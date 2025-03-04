@@ -6,6 +6,7 @@ root: intro
 parts:
   - caption: Basics
     chapters:
+    - file: basics/intro.ipynb
     - file: basics/syntax.ipynb
       sections:
       - file: basics/syntax/operators.ipynb
@@ -168,6 +169,7 @@ parts:
         - file: packages/tkinter/change_elements_position.ipynb
   - caption: Pandas
     chapters:
+    - file: pandas/intro.ipynb
     - file: pandas/data_types
       sections:
       - file: pandas/data_types/datetime.ipynb
@@ -183,6 +185,7 @@ parts:
     - file: pandas/read_sql.ipynb
   - caption: Scikit-learn
     chapters:
+    - file: sklearn/intro.md
     - file: sklearn/dataset_transformations
       sections:
       - file: sklearn/dataset_transformations/pipeline.ipynb
@@ -204,6 +207,7 @@ parts:
       - file: sklearn/nearest_neighbors/metric.ipynb
   - caption: Torch
     chapters:
+    - file: torch/intro.ipynb
     - file: torch/tensor.ipynb
       sections:
       - file: torch/tensor/creating_methods.ipynb
@@ -257,6 +261,7 @@ parts:
       - file: torch/examples/conditional_gan.ipynb
   - caption: FastAPI
     chapters:
+    - file: fastapi/intro.ipynb
     - file: fastapi/run_application.ipynb
     - file: fastapi/requests.ipynb
       sections:
