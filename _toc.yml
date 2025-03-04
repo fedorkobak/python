@@ -1,0 +1,274 @@
+# Table of chapters
+# Learn more at https://jupyterbook.org/customize/toc.html
+format: jb-book
+root: intro
+
+parts:
+  - caption: Basics
+    chapters:
+    - file: basics/syntax.ipynb
+      sections:
+      - file: basics/syntax/operators.ipynb
+        sections:
+        - file: basics/syntax/operators/order.ipynb
+      - file: basics/syntax/keywords.ipynb
+        sections:
+        - file: basics/syntax/keywords/in.ipynb
+        - file: basics/syntax/keywords/yield.ipynb
+      - file: basics/syntax/functions.ipynb
+        sections:
+        - file: basics/syntax/functions/parameters.ipynb
+      - file: basics/syntax/oop.ipynb
+        sections:
+        - file: basics/syntax/oop/interface.ipynb
+        - file: basics/syntax/oop/class_method.ipynb
+      - file: basics/syntax/imports.ipynb
+        sections:
+        - file: basics/syntax/imports/sys_path.ipynb
+        - file: basics/syntax/imports/from_package_import_all.ipynb
+        - file: basics/syntax/imports/searching_module.ipynb
+      - file: basics/syntax/exceptions.ipynb
+      - file: basics/syntax/decorators.ipynb
+    - file: basics/datatypes.ipynb
+      sections:
+      - file: basics/datatypes/basic.ipynb
+        sections:
+        - file: basics/datatypes/basic/str.ipynb
+        - file: basics/datatypes/basic/list.ipynb
+        - file: basics/datatypes/basic/dict.ipynb
+        - file: basics/datatypes/basic/set.ipynb
+      - file: basics/datatypes/datetime.ipynb
+    - file: basics/files_folders.ipynb
+      sections:
+      - file: basics/files_folders/pathlib.ipynb
+    - file: basics/unittest
+      sections:
+      - file: basics/unittest/run_tests.ipynb
+      - file: basics/unittest/run_before_after.ipynb
+      - file: basics/unittest/check_error.ipynb
+      - file: basics/unittest/mocking.ipynb
+        sections:
+        - file: basics/unittest/mocking/call_details.ipynb
+        - file: basics/unittest/mocking/syntax.ipynb
+        - file: basics/unittest/mocking/patch.ipynb # Max depth
+        - file: basics/unittest/mocking/raising_errors.ipynb
+    - file: basics/logging.ipynb
+      sections:
+      - file: basics/logging/loggers.ipynb
+      - file: basics/logging/handlers.ipynb
+      - file: basics/logging/filters.ipynb
+      - file: basics/logging/configuration.ipynb
+      - file: basics/logging/exception_information.ipynb
+      - file: basics/logging/logging_to_file.ipynb
+      - file: basics/logging/logger_handler_level.ipynb
+      - file: basics/logging/root_logger.ipynb
+    - file: basics/data_classes.ipynb
+    - file: basics/cli_arguments
+      sections:
+      - file: basics/cli_arguments/argparse.ipynb
+      - file: basics/cli_arguments/manually.ipynb
+    - file: basics/packages.ipynb
+      sections:
+      - file: basics/packages/pip.ipynb
+      - file: basics/packages/pyproject_toml.ipynb 
+    - file: basics/interpreter.ipynb
+      sections:
+      - file: basics/interpreter/build.ipynb
+    - file: packages
+      sections:
+      - file: packages/collections.ipynb
+      - file: packages/numpy
+        sections:
+        - file: packages/numpy/norm.ipynb
+        - file: packages/numpy/array_splitting.ipynb
+        - file: packages/numpy/apply_along_axis.ipynb
+      - file: packages/excel_export.ipynb
+      - file: packages/zipfile.ipynb
+        sections:
+        - file: packages/zipfile/extraction.ipynb
+      - file: packages/jupyter.ipynb
+        sections:
+        - file: packages/jupyter/ipython.ipynb
+          sections:
+          - file: packages/jupyter/ipython/syntax.ipynb
+          - file: packages/jupyter/ipython/reloading_modules.ipynb
+        - file: packages/jupyter/jupyter_client.ipynb
+      - file: packages/jinja.ipynb
+      - file: packages/docker_sdk.ipynb
+        sections:
+        - file: packages/docker_sdk/containers.ipynb
+      - file: packages/multi_threads.ipynb
+      - file: packages/multiprocessing.ipynb
+        sections:
+        - file: packages/multiprocessing/pool.ipynb
+      - file: packages/transformers.ipynb
+        sections:
+        - file: packages/transformers/pipeline.ipynb
+        - file: packages/transformers/tokenizer.ipynb
+      - file: packages/apscheduler.ipynb
+      - file: packages/hashlib.ipynb
+      - file: packages/selenium.ipynb
+      - file: packages/ranx.ipynb
+        sections:
+        - file: packages/ranx/entry_queries_documents.ipynb
+      - file: packages/tqdm.ipynb
+      - file: packages/redis.ipynb
+        sections:
+        - file: packages/redis/redis_client.ipynb
+      - file: packages/surprise.ipynb
+      - file: packages/matplotlib.ipynb
+        sections:
+        - file: packages/matplotlib/table_in_matplotlib.ipynb
+        - file: packages/matplotlib/gif_creation.ipynb
+      - file: packages/airflow
+        sections:
+        - file: packages/airflow/run_airflow.ipynb
+        - file: packages/airflow/tutorial_dag.ipynb
+      - file: packages/geopy
+        sections:
+        - file: packages/geopy/distances.ipynb
+        - file: packages/geopy/request.ipynb
+      - file: packages/type_annotations.ipynb
+        sections:
+        - file: packages/type_annotations/complex_types.ipynb
+        - file: packages/type_annotations/function_annotations.ipynb
+      - file: packages/socket.ipynb
+      - file: packages/requests.ipynb
+      - file: packages/mlflow
+        sections:
+        - file: packages/mlflow/example_of_use.ipynb
+        - file: packages/mlflow/deploy.ipynb
+        - file: packages/mlflow/custom_model.ipynb
+      - file: packages/plotly
+        sections:
+        - file: packages/plotly/hovers.ipynb
+        - file: packages/plotly/dragmode.ipynb
+        - file: packages/plotly/color_from_scheme.ipynb
+      - file: packages/dash
+        sections:
+        - file: packages/dash/callbacks.ipynb
+        - file: packages/dash/components.ipynb
+        - file: packages/dash/select_clear_all.ipynb
+        - file: packages/dash/multipage_applications.ipynb
+        - file: packages/dash/empty_figure.ipynb
+      - file: packages/sqlalchemy.ipynb
+        sections:
+        - file: packages/sqlalchemy/metadata.ipynb
+        - file: packages/sqlalchemy/create_table.ipynb
+        - file: packages/sqlalchemy/query.ipynb
+        - file: packages/sqlalchemy/add_record.ipynb
+        - file: packages/sqlalchemy/relations.ipynb
+      - file: packages/tkinter.ipynb
+        sections:
+        - file: packages/tkinter/widgets_overview.ipynb
+          sections:
+          - file: packages/tkinter/widgets_overview/scrolling.ipynb
+          - file: packages/tkinter/widgets_overview/treeview.ipynb
+        - file: packages/tkinter/pack.ipynb
+        - file: packages/tkinter/change_elements_position.ipynb
+  - caption: Pandas
+    chapters:
+    - file: pandas/data_types
+      sections:
+      - file: pandas/data_types/datetime.ipynb
+      - file: pandas/data_types/columns_by_types.ipynb
+    - file: pandas/data_transformations.ipynb
+      sections:
+      - file: pandas/data_transformations/groupby.ipynb
+    - file: pandas/loc.ipynb
+    - file: pandas/data_visualisation.ipynb
+    - file: pandas/styles.ipynb
+    - file: pandas/display_options.ipynb
+    - file: pandas/inline_columns_add.ipynb
+    - file: pandas/read_sql.ipynb
+  - caption: Scikit-learn
+    chapters:
+    - file: sklearn/dataset_transformations
+      sections:
+      - file: sklearn/dataset_transformations/pipeline.ipynb
+        sections:
+        - file: sklearn/dataset_transformations/pipeline/features_names.ipynb
+      - file: sklearn/dataset_transformations/pipeline/memory_parameter.ipynb
+      - file: sklearn/dataset_transformations/columns_transformer.ipynb
+      - file: sklearn/dataset_transformations/features_names_out.ipynb
+      - file: sklearn/dataset_transformations/one_hot_encoder.ipynb
+      - file: sklearn/dataset_transformations/developing_transformer.ipynb
+        sections:
+        - file: sklearn/dataset_transformations/developing_transformer/features_names_out.ipynb
+      - file: sklearn/dataset_transformations/frozen_steps.ipynb
+      - file: sklearn/dataset_transformations/estimator_to_transformer.ipynb
+    - file: sklearn/grid_search_cv.ipynb
+    - file: sklearn/saving_models.ipynb
+    - file: sklearn/nearest_neighbors.ipynb
+      sections:
+      - file: sklearn/nearest_neighbors/metric.ipynb
+  - caption: Torch
+    chapters:
+    - file: torch/tensor.ipynb
+      sections:
+      - file: torch/tensor/creating_methods.ipynb
+        sections:
+        - file: torch/tensor/creating_methods/random_distributions.ipynb
+      - file: torch/tensor/dimentionality.ipynb
+        sections:
+        - file: torch/tensor/dimentionality/reshape_like.ipynb
+        - file: torch/tensor/dimentionality/transpose_permute.ipynb
+        - file: torch/tensor/dimentionality/add_dimention.ipynb
+        - file: torch/tensor/dimentionality/squeeze.ipynb
+      - file: torch/tensor/concatenation_splitting.ipynb
+      - file: torch/tensor/indexing.ipynb
+      - file: torch/tensor/broadcasting.ipynb
+    - file: torch/loss_functions.ipynb
+    - file: torch/gradient.ipynb
+    - file: torch/layers.ipynb
+      sections:
+      - file: torch/layers/linear.ipynb
+      - file: torch/layers/dropout.ipynb
+      - file: torch/layers/normalisation_layers.ipynb
+      - file: torch/layers/recurrent_layers.ipynb
+        sections:
+        - file: torch/layers/recurrent_layers/forward_input.ipynb
+      - file: torch/layers/flatten_unflatten.ipynb
+    - file: torch/managing_network.ipynb
+      sections:
+      - file: torch/managing_network/sequential.ipynb
+      - file: torch/managing_network/saving_model.ipynb
+    - file: torch/devices.ipynb
+    - file: torch/data_primitives.ipynb
+    - file: torch/vision
+      sections:
+      - file: torch/vision/basic.ipynb
+      - file: torch/vision/augmentations.ipynb
+      - file: torch/vision/datasets.ipynb
+    - file: torch/examples.ipynb
+      sections:
+      - file: torch/examples/logistic_regression.ipynb
+      - file: torch/examples/multiclass_task.ipynb
+      - file: torch/examples/texts_classification.ipynb
+      - file: torch/examples/mnist.ipynb
+      - file: torch/examples/symbols_classification.ipynb
+      - file: torch/examples/resnet_finetuning.ipynb
+      - file: torch/examples/cnn_classification.ipynb
+      - file: torch/examples/unet.ipynb
+        sections: 
+        - file: torch/examples/unet/oxford_pet.ipynb
+        - file: torch/examples/unet/voc_segmentation.ipynb
+      - file: torch/examples/gan.ipynb
+      - file: torch/examples/conditional_gan.ipynb
+  - caption: FastAPI
+    chapters:
+    - file: fastapi/run_application.ipynb
+    - file: fastapi/requests.ipynb
+      sections:
+      - file: fastapi/requests/request_object.ipynb
+      - file: fastapi/requests/pydantic_model.ipynb
+    - file: fastapi/responses.ipynb
+      sections:
+      - file: fastapi/responses/json.ipynb
+      - file: fastapi/responses/exceptions.ipynb
+    - file: fastapi/logging.ipynb
+    - file: fastapi/documentation
+      sections:
+      - file: fastapi/documentation/parameters.ipynb
+    - file: fastapi/cache.ipynb
+    - file: fastapi/cors.ipynb

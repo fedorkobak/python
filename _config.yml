@@ -1,0 +1,29 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Knowledge base
+author: Fedor Kobak
+logo: logo.jpg
+exclude_patterns: ['venv/*']
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: 'off'
+
+# this is the part of the config to draw
+# plotly plots on the site
+sphinx:
+  config:
+    html_js_files:
+    - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+
+html:
+  use_issues_button: false
+  use_repository_button: true
+
+
+repository:
+  url: https://github.com/fedorkobak/knowledge
+  path_to_book: ""
+  branch: master
