@@ -1,9 +1,9 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Knowledge base
+title: Python
 author: Fedor Kobak
-logo: logo.jpg
+logo: logo.png
 exclude_patterns: ['venv/*']
 
 # Force re-execution of notebooks on each build.
