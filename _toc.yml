@@ -23,6 +23,7 @@ parts:
         sections:
         - file: basics/syntax/oop/interface.ipynb
         - file: basics/syntax/oop/class_method.ipynb
+        - file: basics/syntax/oop/special_methods.ipynb
       - file: basics/syntax/imports.ipynb
         sections:
         - file: basics/syntax/imports/sys_path.ipynb
