@@ -1,0 +1,716 @@
+Running Jupyter-Book v1.0.4.post1
+Source Folder: /home/fedor/Documents/python
+Config Path: /home/fedor/Documents/python/_config.yml
+Output Path: /home/fedor/Documents/python/_build/html
+[01mRunning Sphinx v7.4.7[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mmaking output directory... [39;49;00mdone
+[etoc] Changing master_doc to 'intro'
+[01mmyst v3.0.1:[39;49;00m MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions={'linkify', 'tasklist', 'colon_fence', 'dollarmath', 'substitution'}, disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('mailto', 'http', 'https'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+[01mmyst-nb v1.2.0:[39;49;00m NbParserConfig(custom_formats={}, metadata_key='mystnb', cell_metadata_key='mystnb', kernel_rgx_aliases={}, eval_name_regex='^[a-zA-Z_][a-zA-Z0-9_]*$', execution_mode='off', execution_cache_path='', execution_excludepatterns=[], execution_timeout=30, execution_in_temp=False, execution_allow_errors=False, execution_raise_on_error=False, execution_show_tb=False, merge_streams=False, render_plugin='default', remove_code_source=False, remove_code_outputs=False, code_prompt_show='Show code cell {type}', code_prompt_hide='Hide code cell {type}', number_source_lines=False, output_stderr='show', render_text_lexer='myst-ansi', render_error_lexer='ipythontb', render_image_options={}, render_figure_options={}, render_markdown_format='commonmark', output_folder='build', append_css=True, metadata_to_fm=False)
+Using jupyter-cache at: /home/fedor/Documents/python/_build/.jupyter_cache
+[01msphinx-multitoc-numbering v0.1.3:[39;49;00m Loaded
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 225 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 225 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  0%] [35mREADME[39;49;00m
+[01mreading sources... [39;49;00m[  1%] [35mbasics/cli_arguments[39;49;00m
+[01mreading sources... [39;49;00m[  1%] [35mbasics/cli_arguments/argparse[39;49;00m
+[01mreading sources... [39;49;00m[  2%] [35mbasics/cli_arguments/manually[39;49;00m
+[01mreading sources... [39;49;00m[  2%] [35mbasics/data_classes[39;49;00m
+[01mreading sources... [39;49;00m[  3%] [35mbasics/datatypes[39;49;00m
+[01mreading sources... [39;49;00m[  3%] [35mbasics/datatypes/basic[39;49;00m
+[01mreading sources... [39;49;00m[  4%] [35mbasics/datatypes/basic/dict[39;49;00m
+[01mreading sources... [39;49;00m[  4%] [35mbasics/datatypes/basic/list[39;49;00m
+[01mreading sources... [39;49;00m[  4%] [35mbasics/datatypes/basic/set[39;49;00m
+[01mreading sources... [39;49;00m[  5%] [35mbasics/datatypes/basic/str[39;49;00m
+[01mreading sources... [39;49;00m[  5%] [35mbasics/datatypes/datetime[39;49;00m
+[01mreading sources... [39;49;00m[  6%] [35mbasics/files_folders[39;49;00m
+[01mreading sources... [39;49;00m[  6%] [35mbasics/files_folders/pathlib[39;49;00m
+[01mreading sources... [39;49;00m[  7%] [35mbasics/interpreter[39;49;00m
+[01mreading sources... [39;49;00m[  7%] [35mbasics/interpreter/build[39;49;00m
+[01mreading sources... [39;49;00m[  8%] [35mbasics/intro[39;49;00m
+[01mreading sources... [39;49;00m[  8%] [35mbasics/logging[39;49;00m
+[01mreading sources... [39;49;00m[  8%] [35mbasics/logging/configuration[39;49;00m
+[01mreading sources... [39;49;00m[  9%] [35mbasics/logging/exception_information[39;49;00m
+[01mreading sources... [39;49;00m[  9%] [35mbasics/logging/filters[39;49;00m
+[01mreading sources... [39;49;00m[ 10%] [35mbasics/logging/handlers[39;49;00m
+[01mreading sources... [39;49;00m[ 10%] [35mbasics/logging/logger_handler_level[39;49;00m
+[01mreading sources... [39;49;00m[ 11%] [35mbasics/logging/loggers[39;49;00m
+[01mreading sources... [39;49;00m[ 11%] [35mbasics/logging/logging_to_file[39;49;00m
+[01mreading sources... [39;49;00m[ 12%] [35mbasics/logging/root_logger[39;49;00m
+[01mreading sources... [39;49;00m[ 12%] [35mbasics/packages[39;49;00m
+[01mreading sources... [39;49;00m[ 12%] [35mbasics/packages/pip[39;49;00m
+[01mreading sources... [39;49;00m[ 13%] [35mbasics/packages/pyproject_toml[39;49;00m
+[01mreading sources... [39;49;00m[ 13%] [35mbasics/regex/regex[39;49;00m
+[01mreading sources... [39;49;00m[ 14%] [35mbasics/syntax[39;49;00m
+[01mreading sources... [39;49;00m[ 14%] [35mbasics/syntax/decorators[39;49;00m
+[01mreading sources... [39;49;00m[ 15%] [35mbasics/syntax/exceptions[39;49;00m
+[01mreading sources... [39;49;00m[ 15%] [35mbasics/syntax/functions[39;49;00m
+[01mreading sources... [39;49;00m[ 16%] [35mbasics/syntax/functions/parameters[39;49;00m
+[01mreading sources... [39;49;00m[ 16%] [35mbasics/syntax/imports[39;49;00m
+[01mreading sources... [39;49;00m[ 16%] [35mbasics/syntax/imports/from_package_import_all[39;49;00m
+[01mreading sources... [39;49;00m[ 17%] [35mbasics/syntax/imports/searching_module[39;49;00m
+[01mreading sources... [39;49;00m[ 17%] [35mbasics/syntax/imports/sys_path[39;49;00m
+[01mreading sources... [39;49;00m[ 18%] [35mbasics/syntax/keywords[39;49;00m
+[01mreading sources... [39;49;00m[ 18%] [35mbasics/syntax/keywords/in[39;49;00m
+[01mreading sources... [39;49;00m[ 19%] [35mbasics/syntax/keywords/yield[39;49;00m
+[01mreading sources... [39;49;00m[ 19%] [35mbasics/syntax/oop[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mbasics/syntax/oop/class_method[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mbasics/syntax/oop/interface[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mbasics/syntax/oop/special_attributes[39;49;00m
+[01mreading sources... [39;49;00m[ 21%] [35mbasics/syntax/oop/special_methods[39;49;00m
+[01mreading sources... [39;49;00m[ 21%] [35mbasics/syntax/operators[39;49;00m
+[01mreading sources... [39;49;00m[ 22%] [35mbasics/syntax/operators/order[39;49;00m
+[01mreading sources... [39;49;00m[ 22%] [35mbasics/unittest[39;49;00m
+[01mreading sources... [39;49;00m[ 23%] [35mbasics/unittest/check_error[39;49;00m
+[01mreading sources... [39;49;00m[ 23%] [35mbasics/unittest/mocking[39;49;00m
+[01mreading sources... [39;49;00m[ 24%] [35mbasics/unittest/mocking/call_details[39;49;00m
+[01mreading sources... [39;49;00m[ 24%] [35mbasics/unittest/mocking/patch[39;49;00m
+[01mreading sources... [39;49;00m[ 24%] [35mbasics/unittest/mocking/raising_errors[39;49;00m
+[01mreading sources... [39;49;00m[ 25%] [35mbasics/unittest/mocking/syntax[39;49;00m
+[01mreading sources... [39;49;00m[ 25%] [35mbasics/unittest/run_before_after[39;49;00m
+[01mreading sources... [39;49;00m[ 26%] [35mbasics/unittest/run_tests[39;49;00m
+[01mreading sources... [39;49;00m[ 26%] [35mfastapi/cache[39;49;00m
+[01mreading sources... [39;49;00m[ 27%] [35mfastapi/cors[39;49;00m
+[01mreading sources... [39;49;00m[ 27%] [35mfastapi/documentation[39;49;00m
+[01mreading sources... [39;49;00m[ 28%] [35mfastapi/documentation/parameters[39;49;00m
+[01mreading sources... [39;49;00m[ 28%] [35mfastapi/intro[39;49;00m
+[01mreading sources... [39;49;00m[ 28%] [35mfastapi/logging[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mfastapi/requests[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mfastapi/requests/pydantic_model[39;49;00m
+[01mreading sources... [39;49;00m[ 30%] [35mfastapi/requests/request_object[39;49;00m
+[01mreading sources... [39;49;00m[ 30%] [35mfastapi/responses[39;49;00m
+[01mreading sources... [39;49;00m[ 31%] [35mfastapi/responses/exceptions[39;49;00m
+[01mreading sources... [39;49;00m[ 31%] [35mfastapi/responses/json[39;49;00m
+[01mreading sources... [39;49;00m[ 32%] [35mfastapi/run_application[39;49;00m
+[01mreading sources... [39;49;00m[ 32%] [35mintro[39;49;00m
+[01mreading sources... [39;49;00m[ 32%] [35mpackages/airflow[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mpackages/airflow/bash_tasks[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mpackages/airflow/run_airflow[39;49;00m
+[01mreading sources... [39;49;00m[ 34%] [35mpackages/airflow/tutorial_dag[39;49;00m
+[01mreading sources... [39;49;00m[ 34%] [35mpackages/apscheduler[39;49;00m
+[01mreading sources... [39;49;00m[ 35%] [35mpackages/collections[39;49;00m
+[01mreading sources... [39;49;00m[ 35%] [35mpackages/dash[39;49;00m
+[01mreading sources... [39;49;00m[ 36%] [35mpackages/dash/callbacks[39;49;00m
+[01mreading sources... [39;49;00m[ 36%] [35mpackages/dash/components[39;49;00m
+[01mreading sources... [39;49;00m[ 36%] [35mpackages/dash/empty_figure[39;49;00m
+[01mreading sources... [39;49;00m[ 37%] [35mpackages/dash/multipage_applications[39;49;00m
+[01mreading sources... [39;49;00m[ 37%] [35mpackages/dash/select_clear_all[39;49;00m
+[01mreading sources... [39;49;00m[ 38%] [35mpackages/docker_sdk[39;49;00m
+[01mreading sources... [39;49;00m[ 38%] [35mpackages/docker_sdk/containers[39;49;00m
+[01mreading sources... [39;49;00m[ 39%] [35mpackages/excel_export[39;49;00m
+[01mreading sources... [39;49;00m[ 39%] [35mpackages/geopy[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mpackages/geopy/distances[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mpackages/geopy/request[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mpackages/hashlib[39;49;00m
+[01mreading sources... [39;49;00m[ 41%] [35mpackages/intro[39;49;00m
+[01mreading sources... [39;49;00m[ 41%] [35mpackages/jinja[39;49;00m
+[01mreading sources... [39;49;00m[ 42%] [35mpackages/jupyter[39;49;00m
+[01mreading sources... [39;49;00m[ 42%] [35mpackages/jupyter/ipython[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mpackages/jupyter/ipython/reloading_modules[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mpackages/jupyter/ipython/syntax[39;49;00m
+[01mreading sources... [39;49;00m[ 44%] [35mpackages/jupyter/jupyter_client[39;49;00m
+[01mreading sources... [39;49;00m[ 44%] [35mpackages/matplotlib[39;49;00m
+[01mreading sources... [39;49;00m[ 44%] [35mpackages/matplotlib/gif_creation[39;49;00m
+[01mreading sources... [39;49;00m[ 45%] [35mpackages/matplotlib/table_in_matplotlib[39;49;00m
+[01mreading sources... [39;49;00m[ 45%] [35mpackages/mlflow[39;49;00m
+[01mreading sources... [39;49;00m[ 46%] [35mpackages/mlflow/backet[39;49;00m
+[01mreading sources... [39;49;00m[ 46%] [35mpackages/mlflow/custom_model[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mpackages/mlflow/deploy[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mpackages/mlflow/deploy/kubernetes[39;49;00m
+[01mreading sources... [39;49;00m[ 48%] [35mpackages/mlflow/example_of_use[39;49;00m
+[01mreading sources... [39;49;00m[ 48%] [35mpackages/multi_threads[39;49;00m
+[01mreading sources... [39;49;00m[ 48%] [35mpackages/multiprocessing[39;49;00m
+[01mreading sources... [39;49;00m[ 49%] [35mpackages/multiprocessing/pool[39;49;00m
+[01mreading sources... [39;49;00m[ 49%] [35mpackages/numpy[39;49;00m
+[01mreading sources... [39;49;00m[ 50%] [35mpackages/numpy/apply_along_axis[39;49;00m
+[01mreading sources... [39;49;00m[ 50%] [35mpackages/numpy/array_splitting[39;49;00m
+[01mreading sources... [39;49;00m[ 51%] [35mpackages/numpy/functions[39;49;00m
+[01mreading sources... [39;49;00m[ 51%] [35mpackages/numpy/norm[39;49;00m
+[01mreading sources... [39;49;00m[ 52%] [35mpackages/numpy/set_printoptions[39;49;00m
+[01mreading sources... [39;49;00m[ 52%] [35mpackages/open_cv[39;49;00m
+[01mreading sources... [39;49;00m[ 52%] [35mpackages/plotly[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mpackages/plotly/color_from_scheme[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mpackages/plotly/dragmode[39;49;00m
+[01mreading sources... [39;49;00m[ 54%] [35mpackages/plotly/hovers[39;49;00m
+[01mreading sources... [39;49;00m[ 54%] [35mpackages/ranx[39;49;00m
+[01mreading sources... [39;49;00m[ 55%] [35mpackages/ranx/entry_queries_documents[39;49;00m
+[01mreading sources... [39;49;00m[ 55%] [35mpackages/redis[39;49;00m
+[01mreading sources... [39;49;00m[ 56%] [35mpackages/redis/redis_client[39;49;00m
+[01mreading sources... [39;49;00m[ 56%] [35mpackages/requests[39;49;00m
+[01mreading sources... [39;49;00m[ 56%] [35mpackages/selenium[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mpackages/socket[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mpackages/sqlalchemy[39;49;00m
+[01mreading sources... [39;49;00m[ 58%] [35mpackages/sqlalchemy/add_record[39;49;00m
+[01mreading sources... [39;49;00m[ 58%] [35mpackages/sqlalchemy/create_table[39;49;00m
+[01mreading sources... [39;49;00m[ 59%] [35mpackages/sqlalchemy/metadata[39;49;00m
+[01mreading sources... [39;49;00m[ 59%] [35mpackages/sqlalchemy/query[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mpackages/sqlalchemy/relations[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mpackages/surprise[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mpackages/tkinter[39;49;00m
+[01mreading sources... [39;49;00m[ 61%] [35mpackages/tkinter/change_elements_position[39;49;00m
+[01mreading sources... [39;49;00m[ 61%] [35mpackages/tkinter/list_box[39;49;00m
+[01mreading sources... [39;49;00m[ 62%] [35mpackages/tkinter/pack[39;49;00m
+[01mreading sources... [39;49;00m[ 62%] [35mpackages/tkinter/widgets_overview[39;49;00m
+[01mreading sources... [39;49;00m[ 63%] [35mpackages/tkinter/widgets_overview/scrolling[39;49;00m
+[01mreading sources... [39;49;00m[ 63%] [35mpackages/tkinter/widgets_overview/treeview[39;49;00m
+[01mreading sources... [39;49;00m[ 64%] [35mpackages/tqdm[39;49;00m
+[01mreading sources... [39;49;00m[ 64%] [35mpackages/transformers[39;49;00m
+[01mreading sources... [39;49;00m[ 64%] [35mpackages/transformers/pipeline[39;49;00m
+[01mreading sources... [39;49;00m[ 65%] [35mpackages/transformers/tokenizer[39;49;00m
+[01mreading sources... [39;49;00m[ 65%] [35mpackages/type_annotations[39;49;00m
+[01mreading sources... [39;49;00m[ 66%] [35mpackages/type_annotations/complex_types[39;49;00m
+[01mreading sources... [39;49;00m[ 66%] [35mpackages/type_annotations/function_annotations[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mpackages/zipfile[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mpackages/zipfile/extraction[39;49;00m
+[01mreading sources... [39;49;00m[ 68%] [35mpandas/data_transformations[39;49;00m
+[01mreading sources... [39;49;00m[ 68%] [35mpandas/data_transformations/groupby[39;49;00m
+[01mreading sources... [39;49;00m[ 68%] [35mpandas/data_types[39;49;00m
+[01mreading sources... [39;49;00m[ 69%] [35mpandas/data_types/columns_by_types[39;49;00m
+[01mreading sources... [39;49;00m[ 69%] [35mpandas/data_types/datetime[39;49;00m
+[01mreading sources... [39;49;00m[ 70%] [35mpandas/data_visualisation[39;49;00m
+[01mreading sources... [39;49;00m[ 70%] [35mpandas/display_options[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mpandas/iloc[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mpandas/inline_columns_add[39;49;00m
+[01mreading sources... [39;49;00m[ 72%] [35mpandas/intro[39;49;00m
+[01mreading sources... [39;49;00m[ 72%] [35mpandas/loc[39;49;00m
+[01mreading sources... [39;49;00m[ 72%] [35mpandas/read_sql[39;49;00m
+[01mreading sources... [39;49;00m[ 73%] [35mpandas/styles[39;49;00m
+[01mreading sources... [39;49;00m[ 73%] [35msklearn/custom_components[39;49;00m
+[01mreading sources... [39;49;00m[ 74%] [35msklearn/dataset_transformations[39;49;00m
+[01mreading sources... [39;49;00m[ 74%] [35msklearn/dataset_transformations/columns_transformer[39;49;00m
+[01mreading sources... [39;49;00m[ 75%] [35msklearn/dataset_transformations/developing_transformer[39;49;00m
+[01mreading sources... [39;49;00m[ 75%] [35msklearn/dataset_transformations/developing_transformer/features_names_out[39;49;00m
+[01mreading sources... [39;49;00m[ 76%] [35msklearn/dataset_transformations/estimator_to_transformer[39;49;00m
+[01mreading sources... [39;49;00m[ 76%] [35msklearn/dataset_transformations/features_names_out[39;49;00m
+[01mreading sources... [39;49;00m[ 76%] [35msklearn/dataset_transformations/frozen_steps[39;49;00m
+[01mreading sources... [39;49;00m[ 77%] [35msklearn/dataset_transformations/one_hot_encoder[39;49;00m
+[01mreading sources... [39;49;00m[ 77%] [35msklearn/dataset_transformations/pipeline[39;49;00m
+[01mreading sources... [39;49;00m[ 78%] [35msklearn/dataset_transformations/pipeline/features_names[39;49;00m
+[01mreading sources... [39;49;00m[ 78%] [35msklearn/dataset_transformations/pipeline/memory_parameter[39;49;00m
+[01mreading sources... [39;49;00m[ 79%] [35msklearn/grid_search_cv[39;49;00m
+[01mreading sources... [39;49;00m[ 79%] [35msklearn/intro[39;49;00m
+[01mreading sources... [39;49;00m[ 80%] [35msklearn/nearest_neighbors[39;49;00m
+[01mreading sources... [39;49;00m[ 80%] [35msklearn/nearest_neighbors/metric[39;49;00m
+[01mreading sources... [39;49;00m[ 80%] [35msklearn/saving_models[39;49;00m
+[01mreading sources... [39;49;00m[ 81%] [35mtorch/data_primitives[39;49;00m
+[01mreading sources... [39;49;00m[ 81%] [35mtorch/devices[39;49;00m
+[01mreading sources... [39;49;00m[ 82%] [35mtorch/examples[39;49;00m
+[01mreading sources... [39;49;00m[ 82%] [35mtorch/examples/cnn_classification[39;49;00m
+[01mreading sources... [39;49;00m[ 83%] [35mtorch/examples/conditional_gan[39;49;00m
+[01mreading sources... [39;49;00m[ 83%] [35mtorch/examples/gan[39;49;00m
+[01mreading sources... [39;49;00m[ 84%] [35mtorch/examples/logistic_regression[39;49;00m
+[01mreading sources... [39;49;00m[ 84%] [35mtorch/examples/mnist[39;49;00m
+[01mreading sources... [39;49;00m[ 84%] [35mtorch/examples/multiclass_task[39;49;00m
+[01mreading sources... [39;49;00m[ 85%] [35mtorch/examples/resnet_finetuning[39;49;00m
+[01mreading sources... [39;49;00m[ 85%] [35mtorch/examples/symbols_classification[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mtorch/examples/texts_classification[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mtorch/examples/unet[39;49;00m
+[01mreading sources... [39;49;00m[ 87%] [35mtorch/examples/unet/oxford_pet[39;49;00m
+[01mreading sources... [39;49;00m[ 87%] [35mtorch/examples/unet/voc_segmentation[39;49;00m
+[01mreading sources... [39;49;00m[ 88%] [35mtorch/gradient[39;49;00m
+[01mreading sources... [39;49;00m[ 88%] [35mtorch/intro[39;49;00m
+[01mreading sources... [39;49;00m[ 88%] [35mtorch/layers[39;49;00m
+[01mreading sources... [39;49;00m[ 89%] [35mtorch/layers/dropout[39;49;00m
+[01mreading sources... [39;49;00m[ 89%] [35mtorch/layers/flatten_unflatten[39;49;00m
+[01mreading sources... [39;49;00m[ 90%] [35mtorch/layers/linear[39;49;00m
+[01mreading sources... [39;49;00m[ 90%] [35mtorch/layers/normalisation_layers[39;49;00m
+[01mreading sources... [39;49;00m[ 91%] [35mtorch/layers/recurrent_layers[39;49;00m
+[01mreading sources... [39;49;00m[ 91%] [35mtorch/layers/recurrent_layers/forward_input[39;49;00m
+[01mreading sources... [39;49;00m[ 92%] [35mtorch/layers/recurrent_layers/layers_number[39;49;00m
+[01mreading sources... [39;49;00m[ 92%] [35mtorch/loss_functions[39;49;00m
+[01mreading sources... [39;49;00m[ 92%] [35mtorch/managing_network[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35mtorch/managing_network/saving_model[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35mtorch/managing_network/sequential[39;49;00m
+[01mreading sources... [39;49;00m[ 94%] [35mtorch/tensor[39;49;00m
+[01mreading sources... [39;49;00m[ 94%] [35mtorch/tensor/broadcasting[39;49;00m
+[01mreading sources... [39;49;00m[ 95%] [35mtorch/tensor/concatenation_splitting[39;49;00m
+[01mreading sources... [39;49;00m[ 95%] [35mtorch/tensor/creating_methods[39;49;00m
+[01mreading sources... [39;49;00m[ 96%] [35mtorch/tensor/creating_methods/random_distributions[39;49;00m
+[01mreading sources... [39;49;00m[ 96%] [35mtorch/tensor/dimentionality[39;49;00m
+[01mreading sources... [39;49;00m[ 96%] [35mtorch/tensor/dimentionality/add_dimention[39;49;00m
+[01mreading sources... [39;49;00m[ 97%] [35mtorch/tensor/dimentionality/reshape_like[39;49;00m
+[01mreading sources... [39;49;00m[ 97%] [35mtorch/tensor/dimentionality/squeeze[39;49;00m
+[01mreading sources... [39;49;00m[ 98%] [35mtorch/tensor/dimentionality/transpose_permute[39;49;00m
+[01mreading sources... [39;49;00m[ 98%] [35mtorch/tensor/indexing[39;49;00m
+[01mreading sources... [39;49;00m[ 99%] [35mtorch/vision[39;49;00m
+[01mreading sources... [39;49;00m[ 99%] [35mtorch/vision/augmentations[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtorch/vision/basic[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtorch/vision/datasets[39;49;00m
+
+[91m/home/fedor/Documents/python/basics/cli_arguments.md:1: WARNING: Document headings start at H2, not H1 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/intro.md:: WARNING: toctree contains reference to nonexisting document 'packages' [etoc.ref][39;49;00m
+[91m/home/fedor/Documents/python/packages/dash/multipage_applications.ipynb:90002: WARNING: skipping unknown output mime type: application/json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/jupyter/ipython.ipynb:120002: WARNING: skipping unknown output mime type: application/json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/functions.ipynb:50002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:270002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:290002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:320002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:360002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:440002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:460002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:480002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:500002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:530002: WARNING: Non-consecutive header level increase; H1 to H4 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:550002: WARNING: Non-consecutive header level increase; H1 to H4 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/plotly/color_from_scheme.ipynb:20002: WARNING: skipping unknown output mime type: application/vnd.plotly.v1+json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/plotly/dragmode.ipynb:20002: WARNING: skipping unknown output mime type: application/vnd.plotly.v1+json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/plotly/dragmode.ipynb:20002: WARNING: skipping unknown output mime type: application/vnd.plotly.v1+json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/plotly/hovers.ipynb:40002: WARNING: skipping unknown output mime type: application/vnd.plotly.v1+json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/plotly/hovers.ipynb:60002: WARNING: skipping unknown output mime type: application/vnd.plotly.v1+json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/plotly/hovers.ipynb:60002: WARNING: skipping unknown output mime type: application/vnd.plotly.v1+json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/plotly/hovers.ipynb:80002: WARNING: skipping unknown output mime type: application/vnd.plotly.v1+json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:70002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:100002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:140002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:200002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:240002: WARNING: Non-consecutive header level increase; H1 to H3 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/torch/intro.ipynb:120002: WARNING: Non-consecutive header level increase; H2 to H4 [myst.header][39;49;00m
+[91m/home/fedor/Documents/python/torch/managing_network.ipynb:400002: WARNING: skipping unknown output mime type: application/vnd.google.colaboratory.intrinsic+json [mystnb.unknown_mime_type][39;49;00m
+[91m/home/fedor/Documents/python/torch/managing_network.ipynb:450002: WARNING: skipping unknown output mime type: application/vnd.google.colaboratory.intrinsic+json [mystnb.unknown_mime_type][39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00m[91m/home/fedor/Documents/python/README.md: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/basics/regex/regex.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/airflow.md: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/airflow/bash_tasks.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/apscheduler.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/collections.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/dash.md: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/docker_sdk.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/excel_export.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/geopy.md: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/hashlib.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/intro.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/jinja.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/jupyter.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/matplotlib.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/mlflow.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/mlflow/backet.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/mlflow/deploy/kubernetes.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/multi_threads.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/multiprocessing.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/functions.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/open_cv.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/plotly.md: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/ranx.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/redis.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/requests.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/selenium.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/socket.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/sqlalchemy.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/surprise.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/tqdm.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/transformers.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/type_annotations.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/packages/zipfile.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/pandas/iloc.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/sklearn/custom_components.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+[91m/home/fedor/Documents/python/torch/layers/recurrent_layers/layers_number.ipynb: WARNING: document isn't included in any toctree[39;49;00m
+done
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying downloadable files... [39;49;00m[100%] [33mpandas/postgres_inter_files/simple_example_db/create_table.sql[39;49;00m
+
+[01mcopying static files... [39;49;00mdone
+[01mcopying extra files... [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  0%] [32mREADME[39;49;00m
+[01mwriting output... [39;49;00m[  1%] [32mbasics/cli_arguments[39;49;00m
+[01mwriting output... [39;49;00m[  1%] [32mbasics/cli_arguments/argparse[39;49;00m
+[01mwriting output... [39;49;00m[  2%] [32mbasics/cli_arguments/manually[39;49;00m
+[01mwriting output... [39;49;00m[  2%] [32mbasics/data_classes[39;49;00m
+[01mwriting output... [39;49;00m[  3%] [32mbasics/datatypes[39;49;00m
+[01mwriting output... [39;49;00m[  3%] [32mbasics/datatypes/basic[39;49;00m
+[01mwriting output... [39;49;00m[  4%] [32mbasics/datatypes/basic/dict[39;49;00m
+[01mwriting output... [39;49;00m[  4%] [32mbasics/datatypes/basic/list[39;49;00m
+[01mwriting output... [39;49;00m[  4%] [32mbasics/datatypes/basic/set[39;49;00m
+[01mwriting output... [39;49;00m[  5%] [32mbasics/datatypes/basic/str[39;49;00m
+[01mwriting output... [39;49;00m[  5%] [32mbasics/datatypes/datetime[39;49;00m
+[01mwriting output... [39;49;00m[  6%] [32mbasics/files_folders[39;49;00m
+[01mwriting output... [39;49;00m[  6%] [32mbasics/files_folders/pathlib[39;49;00m
+[01mwriting output... [39;49;00m[  7%] [32mbasics/interpreter[39;49;00m
+[01mwriting output... [39;49;00m[  7%] [32mbasics/interpreter/build[39;49;00m
+[01mwriting output... [39;49;00m[  8%] [32mbasics/intro[39;49;00m
+[01mwriting output... [39;49;00m[  8%] [32mbasics/logging[39;49;00m
+[01mwriting output... [39;49;00m[  8%] [32mbasics/logging/configuration[39;49;00m
+[01mwriting output... [39;49;00m[  9%] [32mbasics/logging/exception_information[39;49;00m
+[01mwriting output... [39;49;00m[  9%] [32mbasics/logging/filters[39;49;00m
+[01mwriting output... [39;49;00m[ 10%] [32mbasics/logging/handlers[39;49;00m
+[01mwriting output... [39;49;00m[ 10%] [32mbasics/logging/logger_handler_level[39;49;00m
+[01mwriting output... [39;49;00m[ 11%] [32mbasics/logging/loggers[39;49;00m
+[01mwriting output... [39;49;00m[ 11%] [32mbasics/logging/logging_to_file[39;49;00m
+[01mwriting output... [39;49;00m[ 12%] [32mbasics/logging/root_logger[39;49;00m
+[01mwriting output... [39;49;00m[ 12%] [32mbasics/packages[39;49;00m
+[01mwriting output... [39;49;00m[ 12%] [32mbasics/packages/pip[39;49;00m
+[01mwriting output... [39;49;00m[ 13%] [32mbasics/packages/pyproject_toml[39;49;00m
+[01mwriting output... [39;49;00m[ 13%] [32mbasics/regex/regex[39;49;00m
+[01mwriting output... [39;49;00m[ 14%] [32mbasics/syntax[39;49;00m
+[01mwriting output... [39;49;00m[ 14%] [32mbasics/syntax/decorators[39;49;00m
+[01mwriting output... [39;49;00m[ 15%] [32mbasics/syntax/exceptions[39;49;00m
+[01mwriting output... [39;49;00m[ 15%] [32mbasics/syntax/functions[39;49;00m
+[01mwriting output... [39;49;00m[ 16%] [32mbasics/syntax/functions/parameters[39;49;00m
+[01mwriting output... [39;49;00m[ 16%] [32mbasics/syntax/imports[39;49;00m
+[01mwriting output... [39;49;00m[ 16%] [32mbasics/syntax/imports/from_package_import_all[39;49;00m
+[01mwriting output... [39;49;00m[ 17%] [32mbasics/syntax/imports/searching_module[39;49;00m
+[01mwriting output... [39;49;00m[ 17%] [32mbasics/syntax/imports/sys_path[39;49;00m
+[01mwriting output... [39;49;00m[ 18%] [32mbasics/syntax/keywords[39;49;00m
+[01mwriting output... [39;49;00m[ 18%] [32mbasics/syntax/keywords/in[39;49;00m
+[01mwriting output... [39;49;00m[ 19%] [32mbasics/syntax/keywords/yield[39;49;00m
+[01mwriting output... [39;49;00m[ 19%] [32mbasics/syntax/oop[39;49;00m
+[01mwriting output... [39;49;00m[ 20%] [32mbasics/syntax/oop/class_method[39;49;00m
+[01mwriting output... [39;49;00m[ 20%] [32mbasics/syntax/oop/interface[39;49;00m
+[01mwriting output... [39;49;00m[ 20%] [32mbasics/syntax/oop/special_attributes[39;49;00m
+[01mwriting output... [39;49;00m[ 21%] [32mbasics/syntax/oop/special_methods[39;49;00m
+[01mwriting output... [39;49;00m[ 21%] [32mbasics/syntax/operators[39;49;00m
+[01mwriting output... [39;49;00m[ 22%] [32mbasics/syntax/operators/order[39;49;00m
+[01mwriting output... [39;49;00m[ 22%] [32mbasics/unittest[39;49;00m
+[01mwriting output... [39;49;00m[ 23%] [32mbasics/unittest/check_error[39;49;00m
+[01mwriting output... [39;49;00m[ 23%] [32mbasics/unittest/mocking[39;49;00m
+[01mwriting output... [39;49;00m[ 24%] [32mbasics/unittest/mocking/call_details[39;49;00m
+[01mwriting output... [39;49;00m[ 24%] [32mbasics/unittest/mocking/patch[39;49;00m
+[01mwriting output... [39;49;00m[ 24%] [32mbasics/unittest/mocking/raising_errors[39;49;00m
+[01mwriting output... [39;49;00m[ 25%] [32mbasics/unittest/mocking/syntax[39;49;00m
+[01mwriting output... [39;49;00m[ 25%] [32mbasics/unittest/run_before_after[39;49;00m
+[01mwriting output... [39;49;00m[ 26%] [32mbasics/unittest/run_tests[39;49;00m
+[01mwriting output... [39;49;00m[ 26%] [32mfastapi/cache[39;49;00m
+[01mwriting output... [39;49;00m[ 27%] [32mfastapi/cors[39;49;00m
+[01mwriting output... [39;49;00m[ 27%] [32mfastapi/documentation[39;49;00m
+[01mwriting output... [39;49;00m[ 28%] [32mfastapi/documentation/parameters[39;49;00m
+[01mwriting output... [39;49;00m[ 28%] [32mfastapi/intro[39;49;00m
+[01mwriting output... [39;49;00m[ 28%] [32mfastapi/logging[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mfastapi/requests[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mfastapi/requests/pydantic_model[39;49;00m
+[01mwriting output... [39;49;00m[ 30%] [32mfastapi/requests/request_object[39;49;00m
+[01mwriting output... [39;49;00m[ 30%] [32mfastapi/responses[39;49;00m
+[01mwriting output... [39;49;00m[ 31%] [32mfastapi/responses/exceptions[39;49;00m
+[01mwriting output... [39;49;00m[ 31%] [32mfastapi/responses/json[39;49;00m
+[01mwriting output... [39;49;00m[ 32%] [32mfastapi/run_application[39;49;00m
+[01mwriting output... [39;49;00m[ 32%] [32mintro[39;49;00m
+[01mwriting output... [39;49;00m[ 32%] [32mpackages/airflow[39;49;00m
+[01mwriting output... [39;49;00m[ 33%] [32mpackages/airflow/bash_tasks[39;49;00m
+[01mwriting output... [39;49;00m[ 33%] [32mpackages/airflow/run_airflow[39;49;00m
+[01mwriting output... [39;49;00m[ 34%] [32mpackages/airflow/tutorial_dag[39;49;00m
+[01mwriting output... [39;49;00m[ 34%] [32mpackages/apscheduler[39;49;00m
+[01mwriting output... [39;49;00m[ 35%] [32mpackages/collections[39;49;00m
+[01mwriting output... [39;49;00m[ 35%] [32mpackages/dash[39;49;00m
+[01mwriting output... [39;49;00m[ 36%] [32mpackages/dash/callbacks[39;49;00m
+[01mwriting output... [39;49;00m[ 36%] [32mpackages/dash/components[39;49;00m
+[01mwriting output... [39;49;00m[ 36%] [32mpackages/dash/empty_figure[39;49;00m
+[01mwriting output... [39;49;00m[ 37%] [32mpackages/dash/multipage_applications[39;49;00m
+[01mwriting output... [39;49;00m[ 37%] [32mpackages/dash/select_clear_all[39;49;00m
+[01mwriting output... [39;49;00m[ 38%] [32mpackages/docker_sdk[39;49;00m
+[01mwriting output... [39;49;00m[ 38%] [32mpackages/docker_sdk/containers[39;49;00m
+[01mwriting output... [39;49;00m[ 39%] [32mpackages/excel_export[39;49;00m
+[01mwriting output... [39;49;00m[ 39%] [32mpackages/geopy[39;49;00m
+[01mwriting output... [39;49;00m[ 40%] [32mpackages/geopy/distances[39;49;00m
+[01mwriting output... [39;49;00m[ 40%] [32mpackages/geopy/request[39;49;00m
+[01mwriting output... [39;49;00m[ 40%] [32mpackages/hashlib[39;49;00m
+[01mwriting output... [39;49;00m[ 41%] [32mpackages/intro[39;49;00m
+[01mwriting output... [39;49;00m[ 41%] [32mpackages/jinja[39;49;00m
+[01mwriting output... [39;49;00m[ 42%] [32mpackages/jupyter[39;49;00m
+[01mwriting output... [39;49;00m[ 42%] [32mpackages/jupyter/ipython[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mpackages/jupyter/ipython/reloading_modules[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mpackages/jupyter/ipython/syntax[39;49;00m
+[01mwriting output... [39;49;00m[ 44%] [32mpackages/jupyter/jupyter_client[39;49;00m
+[01mwriting output... [39;49;00m[ 44%] [32mpackages/matplotlib[39;49;00m
+[01mwriting output... [39;49;00m[ 44%] [32mpackages/matplotlib/gif_creation[39;49;00m
+[01mwriting output... [39;49;00m[ 45%] [32mpackages/matplotlib/table_in_matplotlib[39;49;00m
+[01mwriting output... [39;49;00m[ 45%] [32mpackages/mlflow[39;49;00m
+[01mwriting output... [39;49;00m[ 46%] [32mpackages/mlflow/backet[39;49;00m
+[01mwriting output... [39;49;00m[ 46%] [32mpackages/mlflow/custom_model[39;49;00m
+[01mwriting output... [39;49;00m[ 47%] [32mpackages/mlflow/deploy[39;49;00m
+[01mwriting output... [39;49;00m[ 47%] [32mpackages/mlflow/deploy/kubernetes[39;49;00m
+[01mwriting output... [39;49;00m[ 48%] [32mpackages/mlflow/example_of_use[39;49;00m
+[01mwriting output... [39;49;00m[ 48%] [32mpackages/multi_threads[39;49;00m
+[01mwriting output... [39;49;00m[ 48%] [32mpackages/multiprocessing[39;49;00m
+[01mwriting output... [39;49;00m[ 49%] [32mpackages/multiprocessing/pool[39;49;00m
+[01mwriting output... [39;49;00m[ 49%] [32mpackages/numpy[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mpackages/numpy/apply_along_axis[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mpackages/numpy/array_splitting[39;49;00m
+[01mwriting output... [39;49;00m[ 51%] [32mpackages/numpy/functions[39;49;00m
+[01mwriting output... [39;49;00m[ 51%] [32mpackages/numpy/norm[39;49;00m
+[01mwriting output... [39;49;00m[ 52%] [32mpackages/numpy/set_printoptions[39;49;00m
+[01mwriting output... [39;49;00m[ 52%] [32mpackages/open_cv[39;49;00m
+[01mwriting output... [39;49;00m[ 52%] [32mpackages/plotly[39;49;00m
+[01mwriting output... [39;49;00m[ 53%] [32mpackages/plotly/color_from_scheme[39;49;00m
+[01mwriting output... [39;49;00m[ 53%] [32mpackages/plotly/dragmode[39;49;00m
+[01mwriting output... [39;49;00m[ 54%] [32mpackages/plotly/hovers[39;49;00m
+[01mwriting output... [39;49;00m[ 54%] [32mpackages/ranx[39;49;00m
+[01mwriting output... [39;49;00m[ 55%] [32mpackages/ranx/entry_queries_documents[39;49;00m
+[01mwriting output... [39;49;00m[ 55%] [32mpackages/redis[39;49;00m
+[01mwriting output... [39;49;00m[ 56%] [32mpackages/redis/redis_client[39;49;00m
+[01mwriting output... [39;49;00m[ 56%] [32mpackages/requests[39;49;00m
+[01mwriting output... [39;49;00m[ 56%] [32mpackages/selenium[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mpackages/socket[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mpackages/sqlalchemy[39;49;00m
+[01mwriting output... [39;49;00m[ 58%] [32mpackages/sqlalchemy/add_record[39;49;00m
+[01mwriting output... [39;49;00m[ 58%] [32mpackages/sqlalchemy/create_table[39;49;00m
+[01mwriting output... [39;49;00m[ 59%] [32mpackages/sqlalchemy/metadata[39;49;00m
+[01mwriting output... [39;49;00m[ 59%] [32mpackages/sqlalchemy/query[39;49;00m
+[01mwriting output... [39;49;00m[ 60%] [32mpackages/sqlalchemy/relations[39;49;00m
+[01mwriting output... [39;49;00m[ 60%] [32mpackages/surprise[39;49;00m
+[01mwriting output... [39;49;00m[ 60%] [32mpackages/tkinter[39;49;00m
+[01mwriting output... [39;49;00m[ 61%] [32mpackages/tkinter/change_elements_position[39;49;00m
+[01mwriting output... [39;49;00m[ 61%] [32mpackages/tkinter/list_box[39;49;00m
+[01mwriting output... [39;49;00m[ 62%] [32mpackages/tkinter/pack[39;49;00m
+[01mwriting output... [39;49;00m[ 62%] [32mpackages/tkinter/widgets_overview[39;49;00m
+[01mwriting output... [39;49;00m[ 63%] [32mpackages/tkinter/widgets_overview/scrolling[39;49;00m
+[01mwriting output... [39;49;00m[ 63%] [32mpackages/tkinter/widgets_overview/treeview[39;49;00m
+[01mwriting output... [39;49;00m[ 64%] [32mpackages/tqdm[39;49;00m
+[01mwriting output... [39;49;00m[ 64%] [32mpackages/transformers[39;49;00m
+[01mwriting output... [39;49;00m[ 64%] [32mpackages/transformers/pipeline[39;49;00m
+[01mwriting output... [39;49;00m[ 65%] [32mpackages/transformers/tokenizer[39;49;00m
+[01mwriting output... [39;49;00m[ 65%] [32mpackages/type_annotations[39;49;00m
+[01mwriting output... [39;49;00m[ 66%] [32mpackages/type_annotations/complex_types[39;49;00m
+[01mwriting output... [39;49;00m[ 66%] [32mpackages/type_annotations/function_annotations[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mpackages/zipfile[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mpackages/zipfile/extraction[39;49;00m
+[01mwriting output... [39;49;00m[ 68%] [32mpandas/data_transformations[39;49;00m
+[01mwriting output... [39;49;00m[ 68%] [32mpandas/data_transformations/groupby[39;49;00m
+[01mwriting output... [39;49;00m[ 68%] [32mpandas/data_types[39;49;00m
+[01mwriting output... [39;49;00m[ 69%] [32mpandas/data_types/columns_by_types[39;49;00m
+[01mwriting output... [39;49;00m[ 69%] [32mpandas/data_types/datetime[39;49;00m
+[01mwriting output... [39;49;00m[ 70%] [32mpandas/data_visualisation[39;49;00m
+[01mwriting output... [39;49;00m[ 70%] [32mpandas/display_options[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mpandas/iloc[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mpandas/inline_columns_add[39;49;00m
+[01mwriting output... [39;49;00m[ 72%] [32mpandas/intro[39;49;00m
+[01mwriting output... [39;49;00m[ 72%] [32mpandas/loc[39;49;00m
+[01mwriting output... [39;49;00m[ 72%] [32mpandas/read_sql[39;49;00m
+[01mwriting output... [39;49;00m[ 73%] [32mpandas/styles[39;49;00m
+[01mwriting output... [39;49;00m[ 73%] [32msklearn/custom_components[39;49;00m
+[01mwriting output... [39;49;00m[ 74%] [32msklearn/dataset_transformations[39;49;00m
+[01mwriting output... [39;49;00m[ 74%] [32msklearn/dataset_transformations/columns_transformer[39;49;00m
+[01mwriting output... [39;49;00m[ 75%] [32msklearn/dataset_transformations/developing_transformer[39;49;00m
+[01mwriting output... [39;49;00m[ 75%] [32msklearn/dataset_transformations/developing_transformer/features_names_out[39;49;00m
+[01mwriting output... [39;49;00m[ 76%] [32msklearn/dataset_transformations/estimator_to_transformer[39;49;00m
+[01mwriting output... [39;49;00m[ 76%] [32msklearn/dataset_transformations/features_names_out[39;49;00m
+[01mwriting output... [39;49;00m[ 76%] [32msklearn/dataset_transformations/frozen_steps[39;49;00m
+[01mwriting output... [39;49;00m[ 77%] [32msklearn/dataset_transformations/one_hot_encoder[39;49;00m
+[01mwriting output... [39;49;00m[ 77%] [32msklearn/dataset_transformations/pipeline[39;49;00m
+[01mwriting output... [39;49;00m[ 78%] [32msklearn/dataset_transformations/pipeline/features_names[39;49;00m
+[01mwriting output... [39;49;00m[ 78%] [32msklearn/dataset_transformations/pipeline/memory_parameter[39;49;00m
+[01mwriting output... [39;49;00m[ 79%] [32msklearn/grid_search_cv[39;49;00m
+[01mwriting output... [39;49;00m[ 79%] [32msklearn/intro[39;49;00m
+[01mwriting output... [39;49;00m[ 80%] [32msklearn/nearest_neighbors[39;49;00m
+[01mwriting output... [39;49;00m[ 80%] [32msklearn/nearest_neighbors/metric[39;49;00m
+[01mwriting output... [39;49;00m[ 80%] [32msklearn/saving_models[39;49;00m
+[01mwriting output... [39;49;00m[ 81%] [32mtorch/data_primitives[39;49;00m
+[01mwriting output... [39;49;00m[ 81%] [32mtorch/devices[39;49;00m
+[01mwriting output... [39;49;00m[ 82%] [32mtorch/examples[39;49;00m
+[01mwriting output... [39;49;00m[ 82%] [32mtorch/examples/cnn_classification[39;49;00m
+[01mwriting output... [39;49;00m[ 83%] [32mtorch/examples/conditional_gan[39;49;00m
+[01mwriting output... [39;49;00m[ 83%] [32mtorch/examples/gan[39;49;00m
+[01mwriting output... [39;49;00m[ 84%] [32mtorch/examples/logistic_regression[39;49;00m
+[01mwriting output... [39;49;00m[ 84%] [32mtorch/examples/mnist[39;49;00m
+[01mwriting output... [39;49;00m[ 84%] [32mtorch/examples/multiclass_task[39;49;00m
+[01mwriting output... [39;49;00m[ 85%] [32mtorch/examples/resnet_finetuning[39;49;00m
+[01mwriting output... [39;49;00m[ 85%] [32mtorch/examples/symbols_classification[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mtorch/examples/texts_classification[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mtorch/examples/unet[39;49;00m
+[01mwriting output... [39;49;00m[ 87%] [32mtorch/examples/unet/oxford_pet[39;49;00m
+[01mwriting output... [39;49;00m[ 87%] [32mtorch/examples/unet/voc_segmentation[39;49;00m
+[01mwriting output... [39;49;00m[ 88%] [32mtorch/gradient[39;49;00m
+[01mwriting output... [39;49;00m[ 88%] [32mtorch/intro[39;49;00m
+[01mwriting output... [39;49;00m[ 88%] [32mtorch/layers[39;49;00m
+[01mwriting output... [39;49;00m[ 89%] [32mtorch/layers/dropout[39;49;00m
+[01mwriting output... [39;49;00m[ 89%] [32mtorch/layers/flatten_unflatten[39;49;00m
+[01mwriting output... [39;49;00m[ 90%] [32mtorch/layers/linear[39;49;00m
+[01mwriting output... [39;49;00m[ 90%] [32mtorch/layers/normalisation_layers[39;49;00m
+[01mwriting output... [39;49;00m[ 91%] [32mtorch/layers/recurrent_layers[39;49;00m
+[01mwriting output... [39;49;00m[ 91%] [32mtorch/layers/recurrent_layers/forward_input[39;49;00m
+[01mwriting output... [39;49;00m[ 92%] [32mtorch/layers/recurrent_layers/layers_number[39;49;00m
+[01mwriting output... [39;49;00m[ 92%] [32mtorch/loss_functions[39;49;00m
+[01mwriting output... [39;49;00m[ 92%] [32mtorch/managing_network[39;49;00m
+[01mwriting output... [39;49;00m[ 93%] [32mtorch/managing_network/saving_model[39;49;00m
+[01mwriting output... [39;49;00m[ 93%] [32mtorch/managing_network/sequential[39;49;00m
+[01mwriting output... [39;49;00m[ 94%] [32mtorch/tensor[39;49;00m
+[01mwriting output... [39;49;00m[ 94%] [32mtorch/tensor/broadcasting[39;49;00m
+[01mwriting output... [39;49;00m[ 95%] [32mtorch/tensor/concatenation_splitting[39;49;00m
+[01mwriting output... [39;49;00m[ 95%] [32mtorch/tensor/creating_methods[39;49;00m
+[01mwriting output... [39;49;00m[ 96%] [32mtorch/tensor/creating_methods/random_distributions[39;49;00m
+[01mwriting output... [39;49;00m[ 96%] [32mtorch/tensor/dimentionality[39;49;00m
+[01mwriting output... [39;49;00m[ 96%] [32mtorch/tensor/dimentionality/add_dimention[39;49;00m
+[01mwriting output... [39;49;00m[ 97%] [32mtorch/tensor/dimentionality/reshape_like[39;49;00m
+[01mwriting output... [39;49;00m[ 97%] [32mtorch/tensor/dimentionality/squeeze[39;49;00m
+[01mwriting output... [39;49;00m[ 98%] [32mtorch/tensor/dimentionality/transpose_permute[39;49;00m
+[01mwriting output... [39;49;00m[ 98%] [32mtorch/tensor/indexing[39;49;00m
+[01mwriting output... [39;49;00m[ 99%] [32mtorch/vision[39;49;00m
+[01mwriting output... [39;49;00m[ 99%] [32mtorch/vision/augmentations[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtorch/vision/basic[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtorch/vision/datasets[39;49;00m
+
+[91m/home/fedor/Documents/python/basics/files_folders.ipynb:250007: WARNING: 'myst' cross-reference target not found: 'path/pathlib.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/basics/logging/configuration.ipynb:140004: WARNING: local id not found in doc 'basics/logging': 'disable' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/basics/syntax.ipynb:90004: WARNING: 'myst' cross-reference target not found: 'basics/decorators.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/basics/syntax/exceptions.ipynb:30008: WARNING: 'myst' cross-reference target not found: 'default-except' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/basics/syntax/imports/sys_path.ipynb:120002: WARNING: Lexing literal_block '%%bash\nexport PYTHONPATH="example/path1:example/path2"\necho $PYTHONPATH\n\necho\necho "=====python output====="\npython3 path_settings_files/print_sys_folder.py' as "python" resulted in an error at token: '$'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/basics/syntax/oop.ipynb:280007: WARNING: 'myst' cross-reference target not found: 'oop/class_metthod.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/fastapi/cors.ipynb:60002: WARNING: Lexing literal_block '%%writefile cors_files/index.html\n<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Frontend</title>\n</head>\n<body>\n    <h1>Frontend</h1>\n    <button id="fetchData">Fetch Data from Backend</button>\n    <pre id="response"></pre>\n\n    <script>\n        document.getElementById(\'fetchData\').addEventListener(\'click\', () => {\n            fetch(\'http://localhost:8000\')\n                .then(response => response.json())\n                .then(data => {\n                    document.getElementById(\'response\').textContent = JSON.stringify(data, null, 2);\n                })\n                .catch(error => console.error(\'Error:\', error));\n        });\n    </script>\n</body>\n</html>' as "ipython3" resulted in an error at token: '!'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/fastapi/intro.ipynb:230004: WARNING: 'myst' cross-reference target not found: 'return_values.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/fastapi/intro.ipynb:110002: WARNING: Lexing literal_block '!docker run --rm -itd\\\n    --name test_container\\\n    -v ./fastapi/run_application_files/get_started.py:/get_started.py\\\n    -p 8000:8000 \\\n    fastapi_experiment \\\n    uvicorn --host 0.0.0.0 --reload get_started:my_first_app >/dev/null' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/fastapi/logging.ipynb:50002: WARNING: Lexing literal_block '!docker run --rm -itd\\\n    --name test_container\\\n    -v ./logging_files/:/app/\\\n    -p 8000:8000 \\\n    fastapi_experiment \\\n    uvicorn --host 0.0.0.0 --reload app.app:app' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/fastapi/responses.ipynb:30002: WARNING: Lexing literal_block 'import requests\n\n!docker run --rm -itd\\\n    --name test_container\\\n    -v ./responses_files/app.py:/app.py\\\n    -p 8000:8000 \\\n    fastapi_experiment \\\n    uvicorn --host 0.0.0.0 --reload app:app' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/fastapi/responses/exceptions.ipynb:20002: WARNING: Lexing literal_block 'import requests\n\n!docker run --rm -itd\\\n    --name test_container\\\n    -v ./exceptions_files/app.py:/app.py\\\n    -p 8000:8000 \\\n    fastapi_experiment \\\n    uvicorn --host 0.0.0.0 --reload app:app' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/fastapi/responses/json.ipynb:20002: WARNING: Lexing literal_block 'import requests\n\n!docker run --rm -itd\\\n    --name fastapi_json_responses\\\n    -v ./json_files/app.py:/app.py\\\n    -p 8000:8000 \\\n    fastapi_experiment \\\n    uvicorn --host 0.0.0.0 --reload app:app' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/fastapi/run_application.ipynb:60004: WARNING: 'myst' cross-reference target not found: 'sec-dockerfile' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/fastapi/run_application.ipynb:90002: WARNING: Lexing literal_block '!docker build -t fastapi_experiment\\\n    ./fastapi/run_application_files/ &> /dev/null' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/fastapi/run_application.ipynb:150002: WARNING: Lexing literal_block '!docker run --rm -itd\\\n    --name test_container\\\n    -v ./run_application_files/reload.py:/reload.py\\\n    -p 8000:8000 \\\n    fastapi_experiment \\\n    uvicorn --host 0.0.0.0 --reload reload:my_first_app' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/fastapi/run_application.ipynb:280002: WARNING: Lexing literal_block '!docker run --rm -itd\\\n    --name test_container\\\n    -v ./run_application_files/reload.py:/reload.py\\\n    -p 8000:8000 \\\n    fastapi_experiment \\\n    python3 reload.py' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/packages/airflow/run_airflow.ipynb:70002: WARNING: Lexing literal_block '!docker run -itd --rm\\\n    --name start_airflow\\\n    -p 8080:8080\\\n    airflow_tests &> /dev/null' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/packages/airflow/tutorial_dag.ipynb:60002: WARNING: Lexing literal_block '!docker run -itd --rm\\\n    --name tutorial_dag\\\n    -p 8080:8080\\\n    -v ./tutorial_dag:/root/airflow/dags\\\n    airflow_tests &> /dev/null' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/packages/dash/callbacks.ipynb:60006: WARNING: 'myst' cross-reference target not found: 'sec-input_output_section' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/numpy/set_printoptions.ipynb:310004: WARNING: 'myst' cross-reference target not found: '1' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/ranx.ipynb:90004: WARNING: 'myst' cross-reference target not found: 'metrics-with-binary-relevance' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/redis.ipynb:10004: WARNING: 'myst' cross-reference target not found: '../../other/redis.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/sqlalchemy/add_record.ipynb:30002: WARNING: Lexing literal_block '!docker run -d --rm\\\n    --name add_record_example\\\n    -e POSTGRES_PASSWORD=postgres\\\n    -p 5000:5432\\\n    postgres:15.4 &> /dev/null\n!sleep 5\n\nfrom sqlalchemy import (\n    create_engine, \n    Column, \n    Integer,\n    String\n)\nfrom sqlalchemy.orm import sessionmaker, declarative_base\n\nURL = "postgresql://postgres:postgres@localhost:5000/postgres"\nengine = create_engine(URL)\n\nSessionLocal = sessionmaker(\n    autoflush=False,\n    autocommit=False,\n    bind=engine\n)\n\n# defining data model\nBase = declarative_base()\nclass TestTable(Base):\n    __tablename__="test_table"\n    id = Column(Integer, primary_key=True)\n    numeric_var = Column(Integer)\n    text_var = Column(String)\n\n# duplicate datamodel in the database\nBase.metadata.create_all(engine)' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/packages/sqlalchemy/relations.ipynb:30002: WARNING: Lexing literal_block '!docker run -d --rm\\\n    --name relations_example\\\n    -e POSTGRES_PASSWORD=postgres\\\n    -p 5000:5432\\\n    postgres:15.4 &> /dev/null\n!sleep 5\n\nfrom sqlalchemy import (\n    create_engine, \n    Column, \n    Integer,\n    String,\n    ForeignKey\n)\nfrom sqlalchemy.orm import (\n    sessionmaker, \n    declarative_base, \n    relationship\n)\nfrom random import randint\n\nURL = "postgresql://postgres:postgres@localhost:5000/postgres"\nengine = create_engine(URL)\n\nSessionLocal = sessionmaker(\n    autoflush=False,\n    autocommit=False,\n    bind=engine\n)\nsession = SessionLocal()\n\n# defining data model\nBase = declarative_base()' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/packages/surprise.ipynb:30002: WARNING: 'myst' cross-reference target not found: '../../data_science/ranking_task.md' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:30004: WARNING: 'myst' cross-reference target not found: '1' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:30005: WARNING: 'myst' cross-reference target not found: '1.A' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:30006: WARNING: 'myst' cross-reference target not found: '1.B' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:30007: WARNING: 'myst' cross-reference target not found: '1.C' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:30008: WARNING: 'myst' cross-reference target not found: '1.D' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/packages/tkinter/list_box.ipynb:30009: WARNING: 'myst' cross-reference target not found: '2' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/pandas/read_sql.ipynb:20002: WARNING: Lexing literal_block 'import pandas as pd\nfrom sqlalchemy import create_engine\nfrom sqlalchemy.engine import URL \n\n!docker run --rm -d\\\n    -v ./postgres_inter_files/simple_example_db:/docker-entrypoint-initdb.d\\\n    -e POSTGRES_PASSWORD=docker_app\\\n    --name read_postgres_to_pandas_to_pandas\\\n    -p 5431:5432\\\n    postgres:15.4 &> /dev/null' as "ipython3" resulted in an error at token: '\\'. Retrying in relaxed mode.[39;49;00m
+[91m/home/fedor/Documents/python/sklearn/saving_models.ipynb:180002: WARNING: 'myst' cross-reference target not found: 'pickle' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/torch/intro.ipynb:30004: WARNING: 'myst' cross-reference target not found: 'torch/tensor.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/torch/intro.ipynb:60004: WARNING: 'myst' cross-reference target not found: 'torch/gradient.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/torch/intro.ipynb:90023: WARNING: 'myst' cross-reference target not found: 'torch/loss_functions.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/torch/intro.ipynb:150004: WARNING: 'myst' cross-reference target not found: 'torch/layers.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/torch/intro.ipynb:200008: WARNING: 'myst' cross-reference target not found: 'torch/managing_network.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/torch/intro.ipynb:250004: WARNING: 'myst' cross-reference target not found: 'torch/devices.ipynb' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/torch/intro.ipynb:350010: WARNING: 'myst' cross-reference target not found: '' [myst.xref_missing][39;49;00m
+[91m/home/fedor/Documents/python/torch/layers.ipynb:410004: WARNING: 'myst' cross-reference target not found: 'layers/recurent_layers.ipynb' [myst.xref_missing][39;49;00m
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mcopying images... [39;49;00m[  1%] [33mbasics/syntax/operators/order_files/operators_order.jpg[39;49;00m
+[01mcopying images... [39;49;00m[  2%] [33mfastapi/cors_files/error_screen.png[39;49;00m
+[01mcopying images... [39;49;00m[  3%] [33m_build/jupyter_execute/6cb6b40ddbc6dbacd8dab7ef83b9c6ef7d9d10a3f306de96ba2abefaf4ac9159.png[39;49;00m
+[01mcopying images... [39;49;00m[  4%] [33m_build/jupyter_execute/dbb6bf98ce754020d030fe19a386aebf365bdaac414e21b0d904bcfd51ba9301.png[39;49;00m
+[01mcopying images... [39;49;00m[  5%] [33m_build/jupyter_execute/7cf7217aab7158e27146f3c8ccd83d042704428515f5cc572cb56dcee4f2a6d4.png[39;49;00m
+[01mcopying images... [39;49;00m[  6%] [33m_build/jupyter_execute/f5994b49eb7c79601d93fbd0d10bd0a29f142aefc9ed7fa40ffa28ee9ead3308.png[39;49;00m
+[01mcopying images... [39;49;00m[  7%] [33m_build/jupyter_execute/b31bce7a0224f734481fecbd35073aaf37ae521bf4a7b374afc47c07a350153f.png[39;49;00m
+[01mcopying images... [39;49;00m[  8%] [33m_build/jupyter_execute/82397d8c1a8539d8fc2072ef8e2e0c21a1482f12fb3e20d619b1da682399cc01.png[39;49;00m
+[01mcopying images... [39;49;00m[  9%] [33m_build/jupyter_execute/6fd2116339fb63febd3be5403be8ae6093545de5460cfff1af6653e75a2ed8ec.png[39;49;00m
+[01mcopying images... [39;49;00m[ 10%] [33m_build/jupyter_execute/9cecfdfee0638dfd13bb1a4bb3e806e453044c4c7147414d65f790de3baf96d7.png[39;49;00m
+[01mcopying images... [39;49;00m[ 11%] [33m_build/jupyter_execute/3f457c77e50e90ea58485a1bbf153d339f774e8169b9e55cee0a366e5f51f7b1.png[39;49;00m
+[01mcopying images... [39;49;00m[ 12%] [33m_build/jupyter_execute/0e3a1a9a8bb77b1a44e21dc018fabf96a562c5f276b93e6898d9a9bc35266bb8.png[39;49;00m
+[01mcopying images... [39;49;00m[ 13%] [33m_build/jupyter_execute/282f98f6a32df86948235662ab81843939e9d902d31afa269ab6b1a34be862d8.png[39;49;00m
+[01mcopying images... [39;49;00m[ 14%] [33m_build/jupyter_execute/acc8bf314b5b26501405e3acbca59c5b5998193da74efa4a78b10f1f2b879fb8.png[39;49;00m
+[01mcopying images... [39;49;00m[ 15%] [33m_build/jupyter_execute/ed36f6985a300de32b2e928dc464fe675855cdf83cbe1e0b18db7d9bb7cee06e.png[39;49;00m
+[01mcopying images... [39;49;00m[ 16%] [33m_build/jupyter_execute/1b142897bf63f371c4dc9e05c8f2b741aeb25298d6073f958bbe770a66adac6b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 17%] [33m_build/jupyter_execute/9540ee51e3b13d1fa685a639da23f199015f1bef9420b2c1639e924f9519fa5e.png[39;49;00m
+[01mcopying images... [39;49;00m[ 17%] [33m_build/jupyter_execute/ce5ceca2a62d947e5b250198ae3f0ed4267e35aab815cda9eabb45a06c0ee52b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 18%] [33m_build/jupyter_execute/173f79679950c549445e227c4a9d482e9fdacb8f984e8f0a056405ff9341e079.png[39;49;00m
+[01mcopying images... [39;49;00m[ 19%] [33m_build/jupyter_execute/d00a9459a1495833183e751d081dfdbe50040d2591c41a65273c5fe645222c60.png[39;49;00m
+[01mcopying images... [39;49;00m[ 20%] [33m_build/jupyter_execute/64716473c0a173fd1368adefeecd763750e3f6a1045aa8bc316e72abd3cadca2.png[39;49;00m
+[01mcopying images... [39;49;00m[ 21%] [33m_build/jupyter_execute/02b2f3d3d994e987101559df24652430cae9614d9fad15dbd9d0341925b81525.png[39;49;00m
+[01mcopying images... [39;49;00m[ 22%] [33m_build/jupyter_execute/4295c85fcf267bf38c7a997f8cafa974a4eb6127f07ec93279fe2a884d5a1016.png[39;49;00m
+[01mcopying images... [39;49;00m[ 23%] [33m_build/jupyter_execute/8a8fc8b53912a02f6bbf24de3b4148e277df809ad27a7705b091826d59e5c84c.png[39;49;00m
+[01mcopying images... [39;49;00m[ 24%] [33m_build/jupyter_execute/c830f99af37698231086652eddeaaaa029e74b95f63e006a71052f7bbabc39a5.png[39;49;00m
+[01mcopying images... [39;49;00m[ 25%] [33m_build/jupyter_execute/4892e3d664de76fcbc1a5269fe2f858403b3d373c17a5212d83518d08b0965b6.png[39;49;00m
+[01mcopying images... [39;49;00m[ 26%] [33m_build/jupyter_execute/c52f98fdc7841f6a9437c58190f5604968a6e3f52bc94a0b4033a9d4d4f7f6dc.png[39;49;00m
+[01mcopying images... [39;49;00m[ 27%] [33m_build/jupyter_execute/af7ea6f9e60ade28f23013602d7135382a6fd2260411ef9df25c7fcd1f52d985.png[39;49;00m
+[01mcopying images... [39;49;00m[ 28%] [33m_build/jupyter_execute/75f58d9e5c1cc40db9ba19c68b8fc6ec3101c209501d1b8de2cd2c85a8025cd2.png[39;49;00m
+[01mcopying images... [39;49;00m[ 29%] [33m_build/jupyter_execute/9332d591051c00f547b83dc5610c8e7ae7f5bec3c7224650268371aca7d3ff7c.png[39;49;00m
+[01mcopying images... [39;49;00m[ 30%] [33m_build/jupyter_execute/2cc83b82ee798de8eff2e5cd35a4d95600f53f771bcb867707a8b23361c28122.png[39;49;00m
+[01mcopying images... [39;49;00m[ 31%] [33m_build/jupyter_execute/420f981fd5dd5957a07f732276351f75804417e0cc87433891c1ce0370ea70a2.png[39;49;00m
+[01mcopying images... [39;49;00m[ 32%] [33m_build/jupyter_execute/eda71e73d19406d711ccea96a35692a717ba94b1cdec4ee8bafb49bcfbdd865b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 33%] [33m_build/jupyter_execute/d7b168331d373503f50d1ddeb451b65bad9f2ae4bc0e05f538d50318bc955e8d.png[39;49;00m
+[01mcopying images... [39;49;00m[ 34%] [33m_build/jupyter_execute/bc42b076e1fbf63ed8d7ab0900105898162b92a9e957721b25b042837e0d44fe.png[39;49;00m
+[01mcopying images... [39;49;00m[ 35%] [33m_build/jupyter_execute/76a4ca0ac470934a694433689448e2e3953862066fee414927a4258b0506c056.png[39;49;00m
+[01mcopying images... [39;49;00m[ 36%] [33m_build/jupyter_execute/ae6348124489e854b5e69570b991f4d9dbd2a0abb24d61221d36ad99fa5c8650.png[39;49;00m
+[01mcopying images... [39;49;00m[ 37%] [33m_build/jupyter_execute/eb5cef1c5b67aff20260f91a4f1f196f45aee5ba65c36db18ce5263e8e7770bf.png[39;49;00m
+[01mcopying images... [39;49;00m[ 38%] [33m_build/jupyter_execute/c50f168900f8428867f68a24160323bfb0cac7c0b377c3c7e01c0c16da02bb07.png[39;49;00m
+[01mcopying images... [39;49;00m[ 39%] [33m_build/jupyter_execute/1c803190c8090fe189cf8c518e358e8135b69e4a03316e6dbb2c09d5d5ff2d93.png[39;49;00m
+[01mcopying images... [39;49;00m[ 40%] [33m_build/jupyter_execute/f759f2dd19fb60868a7aab5e190ddaa59de9293f6bbba48d958c5a20c48a3719.png[39;49;00m
+[01mcopying images... [39;49;00m[ 41%] [33m_build/jupyter_execute/935768f137e5f7c91b4a7974d0167e2e8716ed3800809792300ea3fab36ab743.png[39;49;00m
+[01mcopying images... [39;49;00m[ 42%] [33m_build/jupyter_execute/71374a64f47fabb7b4575888443c86eccd2f2cbc675a9b63e8770e8deecdff4f.png[39;49;00m
+[01mcopying images... [39;49;00m[ 43%] [33m_build/jupyter_execute/7105db5f748a196d6256e08666eccf93fe36be412c8a92400855eefbb83ec317.png[39;49;00m
+[01mcopying images... [39;49;00m[ 44%] [33m_build/jupyter_execute/9edc0c4f6a45af5aaecc77c6113b3f7822a1b3615b77d8c29b5fe0ddd7e2010b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 45%] [33m_build/jupyter_execute/5253410fcad438e7d91c60969dd62031d6a5ea5eae8d0bbb5a581a49d337c7ee.png[39;49;00m
+[01mcopying images... [39;49;00m[ 46%] [33m_build/jupyter_execute/0a72d05aa6a066bab569bf98ed92615f61fab485f74f8adfb7c324b7ed671b6f.png[39;49;00m
+[01mcopying images... [39;49;00m[ 47%] [33m_build/jupyter_execute/8a91cf966e4cde0308c70c56aac51f2e5badf0e864d91b02d52d896c54d5f075.png[39;49;00m
+[01mcopying images... [39;49;00m[ 48%] [33m_build/jupyter_execute/09e682830088d3c3429812e95bb62e77198d57d75f979c4d5a41a86b69f82828.png[39;49;00m
+[01mcopying images... [39;49;00m[ 49%] [33m_build/jupyter_execute/d652aac985f3884c53460f32e8d9b01bbd91012b7fbc7e1544ae8374412c13cb.png[39;49;00m
+[01mcopying images... [39;49;00m[ 50%] [33m_build/jupyter_execute/8dfcc928b86429db144f49856b085a59fcacc2f2e33aee6466af1309bdf3f30f.png[39;49;00m
+[01mcopying images... [39;49;00m[ 50%] [33m_build/jupyter_execute/b0752fc754ea198f352770fb5c04998870695267d132c6d2b2218f67fd226180.png[39;49;00m
+[01mcopying images... [39;49;00m[ 51%] [33m_build/jupyter_execute/d18ec95069cf30b0c30bde32c69bcda935d6051208ecf52a38627e2316623a27.png[39;49;00m
+[01mcopying images... [39;49;00m[ 52%] [33m_build/jupyter_execute/517c83507ba2fc388693d919b9bc77a97d2d9f6e0a2f179ba1b88601465a0cb3.png[39;49;00m
+[01mcopying images... [39;49;00m[ 53%] [33m_build/jupyter_execute/aa87a1882905dab382064ee74ff0c988f22dffcb6b92ea44e192f70ac0b57e0b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 54%] [33m_build/jupyter_execute/0c70e81a7ce4d62577146cf70ff5f15767d27dbf727867b9d21306cb52cecadb.png[39;49;00m
+[01mcopying images... [39;49;00m[ 55%] [33m_build/jupyter_execute/d3416966d882e078bcd4f98c4deee6e4a3364908d1832b65c9177f3d60570c82.png[39;49;00m
+[01mcopying images... [39;49;00m[ 56%] [33m_build/jupyter_execute/af1477ec6e4a3c6b34a466c2230a8797cfbcfeb2bc703b77f01b8ae98d446a39.png[39;49;00m
+[01mcopying images... [39;49;00m[ 57%] [33m_build/jupyter_execute/5e800129b1325b4584acf2111c003564ac62dc1d9a46db21b341b45f02a05827.png[39;49;00m
+[01mcopying images... [39;49;00m[ 58%] [33m_build/jupyter_execute/8a0bb5b0591470a9e23a38f5cb8bafdd044e9e1487bc81659ded05cfbd9e0cc5.png[39;49;00m
+[01mcopying images... [39;49;00m[ 59%] [33m_build/jupyter_execute/e4914d3000405cac3ea0f0eee4810ff27b1c47d21555ddbde96797b049337451.png[39;49;00m
+[01mcopying images... [39;49;00m[ 60%] [33m_build/jupyter_execute/aad841ca3b5229bcbecd89776bc94f9b07c6b4616e3a48028fd874b4aba2a0e8.png[39;49;00m
+[01mcopying images... [39;49;00m[ 61%] [33m_build/jupyter_execute/fef49a52574163f205d2103c8a15b4c4a520b0c2904149441f864e1c14b33c09.png[39;49;00m
+[01mcopying images... [39;49;00m[ 62%] [33m_build/jupyter_execute/083b3b44e1289df92ce2ebd0ae0073b940c6834d331f928351ec3bd970e0dd3c.png[39;49;00m
+[01mcopying images... [39;49;00m[ 63%] [33m_build/jupyter_execute/f33c738233dc0d4ad8c9d4a057e86bb8f990803baf29b420b80872aac2fd934a.png[39;49;00m
+[01mcopying images... [39;49;00m[ 64%] [33m_build/jupyter_execute/af2ae325cab5bdde7e62974bab1f8873fc9bea1421a26422a62c596d95bc1504.png[39;49;00m
+[01mcopying images... [39;49;00m[ 65%] [33m_build/jupyter_execute/7f88bcc35165fef400f5fdccf888c0886197f7b2ad93d475fb4f69a7547150a6.png[39;49;00m
+[01mcopying images... [39;49;00m[ 66%] [33m_build/jupyter_execute/c38a9e2cf07cbf4bafc2806167b9f9952a695e84253b1400e2b71395a6d4a7f7.png[39;49;00m
+[01mcopying images... [39;49;00m[ 67%] [33m_build/jupyter_execute/e6f765b7ea4864dd7c32d85b71f6f27bade629a3a2ef1f5d352333e08cb477d9.png[39;49;00m
+[01mcopying images... [39;49;00m[ 68%] [33m_build/jupyter_execute/df36e249f81b5213f2cc4d2b362c37878862f6f311520619aa949640a29d180b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 69%] [33m_build/jupyter_execute/f64466c58908ba3d858a7d7301114f781a88dfb753de2ddb7e5fbde10f8429a8.png[39;49;00m
+[01mcopying images... [39;49;00m[ 70%] [33m_build/jupyter_execute/df5fd12516b44070392bdc1a47530c36f6f955f51df080a92b7e7e906a627ae7.png[39;49;00m
+[01mcopying images... [39;49;00m[ 71%] [33m_build/jupyter_execute/96fbec0d4257baf13a79a31dc59c1bf3ffa85be27cc81d9d99b096d4301e577f.png[39;49;00m
+[01mcopying images... [39;49;00m[ 72%] [33m_build/jupyter_execute/95ad914ef0f60d730adbd27c02f3348969fc75ecd763a1846abd6bb7a267d2f2.png[39;49;00m
+[01mcopying images... [39;49;00m[ 73%] [33m_build/jupyter_execute/974f5006ab4b3889b63b530a27f041fa0e1c0ba849b6078936c8fc0bd76cced8.png[39;49;00m
+[01mcopying images... [39;49;00m[ 74%] [33m_build/jupyter_execute/d8b960a13add48d1343e9e522764d15518a9d8bbf148f220e869d92510fc117f.png[39;49;00m
+[01mcopying images... [39;49;00m[ 75%] [33m_build/jupyter_execute/f3501ef224f3ea1f311a193ef71b01efa696b4fd5bbabe90715054a07d2eb4b5.png[39;49;00m
+[01mcopying images... [39;49;00m[ 76%] [33m_build/jupyter_execute/8b0aca36e7d3e73b0932b42f6a9d024dcbedd8212a869c9e53a550447915765b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 77%] [33m_build/jupyter_execute/9c8f64c01cd24f23d84016ad32854a0353fb7b6e628d27958876b092c9b5184f.png[39;49;00m
+[01mcopying images... [39;49;00m[ 78%] [33m_build/jupyter_execute/11fde250036fd2412b2bf4f36edf95faa393044d99e7e49e5f58cc3ebb85838c.png[39;49;00m
+[01mcopying images... [39;49;00m[ 79%] [33m_build/jupyter_execute/6adccbeda2e9f09f0ccddd2716d911a61eec2895ac91eb30e9a3ce8f2e70bf4d.png[39;49;00m
+[01mcopying images... [39;49;00m[ 80%] [33m_build/jupyter_execute/256f22886935957d0e727554eee654800ccceaa2575d5a77439707cea530211f.png[39;49;00m
+[01mcopying images... [39;49;00m[ 81%] [33m_build/jupyter_execute/f294bbff7146a689e24fff04e01b7d0b63a8e501fc7c95ce0f4e2afb15400795.png[39;49;00m
+[01mcopying images... [39;49;00m[ 82%] [33m_build/jupyter_execute/105c8110e37de5d9a0416c476f657e09d329edf2df4a815b194622c9e9f725aa.png[39;49;00m
+[01mcopying images... [39;49;00m[ 83%] [33m_build/jupyter_execute/beafa26cf2671ee475801e71a00eeb3913c30bbf970f330dfb1d42538bb9a4ef.png[39;49;00m
+[01mcopying images... [39;49;00m[ 83%] [33m_build/jupyter_execute/d4647a7ac8d20fd453cbaefc2022c1ce187532f627c108078434accad8c6e392.png[39;49;00m
+[01mcopying images... [39;49;00m[ 84%] [33m_build/jupyter_execute/eebaab4eba9eb196b8f24130017717310d387e94c2c236ead2509361d3b31fa9.png[39;49;00m
+[01mcopying images... [39;49;00m[ 85%] [33mtorch/layers_files/inv_conv_input.png[39;49;00m
+[01mcopying images... [39;49;00m[ 86%] [33mtorch/layers_files/inv_conv_output.png[39;49;00m
+[01mcopying images... [39;49;00m[ 87%] [33m_build/jupyter_execute/246a012ad3b35468fb1d7774c946bf022db83a1b39a66dee3eb5e0e4eba1ab17.png[39;49;00m
+[01mcopying images... [39;49;00m[ 88%] [33m_build/jupyter_execute/278f441b3bd586a7b78cfba9dc843dc4976bb5536a679466ee2f24d3f5c378de.png[39;49;00m
+[01mcopying images... [39;49;00m[ 89%] [33m_build/jupyter_execute/eae509feef409e8a5305d4ec44808b1f6c73ebe104c29606009c849e45b71d31.png[39;49;00m
+[01mcopying images... [39;49;00m[ 90%] [33m_build/jupyter_execute/63b7318394a889d4255315e065f137f7cf2bc3ae0e4cc1386ae5e5286f8daca8.png[39;49;00m
+[01mcopying images... [39;49;00m[ 91%] [33m_build/jupyter_execute/ce7c5f0c1365e5ae409eb10c4a1ff86a8dfaef6d7536175f4cd03b9a447a0518.png[39;49;00m
+[01mcopying images... [39;49;00m[ 92%] [33m_build/jupyter_execute/35fd27ccbbd451e7fcbde9a43eb66dbe958aa7ab92642659c5478394d7c3a668.png[39;49;00m
+[01mcopying images... [39;49;00m[ 93%] [33m_build/jupyter_execute/a5e08e4693de6102a005b7858a29d70d937839ef4fa329ab838078fda86b2be9.png[39;49;00m
+[01mcopying images... [39;49;00m[ 94%] [33m_build/jupyter_execute/0ec8bbee7d72fb542c1cc7dae347c8b1a630540c2483181e806d993c5eaaab82.png[39;49;00m
+[01mcopying images... [39;49;00m[ 95%] [33m_build/jupyter_execute/75dafc930a3a78121b0675af456957352c322f0951f3424d21120d4ae3e10703.png[39;49;00m
+[01mcopying images... [39;49;00m[ 96%] [33m_build/jupyter_execute/1d24198f7d88c4402d1172e71f81a673f0deaab115417fa940c314dd06f053df.png[39;49;00m
+[01mcopying images... [39;49;00m[ 97%] [33m_build/jupyter_execute/89f456335d3be2fb38e1e02a1d319eb8b4df42fbc9ea724aa30022540f49552d.png[39;49;00m
+[01mcopying images... [39;49;00m[ 98%] [33m_build/jupyter_execute/4958e1f587c13bb3764dd26b246cf192cf11064958bf9568145d915b843e95ea.png[39;49;00m
+[01mcopying images... [39;49;00m[ 99%] [33m_build/jupyter_execute/532f2faa10b47923ca9f0c0baa07116564fcac37c6549c21bb83b5fb0fb3a66d.png[39;49;00m
+[01mcopying images... [39;49;00m[100%] [33m_build/jupyter_execute/ab089ed1af20a41402f6b22e6e03264c77b74c944e398e930e59101f37af124e.png[39;49;00m
+
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[etoc] missing index.html written as redirect to 'intro.html'
+[01mbuild succeeded, 113 warnings.[39;49;00m
+
+The HTML pages are in _build/html.
+
+[92m===============================================================================[0m
+
+Finished generating HTML for book.
+Your book's HTML pages are here:
+    _build/html/
+You can look at your book by opening this file in a browser:
+    _build/html/index.html
+Or paste this line directly into your browser bar:
+    file:///home/fedor/Documents/python/_build/html/index.html            
+
+[92m===============================================================================[0m
+

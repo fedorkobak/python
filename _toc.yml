@@ -69,7 +69,6 @@ parts:
     - file: basics/cli_arguments
       sections:
       - file: basics/cli_arguments/argparse.ipynb
-      - file: basics/cli_arguments/manually.ipynb
     - file: basics/packages.ipynb
       sections:
       - file: basics/packages/pip.ipynb
