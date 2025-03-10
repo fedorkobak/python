@@ -84,6 +84,7 @@ parts:
       - file: packages/numpy/norm.ipynb
       - file: packages/numpy/array_splitting.ipynb
       - file: packages/numpy/apply_along_axis.ipynb
+      - file: packages/numpy/set_printoptions.ipynb
     - file: packages/excel_export.ipynb
     - file: packages/zipfile.ipynb
       sections:
