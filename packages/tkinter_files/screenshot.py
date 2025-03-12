@@ -1,5 +1,6 @@
 import tkinter as tk
 import pyscreenshot as ImageGrab
+from IPython.display import display
 
 def take_screenshot(root:tk.Tk):
     '''

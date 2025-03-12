@@ -151,6 +151,7 @@ parts:
         sections:
         - file: packages/tkinter/widgets_overview/scrolling.ipynb
         - file: packages/tkinter/widgets_overview/treeview.ipynb
+        - file: packages/tkinter/widgets_overview/list_box.ipynb
       - file: packages/tkinter/pack.ipynb
       - file: packages/tkinter/change_elements_position.ipynb
   - caption: Pandas
