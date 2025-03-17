@@ -164,6 +164,8 @@ parts:
     - file: pandas/data_transformations.ipynb
       sections:
       - file: pandas/data_transformations/groupby.ipynb
+        sections:
+        - file: pandas/data_transformations/groupby/usage_options.ipynb
     - file: pandas/loc.ipynb
     - file: pandas/data_visualisation.ipynb
     - file: pandas/styles.ipynb
