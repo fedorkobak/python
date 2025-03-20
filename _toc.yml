@@ -161,6 +161,7 @@ parts:
       sections:
       - file: pandas/data_types/datetime.ipynb
       - file: pandas/data_types/columns_by_types.ipynb
+    - file: pandas/creating_loading.ipynb
     - file: pandas/data_transformations.ipynb
       sections:
       - file: pandas/data_transformations/groupby.ipynb
@@ -171,7 +172,6 @@ parts:
     - file: pandas/styles.ipynb
     - file: pandas/display_options.ipynb
     - file: pandas/inline_columns_add.ipynb
-    - file: pandas/read_sql.ipynb
   - caption: Scikit-learn
     chapters:
     - file: sklearn/intro.md
