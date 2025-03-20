@@ -375,20 +375,21 @@
 <li class="toctree-l2"><a class="reference internal" href="data_types/columns_by_types.html">Columns by types</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_loading.html">Creating &amp; loading</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="data_transformations.html">Data transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_transformations/groupby.html">Groupby</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="data_transformations/groupby.html">Groupby</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_transformations/groupby/usage_options.html">Usage options</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="loc.html">&lt;DataFrame/Series&gt;.loc</a></li>
-
-
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="data_selecting.html">Data selecting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_visualisation.html">Data visualisation</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="styles.html">Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display_options.html">Display options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inline_columns_add.html">Inline column add (assign)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="read_sql.html">pandas.read_sql</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
 <ul class="nav bd-sidenav">
@@ -700,6 +701,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-loading">Creating &amp; loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-selecting">Data selecting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#styles">Styles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-like">Check like</a></li>
@@ -723,10 +726,221 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">shuffle</span>
 </pre></div>
 </div>
 </div>
 </div>
+<section id="creating-loading">
+<h2>Creating &amp; loading<a class="headerlink" href="#creating-loading" title="Link to this heading">#</a></h2>
+<p>Pandas have variety of method to create dataframe or load table as pandas dataframe. This sections consdiers options.</p>
+<p>For more details check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pandas.pydata.org/docs/user_guide/dsintro.html#basics-dataframe">Basics data frame</a> section of the official documentation - describes the ways how to define <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>s.</p></li>
+<li><p><a class="reference internal" href="creating_loading.html"><span class="std std-doc">Specific page</span></a> on this website for more details on some use cases.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell shows the most typical way for me to define a data frame. Dict of lists:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>c</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As result there is a column for each item of the input <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
+<p>To show a contrast the following cell uses a much more complicated data structure to create a data frame. There is a dictionary of <code class="docutils literal notranslate"><span class="pre">tuples</span></code> in the keys. Each element is a dictionary that also uses tuples as keys.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">):</span> <span class="p">{(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">):</span> <span class="mi">2</span><span class="p">},</span>
+    <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">):</span> <span class="p">{(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">):</span> <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">):</span> <span class="mi">4</span><span class="p">},</span>
+    <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">):</span> <span class="p">{(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">):</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">):</span> <span class="mi">6</span><span class="p">},</span>
+    <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">):</span> <span class="p">{(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">):</span> <span class="mi">8</span><span class="p">},</span>
+    <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">):</span> <span class="p">{(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">):</span> <span class="mi">9</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">):</span> <span class="mi">10</span><span class="p">},</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="3" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>b</th>
+      <th>a</th>
+      <th>c</th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">A</th>
+      <th>B</th>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>8.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>D</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>9.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As a result, outer keys became a columns where elements of tuples define levels of <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> for columns. Inner keys define <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> for the index of the data frame.</p>
+</section>
+<section id="data-selecting">
+<h2>Data selecting<a class="headerlink" href="#data-selecting" title="Link to this heading">#</a></h2>
+<p>This section is about selecting subsets from the pandas data frames.</p>
+<p>There are two main ways to select data from a data frame:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">loc</span></code> to specify selection selecting rules based on dataframe index.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">iloc</span></code> to specify selection rules based on the order of records in the data frame.</p></li>
+</ul>
+<p>Find out more in the <a class="reference internal" href="data_selecting.html"><span class="std std-doc">corresponding page</span></a>.</p>
+<hr class="docutils" />
+<p>The following cell creates a series with shuffled index. So it’s easy to show the difference between <code class="docutils literal notranslate"><span class="pre">loc</span></code> and <code class="docutils literal notranslate"><span class="pre">iloc</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="n">shuffle</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+<span class="n">test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10     1
+1      2
+9      3
+8      4
+6      5
+2      6
+7      7
+5      8
+3      9
+4     10
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell applies <code class="docutils literal notranslate"><span class="pre">iloc</span></code> with slice selected exactly elements that are stay in corresponding positions according to the order of the original series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6    5
+2    6
+7    7
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cells select data using <code class="docutils literal notranslate"><span class="pre">loc</span></code> - values with matching indices are selected in the order they are listed in the <code class="docutils literal notranslate"><span class="pre">loc</span></code> condition.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5    8
+6    5
+7    7
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="styles">
 <h2>Styles<a class="headerlink" href="#styles" title="Link to this heading">#</a></h2>
 <p>If you need a specific representation for your data in pandas, there is a feature that allows you to customize the representation of a pandas DataFrame.</p>
@@ -1193,6 +1407,8 @@ At positional index 0, first diff: 1 != 2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-loading">Creating &amp; loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-selecting">Data selecting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#styles">Styles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-like">Check like</a></li>

@@ -375,20 +375,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../../pandas/data_types/columns_by_types.html">Columns by types</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/creating_loading.html">Creating &amp; loading</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../pandas/data_transformations.html">Data transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../pandas/data_transformations/groupby.html">Groupby</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../pandas/data_transformations/groupby.html">Groupby</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/data_transformations/groupby/usage_options.html">Usage options</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../pandas/loc.html">&lt;DataFrame/Series&gt;.loc</a></li>
-
-
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/data_selecting.html">Data selecting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../pandas/data_visualisation.html">Data visualisation</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../../pandas/styles.html">Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../pandas/display_options.html">Display options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../pandas/inline_columns_add.html">Inline column add (assign)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../pandas/read_sql.html">pandas.read_sql</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
 <ul class="nav bd-sidenav">
@@ -677,7 +678,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -693,6 +696,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depencies">Depencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#must-have-options">Must have options</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -757,6 +769,19 @@ tar<span class="w"> </span>-xzf<span class="w"> </span><span class="m">3</span>.
 </div>
 </div>
 </div>
+<section id="depencies">
+<h2>Depencies<a class="headerlink" href="#depencies" title="Link to this heading">#</a></h2>
+<p>Python building depends on some packages awailable in your system. Here are listed some of the common issues.</p>
+<p>Without <code class="docutils literal notranslate"><span class="pre">openSSL</span></code> installed, python would not be able to build the ssl module, so use <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">libssl-dev</span></code> on ubuntu.</p>
+</section>
+<section id="must-have-options">
+<h2>Must have options<a class="headerlink" href="#must-have-options" title="Link to this heading">#</a></h2>
+<p>Here are the options that I think are really necessary for a comfortable usa of python.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--with-ensurepip</span></code>: garantees that python will have the <code class="docutils literal notranslate"><span class="pre">ensurepip</span></code> package, which installes pip in python and possble virtual environments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--with-ssl-default-sites=openssl</span></code> to include the ssl module in the build.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -813,6 +838,22 @@ tar<span class="w"> </span>-xzf<span class="w"> </span><span class="m">3</span>.
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depencies">Depencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#must-have-options">Must have options</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;DataFrame/Series&gt;.iloc &#8212; Python</title>
+    <title>Data selecting &#8212; Python</title>
   
   
   
@@ -57,10 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pandas/iloc';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pandas/data_selecting';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data visualisation" href="data_visualisation.html" />
+    <link rel="prev" title="Usage options" href="data_transformations/groupby/usage_options.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -364,7 +364,7 @@
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="data_types.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="data_types/datetime.html">datetime</a></li>
@@ -375,20 +375,21 @@
 <li class="toctree-l2"><a class="reference internal" href="data_types/columns_by_types.html">Columns by types</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_loading.html">Creating &amp; loading</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="data_transformations.html">Data transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_transformations/groupby.html">Groupby</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="data_transformations/groupby.html">Groupby</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_transformations/groupby/usage_options.html">Usage options</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="loc.html">&lt;DataFrame/Series&gt;.loc</a></li>
-
-
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data selecting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_visualisation.html">Data visualisation</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="styles.html">Styles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display_options.html">Display options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inline_columns_add.html">Inline column add (assign)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="read_sql.html">pandas.read_sql</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
 <ul class="nav bd-sidenav">
@@ -606,7 +607,7 @@
       
       
       
-      <li><a href="../_sources/pandas/iloc.ipynb" target="_blank"
+      <li><a href="../_sources/pandas/data_selecting.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -690,7 +691,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><DataFrame/Series>.iloc</h1>
+    <h1>Data selecting</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -700,10 +701,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">&lt;DataFrame/Series&gt;.iloc</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#editable">Editable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loc-slicing">Loc slicing</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -714,444 +713,111 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="dataframe-series-iloc">
-<h1>&lt;DataFrame/Series&gt;.iloc<a class="headerlink" href="#dataframe-series-iloc" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">iloc</span></code> is a way of selecting elements from DataFrames/Series using it index position like this <code class="docutils literal notranslate"><span class="pre">[&lt;row</span> <span class="pre">number&gt;,&lt;column</span> <span class="pre">number&gt;]</span></code>.</p>
-<p>In the next cell I create the data frame for the experiments.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-selecting">
+<h1>Data selecting<a class="headerlink" href="#data-selecting" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
-
-<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">sample_size</span><span class="p">),</span>
-        <span class="s2">&quot;b&quot;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">sample_size</span><span class="p">)</span>
-    <span class="p">},</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span><span class="o">+</span><span class="n">sample_size</span><span class="p">)]</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">shuffle</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="loc-slicing">
+<h2>Loc slicing<a class="headerlink" href="#loc-slicing" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">loc</span></code> in Pandas supports a slicing mechanism, i.e. all records between upper and lower bounds of the slice are selected in the order they appear in the dataframe/serices under consideration.</p>
+<hr class="docutils" />
+<p>The following cell creates a pandas series with a categorial index - this allows us to show cases where slices are used in <code class="docutils literal notranslate"><span class="pre">loc</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)],</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">sample_size</span><span class="p">)]</span>
 <span class="p">)</span>
-<span class="n">test_df</span>
+<span class="n">ser</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>7</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>e</th>
-      <td>4</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>f</th>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>g</th>
-      <td>9</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>h</th>
-      <td>8</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>i</th>
-      <td>9</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>j</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a    0
+b    1
+c    2
+d    3
+e    4
+f    5
+g    6
+h    7
+i    8
+j    9
+dtype: int64
+</pre></div>
 </div>
+</div>
+</div>
+<p>The following cell uses slices with the categorical index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">:</span><span class="s2">&quot;f&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c    2
+d    3
+e    4
+f    5
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Result is pretty easy to predict.</p>
+<p>The following cell truncates data in the series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shuffle</span><span class="p">(</span><span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">ser</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+<span class="n">ser</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g    0
+b    1
+d    2
+e    3
+c    4
+i    5
+j    6
+h    7
+f    8
+a    9
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next code just uses regular slice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">:</span><span class="s2">&quot;f&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c    4
+i    5
+j    6
+h    7
+f    8
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Slice logic doesn’t follow the order of the letters in the alphabet, but follow the order of the elements in the series.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="editable">
-<h1>Editable<a class="headerlink" href="#editable" title="Link to this heading">#</a></h1>
-<p>You can edit element that you access throw <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>.</p>
-<p>So in following example I edited one element by accessing it through <code class="docutils literal notranslate"><span class="pre">iloc</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edit_df_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Initial df&lt;/b&gt;&quot;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">edit_df_test</span><span class="p">)</span>
-
-<span class="n">edit_df_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Edited df&lt;/b&gt;&quot;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">edit_df_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><b>Initial df</b></div><div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>7</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>e</th>
-      <td>4</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>f</th>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>g</th>
-      <td>9</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>h</th>
-      <td>8</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>i</th>
-      <td>9</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>j</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output text_html"><b>Edited df</b></div><div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>7</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>e</th>
-      <td>4</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>f</th>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>g</th>
-      <td>9</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>h</th>
-      <td>8</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>i</th>
-      <td>9</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>j</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p><strong>Note</strong> You can only edit an item via <code class="docutils literal notranslate"><span class="pre">iloc</span></code> if you access it directly. If you get a table column via <code class="docutils literal notranslate"><span class="pre">df.iloc[&lt;row&gt;]</span></code> and then apply the <code class="docutils literal notranslate"><span class="pre">[&lt;column&gt;]</span></code> operator to it, it won’t work.</p>
-<p>So in the following example I try to edit <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> using <code class="docutils literal notranslate"><span class="pre">df.iloc[&lt;row&gt;][&lt;column&gt;]</span></code> to edit the dataframe, but find out that the dataframe has not been edited.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edit_df_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Initial df&lt;/b&gt;&quot;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">edit_df_test</span><span class="p">)</span>
-
-<span class="n">edit_df_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Edited df&lt;/b&gt;&quot;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">edit_df_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><b>Initial df</b></div><div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>7</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>e</th>
-      <td>4</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>f</th>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>g</th>
-      <td>9</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>h</th>
-      <td>8</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>i</th>
-      <td>9</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>j</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output text_html"><b>Edited df</b></div><div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>7</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>e</th>
-      <td>4</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>f</th>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>g</th>
-      <td>9</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>h</th>
-      <td>8</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>i</th>
-      <td>9</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>j</th>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1184,6 +850,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="data_transformations/groupby/usage_options.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Usage options</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="data_visualisation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data visualisation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1200,10 +884,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">&lt;DataFrame/Series&gt;.iloc</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#editable">Editable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loc-slicing">Loc slicing</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
