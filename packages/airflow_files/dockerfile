@@ -1,3 +1,4 @@
 FROM apache/airflow:2.10.5
 RUN pip install bash_kernel && python -m bash_kernel.install
 RUN airflow db init && airflow users create --username admin --firstname admin --lastname admin --role Admin --email test@mail.com --password admin
+USER root
