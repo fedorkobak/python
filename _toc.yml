@@ -123,6 +123,7 @@ parts:
       sections:
       - file: packages/airflow/run_airflow.ipynb
       - file: packages/airflow/tutorial_dag.ipynb
+      - file: packages/airflow/tasks.ipynb
     - file: packages/geopy
       sections:
       - file: packages/geopy/distances.ipynb
