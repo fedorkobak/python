@@ -76,6 +76,16 @@ parts:
     - file: core/interpreter.ipynb
       sections:
       - file: core/interpreter/build.ipynb
+  - caption: "Standard library"
+    chapters:
+    - file: standard_library/collections.ipynb
+    - file: standard_library/hashlib.ipynb
+    - file: standard_library/zipfile.ipynb
+    - file: standard_library/socket.ipynb
+    - file: standard_library/multiprocessing.ipynb
+      sections:
+      - file: standard_library/multiprocessing/pool.ipynb
+    - file: standard_library/multi_threads.ipynb
   - caption: Pandas
     chapters:
     - file: pandas/intro.ipynb
@@ -208,7 +218,6 @@ parts:
       - file: visualisation/dash/empty_figure.ipynb
   - caption: Packages
     chapters:
-    - file: packages/collections.ipynb
     - file: packages/numpy
       sections:
       - file: packages/numpy/norm.ipynb
@@ -230,16 +239,11 @@ parts:
     - file: packages/docker_sdk.ipynb
       sections:
       - file: packages/docker_sdk/containers.ipynb
-    - file: packages/multi_threads.ipynb
-    - file: packages/multiprocessing.ipynb
-      sections:
-      - file: packages/multiprocessing/pool.ipynb
     - file: packages/transformers.ipynb
       sections:
       - file: packages/transformers/pipeline.ipynb
       - file: packages/transformers/tokenizer.ipynb
     - file: packages/apscheduler.ipynb
-    - file: packages/hashlib.ipynb
     - file: packages/selenium.ipynb
     - file: packages/ranx.ipynb
       sections:
