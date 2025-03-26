@@ -4,78 +4,78 @@ format: jb-book
 root: intro
 
 parts:
-  - caption: Basics
+  - caption: Core
     chapters:
-    - file: basics/intro.ipynb
-    - file: basics/syntax.ipynb
+    - file: core/intro.ipynb
+    - file: core/syntax.ipynb
       sections:
-      - file: basics/syntax/operators.ipynb
+      - file: core/syntax/operators.ipynb
         sections:
-        - file: basics/syntax/operators/order.ipynb
-      - file: basics/syntax/keywords.ipynb
+        - file: core/syntax/operators/order.ipynb
+      - file: core/syntax/keywords.ipynb
         sections:
-        - file: basics/syntax/keywords/in.ipynb
-        - file: basics/syntax/keywords/yield.ipynb
-      - file: basics/syntax/functions.ipynb
+        - file: core/syntax/keywords/in.ipynb
+        - file: core/syntax/keywords/yield.ipynb
+      - file: core/syntax/functions.ipynb
         sections:
-        - file: basics/syntax/functions/parameters.ipynb
-      - file: basics/syntax/oop.ipynb
+        - file: core/syntax/functions/parameters.ipynb
+      - file: core/syntax/oop.ipynb
         sections:
-        - file: basics/syntax/oop/interface.ipynb
-        - file: basics/syntax/oop/class_method.ipynb
-        - file: basics/syntax/oop/special_methods.ipynb
-        - file: basics/syntax/oop/special_attributes.ipynb
-      - file: basics/syntax/imports.ipynb
+        - file: core/syntax/oop/interface.ipynb
+        - file: core/syntax/oop/class_method.ipynb
+        - file: core/syntax/oop/special_methods.ipynb
+        - file: core/syntax/oop/special_attributes.ipynb
+      - file: core/syntax/imports.ipynb
         sections:
-        - file: basics/syntax/imports/sys_path.ipynb
-        - file: basics/syntax/imports/from_package_import_all.ipynb
-        - file: basics/syntax/imports/searching_module.ipynb
-      - file: basics/syntax/exceptions.ipynb
-      - file: basics/syntax/decorators.ipynb
-    - file: basics/datatypes.ipynb
+        - file: core/syntax/imports/sys_path.ipynb
+        - file: core/syntax/imports/from_package_import_all.ipynb
+        - file: core/syntax/imports/searching_module.ipynb
+      - file: core/syntax/exceptions.ipynb
+      - file: core/syntax/decorators.ipynb
+    - file: core/datatypes.ipynb
       sections:
-      - file: basics/datatypes/basic.ipynb
+      - file: core/datatypes/basic.ipynb
         sections:
-        - file: basics/datatypes/basic/str.ipynb
-        - file: basics/datatypes/basic/list.ipynb
-        - file: basics/datatypes/basic/dict.ipynb
-        - file: basics/datatypes/basic/set.ipynb
-      - file: basics/datatypes/datetime.ipynb
-    - file: basics/files_folders.ipynb
+        - file: core/datatypes/basic/str.ipynb
+        - file: core/datatypes/basic/list.ipynb
+        - file: core/datatypes/basic/dict.ipynb
+        - file: core/datatypes/basic/set.ipynb
+      - file: core/datatypes/datetime.ipynb
+    - file: core/files_folders.ipynb
       sections:
-      - file: basics/files_folders/pathlib.ipynb
-    - file: basics/unittest
+      - file: core/files_folders/pathlib.ipynb
+    - file: core/unittest
       sections:
-      - file: basics/unittest/run_tests.ipynb
-      - file: basics/unittest/run_before_after.ipynb
-      - file: basics/unittest/check_error.ipynb
-      - file: basics/unittest/mocking.ipynb
+      - file: core/unittest/run_tests.ipynb
+      - file: core/unittest/run_before_after.ipynb
+      - file: core/unittest/check_error.ipynb
+      - file: core/unittest/mocking.ipynb
         sections:
-        - file: basics/unittest/mocking/call_details.ipynb
-        - file: basics/unittest/mocking/syntax.ipynb
-        - file: basics/unittest/mocking/patch.ipynb # Max depth
-        - file: basics/unittest/mocking/raising_errors.ipynb
-    - file: basics/logging.ipynb
+        - file: core/unittest/mocking/call_details.ipynb
+        - file: core/unittest/mocking/syntax.ipynb
+        - file: core/unittest/mocking/patch.ipynb # Max depth
+        - file: core/unittest/mocking/raising_errors.ipynb
+    - file: core/logging.ipynb
       sections:
-      - file: basics/logging/loggers.ipynb
-      - file: basics/logging/handlers.ipynb
-      - file: basics/logging/filters.ipynb
-      - file: basics/logging/configuration.ipynb
-      - file: basics/logging/exception_information.ipynb
-      - file: basics/logging/logging_to_file.ipynb
-      - file: basics/logging/logger_handler_level.ipynb
-      - file: basics/logging/root_logger.ipynb
-    - file: basics/data_classes.ipynb
-    - file: basics/cli_arguments
+      - file: core/logging/loggers.ipynb
+      - file: core/logging/handlers.ipynb
+      - file: core/logging/filters.ipynb
+      - file: core/logging/configuration.ipynb
+      - file: core/logging/exception_information.ipynb
+      - file: core/logging/logging_to_file.ipynb
+      - file: core/logging/logger_handler_level.ipynb
+      - file: core/logging/root_logger.ipynb
+    - file: core/data_classes.ipynb
+    - file: core/cli_arguments
       sections:
-      - file: basics/cli_arguments/argparse.ipynb
-    - file: basics/packages.ipynb
+      - file: core/cli_arguments/argparse.ipynb
+    - file: core/packages.ipynb
       sections:
-      - file: basics/packages/pip.ipynb
-      - file: basics/packages/pyproject_toml.ipynb 
-    - file: basics/interpreter.ipynb
+      - file: core/packages/pip.ipynb
+      - file: core/packages/pyproject_toml.ipynb 
+    - file: core/interpreter.ipynb
       sections:
-      - file: basics/interpreter/build.ipynb
+      - file: core/interpreter/build.ipynb
   - caption: Pandas
     chapters:
     - file: pandas/intro.ipynb
