@@ -44,16 +44,6 @@ parts:
     - file: core/files_folders.ipynb
       sections:
       - file: core/files_folders/pathlib.ipynb
-    - file: core/logging.ipynb
-      sections:
-      - file: core/logging/loggers.ipynb
-      - file: core/logging/handlers.ipynb
-      - file: core/logging/filters.ipynb
-      - file: core/logging/configuration.ipynb
-      - file: core/logging/exception_information.ipynb
-      - file: core/logging/logging_to_file.ipynb
-      - file: core/logging/logger_handler_level.ipynb
-      - file: core/logging/root_logger.ipynb
     - file: core/data_classes.ipynb
     - file: core/cli_arguments
       sections:
@@ -79,6 +69,16 @@ parts:
         - file: standard_library/unittest/mocking/syntax.ipynb
         - file: standard_library/unittest/mocking/patch.ipynb # Max depth
         - file: standard_library/unittest/mocking/raising_errors.ipynb
+    - file: standard_library/logging.ipynb
+      sections:
+      - file: standard_library/logging/loggers.ipynb
+      - file: standard_library/logging/handlers.ipynb
+      - file: standard_library/logging/filters.ipynb
+      - file: standard_library/logging/configuration.ipynb
+      - file: standard_library/logging/exception_information.ipynb
+      - file: standard_library/logging/logging_to_file.ipynb
+      - file: standard_library/logging/logger_handler_level.ipynb
+      - file: standard_library/logging/root_logger.ipynb
     - file: standard_library/hashlib.ipynb
     - file: standard_library/zipfile.ipynb
     - file: standard_library/socket.ipynb
