@@ -44,17 +44,6 @@ parts:
     - file: core/files_folders.ipynb
       sections:
       - file: core/files_folders/pathlib.ipynb
-    - file: core/unittest
-      sections:
-      - file: core/unittest/run_tests.ipynb
-      - file: core/unittest/run_before_after.ipynb
-      - file: core/unittest/check_error.ipynb
-      - file: core/unittest/mocking.ipynb
-        sections:
-        - file: core/unittest/mocking/call_details.ipynb
-        - file: core/unittest/mocking/syntax.ipynb
-        - file: core/unittest/mocking/patch.ipynb # Max depth
-        - file: core/unittest/mocking/raising_errors.ipynb
     - file: core/logging.ipynb
       sections:
       - file: core/logging/loggers.ipynb
@@ -79,6 +68,17 @@ parts:
   - caption: "Standard library"
     chapters:
     - file: standard_library/collections.ipynb
+    - file: standard_library/unittest.ipynb
+      sections:
+      - file: standard_library/unittest/run_tests.ipynb
+      - file: standard_library/unittest/run_before_after.ipynb
+      - file: standard_library/unittest/check_error.ipynb
+      - file: standard_library/unittest/mocking.ipynb
+        sections:
+        - file: standard_library/unittest/mocking/call_details.ipynb
+        - file: standard_library/unittest/mocking/syntax.ipynb
+        - file: standard_library/unittest/mocking/patch.ipynb # Max depth
+        - file: standard_library/unittest/mocking/raising_errors.ipynb
     - file: standard_library/hashlib.ipynb
     - file: standard_library/zipfile.ipynb
     - file: standard_library/socket.ipynb
