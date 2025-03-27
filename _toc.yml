@@ -79,6 +79,7 @@ parts:
       - file: standard_library/logging/logging_to_file.ipynb
       - file: standard_library/logging/logger_handler_level.ipynb
       - file: standard_library/logging/root_logger.ipynb
+    - file: standard_library/re.ipynb
     - file: standard_library/hashlib.ipynb
     - file: standard_library/zipfile.ipynb
     - file: standard_library/socket.ipynb
