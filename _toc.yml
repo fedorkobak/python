@@ -52,6 +52,7 @@ parts:
       sections:
       - file: core/packages/pip.ipynb
       - file: core/packages/pyproject_toml.ipynb 
+      - file: core/packages/hatch.ipynb
     - file: core/interpreter.ipynb
       sections:
       - file: core/interpreter/build.ipynb
