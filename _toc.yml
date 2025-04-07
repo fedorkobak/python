@@ -83,13 +83,15 @@ parts:
     - file: standard_library/re.ipynb
       sections:
       - file: standard_library/re/match_search.ipynb
+    - file: standard_library/concurrency.ipynb
+      sections:
+      - file: standard_library/concurrency/multiprocessing.ipynb
+        sections:
+        - file: standard_library/concurrency/multiprocessing/pool.ipynb
+      - file: standard_library/concurrency/threading.ipynb
     - file: standard_library/hashlib.ipynb
     - file: standard_library/zipfile.ipynb
     - file: standard_library/socket.ipynb
-    - file: standard_library/multiprocessing.ipynb
-      sections:
-      - file: standard_library/multiprocessing/pool.ipynb
-    - file: standard_library/multi_threads.ipynb
   - caption: Pandas
     chapters:
     - file: pandas/intro.ipynb
