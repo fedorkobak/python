@@ -88,6 +88,7 @@ parts:
       - file: standard_library/concurrency/multiprocessing.ipynb
         sections:
         - file: standard_library/concurrency/multiprocessing/pool.ipynb
+        - file: standard_library/concurrency/multiprocessing/start_methods.ipynb
       - file: standard_library/concurrency/threading.ipynb
     - file: standard_library/hashlib.ipynb
     - file: standard_library/zipfile.ipynb
