@@ -276,14 +276,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../standard_library/re/match_search.html">Match/Search</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/socket.html">Socket</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../standard_library/multiprocessing/pool.html">Pool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../standard_library/multi_threads.html">Multithreads in python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/importlib.html">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -478,6 +483,10 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../packages/jupyter/jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/jinja.html">Jinja</a></li>
@@ -710,11 +719,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loaded-modules">Loaded modules</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sys-path"><code class="docutils literal notranslate"><span class="pre">sys.path</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-module">Searching module</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reload-module">Reload module</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixing">Fixing</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-function">Import function</a></li>
 </ul>
             </nav>
         </div>
@@ -837,117 +842,31 @@ python3 -c &quot;import sys; print(len(sys.modules))&quot;
 <p>Searching for module in python described in <a class="reference external" href="https://docs.python.org/3/reference/import.html#searching">this subsection</a> of the official documentation.</p>
 <p>For some practical features associated with that check <a class="reference internal" href="imports/searching_module.html"><span class="std std-doc">special page</span></a> of this site.</p>
 </section>
-<section id="reload-module">
-<h2>Reload module<a class="headerlink" href="#reload-module" title="Link to this heading">#</a></h2>
-<p><strong>Long story short</strong> - use <code class="docutils literal notranslate"><span class="pre">importlib.reload(&lt;module</span> <span class="pre">name&gt;)</span></code> to update the module in the current interpier run.</p>
-<p>If you have imported a module in the current run of Interpirer, even if the module has been updated, Interpirer will use old versions of the module.</p>
-<section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
-<p>Let’s reinforce the above with an example. The program in the following cell will:</p>
-<ul class="simple">
-<li><p>Create a module that contains a variable.</p></li>
-<li><p>Import the newly created module and print variable.</p></li>
-<li><p>Update the module.</p></li>
-<li><p>Attempt to reload the module and print variable again.</p></li>
-</ul>
+<section id="import-function">
+<h2>Import function<a class="headerlink" href="#import-function" title="Link to this heading">#</a></h2>
+<p>There is a special build-in function <code class="docutils literal notranslate"><span class="pre">__import__</span></code> that is actually hiden under the <code class="docutils literal notranslate"><span class="pre">import</span></code> keyword in the conventional python. See the <a class="reference external" href="https://docs.python.org/3/library/functions.html#import__">official description</a> of the <code class="docutils literal notranslate"><span class="pre">__import__</span></code> buildin function.</p>
+<hr class="docutils" />
+<p>The following cell shows the usage of the <code class="docutils literal notranslate"><span class="pre">cowsay</span></code> when imported through the <code class="docutils literal notranslate"><span class="pre">__import__</span></code> buildin.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> imports_files/reload_example/reload_example.py
-<span class="n">program</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">variable = &quot;This is initial valule of the variable&quot;</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;temp.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">program</span><span class="p">)</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">temp</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">variable</span><span class="p">)</span>
-
-<span class="c1"># now change value of the variable</span>
-<span class="n">program</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">variable = &quot;This is changed value of the variable&quot;</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;temp.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">program</span><span class="p">)</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">temp</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">variable</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cowsay</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s2">&quot;cowsay&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cowsay</span><span class="o">.</span><span class="n">cowsay</span><span class="p">(</span><span class="s2">&quot;__import__&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting imports_files/reload_example/reload_example.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ____________ 
+&lt; __import__ &gt;
+ ------------ 
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now let us try to run this programme:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-cd imports_files/reload_example
-python3 reload_example.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is initial valule of the variable
-This is changed value of the variable
-</pre></div>
-</div>
-</div>
-</div>
-<p>Changing the module while the programme was running had no effect on the result - even though it was re-imported.</p>
-</section>
-<section id="fixing">
-<h3>Fixing<a class="headerlink" href="#fixing" title="Link to this heading">#</a></h3>
-<p>To apply the changes in the module during further execution of the programme, use the <code class="docutils literal notranslate"><span class="pre">importools.reload</span></code> function.</p>
-<p>The following cell modifies previous example by adding <code class="docutils literal notranslate"><span class="pre">importlib.reaload(temp)</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> imports_files/reload_example/reload_example.py
-<span class="n">program</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">variable = &quot;This is initial valule of the variable&quot;</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;temp.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">program</span><span class="p">)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">temp</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">variable</span><span class="p">)</span>
-
-<span class="c1"># now change value of the variable</span>
-<span class="n">program</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">variable = &quot;This is changed value of the variable&quot;</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;temp.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">program</span><span class="p">)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
-<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">variable</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting imports_files/reload_example/reload_example.py
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-cd imports_files/reload_example
-python3 reload_example.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is initial valule of the variable
-This is changed value of the variable
-</pre></div>
-</div>
-</div>
-</div>
-<p>The second print uses the modified value of the <code class="docutils literal notranslate"><span class="pre">temp.variable</span></code>, so the module has been updated for runtime.</p>
-</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1020,11 +939,7 @@ This is changed value of the variable
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loaded-modules">Loaded modules</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sys-path"><code class="docutils literal notranslate"><span class="pre">sys.path</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-module">Searching module</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reload-module">Reload module</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixing">Fixing</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-function">Import function</a></li>
 </ul>
   </nav></div>
 

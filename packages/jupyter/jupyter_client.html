@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Jinja" href="../jinja.html" />
+    <link rel="next" title="Traitlets" href="traitlets.html" />
     <link rel="prev" title="Reload modules" href="ipython/reloading_modules.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -276,14 +276,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../standard_library/re/match_search.html">Match/Search</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/socket.html">Socket</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../standard_library/multiprocessing/pool.html">Pool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../standard_library/multi_threads.html">Multithreads in python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/importlib.html">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -478,6 +483,10 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../jinja.html">Jinja</a></li>
@@ -708,7 +717,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli">CLI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-kernel">Running kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-python">Run from python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-kernel">Creating kernel</a></li>
 </ul>
             </nav>
@@ -764,9 +773,13 @@ if __name__ == &#39;__main__&#39;:
 </div>
 </div>
 </section>
-<section id="running-kernel">
-<h2>Running kernel<a class="headerlink" href="#running-kernel" title="Link to this heading">#</a></h2>
-<p>You can run and manage your own kernel by using <a class="reference external" href="https://jupyter-client.readthedocs.io/en/latest/api/jupyter_client.html#jupyter_client.manager.KernelManager">KernelManager</a>.</p>
+<section id="run-from-python">
+<h2>Run from python<a class="headerlink" href="#run-from-python" title="Link to this heading">#</a></h2>
+<p>Sometimes it’s useful to be able to run the kernel from the python code - for debugging/experimenting purposes. The main tool for such purposes is the <code class="docutils literal notranslate"><span class="pre">ipykernel.kernelbase.Kernel</span></code> class, which allows to run the kernel and automatically launch the client to it.</p>
+<ul class="simple">
+<li><p>Check some details in <a class="reference external" href="https://jupyter-client.readthedocs.io/en/latest/api/jupyter_client.html#jupyter_client.manager.KernelManager">KernelManager documentation page</a>.</p></li>
+<li><p>And <a class="reference internal" href="jupyter_client/running_kernel.html"><span class="std std-doc">specific page</span></a> in this web-site.</p></li>
+</ul>
 <hr class="docutils" />
 <p>The following example starts the Python kernel.</p>
 <div class="cell docutils container">
@@ -1014,11 +1027,11 @@ if __name__ == &#39;__main__&#39;:
       </div>
     </a>
     <a class="right-next"
-       href="../jinja.html"
+       href="traitlets.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Jinja</p>
+        <p class="prev-next-title">Traitlets</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1039,7 +1052,7 @@ if __name__ == &#39;__main__&#39;:
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli">CLI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-kernel">Running kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-python">Run from python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-kernel">Creating kernel</a></li>
 </ul>
   </nav></div>

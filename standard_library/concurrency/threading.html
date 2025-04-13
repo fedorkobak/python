@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pool &#8212; Python</title>
+    <title>Threading &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/multiprocessing/pool';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/concurrency/threading';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Multithreads in python" href="../multi_threads.html" />
-    <link rel="prev" title="Multiprocessing" href="../multiprocessing.html" />
+    <link rel="next" title="Hashlib" href="../hashlib.html" />
+    <link rel="prev" title="Start methods" href="multiprocessing/start_methods.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -276,14 +276,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../re/match_search.html">Match/Search</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../concurrency.html">Concurrency</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Threading</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../socket.html">Socket</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../multiprocessing.html">Multiprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Pool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi_threads.html">Multithreads in python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../importlib.html">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -478,6 +483,10 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../packages/jupyter/jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/jinja.html">Jinja</a></li>
@@ -613,7 +622,7 @@
       
       
       
-      <li><a href="../../_sources/standard_library/multiprocessing/pool.ipynb" target="_blank"
+      <li><a href="../../_sources/standard_library/concurrency/threading.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -697,7 +706,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pool</h1>
+    <h1>Threading</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -707,11 +716,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-and-baselines">Examples and baselines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map">map</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-order">Results order</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example1-runtime-messages">Example1 - runtime messages</a></li>
 </ul>
             </nav>
         </div>
@@ -723,148 +729,136 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pool">
-<h1>Pool<a class="headerlink" href="#pool" title="Link to this heading">#</a></h1>
-<p>Is an object that automatically creates a specified number of processes and applies some function in those threads.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">random</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pool</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="examples-and-baselines">
-<h2>Examples and baselines<a class="headerlink" href="#examples-and-baselines" title="Link to this heading">#</a></h2>
-<p>We will consider a common task for data scientists, which involves computing distances between objects. We have an array of objects <code class="docutils literal notranslate"><span class="pre">X</span></code>, and we need to compute the distances between each object in the array and a target object <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
-<p>The next cell creates the required objects:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">1_000_000</span>
-<span class="n">features_size</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">features_size</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">features_size</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell implements an operation that we’ll use to calculate distances between objects.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_distances</span><span class="p">(</span><span class="n">X</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">a</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This function computes the Euclidean distances</span>
-<span class="sd">    between all objects in an array and a specified object.</span>
-<span class="sd">    Its purpose is to demonstrate the benefits of using multithreading.</span>
-<span class="sd">    The function intentionally avoids using numpy operations, as they appear </span>
-<span class="sd">    to have their own multithreading optimizations. The bottom line is that </span>
-<span class="sd">    without multithreading, there is no significant performance gain.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    X : np.ndarray</span>
-<span class="sd">        (number of objcets, object dimensionality)</span>
-<span class="sd">        array of objects for which we need distances</span>
-<span class="sd">    a : np.ndarray</span>
-<span class="sd">        (object dimensionality)</span>
-<span class="sd">        object to which we need to compare all objects from X</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">([(</span><span class="n">a_v</span><span class="o">-</span><span class="n">b_v</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">a_v</span><span class="p">,</span> <span class="n">b_v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)]))</span>
-        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">X</span>
-    <span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>So let’s estimate how long it will take to calculate all the distances at once.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%timeit</span> -n 1
-<span class="n">compute_distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.67 s ± 131 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
-</pre></div>
-</div>
-</div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="threading">
+<h1>Threading<a class="headerlink" href="#threading" title="Link to this heading">#</a></h1>
+<section id="sources">
+<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a href="https://docs.python.org/3/library/threading.html">Official documentarion for <code class="docutils literal notranslate"><span class="pre">threading</span></code> module</a>;</p></li>
+<li><p><a href="https://www.tutorialspoint.com/python/python_multithreading.htm">Third-party tutorial with examples (python2)</a>.</p></li>
+</ul>
 </section>
-<section id="map">
-<h2>map<a class="headerlink" href="#map" title="Link to this heading">#</a></h2>
-<p>Map is the simplest method of pooling - you simply specify which function to apply and define the function’s arguments for each process.</p>
+<section id="example1-runtime-messages">
+<h2>Example1 - runtime messages<a class="headerlink" href="#example1-runtime-messages" title="Link to this heading">#</a></h2>
+<p>In following exmaple:</p>
+<ul class="simple">
+<li><p>Define the <code class="docutils literal notranslate"><span class="pre">myThread</span></code> class as an ancestor of the <code class="docutils literal notranslate"><span class="pre">threading.Thread</span></code> class - it will describe the behaviour of the thread:</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">run</span></code> method is executed when the thread is started - in this case method:</p>
+<ul>
+<li><p>Spends time according to the <code class="docutils literal notranslate"><span class="pre">delay</span></code> parameter of the class;</p></li>
+<li><p>Increases the value of <code class="docutils literal notranslate"><span class="pre">counter</span></code> by one.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Create and run two instances of <code class="docutils literal notranslate"><span class="pre">myThread</span></code>:</p>
+<ul>
+<li><p>With <code class="docutils literal notranslate"><span class="pre">delay</span></code> 0.5 and 1;</p></li>
+<li><p>With <code class="docutils literal notranslate"><span class="pre">name</span></code> “first” and “second”;</p></li>
+</ul>
+</li>
+<li><p>In cycle every 0.5 seconds check is threads still alife and print <code class="docutils literal notranslate"><span class="pre">counter</span></code> values for each instance;</p></li>
+<li><p>Result:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">counter</span></code> of instance named “first” updated at each step;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">counter</span></code> of instance named “second” is updated once every two steps.</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Just warps compute_distances to have opportunity to pass there different X </span>
-<span class="sd">    but the same X.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">compute_distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Here is an example of use. The original array of objects was split into chunks and <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> was applied to each chunk.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%timeit</span> -n 1
-<span class="n">split</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-<span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">wrapper</span> <span class="p">,</span> <span class="n">split</span><span class="p">)</span>
-<span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="n">steps_count</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">myThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">delay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps_count</span><span class="p">):</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delay</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Create new threads</span>
+<span class="n">thread1</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">)</span>
+<span class="n">thread2</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">)</span>
+
+<span class="n">begin_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1"># Start new Threads</span>
+<span class="n">thread1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">thread2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Add threads to thread list</span>
+<span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread1</span><span class="p">)</span>
+<span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread2</span><span class="p">)</span>
+
+<span class="n">is_any_thread_live</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">while</span> <span class="n">is_any_thread_live</span><span class="p">:</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">dislpay_line</span> <span class="o">=</span> \
+        <span class="sa">f</span><span class="s2">&quot;=====</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">begin_time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> \
+        <span class="s2">&quot; seconds after begining=====&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dislpay_line</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; counter = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">counter</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+            <span class="c1"># if any thread alife</span>
+            <span class="c1"># i leave the cycle</span>
+            <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># if we tried all threads</span>
+        <span class="c1"># and there aren&#39;t any alife </span>
+        <span class="c1"># set flag for cycle leaving</span>
+        <span class="n">is_any_thread_live</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.9 s ± 53.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=====0.5 seconds after begining=====
+first counter = 1
+second counter = 0
+=====1.0 seconds after begining=====
+first counter = 2
+second counter = 1
+=====1.5 seconds after begining=====
+first counter = 3
+second counter = 1
+=====2.0 seconds after begining=====
+first counter = 4
+second counter = 2
+=====2.5 seconds after begining=====
+first counter = 5
+second counter = 2
+=====3.0 seconds after begining=====
+first counter = 5
+second counter = 3
+=====3.5 seconds after begining=====
+first counter = 5
+second counter = 3
+=====4.0 seconds after begining=====
+first counter = 5
+second counter = 4
+=====4.5 seconds after begining=====
+first counter = 5
+second counter = 4
+=====5.0 seconds after begining=====
+first counter = 5
+second counter = 5
 </pre></div>
 </div>
 </div>
 </div>
-<section id="results-order">
-<h3>Results order<a class="headerlink" href="#results-order" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">pool.map</span></code> the results will always be in the order of the array they were applied to.</p>
-<p>To demonstrate this, we have created an example where initially created threads take significantly longer to complete. In order to clearly determine which options finished earlier, we have included print statements. Additionally, each thread produces output that unambiguously identifies the thread from which the result was obtained.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">it_number</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">it_number</span><span class="si">}</span><span class="s2"> iterations started </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="p">[</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">it_number</span><span class="p">)]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">it_number</span><span class="si">}</span><span class="s2"> iterations finished </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">it_number</span>
-
-<span class="n">split</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">wrapper</span> <span class="p">,</span> <span class="p">[</span><span class="mi">100000</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results : </span><span class="si">{</span><span class="n">results</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000 iterations started 
-100 iterations started 
-10 iterations started 
-100 iterations finished 
-10 iterations finished 
-100000 iterations finished 
-results : [100000, 100, 10]
-</pre></div>
-</div>
-</div>
-</div>
-<p>So even thread with 100000 iterations finished last - it’s output is first in the output.</p>
-</section>
 </section>
 </section>
 
@@ -881,7 +875,7 @@ results : [100000, 100, 10]
         },
         kernelOptions: {
             name: "python3",
-            path: "./standard_library/multiprocessing"
+            path: "./standard_library/concurrency"
         },
         predefinedOutput: true
     }
@@ -899,20 +893,20 @@ results : [100000, 100, 10]
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../multiprocessing.html"
+       href="multiprocessing/start_methods.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Multiprocessing</p>
+        <p class="prev-next-title">Start methods</p>
       </div>
     </a>
     <a class="right-next"
-       href="../multi_threads.html"
+       href="../hashlib.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Multithreads in python</p>
+        <p class="prev-next-title">Hashlib</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -932,11 +926,8 @@ results : [100000, 100, 10]
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-and-baselines">Examples and baselines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map">map</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-order">Results order</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example1-runtime-messages">Example1 - runtime messages</a></li>
 </ul>
   </nav></div>
 

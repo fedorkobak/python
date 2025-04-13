@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Multithreads in python &#8212; Python</title>
+    <title>Importlib &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/multi_threads';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/importlib';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Intro" href="../pandas/intro.html" />
-    <link rel="prev" title="Pool" href="multiprocessing/pool.html" />
+    <link rel="prev" title="Socket" href="socket.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -276,14 +276,19 @@
 <li class="toctree-l2"><a class="reference internal" href="re/match_search.html">Match/Search</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="socket.html">Socket</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="multiprocessing/pool.html">Pool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Multithreads in python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -478,6 +483,10 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../packages/jupyter/jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages/jinja.html">Jinja</a></li>
@@ -613,7 +622,7 @@
       
       
       
-      <li><a href="../_sources/standard_library/multi_threads.ipynb" target="_blank"
+      <li><a href="../_sources/standard_library/importlib.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -697,7 +706,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Multithreads in python</h1>
+    <h1>Importlib</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -707,8 +716,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example1-runtime-messages">Example1 - runtime messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-module">Import module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-module-arguments"><code class="docutils literal notranslate"><span class="pre">import_module</span></code> arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-optional-file">From optional file</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reload-module">Reload module</a></li>
 </ul>
             </nav>
         </div>
@@ -720,136 +733,239 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="multithreads-in-python">
-<h1>Multithreads in python<a class="headerlink" href="#multithreads-in-python" title="Link to this heading">#</a></h1>
-<section id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a href="https://docs.python.org/3/library/threading.html">Official documentarion for <code class="docutils literal notranslate"><span class="pre">threading</span></code> module</a>;</p></li>
-<li><p><a href="https://www.tutorialspoint.com/python/python_multithreading.htm">Third-party tutorial with examples (python2)</a>.</p></li>
-</ul>
-</section>
-<section id="example1-runtime-messages">
-<h2>Example1 - runtime messages<a class="headerlink" href="#example1-runtime-messages" title="Link to this heading">#</a></h2>
-<p>In following exmaple:</p>
-<ul class="simple">
-<li><p>Define the <code class="docutils literal notranslate"><span class="pre">myThread</span></code> class as an ancestor of the <code class="docutils literal notranslate"><span class="pre">threading.Thread</span></code> class - it will describe the behaviour of the thread:</p>
-<ul>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">run</span></code> method is executed when the thread is started - in this case method:</p>
-<ul>
-<li><p>Spends time according to the <code class="docutils literal notranslate"><span class="pre">delay</span></code> parameter of the class;</p></li>
-<li><p>Increases the value of <code class="docutils literal notranslate"><span class="pre">counter</span></code> by one.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Create and run two instances of <code class="docutils literal notranslate"><span class="pre">myThread</span></code>:</p>
-<ul>
-<li><p>With <code class="docutils literal notranslate"><span class="pre">delay</span></code> 0.5 and 1;</p></li>
-<li><p>With <code class="docutils literal notranslate"><span class="pre">name</span></code> “first” and “second”;</p></li>
-</ul>
-</li>
-<li><p>In cycle every 0.5 seconds check is threads still alife and print <code class="docutils literal notranslate"><span class="pre">counter</span></code> values for each instance;</p></li>
-<li><p>Result:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">counter</span></code> of instance named “first” updated at each step;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">counter</span></code> of instance named “second” is updated once every two steps.</p></li>
-</ul>
-</li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="importlib">
+<h1>Importlib<a class="headerlink" href="#importlib" title="Link to this heading">#</a></h1>
+<p>This is a package that implements the functionality of the <code class="docutils literal notranslate"><span class="pre">import</span></code> keyword. It can be useful in some cases when you need to do some tricky import. See the <a class="reference external" href="https://docs.python.org/3/library/importlib.html">appropriate section of the offical documentation</a> for more information.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-
-<span class="n">steps_count</span> <span class="o">=</span> <span class="mi">5</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">myThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">delay</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps_count</span><span class="p">):</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delay</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Create new threads</span>
-<span class="n">thread1</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">)</span>
-<span class="n">thread2</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">)</span>
-
-<span class="n">begin_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="c1"># Start new Threads</span>
-<span class="n">thread1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="n">thread2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-<span class="c1"># Add threads to thread list</span>
-<span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread1</span><span class="p">)</span>
-<span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread2</span><span class="p">)</span>
-
-<span class="n">is_any_thread_live</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">while</span> <span class="n">is_any_thread_live</span><span class="p">:</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-
-    <span class="n">dislpay_line</span> <span class="o">=</span> \
-        <span class="sa">f</span><span class="s2">&quot;=====</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">begin_time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> \
-        <span class="s2">&quot; seconds after begining=====&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">dislpay_line</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; counter = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">counter</span><span class="p">))</span>
-    
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
-            <span class="c1"># if any thread alife</span>
-            <span class="c1"># i leave the cycle</span>
-            <span class="k">break</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># if we tried all threads</span>
-        <span class="c1"># and there aren&#39;t any alife </span>
-        <span class="c1"># set flag for cycle leaving</span>
-        <span class="n">is_any_thread_live</span> <span class="o">=</span> <span class="kc">False</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="import-module">
+<h2>Import module<a class="headerlink" href="#import-module" title="Link to this heading">#</a></h2>
+<p>This section provides an overview of the options for loading modules with <code class="docutils literal notranslate"><span class="pre">importlib</span></code>. The central option here is the <code class="docutils literal notranslate"><span class="pre">importlib.import_module</span></code> function. You just have to specify the name of the module as it is typically written in the <code class="docutils literal notranslate"><span class="pre">import</span></code> keyword.</p>
+<hr class="docutils" />
+<p>The following cell imports <code class="docutils literal notranslate"><span class="pre">cowsay</span></code> using <code class="docutils literal notranslate"><span class="pre">importlib.import_module</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cowsay_object</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;cowsay&quot;</span><span class="p">)</span>
+<span class="n">cowsay_object</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=====0.5 seconds after begining=====
-first counter = 1
-second counter = 0
-=====1.0 seconds after begining=====
-first counter = 2
-second counter = 1
-=====1.5 seconds after begining=====
-first counter = 3
-second counter = 1
-=====2.0 seconds after begining=====
-first counter = 4
-second counter = 2
-=====2.5 seconds after begining=====
-first counter = 5
-second counter = 2
-=====3.0 seconds after begining=====
-first counter = 5
-second counter = 3
-=====3.5 seconds after begining=====
-first counter = 5
-second counter = 3
-=====4.0 seconds after begining=====
-first counter = 5
-second counter = 4
-=====4.5 seconds after begining=====
-first counter = 5
-second counter = 4
-=====5.0 seconds after begining=====
-first counter = 5
-second counter = 5
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;cowsay&#39; from &#39;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/cowsay/__init__.py&#39;&gt;
 </pre></div>
 </div>
 </div>
 </div>
+<p>It returns module object - the objects that act just like a regular module loaded with the <code class="docutils literal notranslate"><span class="pre">import</span></code> keyword.</p>
+<p>The following cells clearly prove that <code class="docutils literal notranslate"><span class="pre">cowsay_object</span></code> is just a regular object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cowsay_object</span><span class="o">.</span><span class="n">cowsay</span><span class="p">(</span><span class="s2">&quot;import module&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> _______________ 
+&lt; import module &gt;
+ --------------- 
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cowsay_object</span><span class="o">.</span><span class="n">cowthink</span><span class="p">(</span><span class="s2">&quot;it&#39;s really module&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ____________________ 
+( it&#39;s really module )
+ -------------------- 
+        o   ^__^
+         o  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+</pre></div>
+</div>
+</div>
+</div>
+<section id="import-module-arguments">
+<h3><code class="docutils literal notranslate"><span class="pre">import_module</span></code> arguments<a class="headerlink" href="#import-module-arguments" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://docs.python.org/3/library/importlib.html#importlib.import_module">Description of the <code class="docutils literal notranslate"><span class="pre">importlib.import_module(name,</span> <span class="pre">package)</span></code></a> function in the official documentation can be a bit complicated.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> argument specifies where to look for a module relative to the <code class="docutils literal notranslate"><span class="pre">package</span></code>, where <code class="docutils literal notranslate"><span class="pre">package</span></code> is just a folder.</p>
+<hr class="docutils" />
+<p>The following cell creates a file structure just as shown in the example in the documentation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;pkg&quot;</span><span class="p">)</span><span class="o">/</span><span class="s2">&quot;subpkg&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> pkg/mod.py
+<span class="k">def</span><span class="w"> </span><span class="nf">hello_mod</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello from mod&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing pkg/mod.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>So there is a “package” <code class="docutils literal notranslate"><span class="pre">pkg.subpkg</span></code> and at the same level there is a module <code class="docutils literal notranslate"><span class="pre">mod.py</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>tree<span class="w"> </span>pkg
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">pkg</span>
+├── mod.py
+└── <span class=" -Color -Color-Bold -Color-Bold-Blue">subpkg</span>
+
+2 directories, 1 file
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell executes <code class="docutils literal notranslate"><span class="pre">importlib.import_module</span></code> as it’s shown in the official documentation. And proves that import really works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;..mod&quot;</span><span class="p">,</span> <span class="s2">&quot;pkg.subpkg&quot;</span><span class="p">)</span>
+<span class="n">mod</span><span class="o">.</span><span class="n">hello_mod</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello from mod
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="from-optional-file">
+<h3>From optional file<a class="headerlink" href="#from-optional-file" title="Link to this heading">#</a></h3>
+<p>You can also load the module from the optional file. To do this, you need to:</p>
+<ul class="simple">
+<li><p>Get spec using <code class="docutils literal notranslate"><span class="pre">importlib.util.spec_from_file_localtion</span></code>.</p></li>
+<li><p>Get module from spec with <code class="docutils literal notranslate"><span class="pre">importlib.util.module_from_spec</span></code>.</p></li>
+<li><p>Execute module with spec’s <code class="docutils literal notranslate"><span class="pre">exec_module</span></code> method.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell creates a python module in the optional location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/some_module.py
+<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;some input&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/some_module.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell imports this module and shows that it works expected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_file_location</span><span class="p">(</span>
+    <span class="s2">&quot;some_module&quot;</span><span class="p">,</span> <span class="s2">&quot;/tmp/some_module.py&quot;</span>
+<span class="p">)</span>
+<span class="n">some_module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+<span class="n">spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">some_module</span><span class="p">)</span>
+<span class="n">some_module</span><span class="o">.</span><span class="n">fun</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>some input
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="reload-module">
+<h2>Reload module<a class="headerlink" href="#reload-module" title="Link to this heading">#</a></h2>
+<p>Python only executes the module’s code the first time the module is imported. <code class="docutils literal notranslate"><span class="pre">importlib.reload</span></code> allows the module to be executed again.</p>
+<hr class="docutils" />
+<p>The following cell creates a python module that we’ll use as an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/my_module.py
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my module is imported&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/my_module.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next cell imports the module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">my_module</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my module is imported
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the module was executed and the message specified in the module is printed.</p>
+<p>The following cell attempts to reload the module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">my_module</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, there is no message again - because python didn’t execute the module again. But the following code uses the <code class="docutils literal notranslate"><span class="pre">importlib.reload</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">my_module</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my module is imported
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;my_module&#39; from &#39;/tmp/my_module.py&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note.</strong> The function returned the the module object, but you don’t have to reassign the module to it’s name - it will be done automatically.</p>
 </section>
 </section>
 
@@ -884,12 +1000,12 @@ second counter = 5
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="multiprocessing/pool.html"
+       href="socket.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pool</p>
+        <p class="prev-next-title">Socket</p>
       </div>
     </a>
     <a class="right-next"
@@ -917,8 +1033,12 @@ second counter = 5
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example1-runtime-messages">Example1 - runtime messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-module">Import module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-module-arguments"><code class="docutils literal notranslate"><span class="pre">import_module</span></code> arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-optional-file">From optional file</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reload-module">Reload module</a></li>
 </ul>
   </nav></div>
 

@@ -278,14 +278,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/re/match_search.html">Match/Search</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/socket.html">Socket</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/multiprocessing/pool.html">Pool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../standard_library/multi_threads.html">Multithreads in python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/importlib.html">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -480,6 +485,10 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="jupyter/jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="jinja.html">Jinja</a></li>
@@ -711,6 +720,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipython">IPython</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-client">Jupyter client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traitlets">Traitlets</a></li>
 </ul>
             </nav>
         </div>
@@ -732,6 +742,82 @@ document.write(`
 <section id="jupyter-client">
 <h2>Jupyter client<a class="headerlink" href="#jupyter-client" title="Link to this heading">#</a></h2>
 <p>jupyter_client’ is a Python package that actually handles the management of the jupyter kernel: registering, running, connecting, etc. Check <a class="reference internal" href="jupyter/jupyter_client.html"><span class="std std-doc">specific page</span></a> for more.</p>
+</section>
+<section id="traitlets">
+<h2>Traitlets<a class="headerlink" href="#traitlets" title="Link to this heading">#</a></h2>
+<p>Traitlets is a tool that allows to make python objects that, automatically check types, autamatically change values of attributes and implement “on change” callbacks. It designed to be used in general, but jet I haven’t seen usage anywhere else except Jupyter project. Check out the <a class="reference external" href="https://github.com/ipython/traitlets">traitlest github page</a>. Practically if you want to dive deep into customizing your jupyter workflow you have to learn it.</p>
+<hr class="docutils" />
+<p>To get an idea what traitlets are in general consider an example using the <code class="docutils literal notranslate"><span class="pre">traitlets.HasTraits</span></code> class, which only allows to build classes that automatically validate type, set dynamic default value for the instances and set up methods that will be called in an attemt to change the attribute.</p>
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">traitlets.HasTraitlet</span></code> ancestor with the <code class="docutils literal notranslate"><span class="pre">value</span></code> attribute, the <code class="docutils literal notranslate"><span class="pre">_default_value</span></code> method sets up rules which default value <code class="docutils literal notranslate"><span class="pre">value</span></code> will have, <code class="docutils literal notranslate"><span class="pre">_observe_value</span></code> is a method that will be callled on an attempt to change the value of <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traitlets</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyFirstTraitlet</span><span class="p">(</span><span class="n">traitlets</span><span class="o">.</span><span class="n">HasTraits</span><span class="p">):</span> 
+    <span class="n">value</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">Int</span><span class="p">()</span>
+
+    <span class="nd">@traitlets</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_default_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    
+    <span class="nd">@traitlets</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_observe_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invoked to change: </span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="s2">&quot;old&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell creates the number of <code class="docutils literal notranslate"><span class="pre">MyFirstTraitlet</span></code> and displays <code class="docutils literal notranslate"><span class="pre">value</span></code> for them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">MyFirstTraitlet</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56
+29
+54
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each time there is a different default value for the instance - just as specified in the <code class="docutils literal notranslate"><span class="pre">_default_value</span></code> method.</p>
+<p>The following cell attemts to create <code class="docutils literal notranslate"><span class="pre">MyFirstTrait</span></code> instance and set <code class="docutils literal notranslate"><span class="pre">value</span></code> with a <code class="docutils literal notranslate"><span class="pre">str</span></code> datatype.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">MyFirstTraitlet</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exception: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception: The &#39;value&#39; trait of a MyFirstTraitlet instance expected an int, not the str &#39;string&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>But due to the value defined as <code class="docutils literal notranslate"><span class="pre">traitlets.Int</span></code> it doesn’t allow to set <code class="docutils literal notranslate"><span class="pre">string</span></code> value to it.</p>
+<p>The following cell attempts to change change the <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traitlet</span> <span class="o">=</span> <span class="n">MyFirstTraitlet</span><span class="p">()</span>
+<span class="n">traitlet</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Invoked to change: 0 to 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result there will be a message in the output that defined by the <code class="docutils literal notranslate"><span class="pre">_observe_value</span></code> method.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -803,6 +889,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipython">IPython</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-client">Jupyter client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traitlets">Traitlets</a></li>
 </ul>
   </nav></div>
 

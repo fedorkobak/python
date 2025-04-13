@@ -276,14 +276,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../standard_library/re/match_search.html">Match/Search</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/socket.html">Socket</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../standard_library/multiprocessing/pool.html">Pool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../standard_library/multi_threads.html">Multithreads in python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/importlib.html">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -478,6 +483,10 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../packages/jupyter/jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/jinja.html">Jinja</a></li>
@@ -707,8 +716,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes-and-objects">Classes and Objects</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-attributes-and-invoking-methods">Accessing Attributes and Invoking Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute">Attribute</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-methods">Special methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes">Special attributes</a></li>
@@ -729,10 +737,77 @@ document.write(`
 <h1>OOP<a class="headerlink" href="#oop" title="Link to this heading">#</a></h1>
 <p>Object-Oriented Programming (OOP) is a programming paradigm that provides a way to structure code by organizing it into objects. Objects are instances of classes, which are blueprints that define the behavior and characteristics of the objects. Python is an object-oriented programming language that fully supports OOP principles.</p>
 <p>The most complete description of how objects interact in python is given in the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#">Data model</a> section of the official documentation.</p>
-<section id="classes-and-objects">
-<h2>Classes and Objects<a class="headerlink" href="#classes-and-objects" title="Link to this heading">#</a></h2>
-<p>In Python, a class is defined using the class keyword. It encapsulates data (attributes) and functions (methods) that operate on that data. An object is an instance of a class, created using the class as a template.</p>
-<p>Here’s an example of a simple class definition:</p>
+<section id="attribute">
+<h2>Attribute<a class="headerlink" href="#attribute" title="Link to this heading">#</a></h2>
+<p>Every object in python has attributes - other objects that belong to that object. It’s important to understand that the class itself is also an object, so its own have it’s own attributes.</p>
+<hr class="docutils" />
+<p>The following cell defines the class with the attribute <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">=</span> <span class="pre">10</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">:</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So you can work with it without creating an instance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyClass</span><span class="o">.</span><span class="n">val</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>But each instance will have the same attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_class</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+<span class="n">my_class</span><span class="o">.</span><span class="n">val</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even more - this is the same object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_class</span><span class="o">.</span><span class="n">val</span> <span class="ow">is</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">val</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>But if you access to the of the instance, it will create the new attribute that’s not realted to the attribute of the class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_class</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">MyClass</span><span class="o">.</span><span class="n">val</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inheritance">
+<h2>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h2>
+<p>One of the key features of OOP is inheritance, which allows a class to inherit attributes and methods from another class. The class that inherits is called a subclass or derived class, and the class from which it inherits is called a superclass or base class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
@@ -746,53 +821,9 @@ document.write(`
         
     <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The car has stopped.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>In this example, we define a class called Car. It has three attributes: make, model, and year. The <strong>init</strong> method is a special method called the constructor, which is invoked when an object is created. The start and stop methods are defined to perform actions specific to a car object.</p>
-<p>To create an instance of the Car class, we can use the following code:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">&quot;Toyota&quot;</span><span class="p">,</span> <span class="s2">&quot;Camry&quot;</span><span class="p">,</span> <span class="mi">2022</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Here, <code class="docutils literal notranslate"><span class="pre">my_car</span></code> is an object of the Car class. We pass the arguments “Toyota”, “Camry”, and 2022 to the constructor to initialize the object.</p>
-</section>
-<section id="accessing-attributes-and-invoking-methods">
-<h2>Accessing Attributes and Invoking Methods<a class="headerlink" href="#accessing-attributes-and-invoking-methods" title="Link to this heading">#</a></h2>
-<p>Once we have an object, we can access its attributes and invoke its methods using the dot notation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_car</span><span class="o">.</span><span class="n">make</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">my_car</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">my_car</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
 
-<span class="n">my_car</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="n">my_car</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Toyota
-Camry
-2022
-The car has started.
-The car has stopped.
-</pre></div>
-</div>
-</div>
-</div>
-<p>Here, we access the attributes make, model, and year of my_car and invoke its start and stop methods.</p>
-</section>
-<section id="inheritance">
-<h2>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h2>
-<p>One of the key features of OOP is inheritance, which allows a class to inherit attributes and methods from another class. The class that inherits is called a subclass or derived class, and the class from which it inherits is called a superclass or base class.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ElectricCar</span><span class="p">(</span><span class="n">Car</span><span class="p">):</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ElectricCar</span><span class="p">(</span><span class="n">Car</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">battery_capacity</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">battery_capacity</span> <span class="o">=</span> <span class="n">battery_capacity</span>
@@ -1310,8 +1341,7 @@ Check out more about static methods in the <a class="reference external" href="h
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes-and-objects">Classes and Objects</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-attributes-and-invoking-methods">Accessing Attributes and Invoking Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute">Attribute</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-methods">Special methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes">Special attributes</a></li>

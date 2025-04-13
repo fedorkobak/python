@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Multiprocessing &#8212; Python</title>
+    <title>Concurrency &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/multiprocessing';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/concurrency';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Pool" href="multiprocessing/pool.html" />
-    <link rel="prev" title="Socket" href="socket.html" />
+    <link rel="next" title="Multiprocessing" href="concurrency/multiprocessing.html" />
+    <link rel="prev" title="Match/Search" href="re/match_search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -276,14 +276,19 @@
 <li class="toctree-l2"><a class="reference internal" href="re/match_search.html">Match/Search</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Concurrency</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="socket.html">Socket</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Multiprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="multiprocessing/pool.html">Pool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="multi_threads.html">Multithreads in python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importlib.html">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -478,6 +483,10 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../packages/jupyter/jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages/jinja.html">Jinja</a></li>
@@ -613,7 +622,7 @@
       
       
       
-      <li><a href="../_sources/standard_library/multiprocessing.ipynb" target="_blank"
+      <li><a href="../_sources/standard_library/concurrency.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -697,7 +706,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Multiprocessing</h1>
+    <h1>Concurrency</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -707,8 +716,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-process">Single process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pool">Pool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asyncio">Asyncio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiprocessing">Multiprocessing</a></li>
 </ul>
             </nav>
         </div>
@@ -720,135 +729,96 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="multiprocessing">
-<h1>Multiprocessing<a class="headerlink" href="#multiprocessing" title="Link to this heading">#</a></h1>
-<p>Multiprocessing is a Python package that allows processes to be spawned in Python. Check <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html">the official documentation</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="concurrency">
+<h1>Concurrency<a class="headerlink" href="#concurrency" title="Link to this heading">#</a></h1>
+<p>Concurrent execution means that multiple tasks are in progress at the same time, but not necessarily running at the exact same time.</p>
+<section id="asyncio">
+<h2>Asyncio<a class="headerlink" href="#asyncio" title="Link to this heading">#</a></h2>
+<p>Python offers tools for organizing asynchronous programming. The main components are the <code class="docutils literal notranslate"><span class="pre">async</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code> keywords, along with the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> library.</p>
+<hr class="docutils" />
+<p>The following cell demonstrates a classical asynchronous program. It uses the functions <code class="docutils literal notranslate"><span class="pre">fun1</span></code> and <code class="docutils literal notranslate"><span class="pre">fun2</span></code>, which are essentially the same—each prints a number in a loop. Each record identifies which function produced it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Process</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fun1</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fun 1|iteration </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fun2</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fun 2|iteration </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=========begin cycle=========&quot;</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">fun1</span><span class="p">(),</span> <span class="n">fun2</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=========end cycle=========&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=========begin cycle=========
+fun 1|iteration 0
+fun 2|iteration 0
+fun 2|iteration 1
+fun 1|iteration 1
+fun 1|iteration 2
+fun 1|iteration 3
+fun 2|iteration 2
+fun 2|iteration 3
+fun 2|iteration 4
+fun 1|iteration 4
+fun 2|iteration 5
+fun 2|iteration 6
+fun 2|iteration 7
+fun 2|iteration 8
+fun 1|iteration 5
+fun 1|iteration 6
+fun 2|iteration 9
+fun 1|iteration 7
+fun 1|iteration 8
+fun 1|iteration 9
+=========end cycle=========
 </pre></div>
 </div>
 </div>
 </div>
-<section id="single-process">
-<h2>Single process<a class="headerlink" href="#single-process" title="Link to this heading">#</a></h2>
-<p>To create a process from scratch, use <code class="docutils literal notranslate"><span class="pre">multiprocessing.Process</span></code> class.</p>
+</section>
+<section id="multiprocessing">
+<h2>Multiprocessing<a class="headerlink" href="#multiprocessing" title="Link to this heading">#</a></h2>
+<p>Runs a sompletely spearate process in the system and executes the code you need there. Find our more in:</p>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">start()</span></code> method starts the execution;</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">joint()</span></code> method is used to synchronise the parent process with the child processes. It allows the parent process to wait for the child processes to finish before continuing.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html">Official documentation</a>.</p></li>
+<li><p><a class="reference internal" href="concurrency/multiprocessing.html"><span class="std std-doc">Corresponding page</span></a>.</p></li>
 </ul>
 <hr class="docutils" />
-<p>The following example runs the same function in different processes. The first time it iterates two times more iteration then the second.</p>
+<p>The following cell defines a funciton that prints the id of the current process. And run it in the main process and in <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">process_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="n">st_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">25</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">en_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">process_name</span><span class="si">}</span><span class="s2"> if finished </span><span class="si">{</span><span class="n">en_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">st_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
 
-<span class="nb">iter</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">8</span>
-<span class="n">p1</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">))</span>
-<span class="n">p2</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">iter</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;second&quot;</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_pid</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span>
 
-<span class="n">p1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="n">p2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">print_pid</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processes were started&quot;</span><span class="p">)</span>
-
-<span class="n">p1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-<span class="n">p2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processes were joined&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">print_pid</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processes were started
-second if finished 2.0598533153533936
-first if finished 4.119459390640259
-Processes were joined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22512
+23316
 </pre></div>
 </div>
 </div>
 </div>
-<p>So, although we started <code class="docutils literal notranslate"><span class="pre">first</span></code> process earlier, it was executed later, confirming that we achieved parallel computation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">print(&quot;Processes</span> <span class="pre">were</span> <span class="pre">started&quot;)</span></code> was executed immediately after the processes were started, but <code class="docutils literal notranslate"><span class="pre">print(&quot;Processes</span> <span class="pre">were</span> <span class="pre">joined&quot;)</span></code> was executed only when both processes were finished - this shows us that the main process was stuck by the <code class="docutils literal notranslate"><span class="pre">join</span></code> method of the child processes.</p>
-</section>
-<section id="pool">
-<h2>Pool<a class="headerlink" href="#pool" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">multiprocessing.Pool</span></code> is more common to use.</p>
-<p>The following function defines a function that creates an array of 1,000,000 floats and then calculates the minimum, maximum and average values over them. In the next cell we will try to run it multiple times, just in cycle and then in multiprocesses.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pool</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">gen_random</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
-    <span class="n">my_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)]</span>
-    <span class="k">return</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">my_array</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">my_array</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_array</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>First - classiscal option only cycle that starts function 10 times.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%timeit</span>
-<span class="p">[</span><span class="n">gen_random</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.08 s ± 54.8 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now lets run it in 10 therads.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%timeit</span>
-<span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">gen_random</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>511 ms ± 16.6 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
-</pre></div>
-</div>
-</div>
-</div>
-<p>The increase in speed is obvious.</p>
-<p>But let’s make sure that the solution via <code class="docutils literal notranslate"><span class="pre">multiprocessing.Pool</span></code> leads to the expected results.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">gen_random</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">results</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(4.888834341798542e-07, 0.9999993695614751, 0.500253121167094),
- (1.5193695950266317e-06, 0.9999995713653611, 0.5004648527204844),
- (8.338447909927993e-08, 0.9999982350763111, 0.49987126646962265),
- (3.533316917048168e-06, 0.9999988394522739, 0.5003074522538739),
- (6.854293412850154e-07, 0.9999992469319836, 0.5001294510917905),
- (7.25034506876554e-08, 0.9999993853360523, 0.5000197205058422),
- (2.1432668373400077e-07, 0.9999985629946924, 0.500037866675235),
- (3.241340156279193e-07, 0.9999995020233481, 0.4998192310331728),
- (3.97997433898567e-08, 0.9999970648221497, 0.49967546355687814),
- (1.1574031938410556e-06, 0.999999502338194, 0.4999944256310727)]
-</pre></div>
-</div>
-</div>
-</div>
+<p>As the result there are two different numbers, which showe that the second execution of the function was recognized by the system as completely different program.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -885,20 +855,20 @@ Processes were joined
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="socket.html"
+       href="re/match_search.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Socket</p>
+        <p class="prev-next-title">Match/Search</p>
       </div>
     </a>
     <a class="right-next"
-       href="multiprocessing/pool.html"
+       href="concurrency/multiprocessing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Pool</p>
+        <p class="prev-next-title">Multiprocessing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -918,8 +888,8 @@ Processes were joined
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-process">Single process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pool">Pool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asyncio">Asyncio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiprocessing">Multiprocessing</a></li>
 </ul>
   </nav></div>
 
