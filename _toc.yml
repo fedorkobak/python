@@ -244,6 +244,8 @@ parts:
         - file: packages/jupyter/ipython/reloading_modules.ipynb
       - file: packages/jupyter/jupyter_client.ipynb
       - file: packages/jupyter/traitlets.ipynb
+        sections:
+        - file: packages/jupyter/traitlets/application.ipynb
     - file: packages/jinja.ipynb
     - file: packages/docker_sdk.ipynb
       sections:
