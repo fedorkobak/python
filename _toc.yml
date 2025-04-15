@@ -242,8 +242,8 @@ parts:
         sections:
         - file: packages/jupyter/ipython/syntax.ipynb
         - file: packages/jupyter/ipython/reloading_modules.ipynb
+      - file: packages/jupyter/kernel.ipynb
       - file: packages/jupyter/client.ipynb
-      - file: packages/jupyter/jupyter_client.ipynb
       - file: packages/jupyter/traitlets.ipynb
         sections:
         - file: packages/jupyter/traitlets/application.ipynb
