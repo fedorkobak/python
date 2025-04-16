@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Jupyter client &#8212; Python</title>
+    <title>Client &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/jupyter/jupyter_client';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/jupyter/client';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Traitlets" href="traitlets.html" />
-    <link rel="prev" title="Reload modules" href="ipython/reloading_modules.html" />
+    <link rel="prev" title="Run from jupyter" href="kernel/run_from_jupyter.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -235,7 +235,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../core/packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../core/packages/pip.html">PIP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/packages/pip.html">PIP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/packages/pip/install_uninstall.html">Install &amp; uninstall</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../core/packages/pyproject_toml.html">Pyproject.toml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../core/packages/hatch.html">Hatch</a></li>
 </ul>
@@ -482,7 +485,11 @@
 <li class="toctree-l3"><a class="reference internal" href="ipython/reloading_modules.html">Reload modules</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Client</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="traitlets/application.html">Application</a></li>
 </ul>
@@ -622,7 +629,7 @@
       
       
       
-      <li><a href="../../_sources/packages/jupyter/jupyter_client.ipynb" target="_blank"
+      <li><a href="../../_sources/packages/jupyter/client.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -706,7 +713,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Jupyter client</h1>
+    <h1>Client</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -716,9 +723,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli">CLI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-python">Run from python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-kernel">Creating kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-client">Creating client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execute">Execute</a></li>
 </ul>
             </nav>
         </div>
@@ -730,260 +736,219 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="jupyter-client">
-<h1>Jupyter client<a class="headerlink" href="#jupyter-client" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">jupyter_client</span></code> is a package that implements a system for managing jupyter kernels. See the <a class="reference external" href="https://jupyter-client.readthedocs.io/en/latest/index.html">official documentation</a>. Actually, it provides access to the programming management of jupyter.</p>
-<p><strong>Note:</strong> Run this notebook in the same environment, as it intentionally modifies the environment to demonstrate certain configurations.</p>
-<section id="cli">
-<h2>CLI<a class="headerlink" href="#cli" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">jupyter-kernel</span></code> tool comes with <code class="docutils literal notranslate"><span class="pre">jupyter_client</span></code> package.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="client">
+<h1>Client<a class="headerlink" href="#client" title="Link to this heading">#</a></h1>
+<p>This section describes how the jupyter client normally works and how to work with different implementations of the jupyter client.</p>
 <hr class="docutils" />
-<p>It confuses me that <code class="docutils literal notranslate"><span class="pre">jupyter_client</span></code> provides the <code class="docutils literal notranslate"><span class="pre">jupyter-kernel</span></code> CLI tool. If you have the same doubts, the following cells will prove it.</p>
-<p>The code in the following cell shows the file to which <code class="docutils literal notranslate"><span class="pre">jupyter-kernel</span></code> refers in the system.</p>
+<p>The following cell runs the simpliest <code class="docutils literal notranslate"><span class="pre">IPythonKernlel</span></code> that is commonly used for experimenting with jupyter clients.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>which<span class="w"> </span>jupyter-kernel
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_kernel_in_process</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jupyter_client.blocking</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlockingKernelClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSON</span>
+
+
+<span class="n">connection_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span><span class="o">/</span><span class="s2">&quot;connection_file.json&quot;</span>
+<span class="n">connection_file</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">missing_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">run_kernel_in_process</span><span class="p">(</span><span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/connection_file.json&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/bin/jupyter-kernel
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NOTE: When using the `ipython kernel` entry point, Ctrl-C will not work.
+
+To exit, you will have to explicitly quit this process, by either sending
+&quot;quit&quot; from a client, or using Ctrl-\ in UNIX-like environments.
+
+To read more about this, see https://github.com/ipython/ipython/issues/2049
+
+
+To connect another client to this kernel, use:
+    --existing /tmp/connection_file.json
 </pre></div>
 </div>
 </div>
 </div>
-<p>And behind it is Python code that refers to <code class="docutils literal notranslate"><span class="pre">jupyter_client.kernelapp.main</span></code>.</p>
+<section id="creating-client">
+<h2>Creating client<a class="headerlink" href="#creating-client" title="Link to this heading">#</a></h2>
+<p>The following cell defines the client that we’ll use as an example. You need to pass the connection file to the kernel and call the <code class="docutils literal notranslate"><span class="pre">start_channels</span></code> method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span><span class="k">$(</span>which<span class="w"> </span>jupyter-kernel<span class="k">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">BlockingKernelClient</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">load_connection_file</span><span class="p">(</span><span class="n">connection_file</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">start_channels</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The conenction can be checked by using the <code class="docutils literal notranslate"><span class="pre">is_alive</span></code> method - it must return <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#!/usr/local/bin/python3.12
-# -*- coding: utf-8 -*-
-import re
-import sys
-from jupyter_client.kernelapp import main
-if __name__ == &#39;__main__&#39;:
-    sys.argv[0] = re.sub(r&#39;(-script\.pyw|\.exe)?$&#39;, &#39;&#39;, sys.argv[0])
-    sys.exit(main())
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="run-from-python">
-<h2>Run from python<a class="headerlink" href="#run-from-python" title="Link to this heading">#</a></h2>
-<p>Sometimes it’s useful to be able to run the kernel from the python code - for debugging/experimenting purposes. The main tool for such purposes is the <code class="docutils literal notranslate"><span class="pre">ipykernel.kernelbase.Kernel</span></code> class, which allows to run the kernel and automatically launch the client to it.</p>
-<ul class="simple">
-<li><p>Check some details in <a class="reference external" href="https://jupyter-client.readthedocs.io/en/latest/api/jupyter_client.html#jupyter_client.manager.KernelManager">KernelManager documentation page</a>.</p></li>
-<li><p>And <a class="reference internal" href="jupyter_client/running_kernel.html"><span class="std std-doc">specific page</span></a> in this web-site.</p></li>
-</ul>
+<section id="execute">
+<h2>Execute<a class="headerlink" href="#execute" title="Link to this heading">#</a></h2>
+<p>For execution code, use the <code class="docutils literal notranslate"><span class="pre">execute</span></code> method to point to code that needs to be executed. It returns <code class="docutils literal notranslate"><span class="pre">msg_id</span></code> which allows to identify which messages from the kernel correspond to which messages returned by the kernel.</p>
+<p>To get messages from the kernel, use the client’s <code class="docutils literal notranslate"><span class="pre">get_iopub_msg</span></code> method of the client. It consistently returns different messages that correspond to different stages of execution.</p>
 <hr class="docutils" />
-<p>The following example starts the Python kernel.</p>
+<p>The following cell sends some code to be executed by the kernel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jupyter_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">KernelManager</span>
-<span class="n">km</span> <span class="o">=</span> <span class="n">KernelManager</span><span class="p">(</span><span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;python3&quot;</span><span class="p">)</span>
-<span class="n">km</span><span class="o">.</span><span class="n">start_kernel</span><span class="p">()</span>
-
-<span class="n">kc</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">client</span><span class="p">()</span>
-<span class="n">kc</span><span class="o">.</span><span class="n">start_channels</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;x = 42</span><span class="se">\n</span><span class="s2">y = x * 2</span><span class="se">\n</span><span class="s2">y&quot;</span><span class="p">)</span>
+<span class="n">msg_id</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;fe6a6eeb-5f12062d2f9dea307db4ff50_36430_0&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<p>Kernel is a separate process, to which you can send code you want to execute and wait for the response. The following cell makes exactly that.</p>
+<p>The following cell collects all messages generaged by the kernel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kc</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;print(f&#39;hello from kernel {10 + 99}&#39;)&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">msg</span> <span class="o">=</span> <span class="n">kc</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans_list</span> <span class="o">=</span> <span class="p">[]</span>
+
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-   <span class="n">msg</span> <span class="o">=</span> <span class="n">kc</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-   <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;msg_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;stream&#39;</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ans_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+    <span class="k">except</span><span class="p">:</span>
         <span class="k">break</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Once we have received the response, we can check it.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello from kernel 109
-</pre></div>
-</div>
-</div>
-</div>
-<p>Expected output for the code we sent to kernel to execute.</p>
-<p>Kernel must be shut down:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kc</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">km</span><span class="o">.</span><span class="n">shutdown_kernel</span><span class="p">(</span><span class="n">now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="creating-kernel">
-<h2>Creating kernel<a class="headerlink" href="#creating-kernel" title="Link to this heading">#</a></h2>
-<p>There are three ways to create your own Jupyter kernel; check more <a class="reference external" href="https://jupyter-client.readthedocs.io/en/latest/kernels.html">here</a>. This page focuses on the simplest method: <a class="reference external" href="https://jupyter-client.readthedocs.io/en/latest/wrapperkernels.html">simple Python wrapper kernels</a>.</p>
-<p>For creating wrapper kernel you need:</p>
+<p>In this case 4 messages were returned by the kernel. There is a lot of duplicated information: what’s importand at this stage is:</p>
 <ul class="simple">
-<li><p>Write a file that implements the logic of the kernel. The official approach is to inherit from the <code class="docutils literal notranslate"><span class="pre">ipykernel.kernelbase.Kernel</span></code> class.</p></li>
-<li><p>Register and set the kernel’s configuration to refer to the kernel implementation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msg_type</span></code>: this allows to understand what type of message we got, for example <code class="docutils literal notranslate"><span class="pre">execute_result</span></code> means that this message.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">content</span></code>: the content that the kernel sends to the client - depends on <code class="docutils literal notranslate"><span class="pre">msg_type</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">header.msg_id</span></code>: This allows to understand to which message from the client this response belongs to.</p></li>
 </ul>
-<hr class="docutils" />
-<p>The following cell shows the implementation of the kernel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/my_kernel.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelbase</span><span class="w"> </span><span class="kn">import</span> <span class="n">Kernel</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">EchoKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">):</span>
-    <span class="n">implementation</span> <span class="o">=</span> <span class="s1">&#39;Echo&#39;</span>
-    <span class="n">implementation_version</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
-    <span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;no-op&#39;</span>
-    <span class="n">language_version</span> <span class="o">=</span> <span class="s1">&#39;0.1&#39;</span>
-    <span class="n">language_info</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Any text&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;mimetype&#39;</span><span class="p">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;file_extension&#39;</span><span class="p">:</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span>
-    <span class="p">}</span>
-    <span class="n">banner</span> <span class="o">=</span> <span class="s2">&quot;Echo kernel - as useful as a parrot&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">do_execute</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">code</span><span class="p">,</span>
-        <span class="n">silent</span><span class="p">,</span>
-        <span class="n">store_history</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">user_expressions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">allow_stdin</span><span class="o">=</span><span class="kc">False</span>
-    <span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">silent</span><span class="p">:</span>
-            <span class="n">stream_content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;stdout&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">code</span><span class="p">}</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iopub_socket</span><span class="p">,</span> <span class="s1">&#39;stream&#39;</span><span class="p">,</span> <span class="n">stream_content</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;execution_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">execution_count</span><span class="p">,</span>
-            <span class="s1">&#39;payload&#39;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s1">&#39;user_expressions&#39;</span><span class="p">:</span> <span class="p">{},</span>
-        <span class="p">}</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelApp</span>
-    <span class="n">IPKernelApp</span><span class="o">.</span><span class="n">launch_instance</span><span class="p">(</span><span class="n">kernel_class</span><span class="o">=</span><span class="n">EchoKernel</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/my_kernel.py
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;header&#39;: {&#39;msg_id&#39;: &#39;b129712b-72dfc25a8727a31966a73369_36544_5&#39;,
+  &#39;msg_type&#39;: &#39;status&#39;,
+  &#39;username&#39;: &#39;fedor&#39;,
+  &#39;session&#39;: &#39;b129712b-72dfc25a8727a31966a73369&#39;,
+  &#39;date&#39;: datetime.datetime(2025, 4, 16, 19, 14, 14, 147446, tzinfo=tzutc()),
+  &#39;version&#39;: &#39;5.3&#39;},
+ &#39;msg_id&#39;: &#39;b129712b-72dfc25a8727a31966a73369_36544_5&#39;,
+ &#39;msg_type&#39;: &#39;status&#39;,
+ &#39;parent_header&#39;: {&#39;msg_id&#39;: &#39;fe6a6eeb-5f12062d2f9dea307db4ff50_36430_0&#39;,
+  &#39;msg_type&#39;: &#39;execute_request&#39;,
+  &#39;username&#39;: &#39;fedor&#39;,
+  &#39;session&#39;: &#39;fe6a6eeb-5f12062d2f9dea307db4ff50&#39;,
+  &#39;date&#39;: datetime.datetime(2025, 4, 16, 19, 14, 14, 145429, tzinfo=tzutc()),
+  &#39;version&#39;: &#39;5.3&#39;},
+ &#39;metadata&#39;: {},
+ &#39;content&#39;: {&#39;execution_state&#39;: &#39;busy&#39;},
+ &#39;buffers&#39;: []}
 </pre></div>
 </div>
 </div>
 </div>
-<p>The next step is to register the kernel, which involves creating a <code class="docutils literal notranslate"><span class="pre">json</span></code> configuration file that points to the Python code you created earlier. First, we should check where existing kernels are stored using the <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">kernelspec</span> <span class="pre">list</span></code> command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>kernelspec<span class="w"> </span>list
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Available kernels:
-  python3    /usr/local/share/jupyter/kernels/python3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;header&#39;: {&#39;msg_id&#39;: &#39;b129712b-72dfc25a8727a31966a73369_36544_6&#39;,
+  &#39;msg_type&#39;: &#39;execute_input&#39;,
+  &#39;username&#39;: &#39;fedor&#39;,
+  &#39;session&#39;: &#39;b129712b-72dfc25a8727a31966a73369&#39;,
+  &#39;date&#39;: datetime.datetime(2025, 4, 16, 19, 14, 14, 147899, tzinfo=tzutc()),
+  &#39;version&#39;: &#39;5.3&#39;},
+ &#39;msg_id&#39;: &#39;b129712b-72dfc25a8727a31966a73369_36544_6&#39;,
+ &#39;msg_type&#39;: &#39;execute_input&#39;,
+ &#39;parent_header&#39;: {&#39;msg_id&#39;: &#39;fe6a6eeb-5f12062d2f9dea307db4ff50_36430_0&#39;,
+  &#39;msg_type&#39;: &#39;execute_request&#39;,
+  &#39;username&#39;: &#39;fedor&#39;,
+  &#39;session&#39;: &#39;fe6a6eeb-5f12062d2f9dea307db4ff50&#39;,
+  &#39;date&#39;: datetime.datetime(2025, 4, 16, 19, 14, 14, 145429, tzinfo=tzutc()),
+  &#39;version&#39;: &#39;5.3&#39;},
+ &#39;metadata&#39;: {},
+ &#39;content&#39;: {&#39;code&#39;: &#39;x = 42\ny = x * 2\ny&#39;, &#39;execution_count&#39;: 1},
+ &#39;buffers&#39;: []}
 </pre></div>
 </div>
 </div>
 </div>
-<p>At the same path, we need to create a folder for the kernel and place <code class="docutils literal notranslate"><span class="pre">kernel.json</span></code> inside it. The <code class="docutils literal notranslate"><span class="pre">argv</span></code> key in <code class="docutils literal notranslate"><span class="pre">kernel.json</span></code> should execute the module we created earlier.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>/usr/local/share/jupyter/kernels/echo
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /usr/local/share/jupyter/kernels/echo/kernel.json
-<span class="p">{</span>
-    <span class="s2">&quot;argv&quot;</span><span class="p">:[</span>
-        <span class="s2">&quot;python3&quot;</span><span class="p">,</span> 
-        <span class="s2">&quot;/tmp/my_kernel.py&quot;</span><span class="p">,</span> 
-        <span class="s2">&quot;-f&quot;</span><span class="p">,</span> 
-        <span class="s2">&quot;</span><span class="si">{connection_file}</span><span class="s2">&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;display_name&quot;</span><span class="p">:</span><span class="s2">&quot;Echo&quot;</span>
-<span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /usr/local/share/jupyter/kernels/echo/kernel.json
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;header&#39;: {&#39;msg_id&#39;: &#39;b129712b-72dfc25a8727a31966a73369_36544_7&#39;,
+  &#39;msg_type&#39;: &#39;execute_result&#39;,
+  &#39;username&#39;: &#39;fedor&#39;,
+  &#39;session&#39;: &#39;b129712b-72dfc25a8727a31966a73369&#39;,
+  &#39;date&#39;: datetime.datetime(2025, 4, 16, 19, 14, 14, 151135, tzinfo=tzutc()),
+  &#39;version&#39;: &#39;5.3&#39;},
+ &#39;msg_id&#39;: &#39;b129712b-72dfc25a8727a31966a73369_36544_7&#39;,
+ &#39;msg_type&#39;: &#39;execute_result&#39;,
+ &#39;parent_header&#39;: {&#39;msg_id&#39;: &#39;fe6a6eeb-5f12062d2f9dea307db4ff50_36430_0&#39;,
+  &#39;msg_type&#39;: &#39;execute_request&#39;,
+  &#39;username&#39;: &#39;fedor&#39;,
+  &#39;session&#39;: &#39;fe6a6eeb-5f12062d2f9dea307db4ff50&#39;,
+  &#39;date&#39;: datetime.datetime(2025, 4, 16, 19, 14, 14, 145429, tzinfo=tzutc()),
+  &#39;version&#39;: &#39;5.3&#39;},
+ &#39;metadata&#39;: {},
+ &#39;content&#39;: {&#39;data&#39;: {&#39;text/plain&#39;: &#39;84&#39;},
+  &#39;metadata&#39;: {},
+  &#39;execution_count&#39;: 1},
+ &#39;buffers&#39;: []}
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now the result of the <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">kernelspec</span> <span class="pre">list</span></code> command is the kernel you just created.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>kernelspec<span class="w"> </span>list
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans_list</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Available kernels:
-  echo       /usr/local/share/jupyter/kernels/echo
-  python3    /usr/local/share/jupyter/kernels/python3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;header&#39;: {&#39;msg_id&#39;: &#39;b129712b-72dfc25a8727a31966a73369_36544_9&#39;,
+  &#39;msg_type&#39;: &#39;status&#39;,
+  &#39;username&#39;: &#39;fedor&#39;,
+  &#39;session&#39;: &#39;b129712b-72dfc25a8727a31966a73369&#39;,
+  &#39;date&#39;: datetime.datetime(2025, 4, 16, 19, 14, 14, 156378, tzinfo=tzutc()),
+  &#39;version&#39;: &#39;5.3&#39;},
+ &#39;msg_id&#39;: &#39;b129712b-72dfc25a8727a31966a73369_36544_9&#39;,
+ &#39;msg_type&#39;: &#39;status&#39;,
+ &#39;parent_header&#39;: {&#39;msg_id&#39;: &#39;fe6a6eeb-5f12062d2f9dea307db4ff50_36430_0&#39;,
+  &#39;msg_type&#39;: &#39;execute_request&#39;,
+  &#39;username&#39;: &#39;fedor&#39;,
+  &#39;session&#39;: &#39;fe6a6eeb-5f12062d2f9dea307db4ff50&#39;,
+  &#39;date&#39;: datetime.datetime(2025, 4, 16, 19, 14, 14, 145429, tzinfo=tzutc()),
+  &#39;version&#39;: &#39;5.3&#39;},
+ &#39;metadata&#39;: {},
+ &#39;content&#39;: {&#39;execution_state&#39;: &#39;idle&#39;},
+ &#39;buffers&#39;: []}
 </pre></div>
 </div>
 </div>
 </div>
-<p>To ensure that everything works correct let’s try to run <code class="docutils literal notranslate"><span class="pre">echo</span></code> kernel and send <code class="docutils literal notranslate"><span class="pre">hello,</span> <span class="pre">parrot?</span></code> to be executed.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jupyter_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">KernelManager</span>
-<span class="n">km</span> <span class="o">=</span> <span class="n">KernelManager</span><span class="p">(</span><span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;echo&quot;</span><span class="p">)</span>
-<span class="n">km</span><span class="o">.</span><span class="n">start_kernel</span><span class="p">()</span>
-
-<span class="n">kc</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">client</span><span class="p">()</span>
-<span class="n">kc</span><span class="o">.</span><span class="n">start_channels</span><span class="p">()</span>
-
-<span class="n">kc</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;hello, parrot?&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">msg</span> <span class="o">=</span> <span class="n">kc</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">()</span>
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-   <span class="n">msg</span> <span class="o">=</span> <span class="n">kc</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-   <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;msg_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;stream&#39;</span><span class="p">:</span>
-        <span class="k">break</span>
-
-<span class="n">kc</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">km</span><span class="o">.</span><span class="n">shutdown_kernel</span><span class="p">(</span><span class="n">now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>As a result, the kernel returns exactly what we’ve sent it - exactly as specified in its logic.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello, parrot?&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<p>Even better, you can run a Jupyter Notebook file, select <code class="docutils literal notranslate"><span class="pre">echo</span></code> from the list of kernels, and use it just like any other notebook.</p>
 </section>
 </section>
 
@@ -1018,12 +983,12 @@ if __name__ == &#39;__main__&#39;:
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ipython/reloading_modules.html"
+       href="kernel/run_from_jupyter.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Reload modules</p>
+        <p class="prev-next-title">Run from jupyter</p>
       </div>
     </a>
     <a class="right-next"
@@ -1051,9 +1016,8 @@ if __name__ == &#39;__main__&#39;:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli">CLI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-python">Run from python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-kernel">Creating kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-client">Creating client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execute">Execute</a></li>
 </ul>
   </nav></div>
 

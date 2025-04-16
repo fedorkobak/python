@@ -235,7 +235,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="core/packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="core/packages/pip.html">PIP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="core/packages/pip.html">PIP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="core/packages/pip/install_uninstall.html">Install &amp; uninstall</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="core/packages/pyproject_toml.html">Pyproject.toml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core/packages/hatch.html">Hatch</a></li>
 </ul>
@@ -482,7 +485,11 @@
 <li class="toctree-l3"><a class="reference internal" href="packages/jupyter/ipython/reloading_modules.html">Reload modules</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="packages/jupyter/jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="packages/jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="packages/jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/jupyter/client.html">Client</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="packages/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="packages/jupyter/traitlets/application.html">Application</a></li>
 </ul>
@@ -731,6 +738,7 @@ jb<span class="w"> </span>build<span class="w"> </span>.
 ghp-import<span class="w"> </span>-n<span class="w"> </span>_build/html
 </pre></div>
 </div>
+<p>Some notebooks use special tools to avoid boilerplate code. Add these tools to your environment with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>.</p>
 </section>
 
     <script type="text/x-thebe-config">

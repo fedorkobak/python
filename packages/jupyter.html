@@ -237,7 +237,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../core/packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../core/packages/pip.html">PIP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/packages/pip.html">PIP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/packages/pip/install_uninstall.html">Install &amp; uninstall</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../core/packages/pyproject_toml.html">Pyproject.toml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core/packages/hatch.html">Hatch</a></li>
 </ul>
@@ -484,7 +487,11 @@
 <li class="toctree-l3"><a class="reference internal" href="jupyter/ipython/reloading_modules.html">Reload modules</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="jupyter/jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="jupyter/client.html">Client</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="jupyter/traitlets/application.html">Application</a></li>
 </ul>
@@ -719,7 +726,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipython">IPython</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-client">Jupyter client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client-kernel">Client/kernel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traitlets">Traitlets</a></li>
 </ul>
             </nav>
@@ -739,9 +746,60 @@ document.write(`
 <h2>IPython<a class="headerlink" href="#ipython" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ipython</span></code> actually exists separately from jupyter. But the most common way to use it as the backend for jupyter notebooks, that’s why this tool udner <code class="docutils literal notranslate"><span class="pre">jupyter</span></code> section. Find out more at the <a class="reference internal" href="jupyter/ipython.html"><span class="std std-doc">corresponding page</span></a>.</p>
 </section>
-<section id="jupyter-client">
-<h2>Jupyter client<a class="headerlink" href="#jupyter-client" title="Link to this heading">#</a></h2>
-<p>jupyter_client’ is a Python package that actually handles the management of the jupyter kernel: registering, running, connecting, etc. Check <a class="reference internal" href="jupyter/jupyter_client.html"><span class="std std-doc">specific page</span></a> for more.</p>
+<section id="client-kernel">
+<h2>Client/kernel<a class="headerlink" href="#client-kernel" title="Link to this heading">#</a></h2>
+<p>Jupyter has a client/server architecture. All commands are executed by the server - so called jupyter kernel. Client only sends code to be executed - receives and displays the output.</p>
+<p>See more on the corresponding <a class="reference internal" href="jupyter/kernel.html"><span class="std std-doc">Kernel</span></a> and <a class="reference internal" href="jupyter/client.html"><span class="std std-doc">Client</span></a> pages. In some cases you can use the special tool that starts the kernel and connects the client to it <code class="docutils literal notranslate"><span class="pre">jupyter_client.KernelManager</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell shows the creation of the <code class="docutils literal notranslate"><span class="pre">KernelManager</span></code> instance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jupyter_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">KernelManager</span>
+<span class="n">km</span> <span class="o">=</span> <span class="n">KernelManager</span><span class="p">(</span><span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;python3&quot;</span><span class="p">)</span>
+<span class="n">km</span><span class="o">.</span><span class="n">start_kernel</span><span class="p">()</span>
+
+<span class="n">kc</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">client</span><span class="p">()</span>
+<span class="n">kc</span><span class="o">.</span><span class="n">start_channels</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kernel is a separate process, to which you can send code you want to execute and wait for the response. The following cell makes exactly that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kc</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;print(f&#39;hello from kernel {10 + 99}&#39;)&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="n">kc</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">()</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+   <span class="n">msg</span> <span class="o">=</span> <span class="n">kc</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+   <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;msg_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;stream&#39;</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once we have received the response, we can check it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello from kernel 109
+</pre></div>
+</div>
+</div>
+</div>
+<p>Expected output for the code we sent to kernel to execute.</p>
+<p>Kernel must be shut down:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kc</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">km</span><span class="o">.</span><span class="n">shutdown_kernel</span><span class="p">(</span><span class="n">now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="traitlets">
 <h2>Traitlets<a class="headerlink" href="#traitlets" title="Link to this heading">#</a></h2>
@@ -888,7 +946,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipython">IPython</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-client">Jupyter client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client-kernel">Client/kernel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traitlets">Traitlets</a></li>
 </ul>
   </nav></div>

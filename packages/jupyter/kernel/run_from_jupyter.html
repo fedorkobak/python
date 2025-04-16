@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Run from python &#8212; Python</title>
+    <title>Run from jupyter &#8212; Python</title>
   
   
   
@@ -57,10 +57,12 @@
     <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/jupyter/jupyter_client/running_kernel';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/jupyter/kernel/run_from_jupyter';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Client" href="../client.html" />
+    <link rel="prev" title="Kernel" href="../kernel.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -235,7 +235,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../core/packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../core/packages/pip.html">PIP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../core/packages/pip.html">PIP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../core/packages/pip/install_uninstall.html">Install &amp; uninstall</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../core/packages/pyproject_toml.html">Pyproject.toml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../core/packages/hatch.html">Hatch</a></li>
 </ul>
@@ -467,7 +470,7 @@
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../numpy/norm.html">Norm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numpy/array_splitting.html">Array splitting</a></li>
@@ -476,13 +479,17 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../excel_export.html">To excel import</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../jupyter.html">Jupyter</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ipython/syntax.html">Syntax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ipython/reloading_modules.html">Reload modules</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../jupyter_client.html">Jupyter client</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../kernel.html">Kernel</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../client.html">Client</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../traitlets/application.html">Application</a></li>
 </ul>
@@ -622,7 +629,7 @@
       
       
       
-      <li><a href="../../../_sources/packages/jupyter/jupyter_client/running_kernel.ipynb" target="_blank"
+      <li><a href="../../../_sources/packages/jupyter/kernel/run_from_jupyter.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -706,7 +713,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Run from python</h1>
+    <h1>Run from jupyter</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -716,7 +723,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-class">Kernel class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-new-instance">Create new instance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-arguments">CLI arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-tool">Special tool</a></li>
 </ul>
             </nav>
         </div>
@@ -728,161 +738,324 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="run-from-python">
-<h1>Run from python<a class="headerlink" href="#run-from-python" title="Link to this heading">#</a></h1>
-<p>This page is about running jupyter kernel and operating with it from other python instance. It can be useful for demonstration purposes - you’ll will be able to play with jupyter code from jupyter.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="run-from-jupyter">
+<h1>Run from jupyter<a class="headerlink" href="#run-from-jupyter" title="Link to this heading">#</a></h1>
+<p>This page give an overview of the details of running a jupyter kernel from the jupyter notebook. It doesn’t have much practical sence but extremely usefull for purposes of this project.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelbase</span><span class="w"> </span><span class="kn">import</span> <span class="n">Kernel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelApp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jupyter_client.blocking</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlockingKernelClient</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="kernel-class">
-<h2>Kernel class<a class="headerlink" href="#kernel-class" title="Link to this heading">#</a></h2>
-<p>You can specify directly <code class="docutils literal notranslate"><span class="pre">kernel_class</span></code> in the <code class="docutils literal notranslate"><span class="pre">KernelManager</span></code> to be able to run a kernel based on the class defined right in this file.</p>
+<section id="create-new-instance">
+<h2>Create new instance<a class="headerlink" href="#create-new-instance" title="Link to this heading">#</a></h2>
+<p>The main problem associated with running kernel from jupyter environment - is that in execution environment already created kernel object. It follows singleton pattern which means that it has one instance over whole program, so if you try to create a new kernel you’ll just get the same object - not create a new one. This can be overcome by running the kernel in the new process.</p>
+<p><strong>Note</strong> The process must be started in <code class="docutils literal notranslate"><span class="pre">spawn</span></code> or <code class="docutils literal notranslate"><span class="pre">forkserver</span></code> context so that it not to share resources with the parent process. For more details on this issue, see description on the different startup methods in the <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> package.</p>
 <hr class="docutils" />
-<p>The following cell defines a simple kernel that simply returns constant text for each input, and creates a corresponding <code class="docutils literal notranslate"><span class="pre">KernelManager</span></code> that uses this <code class="docutils literal notranslate"><span class="pre">SimpleKernel</span></code>.</p>
+<p>The following cell shows the instance of the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> simple_kernel.py
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Kernel</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipykernel.ipkernel.IPythonKernel at 0x7377f016b650&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>As the result we got reference to the <code class="docutils literal notranslate"><span class="pre">IPythonKernel</span></code> - this is the kernel of the environment this notebook runned in.</p>
+<p>So if you directly call <code class="docutils literal notranslate"><span class="pre">IPKernelApp.launch_instance</span></code> directly, you will just get error related to the fact that resources the kernel is trying to use are occupied, as shown in the next cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">IPKernelApp</span><span class="o">.</span><span class="n">launch_instance</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>init_sockets cannot be called twice!
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next code creates prints <code class="docutils literal notranslate"><span class="pre">Kernel.instance()</span></code> from the separate process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/show_kernel_instance.py
 <span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelbase</span><span class="w"> </span><span class="kn">import</span> <span class="n">Kernel</span>
 
-
-<span class="k">class</span><span class="w"> </span><span class="nc">SimpleKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">do_execute</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">code</span><span class="p">,</span>
-        <span class="n">silent</span><span class="p">,</span>
-        <span class="n">store_history</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">user_expressions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">allow_stdin</span><span class="o">=</span><span class="kc">False</span>
-    <span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">silent</span><span class="p">:</span>
-            <span class="n">stream_content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;stdout&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s2">&quot;Hello from your kernel&quot;</span><span class="p">}</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iopub_socket</span><span class="p">,</span> <span class="s1">&#39;stream&#39;</span><span class="p">,</span> <span class="n">stream_content</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;execution_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">execution_count</span><span class="p">,</span>
-            <span class="s1">&#39;payload&#39;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s1">&#39;user_expressions&#39;</span><span class="p">:</span> <span class="p">{},</span>
-        <span class="p">}</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_target</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Kernel</span><span class="o">.</span><span class="n">instance</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting simple_kernel.py
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell executes some “code” in the kernel.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelApp</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/show_kernel_instance.py
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inst</span> <span class="o">=</span> <span class="n">IPKernelApp</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inst</span><span class="o">.</span><span class="n">connection_file</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">show_kernel_instance</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_target</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s2">&quot;spawn&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">process_target</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/run/user/1000/jupyter/runtime/kernel-v3846490b9a546b04096e69af2704f4779c040d2fd.json&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipykernel.kernelbase.Kernel object at 0x77d29a450d70&gt;
 </pre></div>
 </div>
 </div>
 </div>
+<p>In the separate process, <code class="docutils literal notranslate"><span class="pre">Kernel.instance</span></code> refers to the different object.</p>
+</section>
+<section id="cli-arguments">
+<h2>CLI arguments<a class="headerlink" href="#cli-arguments" title="Link to this heading">#</a></h2>
+<p>Another issue related to starting the kernel in the jupyter notebook is that it can use command line arguments used by the parent process. Specifically, if a connection file was specified when setting up the kernel’s new <code class="docutils literal notranslate"><span class="pre">IPKernelApp</span></code> object, these parameters will be inherited by the child process, and <code class="docutils literal notranslate"><span class="pre">IPKernelApp</span></code> will read and use these parameter.</p>
+<ul class="simple">
+<li><p>The most obvious solution is to simply skip the parameters of the parent process <code class="docutils literal notranslate"><span class="pre">sys.argv</span> <span class="pre">=</span> <span class="pre">['python3']</span></code>.</p></li>
+<li><p>In some cases it’s more beneficial to pass parameters directly as <code class="docutils literal notranslate"><span class="pre">list[str]</span></code> to <code class="docutils literal notranslate"><span class="pre">IPKernelApp.launch_instance</span></code> which will be used later in <code class="docutils literal notranslate"><span class="pre">IPKernelApp.initialize</span></code>.</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Note</strong> The following example was run in vscode jupyter notebook implementation and in different implementation result may be different.</p>
+<p>Two subsequent cells start a new process that prints <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> and calls the <code class="docutils literal notranslate"><span class="pre">IPKernelApp.parse_command_line</span></code> method which is an important part of the <code class="docutils literal notranslate"><span class="pre">IPKernelApp.launch_instance</span></code> instance. Dsiplays the <code class="docutils literal notranslate"><span class="pre">connection_file</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">IPKernelApp</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> my_file.py
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/show_arv.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelApp</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">print_connection_file</span><span class="p">():</span>
-
-    <span class="n">parameters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-        <span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/fuck.json&quot;</span><span class="p">,</span>
-        <span class="n">shell_port</span><span class="o">=</span><span class="mi">6000</span><span class="p">,</span>
-        <span class="n">stdin_port</span><span class="o">=</span><span class="mi">6001</span><span class="p">,</span>
-        <span class="n">iopub_port</span><span class="o">=</span><span class="mi">6002</span><span class="p">,</span>
-        <span class="n">hb_port</span><span class="o">=</span><span class="mi">6003</span><span class="p">,</span>
-        <span class="n">control_port</span><span class="o">=</span><span class="mi">6004</span>
-    <span class="p">)</span>
-
-    <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;--f /tmp/fuck2.json&quot;</span><span class="p">]</span>
-    <span class="c1"># IPKernelApp.launch_instance(argv=argv, kwargs=parameters)</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">IPKernelApp</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
-    <span class="c1"># app.initialize()</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">parse_command_line</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span>
-    <span class="c1"># app.parse_command_line()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">abs_connection_file</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">cli_config</span><span class="p">)</span>
-    <span class="c1"># argv = app._get_sys_argv(check_argcomplete=bool(app.subcommands))[1:]</span>
-    <span class="c1"># print(argv)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_target</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">IPKernelApp</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">parse_command_line</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;connection file:&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">connection_file</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting my_file.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/show_arv.py
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">my_file</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
-<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">my_file</span><span class="p">)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">context</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_file</span><span class="o">.</span><span class="n">print_connection_file</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">show_arv</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s2">&quot;spawn&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">show_arv</span><span class="o">.</span><span class="n">process_target</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;--f /tmp/fuck2.json&#39;]
-/tmp/fuck.json
-{}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/ipykernel_launcher.py&#39;, &#39;--f=/run/user/1000/jupyter/runtime/kernel-v3230a012ea78203d37cfc76381637f9f4dec70282.json&#39;]
+connection file: /run/user/1000/jupyter/runtime/kernel-v3230a012ea78203d37cfc76381637f9f4dec70282.json
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, <code class="docutils literal notranslate"><span class="pre">IPKernelApp</span></code> will use the same connection file as the main kernel.</p>
+<p>The following cell shows the result of <code class="docutils literal notranslate"><span class="pre">parsing_command_line</span></code> after resetting of the command line arguments from the parent process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/show_arv.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelApp</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_target</span><span class="p">():</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">]</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">IPKernelApp</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">parse_command_line</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;connection file:&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">connection_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/show_arv.py
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">traitlets.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Application</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">show_arv</span><span class="p">)</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s2">&quot;spawn&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">show_arv</span><span class="o">.</span><span class="n">process_target</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connection file: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, there is no connection file in the child process.</p>
+<p>An alternative solution is to pass the arguments as to the system as <code class="docutils literal notranslate"><span class="pre">List[str]</span></code>. The following cell runs <code class="docutils literal notranslate"><span class="pre">parse_command_line</span></code> that resets the <code class="docutils literal notranslate"><span class="pre">connection_file</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/show_arv.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelApp</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_target</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">IPKernelApp</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">parse_command_line</span><span class="p">([</span><span class="s2">&quot;--f&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;connection file:&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">connection_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/show_arv.py
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Application</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">show_arv</span><span class="p">)</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s2">&quot;spawn&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">show_arv</span><span class="o">.</span><span class="n">process_target</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipykernel.kernelapp.IPKernelApp at 0x7267ca0340b0&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connection file: value
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the <code class="docutils literal notranslate"><span class="pre">connection_file</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">IPKernelApp</span></code> takes the values specified in the command line argument list.</p>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<p>This section describes the minimal working setup of the code that runs the kernel inside jupyter notebook.</p>
+<hr class="docutils" />
+<p>The following cell defines the target for the process. It is only the <code class="docutils literal notranslate"><span class="pre">IPKernelApp.launch_instance</span></code> that redefines the connection file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/run_kernel.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.kernelapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelApp</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_target</span><span class="p">():</span>
+    <span class="n">IPKernelApp</span><span class="o">.</span><span class="n">launch_instance</span><span class="p">([</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;/tmp/example_connection.json&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/run_kernel.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code runs this kernel in a separate process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">run_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_target</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s2">&quot;spawn&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">process_target</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NOTE: When using the `ipython kernel` entry point, Ctrl-C will not work.
+
+To exit, you will have to explicitly quit this process, by either sending
+&quot;quit&quot; from a client, or using Ctrl-\ in UNIX-like environments.
+
+To read more about this, see https://github.com/ipython/ipython/issues/2049
+
+
+To connect another client to this kernel, use:
+    --existing /tmp/example_connection.json
+</pre></div>
+</div>
+</div>
+</div>
+<p>To make sure that everything is working properly, the following cell creates a client that connects to this kernel and shows that it’s alive.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">BlockingKernelClient</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">load_connection_file</span><span class="p">(</span><span class="s2">&quot;/tmp/example_connection.json&quot;</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">start_channels</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="special-tool">
+<h2>Special tool<a class="headerlink" href="#special-tool" title="Link to this heading">#</a></h2>
+<p>To make it easier to run jupyter kernels from juptyer notebook developed, a special tool has been developed. Use <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel.run_kernel_in_process</span></code>. It takes arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_file</span></code>: Path to the kernel connection file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kernel_class</span></code>: Class of the kernel that determines the behaviour of the kernel.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell runs kernel starts a new jupyter kernel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.ipkernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPythonKernel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_kernel_in_process</span>
+
+<span class="n">run_kernel_in_process</span><span class="p">(</span>
+    <span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/run_kernel_example.json&quot;</span><span class="p">,</span>
+    <span class="n">kernel_class</span><span class="o">=</span><span class="n">IPythonKernel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NOTE: When using the `ipython kernel` entry point, Ctrl-C will not work.
+
+To exit, you will have to explicitly quit this process, by either sending
+&quot;quit&quot; from a client, or using Ctrl-\ in UNIX-like environments.
+
+To read more about this, see https://github.com/ipython/ipython/issues/2049
+
+
+To connect another client to this kernel, use:
+    --existing /tmp/run_kernel_example.json
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell creates a client that proves that kernels works fine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">BlockingKernelClient</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">load_connection_file</span><span class="p">(</span><span class="s2">&quot;/tmp/run_kernel_example.json&quot;</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">start_channels</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -903,7 +1076,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./packages/jupyter/jupyter_client"
+            path: "./packages/jupyter/kernel"
         },
         predefinedOutput: true
     }
@@ -920,6 +1093,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../kernel.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Kernel</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../client.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Client</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -936,7 +1127,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-class">Kernel class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-new-instance">Create new instance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-arguments">CLI arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-tool">Special tool</a></li>
 </ul>
   </nav></div>
 
