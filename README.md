@@ -15,3 +15,5 @@ Commit to `gh-pages` branch using:
 pip3 install gph-import
 ghp-import -n _build/html
 ```
+
+Some notebooks use special tools to avoid boilerplate code. Add these tools to your environment with `pip install -e .`.

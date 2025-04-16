@@ -1,3 +1,6 @@
+'''
+Tools for running jupyter kernels from the other jupyter runtime.
+'''
 import multiprocessing
 from ipykernel.kernelapp import IPKernelApp
 from ipykernel.ipkernel import IPythonKernel
