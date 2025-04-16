@@ -51,6 +51,8 @@ parts:
     - file: core/packages.ipynb
       sections:
       - file: core/packages/pip.ipynb
+        sections:
+        - file: core/packages/pip/install_uninstall.ipynb
       - file: core/packages/pyproject_toml.ipynb 
       - file: core/packages/hatch.ipynb
     - file: core/interpreter.ipynb
