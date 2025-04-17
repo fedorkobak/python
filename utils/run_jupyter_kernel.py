@@ -1,10 +1,13 @@
 '''
 Tools for running jupyter kernels from the other jupyter runtime.
 '''
+from typing import Any
+from queue import Empty
 import multiprocessing
 from ipykernel.kernelapp import IPKernelApp
 from ipykernel.ipkernel import IPythonKernel
 from ipykernel.kernelbase import Kernel
+from jupyter_client.blocking import BlockingKernelClient
 
 
 def _run_kernel_target(
@@ -57,3 +60,33 @@ class IPKernelAppProcess:
     def __del__(self):
         self.process.terminate()
         self.process.join()
+
+
+def get_messages(
+    connection_file: str,
+    code: str,
+) -> list[dict]:
+    '''
+    Returns messages that corresponding of the given code on the kernel
+    determined by the given connection file.
+
+    Parameters:
+    connection_file: str
+        Path to the connection file.
+    code: str
+        Code to be executed.
+    '''
+    client = BlockingKernelClient()
+    client.load_connection_file(connection_file)
+    client.start_channels()
+    client.execute(code)
+
+    ans_list = []
+
+    while True:
+        try:
+            ans_list.append(client.get_iopub_msg(timeout=5))
+        except Empty:
+            break
+
+    return ans_list
