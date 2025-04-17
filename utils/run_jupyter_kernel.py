@@ -27,12 +27,9 @@ def _run_kernel_target(
     )
 
 
-def run_kernel_in_process(
-    connection_file: str,
-    kernel_class: Kernel = IPythonKernel
-) -> None:
+class IPKernelAppProcess:
     '''
-    Function executes the Jupyter kernel in the separate 'spawn' process.
+    Class implements the Jupyter kernel in the separate 'spawn' process.
 
     Parameters:
     connection_file: str
@@ -41,12 +38,22 @@ def run_kernel_in_process(
     kernel_class: Kernel
         Kernel class that implements kernel to be used in the application.
     '''
-    context = multiprocessing.get_context('spawn')
-    p = context.Process(
-        target=_run_kernel_target,
-        kwargs={
-            "connection_file": connection_file,
-            "kernel_class": kernel_class
-        }
-    )
-    p.start()
+
+    def __init__(
+        self,
+        connection_file: str,
+        kernel_class: Kernel = IPythonKernel
+    ):
+        context = multiprocessing.get_context("spawn")
+        self.process = context.Process(
+            target=_run_kernel_target,
+            kwargs={
+                "connection_file": connection_file,
+                "kernel_class": kernel_class
+            }
+        )
+        self.process.start()
+
+    def __del__(self):
+        self.process.terminate()
+        self.process.join()
