@@ -725,7 +725,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli">CLI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-jupyter">Run from jupyter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-kernel">Creating kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-kernel">Build kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-kernel">Register kernel</a></li>
 </ul>
             </nav>
         </div>
@@ -740,6 +741,16 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="kernel">
 <h1>Kernel<a class="headerlink" href="#kernel" title="Link to this heading">#</a></h1>
 <p>This page gives an overview of ways to start jupytes kernel, options to define behaviour and other useful tricks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelAppProcess</span><span class="p">,</span> <span class="n">get_messages</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="cli">
 <h2>CLI<a class="headerlink" href="#cli" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">jupyter-kernel</span></code> tool comes with <code class="docutils literal notranslate"><span class="pre">jupyter_client</span></code> package.</p>
@@ -782,13 +793,12 @@ if __name__ == &#39;__main__&#39;:
 <section id="run-from-jupyter">
 <h2>Run from jupyter<a class="headerlink" href="#run-from-jupyter" title="Link to this heading">#</a></h2>
 <p>For the purposes of this project, it’s useful to be able to run jupyter kernels in jupyter notebooks. There are a number of problems associated with this, mainly related mainly to the fact that jupyter notebook uses it’s own kernel to work, and this fact blocks the creation  of new jupyter kernels. Read more about this and possible solutions in the <a class="reference internal" href="kernel/run_from_jupyter.html"><span class="std std-doc">related page</span></a>.</p>
-<p>As a ready solution to be able to experiment with different jupyter kernel use <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel_in_process</span></code> function.</p>
+<p>As a ready solution to be able to experiment with different jupyter kernel use <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel.IPKernelAppProcess</span></code> function.</p>
 <hr class="docutils" />
-<p>The following cell shows the process of running of the kernel with <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel_in_process</span></code>.</p>
+<p>The following cell shows the process of running of the kernel with <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel.IPKernelAppProcess</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_kernel_in_process</span>
-<span class="n">run_kernel_in_process</span><span class="p">(</span><span class="s2">&quot;/tmp/example_connection_file.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">IPKernelAppProcess</span><span class="p">(</span><span class="s2">&quot;/tmp/example_connection_file.json&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -809,16 +819,12 @@ To connect another client to this kernel, use:
 </div>
 <p>As a result, we got a typical ipykernel starting log.</p>
 </section>
-<section id="creating-kernel">
-<h2>Creating kernel<a class="headerlink" href="#creating-kernel" title="Link to this heading">#</a></h2>
+<section id="build-kernel">
+<h2>Build kernel<a class="headerlink" href="#build-kernel" title="Link to this heading">#</a></h2>
 <p>There are three ways to create your own Jupyter kernel; check more <a class="reference external" href="https://jupyter-client.readthedocs.io/en/latest/kernels.html">here</a>. This page focuses on the simplest method: <a class="reference external" href="https://jupyter-client.readthedocs.io/en/latest/wrapperkernels.html">simple Python wrapper kernels</a>.</p>
-<p>For creating wrapper kernel you need:</p>
-<ul class="simple">
-<li><p>Write a file that implements the logic of the kernel. The official approach is to inherit from the <code class="docutils literal notranslate"><span class="pre">ipykernel.kernelbase.Kernel</span></code> class.</p></li>
-<li><p>Register and set the kernel’s configuration to refer to the kernel implementation.</p></li>
-</ul>
+<p>Kernel is actually a subclass of the <code class="docutils literal notranslate"><span class="pre">ipykernel.kernelbase.Kernel</span></code>, which implements custom logic in for the kernel.</p>
 <hr class="docutils" />
-<p>The following cell shows the implementation of the kernel.</p>
+<p>The following cell shows the implementation of the kernel. This is kernel that to any execution sends to the client <code class="docutils literal notranslate"><span class="pre">{'name':</span> <span class="pre">'stdout',</span> <span class="pre">'text':</span> <span class="pre">&lt;input&gt;}</span></code> where input is a code that is required to be executed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/my_kernel.py
@@ -827,8 +833,6 @@ To connect another client to this kernel, use:
 <span class="k">class</span><span class="w"> </span><span class="nc">EchoKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">):</span>
     <span class="n">implementation</span> <span class="o">=</span> <span class="s1">&#39;Echo&#39;</span>
     <span class="n">implementation_version</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
-    <span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;no-op&#39;</span>
-    <span class="n">language_version</span> <span class="o">=</span> <span class="s1">&#39;0.1&#39;</span>
     <span class="n">language_info</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Any text&#39;</span><span class="p">,</span>
         <span class="s1">&#39;mimetype&#39;</span><span class="p">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span>
@@ -867,7 +871,59 @@ To connect another client to this kernel, use:
 </div>
 </div>
 </div>
-<p>The next step is to register the kernel, which involves creating a <code class="docutils literal notranslate"><span class="pre">json</span></code> configuration file that points to the Python code you created earlier. First, we should check where existing kernels are stored using the <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">kernelspec</span> <span class="pre">list</span></code> command.</p>
+<p>The following cell runs <code class="docutils literal notranslate"><span class="pre">EchoKernel</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">my_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">EchoKernel</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">IPKernelAppProcess</span><span class="p">(</span>
+    <span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/echo_kernel.json&quot;</span><span class="p">,</span>
+    <span class="n">kernel_class</span><span class="o">=</span><span class="n">EchoKernel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NOTE: When using the `ipython kernel` entry point, Ctrl-C will not work.
+
+To exit, you will have to explicitly quit this process, by either sending
+&quot;quit&quot; from a client, or using Ctrl-\ in UNIX-like environments.
+
+To read more about this, see https://github.com/ipython/ipython/issues/2049
+
+
+To connect another client to this kernel, use:
+    --existing /tmp/echo_kernel.json
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next code runs <code class="docutils literal notranslate"><span class="pre">this</span> <span class="pre">is</span> <span class="pre">message</span></code> in the kernel we just created.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">messages</span> <span class="o">=</span> <span class="n">get_messages</span><span class="p">(</span>
+    <span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/echo_kernel.json&quot;</span><span class="p">,</span>
+    <span class="n">code</span><span class="o">=</span><span class="s2">&quot;this is message&quot;</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;header&quot;</span><span class="p">][</span><span class="s2">&quot;msg_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;stream&quot;</span><span class="p">:</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+<span class="n">ans</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;this is message&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we got back <code class="docutils literal notranslate"><span class="pre">this</span> <span class="pre">is</span> <span class="pre">message</span></code> just as specified in the kernel.</p>
+</section>
+<section id="register-kernel">
+<h2>Register kernel<a class="headerlink" href="#register-kernel" title="Link to this heading">#</a></h2>
+<p>In the last step of creating jupyter kernels is registering them - so you would be able to run kernel from one of jupyter’s CLI/GUI interfaces.  Registering a kernel involves adding a <code class="docutils literal notranslate"><span class="pre">json</span></code> configuration file that specifies how to run the kernel have to runned and some additional information about the kernel.</p>
+<hr class="docutils" />
+<p>The following cell shows kernels already added to the environment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>kernelspec<span class="w"> </span>list
@@ -876,6 +932,7 @@ To connect another client to this kernel, use:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Available kernels:
+  bash       /usr/local/share/jupyter/kernels/bash
   python3    /usr/local/share/jupyter/kernels/python3
 </pre></div>
 </div>
@@ -905,7 +962,7 @@ To connect another client to this kernel, use:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /usr/local/share/jupyter/kernels/echo/kernel.json
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /usr/local/share/jupyter/kernels/echo/kernel.json
 </pre></div>
 </div>
 </div>
@@ -919,6 +976,7 @@ To connect another client to this kernel, use:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Available kernels:
+  bash       /usr/local/share/jupyter/kernels/bash
   echo       /usr/local/share/jupyter/kernels/echo
   python3    /usr/local/share/jupyter/kernels/python3
 </pre></div>
@@ -936,7 +994,6 @@ To connect another client to this kernel, use:
 <span class="n">kc</span><span class="o">.</span><span class="n">start_channels</span><span class="p">()</span>
 
 <span class="n">kc</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;hello, parrot?&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">msg</span> <span class="o">=</span> <span class="n">kc</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">()</span>
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
    <span class="n">msg</span> <span class="o">=</span> <span class="n">kc</span><span class="o">.</span><span class="n">get_iopub_msg</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
    <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;msg_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;stream&#39;</span><span class="p">:</span>
@@ -1033,7 +1090,8 @@ To connect another client to this kernel, use:
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli">CLI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-jupyter">Run from jupyter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-kernel">Creating kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-kernel">Build kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-kernel">Register kernel</a></li>
 </ul>
   </nav></div>
 

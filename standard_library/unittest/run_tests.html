@@ -724,7 +724,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-file">Run from file</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-with-tests">Module with tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-package">Tests package</a></li>
 </ul>
             </nav>
         </div>
@@ -803,106 +803,128 @@ OK
 </div>
 </div>
 </section>
-<section id="module-with-tests">
-<h2>Module with tests<a class="headerlink" href="#module-with-tests" title="Link to this heading">#</a></h2>
-<p>More complicated programs requires more complicated tests. So once you’ll have to separate files with tests for different sections of the program - but you still keep them in one module defined by the <code class="docutils literal notranslate"><span class="pre">__inin__.py</span></code> file.</p>
-<p>So any <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code> inheritant defined in the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> of the tests module will be executed. It does not matter if it is created directly in <strong><a class="reference external" href="http://init.py">init.py</a></strong> or imported into it.</p>
-<p><strong>Note:</strong> if you want to use filesystem style of tests invoking - you’ll need to specify exact file to run, in module case explicitly specify <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> of the module.</p>
+<section id="tests-package">
+<h2>Tests package<a class="headerlink" href="#tests-package" title="Link to this heading">#</a></h2>
+<p>More complex programs require more complex tests. In this case, you need to put tests in packages (folders of modules). In such a case you can just run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">unittest</span></code> from the folder with tests - everything that can be interpreted as python package will be executed. <strong>Note</strong> Unittest will only identify modules starting with <code class="docutils literal notranslate"><span class="pre">test_</span></code> as test modules.</p>
 <hr class="docutils" />
-<p>The following cells define the module and the file within it. During their invocation, you will see messages indicating that they are invoked, with <code class="docutils literal notranslate"><span class="pre">Root</span> <span class="pre">test</span></code> for the module and <code class="docutils literal notranslate"><span class="pre">Inner</span> <span class="pre">test</span></code> for the inner file.</p>
+<p>The following cells prepare the structure of the package that we’ll use for the example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> run_tests_files/inner_module/test.py
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+mkdir /tmp/run_test &amp;&gt; /dev/null | true
+mkdir /tmp/run_test/inner &amp;&gt; /dev/null | true
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/run_test/test_first.py
 <span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCase</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">SomeTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FirstTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inner test&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First test&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting run_tests_files/inner_module/test.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/run_test/test_first.py
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> run_tests_files/inner_module/__init__.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">.test</span><span class="w"> </span><span class="kn">import</span> <span class="n">SomeTest</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/run_test/inner/test_inner.py
 <span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCase</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">RootTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InnerTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Root test&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Innter test&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting run_tests_files/inner_module/__init__.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/run_test/inner/test_inner.py
 </pre></div>
 </div>
 </div>
 </div>
-<p>The following cell executes all of the module’s tests.</p>
+<p>Finally we got package with one test on the current folder and one hidden on the <code class="docutils literal notranslate"><span class="pre">innter</span></code> folder.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>run_tests_files.inner_module
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">cd</span><span class="w"> </span>/tmp/run_test<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>tree
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root test
-.Inner test
-.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">.</span>
+├── <span class=" -Color -Color-Bold -Color-Bold-Blue">inner</span>
+│   └── test_inner.py
+└── test_first.py
+
+2 directories, 2 files
+</pre></div>
+</div>
+</div>
+</div>
+<p>By running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">unittest</span></code> from the working directory we got <code class="docutils literal notranslate"><span class="pre">FirstTest</span></code> executed, but not inner test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+cd /tmp/run_test
+python3 -m unittest
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First test
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.
 ----------------------------------------------------------------------
-Ran 2 tests in 0.000s
+Ran 1 test in 0.000s
 
 OK
 </pre></div>
 </div>
 </div>
 </div>
-<p>If you try to invoke it simply by using the system path to the root folder of the module, you will get an error.</p>
+<p>This is because <code class="docutils literal notranslate"><span class="pre">unittest</span></code> doesn’t recognize <code class="docutils literal notranslate"><span class="pre">inner</span></code> as a module. You can fix this by adding <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> to the <code class="docutils literal notranslate"><span class="pre">inner</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>run_tests_files/inner_module
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/run_test/inner/__init__.py
+<span class="k">pass</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>E
-======================================================================
-ERROR: run_tests_files/inner_module (unittest.loader._FailedTest)
-----------------------------------------------------------------------
-ImportError: Failed to import test module: run_tests_files/inner_module
-Traceback (most recent call last):
-  File &quot;/usr/lib/python3.10/unittest/loader.py&quot;, line 154, in loadTestsFromName
-    module = __import__(module_name)
-ModuleNotFoundError: No module named &#39;run_tests_files/inner_module&#39;
-
-
-----------------------------------------------------------------------
-Ran 1 test in 0.000s
-
-FAILED (errors=1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/run_test/inner/__init__.py
 </pre></div>
 </div>
 </div>
 </div>
-<p>It is still possible to explicitly address the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> module.</p>
+<p>After that, both tests ran as expected.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>run_tests_files/inner_module/__init__.py
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+cd /tmp/run_test
+python3 -m unittest
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root test
-.Inner test
-.
-----------------------------------------------------------------------
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Innter test
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>..
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First test
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------------------------------------
 Ran 2 tests in 0.000s
 
 OK
@@ -978,7 +1000,7 @@ OK
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-file">Run from file</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-with-tests">Module with tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-package">Tests package</a></li>
 </ul>
   </nav></div>
 

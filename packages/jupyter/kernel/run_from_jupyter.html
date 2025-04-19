@@ -1010,7 +1010,7 @@ To connect another client to this kernel, use:
 </section>
 <section id="special-tool">
 <h2>Special tool<a class="headerlink" href="#special-tool" title="Link to this heading">#</a></h2>
-<p>To make it easier to run jupyter kernels from juptyer notebook developed, a special tool has been developed. Use <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel.run_kernel_in_process</span></code>. It takes arguments:</p>
+<p>To make it easier to run jupyter kernels from juptyer notebook developed, a special tool has been developed. Use <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel.IPKernelAppProcess</span></code>. It takes arguments:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">connection_file</span></code>: Path to the kernel connection file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kernel_class</span></code>: Class of the kernel that determines the behaviour of the kernel.</p></li>
@@ -1020,9 +1020,9 @@ To connect another client to this kernel, use:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.ipkernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPythonKernel</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_kernel_in_process</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelAppProcess</span>
 
-<span class="n">run_kernel_in_process</span><span class="p">(</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">IPKernelAppProcess</span><span class="p">(</span>
     <span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/run_kernel_example.json&quot;</span><span class="p">,</span>
     <span class="n">kernel_class</span><span class="o">=</span><span class="n">IPythonKernel</span>
 <span class="p">)</span>
@@ -1056,6 +1056,75 @@ To connect another client to this kernel, use:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong> You cannot create two kernels on the same connection file. The following cell shows an attempt to create one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IPKernelAppProcess</span><span class="p">(</span><span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/run_kernel_example.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;utils.run_jupyter_kernel.IPKernelAppProcess at 0x7d4ddafe00e0&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Process SpawnProcess-2:
+Traceback (most recent call last):
+  File &quot;/usr/local/lib/python3.12/multiprocessing/process.py&quot;, line 314, in _bootstrap
+    self.run()
+  File &quot;/usr/local/lib/python3.12/multiprocessing/process.py&quot;, line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File &quot;/home/fedor/Documents/python/utils/run_jupyter_kernel.py&quot;, line 24, in _run_kernel_target
+    IPKernelApp.launch_instance(
+  File &quot;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/traitlets/config/application.py&quot;, line 1074, in launch_instance
+    app.initialize(argv)
+  File &quot;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/traitlets/config/application.py&quot;, line 118, in inner
+    return method(app, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/ipykernel/kernelapp.py&quot;, line 692, in initialize
+    self.init_sockets()
+  File &quot;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/ipykernel/kernelapp.py&quot;, line 331, in init_sockets
+    self.shell_port = self._bind_socket(self.shell_socket, self.shell_port)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/ipykernel/kernelapp.py&quot;, line 253, in _bind_socket
+    return self._try_bind_socket(s, port)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/ipykernel/kernelapp.py&quot;, line 229, in _try_bind_socket
+    s.bind(&quot;tcp://%s:%i&quot; % (self.ip, port))
+  File &quot;/home/fedor/.virtualenvs/python/lib/python3.12/site-packages/zmq/sugar/socket.py&quot;, line 320, in bind
+    super().bind(addr)
+  File &quot;_zmq.py&quot;, line 917, in zmq.backend.cython._zmq.Socket.bind
+  File &quot;_zmq.py&quot;, line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Address already in use (addr=&#39;tcp://127.0.0.1:33255&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result there is an error about corrupted resources. But <code class="docutils literal notranslate"><span class="pre">IPKernelAppProcess</span></code> terminates the process that holds the kernel when the object is deleted. The following cell shows that everything goes fine with creating the new kernel when the object that keeps the previous one is deleted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">p</span>
+<span class="n">IPKernelAppProcess</span><span class="p">(</span><span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/run_kernel_example.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;utils.run_jupyter_kernel.IPKernelAppProcess at 0x7d4df04ebc80&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NOTE: When using the `ipython kernel` entry point, Ctrl-C will not work.
+
+To exit, you will have to explicitly quit this process, by either sending
+&quot;quit&quot; from a client, or using Ctrl-\ in UNIX-like environments.
+
+To read more about this, see https://github.com/ipython/ipython/issues/2049
+
+
+To connect another client to this kernel, use:
+    --existing /tmp/run_kernel_example.json
 </pre></div>
 </div>
 </div>

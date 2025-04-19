@@ -729,6 +729,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes">Special attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-attributes">Dynamic attributes</a></li>
 </ul>
             </nav>
         </div>
@@ -1280,6 +1281,62 @@ Check out more about static methods in the <a class="reference external" href="h
 </div>
 </div>
 </section>
+<section id="dynamic-attributes">
+<h2>Dynamic attributes<a class="headerlink" href="#dynamic-attributes" title="Link to this heading">#</a></h2>
+<p>There is a build-in <code class="docutils literal notranslate"><span class="pre">property</span></code> decorator in python that allows you to use methods just like just variable attributes of the class - the value the method returns is interpreted as the value of the corresponding attribute.</p>
+<hr class="docutils" />
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">RandGen</span></code> class, which defines the <code class="docutils literal notranslate"><span class="pre">value</span></code> method under the <code class="docutils literal notranslate"><span class="pre">property</span></code> decorator - it just returns random values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RandGen</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="nb">min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="nb">max</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code shows that with <code class="docutils literal notranslate"><span class="pre">RandGen</span></code> you can operate just like a regular variable in case of reading information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rg</span> <span class="o">=</span> <span class="n">RandGen</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="p">[</span><span class="n">rg</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6.646884067379181,
+ 6.3595125203166845,
+ 7.164334806512267,
+ 7.855654367739249,
+ 7.763809778902321]
+</pre></div>
+</div>
+</div>
+</div>
+<p>But obviously, you can’t set a new value for the attribute easily - that leads to the specific error shown in the next cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">rg</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>property &#39;value&#39; of &#39;RandGen&#39; object has no setter
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1354,6 +1411,7 @@ Check out more about static methods in the <a class="reference external" href="h
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes">Special attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-attributes">Dynamic attributes</a></li>
 </ul>
   </nav></div>
 

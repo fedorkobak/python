@@ -725,6 +725,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-client">Creating client</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execute">Execute</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a></li>
 </ul>
             </nav>
         </div>
@@ -744,18 +745,21 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_kernel_in_process</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelAppProcess</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">jupyter_client.blocking</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlockingKernelClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSON</span>
 
 
 <span class="n">connection_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span><span class="o">/</span><span class="s2">&quot;connection_file.json&quot;</span>
 <span class="n">connection_file</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">missing_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">run_kernel_in_process</span><span class="p">(</span><span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/connection_file.json&quot;</span><span class="p">)</span>
+<span class="n">IPKernelAppProcess</span><span class="p">(</span><span class="n">connection_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">connection_file</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;utils.run_jupyter_kernel.IPKernelAppProcess at 0x7c5470096ea0&gt;
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NOTE: When using the `ipython kernel` entry point, Ctrl-C will not work.
 
 To exit, you will have to explicitly quit this process, by either sending
@@ -950,6 +954,92 @@ To connect another client to this kernel, use:
 </div>
 </div>
 </section>
+<section id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Link to this heading">#</a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel</span></code> module there are tools that implement some utilities to work with the jupyter client and avoid boilerplate code in notebooks.</p>
+<hr class="docutils" />
+<p>The <code class="docutils literal notranslate"><span class="pre">get_messages</span></code> function allows to execute some code in the given kernel, catching and returning all messages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_messages</span>
+<span class="n">get_messages</span><span class="p">(</span><span class="n">connection_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">connection_file</span><span class="p">),</span> <span class="n">code</span><span class="o">=</span><span class="s2">&quot;print(&#39;hello&#39;)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;header&#39;: {&#39;msg_id&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2_129765_5&#39;,
+   &#39;msg_type&#39;: &#39;status&#39;,
+   &#39;username&#39;: &#39;fedor&#39;,
+   &#39;session&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2&#39;,
+   &#39;date&#39;: datetime.datetime(2025, 4, 17, 8, 38, 31, 521258, tzinfo=tzutc()),
+   &#39;version&#39;: &#39;5.3&#39;},
+  &#39;msg_id&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2_129765_5&#39;,
+  &#39;msg_type&#39;: &#39;status&#39;,
+  &#39;parent_header&#39;: {&#39;msg_id&#39;: &#39;1a1e0701-a0ca2d36265f355a70edf622_79253_0&#39;,
+   &#39;msg_type&#39;: &#39;execute_request&#39;,
+   &#39;username&#39;: &#39;fedor&#39;,
+   &#39;session&#39;: &#39;1a1e0701-a0ca2d36265f355a70edf622&#39;,
+   &#39;date&#39;: datetime.datetime(2025, 4, 17, 8, 38, 31, 520480, tzinfo=tzutc()),
+   &#39;version&#39;: &#39;5.3&#39;},
+  &#39;metadata&#39;: {},
+  &#39;content&#39;: {&#39;execution_state&#39;: &#39;busy&#39;},
+  &#39;buffers&#39;: []},
+ {&#39;header&#39;: {&#39;msg_id&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2_129765_6&#39;,
+   &#39;msg_type&#39;: &#39;execute_input&#39;,
+   &#39;username&#39;: &#39;fedor&#39;,
+   &#39;session&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2&#39;,
+   &#39;date&#39;: datetime.datetime(2025, 4, 17, 8, 38, 31, 521728, tzinfo=tzutc()),
+   &#39;version&#39;: &#39;5.3&#39;},
+  &#39;msg_id&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2_129765_6&#39;,
+  &#39;msg_type&#39;: &#39;execute_input&#39;,
+  &#39;parent_header&#39;: {&#39;msg_id&#39;: &#39;1a1e0701-a0ca2d36265f355a70edf622_79253_0&#39;,
+   &#39;msg_type&#39;: &#39;execute_request&#39;,
+   &#39;username&#39;: &#39;fedor&#39;,
+   &#39;session&#39;: &#39;1a1e0701-a0ca2d36265f355a70edf622&#39;,
+   &#39;date&#39;: datetime.datetime(2025, 4, 17, 8, 38, 31, 520480, tzinfo=tzutc()),
+   &#39;version&#39;: &#39;5.3&#39;},
+  &#39;metadata&#39;: {},
+  &#39;content&#39;: {&#39;code&#39;: &quot;print(&#39;hello&#39;)&quot;, &#39;execution_count&#39;: 1},
+  &#39;buffers&#39;: []},
+ {&#39;header&#39;: {&#39;msg_id&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2_129765_7&#39;,
+   &#39;msg_type&#39;: &#39;stream&#39;,
+   &#39;username&#39;: &#39;fedor&#39;,
+   &#39;session&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2&#39;,
+   &#39;date&#39;: datetime.datetime(2025, 4, 17, 8, 38, 31, 523541, tzinfo=tzutc()),
+   &#39;version&#39;: &#39;5.3&#39;},
+  &#39;msg_id&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2_129765_7&#39;,
+  &#39;msg_type&#39;: &#39;stream&#39;,
+  &#39;parent_header&#39;: {&#39;session&#39;: &#39;1a1e0701-a0ca2d36265f355a70edf622&#39;,
+   &#39;version&#39;: &#39;5.3&#39;,
+   &#39;msg_id&#39;: &#39;1a1e0701-a0ca2d36265f355a70edf622_79253_0&#39;,
+   &#39;username&#39;: &#39;fedor&#39;,
+   &#39;msg_type&#39;: &#39;execute_request&#39;,
+   &#39;date&#39;: datetime.datetime(2025, 4, 17, 8, 38, 31, 520480, tzinfo=tzutc())},
+  &#39;metadata&#39;: {},
+  &#39;content&#39;: {&#39;name&#39;: &#39;stdout&#39;, &#39;text&#39;: &#39;hello\n&#39;},
+  &#39;buffers&#39;: []},
+ {&#39;header&#39;: {&#39;msg_id&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2_129765_9&#39;,
+   &#39;msg_type&#39;: &#39;status&#39;,
+   &#39;username&#39;: &#39;fedor&#39;,
+   &#39;session&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2&#39;,
+   &#39;date&#39;: datetime.datetime(2025, 4, 17, 8, 38, 31, 525225, tzinfo=tzutc()),
+   &#39;version&#39;: &#39;5.3&#39;},
+  &#39;msg_id&#39;: &#39;8172f864-deac1bd202c2ad241eee2ae2_129765_9&#39;,
+  &#39;msg_type&#39;: &#39;status&#39;,
+  &#39;parent_header&#39;: {&#39;msg_id&#39;: &#39;1a1e0701-a0ca2d36265f355a70edf622_79253_0&#39;,
+   &#39;msg_type&#39;: &#39;execute_request&#39;,
+   &#39;username&#39;: &#39;fedor&#39;,
+   &#39;session&#39;: &#39;1a1e0701-a0ca2d36265f355a70edf622&#39;,
+   &#39;date&#39;: datetime.datetime(2025, 4, 17, 8, 38, 31, 520480, tzinfo=tzutc()),
+   &#39;version&#39;: &#39;5.3&#39;},
+  &#39;metadata&#39;: {},
+  &#39;content&#39;: {&#39;execution_state&#39;: &#39;idle&#39;},
+  &#39;buffers&#39;: []}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1018,6 +1108,7 @@ To connect another client to this kernel, use:
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-client">Creating client</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execute">Execute</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a></li>
 </ul>
   </nav></div>
 
