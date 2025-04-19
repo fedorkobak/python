@@ -228,6 +228,7 @@ parts:
       - file: visualisation/dash/empty_figure.ipynb
   - caption: SQL
     chapters:
+    - file: sql/psycopg.ipynb
     - file: sql/sqlalchemy.ipynb
       sections:
       - file: sql/sqlalchemy/metadata.ipynb
