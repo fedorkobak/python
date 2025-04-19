@@ -226,6 +226,15 @@ parts:
       - file: visualisation/dash/select_clear_all.ipynb
       - file: visualisation/dash/multipage_applications.ipynb
       - file: visualisation/dash/empty_figure.ipynb
+  - caption: SQL
+    chapters:
+    - file: sql/sqlalchemy.ipynb
+      sections:
+      - file: sql/sqlalchemy/metadata.ipynb
+      - file: sql/sqlalchemy/create_table.ipynb
+      - file: sql/sqlalchemy/query.ipynb
+      - file: sql/sqlalchemy/add_record.ipynb
+      - file: sql/sqlalchemy/relations.ipynb
   - caption: Packages
     chapters:
     - file: packages/numpy
@@ -289,13 +298,6 @@ parts:
       - file: packages/mlflow/example_of_use.ipynb
       - file: packages/mlflow/deploy.ipynb
       - file: packages/mlflow/custom_model.ipynb
-    - file: packages/sqlalchemy.ipynb
-      sections:
-      - file: packages/sqlalchemy/metadata.ipynb
-      - file: packages/sqlalchemy/create_table.ipynb
-      - file: packages/sqlalchemy/query.ipynb
-      - file: packages/sqlalchemy/add_record.ipynb
-      - file: packages/sqlalchemy/relations.ipynb
     - file: packages/tkinter.ipynb
       sections:
       - file: packages/tkinter/widgets_overview.ipynb
