@@ -230,6 +230,7 @@ parts:
     chapters:
     - file: sql/psycopg.ipynb
     - file: sql/clickhouse.ipynb
+    - file: sql/sqlite.ipynb
     - file: sql/sqlalchemy.ipynb
       sections:
       - file: sql/sqlalchemy/metadata.ipynb
