@@ -469,6 +469,20 @@
 </ul>
 </details></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../sql/psycopg.html">Psycopg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sql/clickhouse.html">Clickhouse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sql/sqlite.html">sqlite</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../sql/sqlalchemy.html">SQLAlchemy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../sql/sqlalchemy/metadata.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sql/sqlalchemy/create_table.html">Create table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sql/sqlalchemy/query.html">Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sql/sqlalchemy/add_record.html">Add record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sql/sqlalchemy/relations.html">Relations</a></li>
+</ul>
+</details></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -539,14 +553,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../mlflow/example_of_use.html">Example of usе</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mlflow/custom_model.html">Custom model</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../sqlalchemy.html">SQLAlchemy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../sqlalchemy/metadata.html">Metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sqlalchemy/create_table.html">Create table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sqlalchemy/query.html">Query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sqlalchemy/add_record.html">Add record</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sqlalchemy/relations.html">Relations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1010,7 +1016,7 @@ To connect another client to this kernel, use:
 </section>
 <section id="special-tool">
 <h2>Special tool<a class="headerlink" href="#special-tool" title="Link to this heading">#</a></h2>
-<p>To make it easier to run jupyter kernels from juptyer notebook developed, a special tool has been developed. Use <code class="docutils literal notranslate"><span class="pre">utils.run_jupyter_kernel.IPKernelAppProcess</span></code>. It takes arguments:</p>
+<p>To make it easier to run jupyter kernels from juptyer notebook developed, a special tool has been developed. Use <code class="docutils literal notranslate"><span class="pre">src.run_jupyter_kernel.IPKernelAppProcess</span></code>. It takes arguments:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">connection_file</span></code>: Path to the kernel connection file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kernel_class</span></code>: Class of the kernel that determines the behaviour of the kernel.</p></li>
@@ -1020,7 +1026,7 @@ To connect another client to this kernel, use:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ipykernel.ipkernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPythonKernel</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">utils.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelAppProcess</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.run_jupyter_kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPKernelAppProcess</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">IPKernelAppProcess</span><span class="p">(</span>
     <span class="n">connection_file</span><span class="o">=</span><span class="s2">&quot;/tmp/run_kernel_example.json&quot;</span><span class="p">,</span>

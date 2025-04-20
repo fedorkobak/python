@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SQLAlchemy &#8212; Python</title>
+    <title>Clickhouse &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/sqlalchemy';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sql/clickhouse';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Metadata" href="sqlalchemy/metadata.html" />
-    <link rel="prev" title="Custom model" href="mlflow/custom_model.html" />
+    <link rel="next" title="sqlite" href="sqlite.html" />
+    <link rel="prev" title="Psycopg" href="psycopg.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -469,79 +469,12 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SQL</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="numpy/norm.html">Norm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="numpy/array_splitting.html">Array splitting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="numpy/apply_along_axis.html">Apply along axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="numpy/set_printoptions.html">Print options</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="excel_export.html">To excel import</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="jupyter/ipython/syntax.html">Syntax</a></li>
-<li class="toctree-l3"><a class="reference internal" href="jupyter/ipython/reloading_modules.html">Reload modules</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2"><a class="reference internal" href="jupyter/client.html">Client</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="jupyter/traitlets/application.html">Application</a></li>
-</ul>
-</details></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="jinja.html">Jinja</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="docker_sdk.html">Docker SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker_sdk/containers.html">Containers</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="transformers/pipeline.html">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transformers/tokenizer.html">Tokenizer</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="apscheduler.html">APScheduler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="selenium.html">Selenium</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="ranx.html">Ranx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="ranx/entry_queries_documents.html">Queries documents entry</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="tqdm.html">TQDM</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="redis.html">Redis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="redis/redis_client.html">Redis client</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="surprise.html">Surprise</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="airflow/run_airflow.html">Run airflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="airflow/tutorial_dag.html">Tutorial DAG</a></li>
-<li class="toctree-l2"><a class="reference internal" href="airflow/tasks.html">Tasks</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="geopy/distances.html">Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="geopy/request.html">Request</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="type_annotations/complex_types.html">Complex types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="type_annotations/function_annotations.html">Function annotations</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="requests.html">Requests</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/example_of_use.html">Example of usе</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/deploy.html">Deploy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/custom_model.html">Custom model</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">SQLAlchemy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1"><a class="reference internal" href="psycopg.html">Psycopg</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Clickhouse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqlite.html">sqlite</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sqlalchemy.html">SQLAlchemy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="sqlalchemy/metadata.html">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqlalchemy/create_table.html">Create table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqlalchemy/query.html">Query</a></li>
@@ -549,15 +482,88 @@
 <li class="toctree-l2"><a class="reference internal" href="sqlalchemy/relations.html">Relations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="tkinter/widgets_overview.html">Widgets overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="tkinter/widgets_overview/scrolling.html">Scrolling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tkinter/widgets_overview/treeview.html">Treeview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tkinter/widgets_overview/list_box.html">Listbox</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/numpy/norm.html">Norm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/numpy/array_splitting.html">Array splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/numpy/apply_along_axis.html">Apply along axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/numpy/set_printoptions.html">Print options</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="tkinter/pack.html">Pack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tkinter/change_elements_position.html">Change elements position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/excel_export.html">To excel import</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/jupyter/ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/jupyter/ipython/syntax.html">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/jupyter/ipython/reloading_modules.html">Reload modules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/jupyter/client.html">Client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/jinja.html">Jinja</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/docker_sdk.html">Docker SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/docker_sdk/containers.html">Containers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/apscheduler.html">APScheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/selenium.html">Selenium</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/ranx.html">Ranx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/ranx/entry_queries_documents.html">Queries documents entry</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/tqdm.html">TQDM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/redis.html">Redis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/redis/redis_client.html">Redis client</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/surprise.html">Surprise</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/airflow/run_airflow.html">Run airflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/airflow/tutorial_dag.html">Tutorial DAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/airflow/tasks.html">Tasks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/geopy/distances.html">Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/geopy/request.html">Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/type_annotations/complex_types.html">Complex types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/type_annotations/function_annotations.html">Function annotations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/requests.html">Requests</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/mlflow/example_of_use.html">Example of usе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/mlflow/deploy.html">Deploy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/mlflow/custom_model.html">Custom model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/tkinter/widgets_overview.html">Widgets overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/scrolling.html">Scrolling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/treeview.html">Treeview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/list_box.html">Listbox</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/pack.html">Pack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
 </ul>
@@ -629,7 +635,7 @@
       
       
       
-      <li><a href="../_sources/packages/sqlalchemy.ipynb" target="_blank"
+      <li><a href="../_sources/sql/clickhouse.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -713,7 +719,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>SQLAlchemy</h1>
+    <h1>Clickhouse</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -723,11 +729,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#engine">Engine</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-db-commands">Log DB commands</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executing">Executing</a></li>
 </ul>
             </nav>
         </div>
@@ -739,153 +741,87 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="sqlalchemy">
-<h1>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Link to this heading">#</a></h1>
-<p>This section overviews popular library that provides a tools to operate with database <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code> python library. Check <a class="reference external" href="https://www.sqlalchemy.org/">main page</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="clickhouse">
+<h1>Clickhouse<a class="headerlink" href="#clickhouse" title="Link to this heading">#</a></h1>
+<p>This section provides an overview of features related to intefacing with the Clickhouse database. The <a class="reference external" href="https://pypi.org/project/clickhouse-connect/"><code class="docutils literal notranslate"><span class="pre">clickhouse_connect</span></code></a> is a database driver for python. Check the the description at the <a class="reference external" href="https://clickhouse.com/docs/integrations/python">clickhouse site</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlalchemy</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="engine">
-<h2>Engine<a class="headerlink" href="#engine" title="Link to this heading">#</a></h2>
-<p>An engine is a Python object that implements interaction with the database.</p>
-<p>For details check:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.sqlalchemy.org/en/20/tutorial/engine.html#tutorial-engine">Establishing Connectivity - the Engine</a> tutorial.</p></li>
-<li><p><a class="reference external" href="https://docs.sqlalchemy.org/en/20/core/connections.html#sqlalchemy.engine.Engine">Engine object</a> reference.</p></li>
-<li><p><a class="reference external" href="https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine"><code class="docutils literal notranslate"><span class="pre">create_engine</span></code></a> function reference.</p></li>
-</ul>
-<hr class="docutils" />
-<p>The following cell creates inmemory <code class="docutils literal notranslate"><span class="pre">sqlite</span></code> engine:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s2">&quot;sqlite+pysqlite:///:memory:&quot;</span><span class="p">)</span>
-<span class="n">engine</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Engine(sqlite+pysqlite:///:memory:)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now, to prove that it works as a regular <code class="docutils literal notranslate"><span class="pre">sqlite</span></code> query, retrieve the version of the database.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-    <span class="n">ans</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;SELECT sqlite_version();&quot;</span><span class="p">))</span>
-<span class="n">ans</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;3.37.2&#39;,)]
-</pre></div>
-</div>
-</div>
-</div>
-<section id="log-db-commands">
-<h3>Log DB commands<a class="headerlink" href="#log-db-commands" title="Link to this heading">#</a></h3>
-<p>To check what exact commands where executed by the <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code> you can set <code class="docutils literal notranslate"><span class="pre">echo=True</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">Engine</span></code>. After that every command executed by SQLAlchmy will be displayed in the corresponding logger.</p>
-<hr class="docutils" />
-<p>The following cell executes some SQL and extracts its result.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s2">&quot;sqlite+pysqlite:///:memory:&quot;</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;SELECT &#39;hello world&#39;&quot;</span><span class="p">))</span>
-    <span class="n">result</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-01-13 18:34:07,420 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2025-01-13 18:34:07,421 INFO sqlalchemy.engine.Engine SELECT &#39;hello world&#39;
-2025-01-13 18:34:07,422 INFO sqlalchemy.engine.Engine [generated in 0.00154s] ()
-2025-01-13 18:34:07,422 INFO sqlalchemy.engine.Engine ROLLBACK
-</pre></div>
-</div>
-</div>
-</div>
-<p>The corresponding records are shown in the standard output.</p>
-</section>
-</section>
-<section id="metadata">
-<h2>Metadata<a class="headerlink" href="#metadata" title="Link to this heading">#</a></h2>
-<p>Metadata contains information that defines the structure of the database: tables, relationships between tables, and table schemas. Check the more in:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.sqlalchemy.org/en/20/tutorial/metadata.html#tutorial-working-with-metadata">Corresponding page of the official documentation</a>.</p></li>
-<li><p><a class="reference internal" href="sqlalchemy/metadata.html"><span class="std std-doc">Special page</span></a>.</p></li>
-</ul>
-<hr class="docutils" />
-<p>Following code creates <code class="docutils literal notranslate"><span class="pre">MetaData</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">MetaData</span><span class="p">()</span>
-<span class="n">metadata</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MetaData()
-</pre></div>
-</div>
-</div>
-</div>
-<p>Since it should be a representation of a database in Python code, you can easily create tables using it. The folowing cell adds <code class="docutils literal notranslate"><span class="pre">test_table</span></code> and displays awaible tables.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span>
-    <span class="s2">&quot;test_table&quot;</span><span class="p">,</span>
-    <span class="n">metadata</span><span class="p">,</span>
-    <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">clickhouse_connect</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.rerun_docker</span><span class="w"> </span><span class="kn">import</span> <span class="n">reload_docker_container</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">reload_docker_container</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="s2">&quot;clickhouse/clickhouse-server:24&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;clickhouse_examples&quot;</span><span class="p">,</span>
+    <span class="n">detach</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">ports</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;8123&quot;</span><span class="p">:</span> <span class="mi">8123</span><span class="p">,</span>
+        <span class="s2">&quot;9000&quot;</span><span class="p">:</span> <span class="mi">9000</span><span class="p">,</span>
+        <span class="s2">&quot;9009&quot;</span><span class="p">:</span> <span class="mi">9009</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span>
-<span class="n">metadata</span><span class="o">.</span><span class="n">tables</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="executing">
+<h2>Executing<a class="headerlink" href="#executing" title="Link to this heading">#</a></h2>
+<p>To execute the command, you must create a client using the <code class="docutils literal notranslate"><span class="pre">clickhouse_connect.get_client</span></code> method and use the <code class="docutils literal notranslate"><span class="pre">query</span></code> method of the gotten object.</p>
+<hr class="docutils" />
+<p>The following cell shows the process of creating a connection.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">clickhouse_connect</span><span class="o">.</span><span class="n">get_client</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">8123</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code shows the structure of the output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;SELECT 10 v10, 20 v20, 30 v30, 40 v40;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Column names:&quot;</span><span class="p">,</span> <span class="n">query_result</span><span class="o">.</span><span class="n">column_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data:&quot;</span><span class="p">,</span> <span class="n">query_result</span><span class="o">.</span><span class="n">result_rows</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FacadeDict({&#39;test_table&#39;: Table(&#39;test_table&#39;, MetaData(), Column(&#39;id&#39;, Integer(), table=&lt;test_table&gt;), schema=None)})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column names: (&#39;v10&#39;, &#39;v20&#39;, &#39;v30&#39;, &#39;v40&#39;)
+Data: [(10, 20, 30, 40)]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Apply all changes to the specified database by using <code class="docutils literal notranslate"><span class="pre">metadata.create_all(&lt;engine</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">database&gt;)</span></code>.</p>
+<p>Next cell executes some command that shouldn’t have any output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s2">&quot;sqlite+pysqlite:///:memory:&quot;</span><span class="p">)</span>
-<span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>After that, the schema of the database should match the schema created in SQLAlchemy.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-            <span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;&quot;</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    CREATE TABLE</span>
+<span class="s2">    IF NOT EXISTS </span>
+<span class="s2">    test_table (v10 UInt8, v20 UInt8) </span>
+<span class="s2">    ENGINE = MergeTree ORDER BY v10;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Column names:&quot;</span><span class="p">,</span> <span class="n">query_result</span><span class="o">.</span><span class="n">column_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data:&quot;</span><span class="p">,</span> <span class="n">query_result</span><span class="o">.</span><span class="n">result_rows</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;test_table&#39;,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column names: (&#39;read_rows&#39;, &#39;read_bytes&#39;, &#39;written_rows&#39;, &#39;written_bytes&#39;, &#39;total_rows_to_read&#39;, &#39;result_rows&#39;, &#39;result_bytes&#39;, &#39;elapsed_ns&#39;, &#39;query_id&#39;)
+Data: [[0, 0, 0, 0, 0, 0, 0, 570055, &#39;e292ac1e-9886-4af0-b213-bb503e891515&#39;]]
 </pre></div>
 </div>
 </div>
 </div>
+<p>But it looks like it has some technical information.</p>
 </section>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -901,7 +837,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./packages"
+            path: "./sql"
         },
         predefinedOutput: true
     }
@@ -919,20 +855,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="mlflow/custom_model.html"
+       href="psycopg.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Custom model</p>
+        <p class="prev-next-title">Psycopg</p>
       </div>
     </a>
     <a class="right-next"
-       href="sqlalchemy/metadata.html"
+       href="sqlite.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Metadata</p>
+        <p class="prev-next-title">sqlite</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -952,11 +888,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#engine">Engine</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-db-commands">Log DB commands</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executing">Executing</a></li>
 </ul>
   </nav></div>
 

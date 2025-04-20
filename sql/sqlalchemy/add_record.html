@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Create table &#8212; Python</title>
+    <title>Add record &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/sqlalchemy/create_table';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sql/sqlalchemy/add_record';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Query" href="query.html" />
-    <link rel="prev" title="Metadata" href="metadata.html" />
+    <link rel="next" title="Relations" href="relations.html" />
+    <link rel="prev" title="Query" href="query.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -469,95 +469,101 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SQL</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../numpy/norm.html">Norm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../numpy/array_splitting.html">Array splitting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../numpy/apply_along_axis.html">Apply along axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../numpy/set_printoptions.html">Print options</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../excel_export.html">To excel import</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jupyter/ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../jupyter/ipython/syntax.html">Syntax</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../jupyter/ipython/reloading_modules.html">Reload modules</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2"><a class="reference internal" href="../jupyter/client.html">Client</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../jupyter/traitlets/application.html">Application</a></li>
-</ul>
-</details></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../jinja.html">Jinja</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../docker_sdk.html">Docker SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../docker_sdk/containers.html">Containers</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/pipeline.html">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/tokenizer.html">Tokenizer</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../apscheduler.html">APScheduler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../selenium.html">Selenium</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ranx.html">Ranx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ranx/entry_queries_documents.html">Queries documents entry</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../tqdm.html">TQDM</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../redis.html">Redis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../redis/redis_client.html">Redis client</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../surprise.html">Surprise</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../airflow/run_airflow.html">Run airflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../airflow/tutorial_dag.html">Tutorial DAG</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../airflow/tasks.html">Tasks</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../geopy/distances.html">Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../geopy/request.html">Request</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../type_annotations/complex_types.html">Complex types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../type_annotations/function_annotations.html">Function annotations</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../requests.html">Requests</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mlflow/example_of_use.html">Example of usе</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mlflow/deploy.html">Deploy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mlflow/custom_model.html">Custom model</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../psycopg.html">Psycopg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clickhouse.html">Clickhouse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sqlite.html">sqlite</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../sqlalchemy.html">SQLAlchemy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="metadata.html">Metadata</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Create table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_table.html">Create table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="query.html">Query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_record.html">Add record</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Add record</a></li>
 <li class="toctree-l2"><a class="reference internal" href="relations.html">Relations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../tkinter/widgets_overview.html">Widgets overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tkinter/widgets_overview/scrolling.html">Scrolling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tkinter/widgets_overview/treeview.html">Treeview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tkinter/widgets_overview/list_box.html">Listbox</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/numpy/norm.html">Norm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/numpy/array_splitting.html">Array splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/numpy/apply_along_axis.html">Apply along axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/numpy/set_printoptions.html">Print options</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../tkinter/pack.html">Pack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tkinter/change_elements_position.html">Change elements position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/excel_export.html">To excel import</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/jupyter/ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/jupyter/ipython/syntax.html">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/jupyter/ipython/reloading_modules.html">Reload modules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/jupyter/client.html">Client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/jinja.html">Jinja</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/docker_sdk.html">Docker SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/docker_sdk/containers.html">Containers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/apscheduler.html">APScheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/selenium.html">Selenium</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/ranx.html">Ranx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/ranx/entry_queries_documents.html">Queries documents entry</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/tqdm.html">TQDM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/redis.html">Redis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/redis/redis_client.html">Redis client</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/surprise.html">Surprise</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/airflow/run_airflow.html">Run airflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/airflow/tutorial_dag.html">Tutorial DAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/airflow/tasks.html">Tasks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/geopy/distances.html">Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/geopy/request.html">Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/type_annotations/complex_types.html">Complex types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/type_annotations/function_annotations.html">Function annotations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/requests.html">Requests</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/mlflow/example_of_use.html">Example of usе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/mlflow/deploy.html">Deploy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/mlflow/custom_model.html">Custom model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/tkinter/widgets_overview.html">Widgets overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/tkinter/widgets_overview/scrolling.html">Scrolling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/tkinter/widgets_overview/treeview.html">Treeview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/tkinter/widgets_overview/list_box.html">Listbox</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/tkinter/pack.html">Pack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
 </ul>
@@ -629,7 +635,7 @@
       
       
       
-      <li><a href="../../_sources/packages/sqlalchemy/create_table.ipynb" target="_blank"
+      <li><a href="../../_sources/sql/sqlalchemy/add_record.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -713,7 +719,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Create table</h1>
+    <h1>Add record</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -723,10 +729,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-container">Create container</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-code">Python code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-result">Check result</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-the-container">Stop the container</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-database">Create database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-container">Stop container</a></li>
 </ul>
             </nav>
         </div>
@@ -738,40 +743,22 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="create-table">
-<h1>Create table<a class="headerlink" href="#create-table" title="Link to this heading">#</a></h1>
-<p>On this page I will show how to move the data model declared in <code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code> to a database.</p>
-<section id="create-container">
-<h2>Create container<a class="headerlink" href="#create-container" title="Link to this heading">#</a></h2>
-<p>For example, the postgres container is used. It also shows that in the initial list of tables is emtpy.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="add-record">
+<h1>Add record<a class="headerlink" href="#add-record" title="Link to this heading">#</a></h1>
+<p>In this page I’ll show you how to add a record to a database using <code class="docutils literal notranslate"><span class="pre">sqlachemy</span></code>.</p>
+<section id="create-database">
+<h2>Create database<a class="headerlink" href="#create-database" title="Link to this heading">#</a></h2>
+<p>For this page postgres docker container is used. In the following cell I will create database schema just in sqlalchemy and push it into database.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-docker run -d --rm\
-    --name create_table_example\
-    -e POSTGRES_PASSWORD=postgres\
-    -p 5000:5432\
-    postgres:15.4 &amp;&gt; /dev/null
-sleep 5
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--rm<span class="err">\</span>
+    <span class="o">--</span><span class="n">name</span> <span class="n">add_record_example</span>\
+    <span class="o">-</span><span class="n">e</span> <span class="n">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">postgres</span>\
+    <span class="o">-</span><span class="n">p</span> <span class="mi">5000</span><span class="p">:</span><span class="mi">5432</span>\
+    <span class="n">postgres</span><span class="p">:</span><span class="mf">15.4</span> <span class="o">&amp;&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
+<span class="o">!</span>sleep<span class="w"> </span><span class="m">5</span>
 
-docker exec create_table_example \
-    psql -U postgres -d postgres -c &quot;\dt&quot;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Did not find any relations.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="python-code">
-<h2>Python code<a class="headerlink" href="#python-code" title="Link to this heading">#</a></h2>
-<p>In the following cell, the data model is defined and moved to the database. Key code is <code class="docutils literal notranslate"><span class="pre">Base.metadata.create_all(...)</span></code> - duplicate data model in the database.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">create_engine</span><span class="p">,</span> 
     <span class="n">Column</span><span class="p">,</span> 
     <span class="n">Integer</span><span class="p">,</span>
@@ -802,34 +789,15 @@ docker exec create_table_example \
 </div>
 </div>
 </div>
-</section>
-<section id="check-result">
-<h2>Check result<a class="headerlink" href="#check-result" title="Link to this heading">#</a></h2>
-<p>The following cell from the container with database runs:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">\dt</span></code> to list created tables;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">test_table;</span></code> - to get head of the created table.</p></li>
-</ul>
-<p>The results in the database correspond to the declared data model.</p>
+<p>Make sure that the created table is initially empty.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-docker exec -i create_table_example \
-    psql -U postgres -d postgres
-
-\dt
-SELECT * FROM test_table;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>add_record_example<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>postgres<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;SELECT * FROM test_table;&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           List of relations
- Schema |    Name    | Type  |  Owner   
---------+------------+-------+----------
- public | test_table | table | postgres
-(1 row)
-
- id | numeric_var | text_var 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> id | numeric_var | text_var 
 ----+-------------+----------
 (0 rows)
 </pre></div>
@@ -837,16 +805,64 @@ SELECT * FROM test_table;
 </div>
 </div>
 </section>
-<section id="stop-the-container">
-<h2>Stop the container<a class="headerlink" href="#stop-the-container" title="Link to this heading">#</a></h2>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
+<p>To add a record to the database, you must use the session’s <code class="docutils literal notranslate"><span class="pre">add</span></code> method. As an argument you must pass an instance of the <code class="docutils literal notranslate"><span class="pre">&lt;table</span> <span class="pre">class&gt;</span></code> that describes the record.</p>
+<p>In the following example, a few records with random content have been added to the database.</p>
+<p><strong>Note</strong> In this example, I don’t set a value for the <code class="docutils literal notranslate"><span class="pre">id</span></code> field of <code class="docutils literal notranslate"><span class="pre">TestTable</span></code> because it is the primary key and the table will set it itself.</p>
+<p><strong>Note</strong> At the end, <code class="docutils literal notranslate"><span class="pre">session.commit</span></code> is called - it is needed because of features of the <code class="docutils literal notranslate"><span class="pre">session</span></code> declaration.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>stop<span class="w"> </span>create_table_example
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randint</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">SessionLocal</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">TestTable</span><span class="p">(</span>
+            <span class="n">numeric_var</span><span class="o">=</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span>
+            <span class="n">text_var</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">chr</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">107</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check the contents of the <code class="docutils literal notranslate"><span class="pre">test_table</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>add_record_example<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>postgres<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;SELECT * FROM test_table;&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>create_table_example
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> id | numeric_var |  text_var  
+----+-------------+------------
+  1 |           6 | ejkagfkdgi
+  2 |           3 | ddfaaedjfd
+  3 |           4 | gjchfeahhi
+  4 |          54 | kcfkbfjhjj
+  5 |          56 | gbfejdaecf
+  6 |          14 | cigagdihha
+  7 |          49 | kfcfcjgkej
+  8 |          65 | ajhahgcgff
+  9 |          20 | jgchadeedj
+ 10 |          89 | jdkhfdefdc
+(10 rows)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="stop-container">
+<h2>Stop container<a class="headerlink" href="#stop-container" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>stop<span class="w"> </span>add_record_example
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>add_record_example
 </pre></div>
 </div>
 </div>
@@ -867,7 +883,7 @@ SELECT * FROM test_table;
         },
         kernelOptions: {
             name: "python3",
-            path: "./packages/sqlalchemy"
+            path: "./sql/sqlalchemy"
         },
         predefinedOutput: true
     }
@@ -885,20 +901,20 @@ SELECT * FROM test_table;
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="metadata.html"
+       href="query.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Metadata</p>
+        <p class="prev-next-title">Query</p>
       </div>
     </a>
     <a class="right-next"
-       href="query.html"
+       href="relations.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Query</p>
+        <p class="prev-next-title">Relations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -918,10 +934,9 @@ SELECT * FROM test_table;
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-container">Create container</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-code">Python code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-result">Check result</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-the-container">Stop the container</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-database">Create database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-container">Stop container</a></li>
 </ul>
   </nav></div>
 
