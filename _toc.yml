@@ -82,6 +82,10 @@ parts:
       - file: standard_library/logging/logging_to_file.ipynb
       - file: standard_library/logging/logger_handler_level.ipynb
       - file: standard_library/logging/root_logger.ipynb
+    - file: standard_library/type_annotations.ipynb
+      sections:
+      - file: standard_library/type_annotations/complex_types.ipynb
+      - file: standard_library/type_annotations/function_annotations.ipynb
     - file: standard_library/re.ipynb
       sections:
       - file: standard_library/re/match_search.ipynb
@@ -290,10 +294,6 @@ parts:
       sections:
       - file: packages/geopy/distances.ipynb
       - file: packages/geopy/request.ipynb
-    - file: packages/type_annotations.ipynb
-      sections:
-      - file: packages/type_annotations/complex_types.ipynb
-      - file: packages/type_annotations/function_annotations.ipynb
     - file: packages/socket.ipynb
     - file: packages/requests.ipynb
     - file: packages/mlflow
