@@ -85,7 +85,7 @@ parts:
     - file: standard_library/type_annotations.ipynb
       sections:
       - file: standard_library/type_annotations/complex_types.ipynb
-      - file: standard_library/type_annotations/usecases.ipynb
+      - file: standard_library/type_annotations/annotation_cases.ipynb
     - file: standard_library/re.ipynb
       sections:
       - file: standard_library/re/match_search.ipynb
