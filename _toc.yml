@@ -71,7 +71,7 @@ parts:
         sections:
         - file: standard_library/unittest/mocking/call_details.ipynb
         - file: standard_library/unittest/mocking/syntax.ipynb
-        - file: standard_library/unittest/mocking/patch.ipynb # Max depth
+        - file: standard_library/unittest/mocking/patch.ipynb
         - file: standard_library/unittest/mocking/raising_errors.ipynb
     - file: standard_library/logging.ipynb
       sections:
