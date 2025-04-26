@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Interface" href="oop/interface.html" />
+    <link rel="next" title="Inheritance" href="oop/inheritance.html" />
     <link rel="prev" title="Parameters" href="functions/parameters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -198,6 +198,7 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/class_method.html">Class method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/special_methods.html">Special methods</a></li>
@@ -728,6 +729,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects">Objects</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute">Attribute</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-methods">Special methods</a></li>
@@ -735,6 +737,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-attributes">Dynamic attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstractions">Abstractions</a></li>
 </ul>
             </nav>
         </div>
@@ -750,6 +753,78 @@ document.write(`
 <h1>OOP<a class="headerlink" href="#oop" title="Link to this heading">#</a></h1>
 <p>Object-Oriented Programming (OOP) is a programming paradigm that provides a way to structure code by organizing it into objects. Objects are instances of classes, which are blueprints that define the behavior and characteristics of the objects. Python is an object-oriented programming language that fully supports OOP principles.</p>
 <p>The most complete description of how objects interact in python is given in the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#">Data model</a> section of the official documentation.</p>
+<section id="objects">
+<h2>Objects<a class="headerlink" href="#objects" title="Link to this heading">#</a></h2>
+<p>Everything in python is an object. Each object has it’s unique identifier which you can load using the <code class="docutils literal notranslate"><span class="pre">id</span></code> build-in function. The <code class="docutils literal notranslate"><span class="pre">is</span></code> operator allows you to check if two names refer to the same object.</p>
+<hr class="docutils" />
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">int</span></code> object and shows it’s <code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">id</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99205780812584
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now for the<code class="docutils literal notranslate"><span class="pre">value</span></code> assigned to <code class="docutils literal notranslate"><span class="pre">value2</span></code>. <code class="docutils literal notranslate"><span class="pre">id(value2)</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">id(value)</span></code> - they’re actually the same objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value2</span> <span class="o">=</span> <span class="n">value</span>
+<span class="nb">id</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99205780812584
+</pre></div>
+</div>
+</div>
+</div>
+<p>This can also be checked with the <code class="docutils literal notranslate"><span class="pre">is</span></code> operator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="ow">is</span> <span class="n">value2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>But if you assign a different literal to <code class="docutils literal notranslate"><span class="pre">value2</span></code> - a new object will be created under that name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value2</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="nb">id</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99205780813224
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="ow">is</span> <span class="n">value2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="attribute">
 <h2>Attribute<a class="headerlink" href="#attribute" title="Link to this heading">#</a></h2>
 <p>Every object in python has attributes - other objects that belong to that object. It’s important to understand that the class itself is also an object, so its own have it’s own attributes.</p>
@@ -821,6 +896,7 @@ document.write(`
 <section id="inheritance">
 <h2>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h2>
 <p>One of the key features of OOP is inheritance, which allows a class to inherit attributes and methods from another class. The class that inherits is called a subclass or derived class, and the class from which it inherits is called a superclass or base class.</p>
+<p>Check details on features of the inheritance in the <a class="reference internal" href="oop/inheritance.html"><span class="std std-doc">corresponding page</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
@@ -1342,6 +1418,54 @@ Check out more about static methods in the <a class="reference external" href="h
 </div>
 </div>
 </section>
+<section id="abstractions">
+<h2>Abstractions<a class="headerlink" href="#abstractions" title="Link to this heading">#</a></h2>
+<p>Abstract class is a class which instance can’t be created. Typically it is used to define rules for defining children of the class - from these child classes instances of the class can be created. To define an abstract class, you must create it as a child of the <code class="docutils literal notranslate"><span class="pre">abc.ABC</span></code> and define methods there that must be overloaded in children classes.</p>
+<p>Check more details in:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/abc.html">Related python documentation</a>.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell defines an abstract class with an <code class="docutils literal notranslate"><span class="pre">abstract_method</span></code> method that must be overloaded.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AbstractClass</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">abstract_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code shows that you can’t create an instance of the <code class="docutils literal notranslate"><span class="pre">AbstractClass</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span> <span class="n">AbstractClass</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Can&#39;t instantiate abstract class AbstractClass without an implementation for abstract method &#39;abstract_method&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The purpose of the <code class="docutils literal notranslate"><span class="pre">AbstractClass</span></code> is to be an ancestor for other classes and to define <code class="docutils literal notranslate"><span class="pre">methods</span></code> that need to be overloaded.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Ancestor</span><span class="p">(</span><span class="n">AbstractClass</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">abstract_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Implemented abstract method.&quot;</span><span class="p">)</span>
+
+<span class="n">ancestor</span> <span class="o">=</span> <span class="n">Ancestor</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1386,11 +1510,11 @@ Check out more about static methods in the <a class="reference external" href="h
       </div>
     </a>
     <a class="right-next"
-       href="oop/interface.html"
+       href="oop/inheritance.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Interface</p>
+        <p class="prev-next-title">Inheritance</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1410,6 +1534,7 @@ Check out more about static methods in the <a class="reference external" href="h
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects">Objects</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute">Attribute</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-methods">Special methods</a></li>
@@ -1417,6 +1542,7 @@ Check out more about static methods in the <a class="reference external" href="h
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-attributes">Dynamic attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstractions">Abstractions</a></li>
 </ul>
   </nav></div>
 
