@@ -742,7 +742,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-handler">Patch handler</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pach-object">Pach object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-object">Patch object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create">Create</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new">New</a></li>
 </ul>
             </nav>
         </div>
@@ -1112,8 +1114,8 @@ method2 class decoration patching
 </div>
 </div>
 </section>
-<section id="pach-object">
-<h2>Pach object<a class="headerlink" href="#pach-object" title="Link to this heading">#</a></h2>
+<section id="patch-object">
+<h2>Patch object<a class="headerlink" href="#patch-object" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">patch.object</span></code> allows you to specify the targed defined in the current environment as the target for the mock.</p>
 <hr class="docutils" />
 <p>The following cell defines the class, that we’ll use as an example.</p>
@@ -1145,6 +1147,101 @@ method2 class decoration patching
 </div>
 </div>
 </div>
+</section>
+<section id="create">
+<h2>Create<a class="headerlink" href="#create" title="Link to this heading">#</a></h2>
+<p>In case exact mocked attribute doesn’t exist generally you will get corresponding error. But if you need to test case where attribute must be, you can use <code class="docutils literal notranslate"><span class="pre">create=True</span></code> parameter - in such case attribute under consideration will be created as a mock object.</p>
+<hr class="docutils" />
+<p>The following cell creates a class that has no attributes in it - we’ll use it for mocking attributes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyExample</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell shows an attempt to mock the <code class="docutils literal notranslate"><span class="pre">hello</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">MyExample</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">MyExample</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;__main__.MyExample&#39;&gt; does not have the attribute &#39;hello&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">hello</span></code> is not defined in the <code class="docutils literal notranslate"><span class="pre">MyExample</span></code> class, it returns an error. In contrast, the following cell shows <code class="docutils literal notranslate"><span class="pre">patch.object</span></code> with the parameter <code class="docutils literal notranslate"><span class="pre">create=True</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">MyExample</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;example_method&quot;</span><span class="p">,</span> <span class="n">create</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span> <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>At first it may seem like a useless feature, but the following cell shows case when you may need to use it - suppose we need to test the logic that depends on the presence of the named attribute. The following cell shows a test that triggers a behavior that depends on the presence of the <code class="docutils literal notranslate"><span class="pre">hello</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyExample</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">my_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">MyExample</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">create</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">MyExample</span><span class="p">()</span><span class="o">.</span><span class="n">my_test</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="new">
+<h2>New<a class="headerlink" href="#new" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">patch</span></code> and <code class="docutils literal notranslate"><span class="pre">patch.object</span></code> can set a specific value for the mocked object - using the <code class="docutils literal notranslate"><span class="pre">new</span></code> parameter. It’s useful to test cases where some attributes of the mocked object take specific values.</p>
+<p><strong>Note</strong> The argument passed to the funciton by the decorator and the tartet of the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement now will be the value specified in <code class="docutils literal notranslate"><span class="pre">new</span></code>, not the <code class="docutils literal notranslate"><span class="pre">mock</span></code> object.</p>
+<hr class="docutils" />
+<p>The following cell creates a <code class="docutils literal notranslate"><span class="pre">MyExample</span></code> class with a <code class="docutils literal notranslate"><span class="pre">value</span></code> attribute that is supposed to mock.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyExample</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell defines the context for the <code class="docutils literal notranslate"><span class="pre">patch.object</span></code> that uses new. The context prints the corresponding attribute of the <code class="docutils literal notranslate"><span class="pre">MyExample()</span></code> and the target of the context.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+    <span class="n">target</span><span class="o">=</span><span class="n">MyExample</span><span class="p">,</span>
+    <span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
+    <span class="n">new</span><span class="o">=</span><span class="s2">&quot;hello from mock&quot;</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">value</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;value:&quot;</span><span class="p">,</span> <span class="n">MyExample</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;handler:&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>value: hello from mock
+handler: hello from mock
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both take the value specified by the <code class="docutils literal notranslate"><span class="pre">new</span></code> parameter.</p>
 </section>
 </section>
 
@@ -1225,7 +1322,9 @@ method2 class decoration patching
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-handler">Patch handler</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pach-object">Pach object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-object">Patch object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create">Create</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new">New</a></li>
 </ul>
   </nav></div>
 

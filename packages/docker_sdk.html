@@ -744,6 +744,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="docker-sdk">
 <h1>Docker SDK<a class="headerlink" href="#docker-sdk" title="Link to this heading">#</a></h1>
 <p>There is a Python library that allows you to manage your Docker instance using Python <a class="reference external" href="https://docker-py.readthedocs.io/en/stable/index.html#">docker-py</a>.</p>
+<p><strong>Note:</strong> These examples should to be run in safe environment - it may inadvertently change the docker setup. Basically, use docker in docker image built from <a class="reference download internal" download="" href="../_downloads/1e498788a1e2e5aae41883e49833dba8/dockerfile"><span class="xref download myst">this docker file</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">docker</span>
@@ -766,14 +767,21 @@ document.write(`
 <p>As an example, we will use an image based on the dockerfile defined below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> docker_sdk_files/dockerfile
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>/tmp/docker_sdk_files
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/docker_sdk_files/dockerfile
 <span class="n">FROM</span> <span class="n">ubuntu</span>
 <span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;echo&quot;</span><span class="p">,</span> <span class="s2">&quot;hello_new_image&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting docker_sdk_files/dockerfile
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/docker_sdk_files/dockerfile
 </pre></div>
 </div>
 </div>
@@ -783,12 +791,12 @@ document.write(`
 <p>Using <code class="docutils literal notranslate"><span class="pre">docker_client.images.build</span></code> we can build the image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./docker_sdk_files&quot;</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;modified_hello_world&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/tmp/docker_sdk_files&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;modified_hello_world&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Image: &#39;modified_hello_world:latest&#39;&gt;, &lt;itertools._tee at 0x7cc9035efe80&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Image: &#39;modified_hello_world:latest&#39;&gt;, &lt;itertools._tee at 0x710a12d9e200&gt;)
 </pre></div>
 </div>
 </div>
@@ -815,7 +823,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="s1">&#39;modified_hello_world&#39;</span><span class="p">,</span> 
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;modified_hello_world_container&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;modified_hello_world_container&quot;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -846,13 +854,19 @@ document.write(`
 <p>The following example runs the <code class="docutils literal notranslate"><span class="pre">remove</span></code> method on the container we created earlier, and shows the list of containers - it’s now empty.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="nb">all</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
-<span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="nb">all</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;Container: 4065dbc52270&gt;,
+ &lt;Container: fd82f0fb24df&gt;,
+ &lt;Container: 2d6dd3e39210&gt;,
+ &lt;Container: 1a06c8f8fc92&gt;,
+ &lt;Container: db44a0789e04&gt;,
+ &lt;Container: d53d6874f3c8&gt;,
+ &lt;Container: 989a496be053&gt;]
 </pre></div>
 </div>
 </div>
@@ -868,20 +882,25 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;Image: &#39;mlflow-pyfunc-servable:latest&#39;&gt;,
- &lt;Image: &#39;ubuntu:latest&#39;&gt;,
- &lt;Image: &#39;api-master:latest&#39;&gt;,
- &lt;Image: &#39;gcr.io/k8s-minikube/kicbase:v0.0.44&#39;&gt;,
- &lt;Image: &#39;maxbit_recommendations:latest&#39;&gt;,
- &lt;Image: &#39;python:latest&#39;&gt;,
- &lt;Image: &#39;fastapi_experiment:latest&#39;&gt;,
- &lt;Image: &#39;ghcr.io/mlflow/mlflow:latest&#39;&gt;,
- &lt;Image: &#39;registry:latest&#39;&gt;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;Image: &#39;docker:latest&#39;&gt;,
+ &lt;Image: &#39;clickhouse/clickhouse-server:latest&#39;&gt;,
+ &lt;Image: &#39;airflow:latest&#39;&gt;,
+ &lt;Image: &#39;apache/airflow:3.0.0b4&#39;&gt;,
+ &lt;Image: &#39;ghcr.io/mlflow/mlflow:v2.21.0&#39;&gt;,
+ &lt;Image: &#39;dad_backup:latest&#39;&gt;,
+ &lt;Image: &#39;postgres:17.4&#39;&gt;,
+ &lt;Image: &#39;postgres:latest&#39;&gt;,
+ &lt;Image: &#39;alpine:latest&#39;&gt;,
+ &lt;Image: &#39;apache/airflow:2.10.5&#39;, &#39;apache/airflow:latest&#39;&gt;,
+ &lt;Image: &#39;python:3.12&#39;&gt;,
+ &lt;Image: &#39;ubuntu:24.04&#39;, &#39;ubuntu:latest&#39;&gt;,
+ &lt;Image: &#39;knowledge_dev:latest&#39;&gt;,
+ &lt;Image: &#39;knowledge_jupyter:latest&#39;&gt;,
+ &lt;Image: &#39;knowledge_docker:latest&#39;&gt;,
+ &lt;Image: &#39;clickhouse/clickhouse-server:24&#39;&gt;,
+ &lt;Image: &#39;apache/airflow:2.1.2&#39;&gt;,
  &lt;Image: &#39;postgres:15.4&#39;&gt;,
- &lt;Image: &#39;postgres:14.8&#39;&gt;,
- &lt;Image: &#39;python:3.10.12&#39;&gt;,
- &lt;Image: &#39;hello-world:latest&#39;&gt;,
- &lt;Image: &#39;scality/s3server:latest&#39;&gt;]
+ &lt;Image: &#39;brandoncc/vim-be-good:stable&#39;&gt;]
 </pre></div>
 </div>
 </div>

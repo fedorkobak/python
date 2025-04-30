@@ -736,7 +736,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-except">default <code class="docutils literal notranslate"><span class="pre">except</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-type-of-excetption">Get type of excetption</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#except-variable">Except variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-sys">From sys</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traceback">Traceback</a></li>
 </ul>
             </nav>
         </div>
@@ -750,17 +754,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exceptions">
 <h1>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h1>
+<p>Exceptions is a cases in program when it is syntactically correct but there some other cases doesn’t expected to be normal.</p>
+<p>Check more on the:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/errors.html">Errors and Exceptions</a> page of the official documentation.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#bltin-exceptions">Build it exceptions</a> list with descriptions of the built-in python exceptions.</p></li>
+</ul>
 <section id="several-exception-types">
 <h2>Several exception types<a class="headerlink" href="#several-exception-types" title="Link to this heading">#</a></h2>
 <p>If you want to handle multiple exceptions for a block, you can use one of the following options:</p>
 <section id="same-except-block">
 <h3>Same <code class="docutils literal notranslate"><span class="pre">except</span></code> block<a class="headerlink" href="#same-except-block" title="Link to this heading">#</a></h3>
 <p>To use the same code to handle different types of exceptions, you can simply mention them as tuples in the condition for the <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
-<p>In the following example, I have called a random exception type, but only three of four possible error types are mentioned in the <code class="docutils literal notranslate"><span class="pre">except</span></code> block. So I will only get a message from the <code class="docutils literal notranslate"><span class="pre">except</span></code> block until I get the unmentioned error type.</p>
+<hr class="docutils" />
+<p>In the following example, a random exception type is displayed, but only three of four possible error types are mentioned in the <code class="docutils literal notranslate"><span class="pre">except</span></code> block. So I will only get a message from the <code class="docutils literal notranslate"><span class="pre">except</span></code> block until I get the unmentioned error type.</p>
 <p>I would like to emphasise once again that this is not done to handle all error types, there is a special design for this which is described <a class="reference internal" href="#default-except"><span class="xref myst">here</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">choice</span>
+<span class="n">test_lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">try_functions</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;ZeroDivisionError&quot;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">8</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># </span>
     <span class="s2">&quot;IndexError&quot;</span> <span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">test_lst</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
@@ -771,7 +783,7 @@ document.write(`
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">this_type</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">error_types</span><span class="p">)</span>
+        <span class="n">this_type</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">error_types</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;====I got a type </span><span class="si">{</span><span class="n">this_type</span><span class="si">}</span><span class="s2">====&quot;</span><span class="p">)</span>
         <span class="n">try_functions</span><span class="p">[</span><span class="n">this_type</span><span class="p">]()</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
@@ -780,36 +792,39 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>====I got a type IndexError====
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>====I got a type ZeroDivisionError====
 I handle all mentioned exceptions
 ====I got a type TypeError====
 I handle all mentioned exceptions
 ====I got a type ZeroDivisionError====
 I handle all mentioned exceptions
-====I got a type TypeError====
+====I got a type ZeroDivisionError====
+I handle all mentioned exceptions
+====I got a type IndexError====
 I handle all mentioned exceptions
 ====I got a type NameError====
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">62</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">this_type</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">error_types</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;====I got a type </span><span class="si">{</span><span class="n">this_type</span><span class="si">}</span><span class="s2">====&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">try_functions</span><span class="p">[</span><span class="n">this_type</span><span class="p">]()</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">except</span> <span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I handle all mentioned exceptions&quot;</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">this_type</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">error_types</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;====I got a type </span><span class="si">{</span><span class="n">this_type</span><span class="si">}</span><span class="s2">====&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="n">try_functions</span><span class="p">[</span><span class="n">this_type</span><span class="p">]()</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="k">except</span> <span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I handle all mentioned exceptions&quot;</span><span class="p">)</span>
 
-<span class="nn">Cell In[62], line 6,</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">test_lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">try_functions</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="s2">&quot;ZeroDivisionError&quot;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">8</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># </span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="s2">&quot;IndexError&quot;</span> <span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">test_lst</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="s2">&quot;TypeError&quot;</span> <span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span>
-<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="s2">&quot;NameError&quot;</span> <span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">unknown_name</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">}</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">error_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">try_functions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="nn">Cell In[1], line 7,</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">choice</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">test_lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">try_functions</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="s2">&quot;ZeroDivisionError&quot;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">8</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># </span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="s2">&quot;IndexError&quot;</span> <span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">test_lst</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="s2">&quot;TypeError&quot;</span> <span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span>
+<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="s2">&quot;NameError&quot;</span> <span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">unknown_name</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">}</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">error_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">try_functions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 
 <span class="ne">NameError</span>: name &#39;unknown_name&#39; is not defined
 </pre></div>
@@ -820,7 +835,8 @@ I handle all mentioned exceptions
 <section id="different-except-blocks">
 <h3>Different <code class="docutils literal notranslate"><span class="pre">except</span></code> blocks<a class="headerlink" href="#different-except-blocks" title="Link to this heading">#</a></h3>
 <p>You can set code to handle a particular type of error, and do it several times for a <code class="docutils literal notranslate"><span class="pre">try</span></code> block. All you have to do is mention several <code class="docutils literal notranslate"><span class="pre">except</span></code> blocks one after the other.</p>
-<p>So in the following example, I call random error in a loop, and different errors have different handlers. You can see that there is a specific message for each iteration.</p>
+<hr class="docutils" />
+<p>The following example, call random error in a loop, and different errors have different handlers. You can see that there is a specific message for each iteration.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -875,8 +891,9 @@ This is wrong operations with types (third option)
 </section>
 <section id="ony-one-exception-per-type">
 <h3>Ony one <code class="docutils literal notranslate"><span class="pre">exception</span></code> per type<a class="headerlink" href="#ony-one-exception-per-type" title="Link to this heading">#</a></h3>
-<p>You can define any number of `except’ blocks for the same exception type, but only the first one will be called.</p>
-<p>In the following example, even though I declared two codes for the <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> type exception, only the first one was executed.</p>
+<p>You can define any number of <code class="docutils literal notranslate"><span class="pre">except</span></code> blocks for the same exception type, but only the first one will be called.</p>
+<hr class="docutils" />
+<p>In the following example, even though is declared two codes for the <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> type exception, only the first one was executed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
@@ -899,10 +916,11 @@ This is wrong operations with types (third option)
 <section id="default-except">
 <h2>default <code class="docutils literal notranslate"><span class="pre">except</span></code><a class="headerlink" href="#default-except" title="Link to this heading">#</a></h2>
 <p>You can run some code with any type of exception, just without specifying the type of exception in the corresponding <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
+<hr class="docutils" />
 <p>In the following example, I call random exceptions in a loop, and each of them is handled by an <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">choice</span>
 
 <span class="n">test_lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">try_functions</span> <span class="o">=</span> <span class="p">{</span>
@@ -916,7 +934,7 @@ This is wrong operations with types (third option)
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">this_type</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">error_types</span><span class="p">)</span>
+        <span class="n">this_type</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">error_types</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;====I got a type </span><span class="si">{</span><span class="n">this_type</span><span class="si">}</span><span class="s2">====&quot;</span><span class="p">)</span>
         <span class="n">try_functions</span><span class="p">[</span><span class="n">this_type</span><span class="p">]()</span>
     <span class="k">except</span><span class="p">:</span>
@@ -925,23 +943,23 @@ This is wrong operations with types (third option)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>====I got a type ZeroDivisionError====
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>====I got a type NameError====
+I handle all exceptions
+====I got a type TypeError====
 I handle all exceptions
 ====I got a type NameError====
 I handle all exceptions
-====I got a type IndexError====
-I handle all exceptions
-====I got a type IndexError====
+====I got a type NameError====
 I handle all exceptions
 ====I got a type NameError====
+I handle all exceptions
+====I got a type TypeError====
 I handle all exceptions
 ====I got a type ZeroDivisionError====
 I handle all exceptions
-====I got a type NameError====
+====I got a type IndexError====
 I handle all exceptions
-====I got a type NameError====
-I handle all exceptions
-====I got a type NameError====
+====I got a type ZeroDivisionError====
 I handle all exceptions
 ====I got a type IndexError====
 I handle all exceptions
@@ -973,15 +991,15 @@ I handle all exceptions
 </div>
 </div>
 </section>
-<section id="get-type-of-excetption">
-<h2>Get type of excetption<a class="headerlink" href="#get-type-of-excetption" title="Link to this heading">#</a></h2>
-<p>You can get type of error as string by using <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">Exception</span> <span class="pre">as</span> <span class="pre">e:</span></code> code in definition of <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
-<p>So in the following example I have a list of functions, some of which should work fine, but some of which should cause exceptions. And in <code class="docutils literal notranslate"><span class="pre">except</span></code> block I print the type of exception.</p>
+<section id="except-variable">
+<h2>Except variable<a class="headerlink" href="#except-variable" title="Link to this heading">#</a></h2>
+<p>In the except clause, you can be specify  a variable that will hold the instance of the exception that occurred - you must use the syntax <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">&lt;Exception&gt;</span> <span class="pre">as</span> <span class="pre">&lt;variable</span> <span class="pre">name&gt;</span></code> as the result in the corresponding block can implement logic that works with <code class="docutils literal notranslate"><span class="pre">&lt;variable</span> <span class="pre">name&gt;</span></code>. This variable will refer to the instance of the exception that occurred.</p>
+<hr class="docutils" />
+<p>The following cell shows how different exceptions pass the corresponding object to the variable of the <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">try_functions</span> <span class="o">=</span> <span class="p">[</span>
     <span class="k">lambda</span><span class="p">:</span> <span class="mi">8</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
     <span class="k">lambda</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span> <span class="o">+</span> <span class="mi">4</span>
 <span class="p">]</span>
 
@@ -990,14 +1008,104 @@ I handle all exceptions
         <span class="n">fun</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no error&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error type:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>error type: division by zero
-no error
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;ZeroDivisionError&#39;&gt;
+error type: division by zero
+&lt;class &#39;TypeError&#39;&gt;
 error type: can only concatenate str (not &quot;int&quot;) to str
+</pre></div>
+</div>
+</div>
+</div>
+<section id="from-sys">
+<h3>From sys<a class="headerlink" href="#from-sys" title="Link to this heading">#</a></h3>
+<p>In the <code class="docutils literal notranslate"><span class="pre">sys</span></code> built-in python module, there are two functions, <code class="docutils literal notranslate"><span class="pre">sys.exception()</span></code> and <code class="docutils literal notranslate"><span class="pre">sys.exc_info()</span></code>, which can also provide information about exceptions that have occurred. See the corresponding <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.exception">section of the official documentation</a> for more information.</p>
+<hr class="docutils" />
+<p>The following cell shows that <code class="docutils literal notranslate"><span class="pre">sys.exception</span></code> returns exactly the same object of the exception.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">try</span><span class="p">:</span> <span class="mi">9</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exception</span><span class="p">()</span> <span class="ow">is</span> <span class="n">e</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sys.exc_info</span></code> is an old fashioned function that returns a tuple with different compoments of the exception.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span> <span class="o">+</span> <span class="mi">10</span>
+<span class="k">except</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;class &#39;TypeError&#39;&gt;, TypeError(&#39;can only concatenate str (not &quot;int&quot;) to str&#39;), &lt;traceback object at 0x799ef7ff6200&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="traceback">
+<h2>Traceback<a class="headerlink" href="#traceback" title="Link to this heading">#</a></h2>
+<p>Traceback is information about where in the code an exception occurred. It can be extracted from the exception instance using <code class="docutils literal notranslate"><span class="pre">__traceback__</span></code> attribute. Practically you have to use <code class="docutils literal notranslate"><span class="pre">traceback.format_exception</span></code> to prepare traceback to the view as it is printed to the output in the python programm. Read more about traceback objects on the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#traceback-objects">corresponding page</a> of the official documentation.</p>
+<hr class="docutils" />
+<p>The following cell stores the exception instance that will be used as an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="mi">10</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">e</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>It holds few attributes that actually hold all the information from which a typical traceback message can be constructed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traceback</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">__traceback__</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">tb_frame</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">tb_lineno</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">tb_lasti</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;frame at 0x799ef7facca0, file &#39;/tmp/ipykernel_8011/2685439381.py&#39;, line 4, code &lt;module&gt;&gt;
+2
+8
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell shows the use of the <code class="docutils literal notranslate"><span class="pre">traceback.format_exception</span></code> function to construct a typical traceback message.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">val</span><span class="p">,</span> <span class="n">val</span><span class="o">.</span><span class="n">__traceback__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;/tmp/ipykernel_8011/2685439381.py&quot;, line 2, in &lt;module&gt;
+    10/0
+    ~~^~
+ZeroDivisionError: division by zero
 </pre></div>
 </div>
 </div>
@@ -1076,7 +1184,11 @@ error type: can only concatenate str (not &quot;int&quot;) to str
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-except">default <code class="docutils literal notranslate"><span class="pre">except</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-type-of-excetption">Get type of excetption</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#except-variable">Except variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-sys">From sys</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traceback">Traceback</a></li>
 </ul>
   </nav></div>
 

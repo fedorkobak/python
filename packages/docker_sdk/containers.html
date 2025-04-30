@@ -731,6 +731,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#volumes">Volumes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ports">Ports</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logs">Logs</a></li>
@@ -790,15 +791,15 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">container</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;ubuntu&quot;</span><span class="p">,</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;temp_container&quot;</span><span class="p">,</span>
-    <span class="n">volumes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">image</span><span class="o">=</span><span class="s2">&quot;ubuntu&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;temp_container&quot;</span><span class="p">,</span>
+    <span class="n">volumes</span><span class="o">=</span><span class="p">{</span>
         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s2">/containers_files/some_message&quot;</span><span class="p">:</span> 
         <span class="p">{</span><span class="s1">&#39;bind&#39;</span><span class="p">:</span> <span class="s1">&#39;/some_message&#39;</span><span class="p">,</span> <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;rw&#39;</span><span class="p">}</span>
     <span class="p">},</span>
-    <span class="n">detach</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">stdin_open</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">remove</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">detach</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">stdin_open</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">exec_run</span><span class="p">(</span><span class="s2">&quot;cat some_message&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
@@ -809,6 +810,48 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is message from future container
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ports">
+<h3>Ports<a class="headerlink" href="#ports" title="Link to this heading">#</a></h3>
+<p>You can set ports for docker conatiner using the <code class="docutils literal notranslate"><span class="pre">ports</span></code> argument. It must take dict value with format <code class="docutils literal notranslate"><span class="pre">{&lt;port</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">conatainer&gt;:</span> <span class="pre">&lt;port</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">host&gt;}</span></code>.</p>
+<p><strong>Note:</strong> it can be confusing that in the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">-p</span></code> parameter we usually set the port on the host first, but in the <code class="docutils literal notranslate"><span class="pre">port</span></code> argument of the docker SDK, the dictionary takes ports on the host as a keys.</p>
+<hr class="docutils" />
+<p>The following cell starts the docker container with the <code class="docutils literal notranslate"><span class="pre">ports</span></code> argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">container</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="s2">&quot;alpine&quot;</span><span class="p">,</span>
+    <span class="n">ports</span><span class="o">=</span><span class="p">{</span><span class="mi">6060</span><span class="p">:</span> <span class="mi">7070</span><span class="p">},</span>
+    <span class="n">command</span><span class="o">=</span><span class="s2">&quot;sh&quot;</span><span class="p">,</span>
+    <span class="n">detach</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">stdin_open</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code shows that the container was indeed created and that it has the appropriate ports configuration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>ps
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS                                         NAMES
+81bd3dacf36b   alpine    &quot;sh&quot;      3 seconds ago   Up 3 seconds   0.0.0.0:7070-&gt;6060/tcp, [::]:7070-&gt;6060/tcp   tender_allen
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">container</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -927,6 +970,7 @@ mnopqrstuv
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#volumes">Volumes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ports">Ports</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logs">Logs</a></li>
