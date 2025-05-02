@@ -734,6 +734,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-data">No data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#server-messages">Server messages</a></li>
 </ul>
             </nav>
         </div>
@@ -769,6 +770,15 @@ document.write(`
     <span class="n">detach</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">remove</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_connection</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">psycopg</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">dbname</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">container_port</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -889,6 +899,43 @@ Data [(50, &#39;test&#39;)]
 </div>
 </div>
 </section>
+<section id="server-messages">
+<h2>Server messages<a class="headerlink" href="#server-messages" title="Link to this heading">#</a></h2>
+<p>In some cases postgreSQL server sends some textual information corresponding to the command that caused these responses.</p>
+<ul class="simple">
+<li><p>You can access the messages describing which commands were executed by using <code class="docutils literal notranslate"><span class="pre">cursor.statusmessage</span></code> attribute.</p></li>
+<li><p>You can access postgres log messages from special handler that can be added using <code class="docutils literal notranslate"><span class="pre">connection.add_notice_handler</span></code> method.</p></li>
+</ul>
+<p>Check details in the <a class="reference external" href="https://www.psycopg.org/psycopg3/docs/advanced/async.html#server-messages">corresponding section of the official documentation</a>.</p>
+<hr class="docutils" />
+<p>The following cell shows how you can extract various messagee that appear during the execution of the <code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">TABLE</span> <span class="pre">IF</span> <span class="pre">EXISTS</span></code> command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">get_connection</span><span class="p">()</span>
+
+<span class="k">global</span> <span class="n">global_notice</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_notice</span><span class="p">(</span><span class="n">diag</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The server says: </span><span class="si">{</span><span class="n">diag</span><span class="o">.</span><span class="n">severity</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">diag</span><span class="o">.</span><span class="n">message_primary</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">connection</span><span class="o">.</span><span class="n">add_notice_handler</span><span class="p">(</span><span class="n">log_notice</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DROP TABLE IF EXISTS default_values_example;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">statusmessage</span><span class="p">)</span>
+
+<span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The server says: NOTICE - table &quot;default_values_example&quot; does not exist, skipping
+DROP TABLE
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -960,6 +1007,7 @@ Data [(50, &#39;test&#39;)]
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-data">No data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#server-messages">Server messages</a></li>
 </ul>
   </nav></div>
 
