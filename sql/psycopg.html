@@ -278,6 +278,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -735,6 +736,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-data">No data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#server-messages">Server messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-sets">Output sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cursor-attributes">Cursor attributes</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -906,14 +911,16 @@ Data [(50, &#39;test&#39;)]
 <li><p>You can access the messages describing which commands were executed by using <code class="docutils literal notranslate"><span class="pre">cursor.statusmessage</span></code> attribute.</p></li>
 <li><p>You can access postgres log messages from special handler that can be added using <code class="docutils literal notranslate"><span class="pre">connection.add_notice_handler</span></code> method.</p></li>
 </ul>
-<p>Check details in the <a class="reference external" href="https://www.psycopg.org/psycopg3/docs/advanced/async.html#server-messages">corresponding section of the official documentation</a>.</p>
+<p>Check details:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.psycopg.org/psycopg3/docs/advanced/async.html#server-messages">Server messages</a> section of the official documentation.</p></li>
+<li><p>Description of the <a class="reference external" href="https://www.psycopg.org/docs/cursor.html#cursor.statusmessage"><code class="docutils literal notranslate"><span class="pre">statusmessage</span></code></a> attribute.</p></li>
+</ul>
 <hr class="docutils" />
 <p>The following cell shows how you can extract various messagee that appear during the execution of the <code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">TABLE</span> <span class="pre">IF</span> <span class="pre">EXISTS</span></code> command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">get_connection</span><span class="p">()</span>
-
-<span class="k">global</span> <span class="n">global_notice</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">log_notice</span><span class="p">(</span><span class="n">diag</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The server says: </span><span class="si">{</span><span class="n">diag</span><span class="o">.</span><span class="n">severity</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">diag</span><span class="o">.</span><span class="n">message_primary</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -935,6 +942,130 @@ DROP TABLE
 </div>
 </div>
 </div>
+</section>
+<section id="output-sets">
+<h2>Output sets<a class="headerlink" href="#output-sets" title="Link to this heading">#</a></h2>
+<p>There are cases where one call to the <code class="docutils literal notranslate"><span class="pre">cursor</span></code> can return multiple results:</p>
+<ul class="simple">
+<li><p>To <code class="docutils literal notranslate"><span class="pre">execute</span></code>, several SQL commands are passed in one <code class="docutils literal notranslate"><span class="pre">str</span></code>, such as <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">1;</span> <span class="pre">SELECT</span> <span class="pre">2;</span></code>.</p></li>
+<li><p>In case the <code class="docutils literal notranslate"><span class="pre">executemany</span></code> method is used to execute multiple SQL statements.</p></li>
+</ul>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">cursor</span></code> keeps information about the first command, but you can “move” the cursor to the next one by using the <code class="docutils literal notranslate"><span class="pre">cursor.nextset()</span></code> method.</p>
+<hr class="docutils" />
+<p>The following cell creates <code class="docutils literal notranslate"><span class="pre">cursor</span></code>, which just executed code with two queries in it. Using this example we’ll consider how to load data from structures like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">get_connection</span><span class="p">()</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT 1;SELECT 2;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;psycopg.Cursor [TUPLES_OK] [INTRANS] (host=localhost database=postgres) at 0x7944a2b62150&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the initial state, the cursor “points” to the result of the first SQL query.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1,)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>So <code class="docutils literal notranslate"><span class="pre">cursor.fetchall()</span></code> returns the result of the first <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>. To access the results of the second select, you need to call <code class="docutils literal notranslate"><span class="pre">nextstep</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">nextset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fact that it returned <code class="docutils literal notranslate"><span class="pre">True</span></code> means that there is data for another query.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2,)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">cursor.fetchall()</span></code> returns data for the second query.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">nextset</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fact that <code class="docutils literal notranslate"><span class="pre">cursor.nextstep()</span></code> returned <code class="docutils literal notranslate"><span class="pre">None</span></code> means that there is no more data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="cursor-attributes">
+<h3>Cursor attributes<a class="headerlink" href="#cursor-attributes" title="Link to this heading">#</a></h3>
+<p>Other cursor attributes that is determined by the command being executed, change with with the <code class="docutils literal notranslate"><span class="pre">cursor.nextstep()</span></code> call.</p>
+<hr class="docutils" />
+<p>The following cell executes several SQL commands with different <code class="docutils literal notranslate"><span class="pre">rowcount</span></code> and <code class="docutils literal notranslate"><span class="pre">statusmessage</span></code> values, and prints the corresponding values of the attributes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">get_connection</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_cursor_attirbutes</span><span class="p">(</span><span class="n">cursor</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status message:&quot;</span><span class="p">,</span> <span class="n">cursor</span><span class="o">.</span><span class="n">statusmessage</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rows count:&quot;</span><span class="p">,</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span><span class="p">)</span>
+
+
+<span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        DROP TABLE IF EXISTS table1;</span>
+<span class="s2">        CREATE TABLE table1 (val1 INT, val2 INT);</span>
+<span class="s2">        SELECT 10;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">print_cursor_attirbutes</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">cursor</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">cursor</span><span class="o">.</span><span class="n">nextset</span><span class="p">():</span>
+        <span class="n">print_cursor_attirbutes</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">cursor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Status message: DROP TABLE
+Rows count: -1
+Status message: CREATE TABLE
+Rows count: -1
+Status message: SELECT 1
+Rows count: 1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -1008,6 +1139,10 @@ DROP TABLE
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-data">No data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#server-messages">Server messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-sets">Output sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cursor-attributes">Cursor attributes</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

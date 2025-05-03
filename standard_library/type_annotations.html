@@ -278,6 +278,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Type annotations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -733,11 +734,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-cases">Annotation cases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-aliases">Type aliases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations-attribute"><code class="docutils literal notranslate"><span class="pre">__annotations__</span></code> attribute</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mypy-type-checker">Mypy type checker</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mypy-types">Get mypy types</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-syntax">Wrong syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mypy">Mypy</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typeguard">Typeguard</a></li>
 </ul>
             </nav>
         </div>
@@ -761,6 +762,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typeguard</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1029,14 +1031,22 @@ Found 1 error in 1 file (checked 1 source file)
 </div>
 </div>
 </section>
-<section id="mypy-type-checker">
-<h2>Mypy type checker<a class="headerlink" href="#mypy-type-checker" title="Link to this heading">#</a></h2>
+<section id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Link to this heading">#</a></h2>
+<p>There are a few tools that designed to organize the process of annotations verification:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://mypy-lang.org/">mypy</a>: static type checking for python.</p></li>
+<li><p><a class="reference external" href="https://typeguard.readthedocs.io/en/latest/">typeguard</a>: runtime type checking.</p></li>
+</ul>
+<section id="mypy">
+<h3>Mypy<a class="headerlink" href="#mypy" title="Link to this heading">#</a></h3>
 <p>Tool that allows you to check if the programme respects the specified type hints.</p>
+<p>Check more details on this tools in the <a class="reference internal" href="type_annotations/mypy.html"><span class="std std-doc">corresponding page</span></a>.</p>
 <hr class="docutils" />
-<p>So in the following example a function is defined that takes two arguments and they are annotated as <code class="docutils literal notranslate"><span class="pre">int</span></code>. And just in the next line funciton call just ignores annotations.</p>
+<p>So in the following example a function is defined that takes two arguments and they are annotated as <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> type_annotations_files/mypy_example.py
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/mypy_example.py
 <span class="k">def</span><span class="w"> </span><span class="nf">bin_sum</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
 
@@ -1045,144 +1055,84 @@ Found 1 error in 1 file (checked 1 source file)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting type_annotations_files/mypy_example.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/mypy_example.py
 </pre></div>
 </div>
 </div>
 </div>
-<p>Just execution of the program won’t cause any problems.</p>
+<p>The following code shows shows how to apply <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to this file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>type_annotations_files/mypy_example.py
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/mypy_example.py
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ab
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/mypy_example.py:4: error: Argument 1 to &quot;bin_sum&quot; has incompatible type &quot;str&quot;; expected &quot;int&quot;  [arg-type]
+/tmp/mypy_example.py:4: error: Argument 2 to &quot;bin_sum&quot; has incompatible type &quot;str&quot;; expected &quot;int&quot;  [arg-type]
+Found 2 errors in 1 file (checked 1 source file)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Which strings do not meet the type annotation.</p>
+<p>As a result, we got corresponding errors.</p>
+</section>
+</section>
+<section id="typeguard">
+<h2>Typeguard<a class="headerlink" href="#typeguard" title="Link to this heading">#</a></h2>
+<p>Type guard checks whether the value matches to the annotated types at runtime. With this library you can:</p>
+<ul class="simple">
+<li><p>Write code that checks if the value matches to specified type - use the <code class="docutils literal notranslate"><span class="pre">typeguard.check_type()</span></code> function.</p></li>
+<li><p>Modify the behavior of the functions using the <code class="docutils literal notranslate"><span class="pre">&#64;typeguard.typechecked</span></code> decorator - so that any inconsistency in the input/output of the function will result in an error.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell checks if the literal “hello” matches to the <code class="docutils literal notranslate"><span class="pre">int</span></code> annotation, and shows what kind of error <code class="docutils literal notranslate"><span class="pre">typeguard</span></code> will generate in such a case.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>type_annotations_files/mypy_example.py
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span> <span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type_annotations_files/mypy_example.py:4: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span> Argument 1 to <span class=" -Color -Color-Bold">&quot;bin_sum&quot;</span> has incompatible type <span class=" -Color -Color-Bold">&quot;str&quot;</span>; expected <span class=" -Color -Color-Bold">&quot;int&quot;</span>  <span class=" -Color -Color-Yellow">[arg-type]</span>
-type_annotations_files/mypy_example.py:4: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span> Argument 2 to <span class=" -Color -Color-Bold">&quot;bin_sum&quot;</span> has incompatible type <span class=" -Color -Color-Bold">&quot;str&quot;</span>; expected <span class=" -Color -Color-Bold">&quot;int&quot;</span>  <span class=" -Color -Color-Yellow">[arg-type]</span>
-<span class=" -Color -Color-Bold -Color-Bold-Red">Found 2 errors in 1 file (checked 1 source file)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;typeguard.TypeCheckError&#39;&gt; str is not an instance of int
 </pre></div>
 </div>
 </div>
 </div>
-<section id="get-mypy-types">
-<h3>Get mypy types<a class="headerlink" href="#get-mypy-types" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">Mypy</span></code> has it’s own type detection system, so sometimes it’s useful to know how to check what type it’s detecting. You can do this using the <code class="docutils literal notranslate"><span class="pre">reveal_type</span></code> and <code class="docutils literal notranslate"><span class="pre">reveal_locals</span></code> functions.</p>
-<p><strong>Note</strong> You don’t need to import them or something <code class="docutils literal notranslate"><span class="pre">mypy</span></code> will understand them by itself.</p>
-<p>Here is an example of the <code class="docutils literal notranslate"><span class="pre">reveal_type</span></code> function, which allows you to understand how mypy interprets the type of a given name.</p>
+<p>The following cell saves to file code that uses the <code class="docutils literal notranslate"><span class="pre">&#64;typeguard.typechecked</span></code> decorator, as it doesn’t work in jupyter notebook.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> type_annotations_files/mypy_reveal_type.py
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">reveal_type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing type_annotations_files/mypy_reveal_type.py
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>type_annotations_files/mypy_reveal_type.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type_annotations_files/mypy_reveal_type.py:2: <span class=" -Color -Color-Blue">note:</span> Revealed type is <span class=" -Color -Color-Bold">&quot;builtins.float&quot;</span>
-<span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And an example of <code class="docutils literal notranslate"><span class="pre">reveal_locals</span></code>, which prints out information about all the variables in the namespace.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> type_annotations_files/mypy_reveal_locals.py
-<span class="n">my_float</span> <span class="o">=</span> <span class="mf">10.</span>
-<span class="n">my_int</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/typechecked_decorator.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">typeguard</span>
 
-<span class="n">reveal_locals</span><span class="p">()</span>
+<span class="nd">@typeguard</span><span class="o">.</span><span class="n">typechecked</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;value&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing type_annotations_files/mypy_reveal_locals.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/typechecked_decorator.py
 </pre></div>
 </div>
 </div>
 </div>
+<p>Function returns “value” but <code class="docutils literal notranslate"><span class="pre">int</span></code> is annotated. The following cell shows what kind of error <code class="docutils literal notranslate"><span class="pre">typeguard</span></code> will produce for such a case.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>type_annotations_files/mypy_reveal_locals.py
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typechecked_decorator</span><span class="w"> </span><span class="kn">import</span> <span class="n">value</span>
+<span class="k">try</span><span class="p">:</span> <span class="n">value</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type_annotations_files/mypy_reveal_locals.py:4: <span class=" -Color -Color-Blue">note:</span> Revealed local types are:
-type_annotations_files/mypy_reveal_locals.py:4: <span class=" -Color -Color-Blue">note:</span>     my_float: builtins.float
-type_annotations_files/mypy_reveal_locals.py:4: <span class=" -Color -Color-Blue">note:</span>     my_int: builtins.int
-<span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;typeguard.TypeCheckError&#39;&gt; the return value (str) is not an instance of int
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="wrong-syntax">
-<h3>Wrong syntax<a class="headerlink" href="#wrong-syntax" title="Link to this heading">#</a></h3>
-<p>The Python interpreter doesn’t throw exceptions even if there are annotations that are defined incorrectly. But <code class="docutils literal notranslate"><span class="pre">mypy</span></code> will throw errors on it’s side.</p>
-<p>Here is an example where we are trying to annotate the dictionary, but instead of annotating key and value types, we have only annotated one.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> type_annotations_files/mypy_wrong_syntax.py
-<span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing type_annotations_files/mypy_wrong_syntax.py
-</pre></div>
-</div>
-</div>
-</div>
-<p>If you try to run it just with the python interpreter, it works fine.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>type_annotations_files/mypy_wrong_syntax.py
-</pre></div>
-</div>
-</div>
-</div>
-<p>But <code class="docutils literal notranslate"><span class="pre">mypy</span></code> raises corresponding error.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>type_annotations_files/mypy_wrong_syntax.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type_annotations_files/mypy_wrong_syntax.py:1: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span> <span class=" -Color -Color-Bold">&quot;dict&quot;</span> expects 2 type arguments, but 1 given  <span class=" -Color -Color-Yellow">[type-arg]</span>
-<span class=" -Color -Color-Bold -Color-Bold-Red">Found 1 error in 1 file (checked 1 source file)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1256,11 +1206,11 @@ type_annotations_files/mypy_reveal_locals.py:4: <span class=" -Color -Color-Blue
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-cases">Annotation cases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-aliases">Type aliases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations-attribute"><code class="docutils literal notranslate"><span class="pre">__annotations__</span></code> attribute</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mypy-type-checker">Mypy type checker</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mypy-types">Get mypy types</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-syntax">Wrong syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mypy">Mypy</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typeguard">Typeguard</a></li>
 </ul>
   </nav></div>
 
