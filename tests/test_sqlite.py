@@ -29,7 +29,7 @@ class TestExecuteSeveralStatements(TestCase):
     @patch.object(src.sqlite, "split_sql_statement")
     def test_string_input(self, split_function: MagicMock):
         """
-        Test case when function takes string as input.
+        Case when function takes string as input.
 
         1. `split_sql_statements` must be called with an input string.
         2. `cursor.execute` must be called on each query.
@@ -50,7 +50,9 @@ class TestExecuteSeveralStatements(TestCase):
 
     def test_list_input(self):
         """
-        Test cases when function takes list of queries as input.
+        Case when function takes list of queries as input.
+
+        Just check that queries correctly passed to `cursor.execute`.
         """
         queries = ["query1", "query2", "query3"]
         cursor = MagicMock()
