@@ -30,7 +30,7 @@ def split_sql_statement(code: str) -> list[str]:
 
 @typechecked
 def execute_several_statements(
-    cursor: sqlite3.Cursor | sqlite3.Connection,
+    cursor: sqlite3.Cursor,
     queries: str | list[str]
 ) -> list[tuple[Any, Any]]:
     """
