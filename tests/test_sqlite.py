@@ -22,6 +22,10 @@ class TestSplitStatement(TestCase):
 
 class TestExecuteSeveralStatements(TestCase):
 
+    def assert_cursor_state(self, cursor: MagicMock, queries: list[str]):
+        executed_queries = [call.args[0] for call in cursor.execute.mock_calls]
+        self.assertEqual(executed_queries, queries)
+
     @patch.object(src.sqlite, "split_sql_statement")
     def test_string_input(self, split_function: MagicMock):
         """
@@ -39,6 +43,17 @@ class TestExecuteSeveralStatements(TestCase):
         execute_several_statements(cursor=cursor, queries=input_query)
 
         split_function.assert_called_once_with(code=input_query)
+        self.assert_cursor_state(
+            cursor=cursor,
+            queries=split_function.return_value
+        )
 
-        executed_queries = [call.args[0] for call in cursor.execute.mock_calls]
-        self.assertEqual(executed_queries, split_function.return_value)
+    def test_list_input(self):
+        """
+        Test cases when function takes list of queries as input.
+        """
+        queries = ["query1", "query2", "query3"]
+        cursor = MagicMock()
+        execute_several_statements(cursor=cursor, queries=queries)
+
+        self.assert_cursor_state(cursor=cursor, queries=queries)
