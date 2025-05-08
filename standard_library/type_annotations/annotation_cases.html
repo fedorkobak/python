@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Usecases &#8212; Python</title>
+    <title>Annotation cases &#8212; Python</title>
   
   
   
@@ -277,7 +277,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../type_annotations.html">Type annotations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Usecases</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Annotation cases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mypy.html">Mypy</a></li>
 </ul>
 </details></li>
@@ -720,7 +720,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Usecases</h1>
+    <h1>Annotation cases</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -730,6 +730,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#union">Union</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#void-functions">Void functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typing-noreturn"><code class="docutils literal notranslate"><span class="pre">typing.NoReturn</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple">Tuple</a></li>
@@ -746,8 +747,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="usecases">
-<h1>Usecases<a class="headerlink" href="#usecases" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="annotation-cases">
+<h1>Annotation cases<a class="headerlink" href="#annotation-cases" title="Link to this heading">#</a></h1>
 <p>This page considers details of annotation in some special cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -760,6 +761,41 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="union">
+<h2>Union<a class="headerlink" href="#union" title="Link to this heading">#</a></h2>
+<p>If a value can take multiple types, you have to annotate it as an enumeration of types with <code class="docutils literal notranslate"><span class="pre">|</span></code> symbol. Using the syntax `typing.Union[&lt;type 1&gt;, &lt;type 2&gt;, …] will have a similar result.</p>
+<hr class="docutils" />
+<p>The following cell shows how <code class="docutils literal notranslate"><span class="pre">typeguard.check_type</span></code> passes the literals <code class="docutils literal notranslate"><span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code> when comparing with the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">|</span> <span class="pre">str</span></code> annotation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">union_type</span> <span class="o">=</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span>
+<span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">union_type</span><span class="p">)</span>
+<span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">union_type</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">typing.Union</span></code> syntax can look a bit inconvenient if you compare it to enumeration by <code class="docutils literal notranslate"><span class="pre">|</span></code>, but it has advantage of possibility to list awailable types in the different place.</p>
+<p>For example, the following cell shows how you can define <code class="docutils literal notranslate"><span class="pre">typing.Union</span></code> with types defined as the elements of the list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+<span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="o">*</span><span class="n">types</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>typing.Union[int, str, float]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="void-functions">
 <h2>Void functions<a class="headerlink" href="#void-functions" title="Link to this heading">#</a></h2>
 <p>If function doesn’t return anything you have to specify <code class="docutils literal notranslate"><span class="pre">None</span></code> as type of output. In other cases, type analisis tools will allow you to assign the function’s returns to any value - which is incorrect behavior.</p>
@@ -1085,6 +1121,7 @@ Found 1 error in 1 file (checked 1 source file)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#union">Union</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#void-functions">Void functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typing-noreturn"><code class="docutils literal notranslate"><span class="pre">typing.NoReturn</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple">Tuple</a></li>

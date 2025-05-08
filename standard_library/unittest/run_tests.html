@@ -277,7 +277,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type_annotations/annotation_cases.html">Annotation cases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
@@ -732,6 +732,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-file">Run from file</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-package">Tests package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming">Naming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-case">Skip case</a></li>
 </ul>
             </nav>
         </div>
@@ -940,6 +942,142 @@ OK
 </div>
 </div>
 </section>
+<section id="naming">
+<h2>Naming<a class="headerlink" href="#naming" title="Link to this heading">#</a></h2>
+<p>You have to name files and classes in a special way to run them with <code class="docutils literal notranslate"><span class="pre">unittest</span></code>.</p>
+<p>By default, if you run  <code class="docutils literal notranslate"><span class="pre">unittest</span></code> without any special modifications it will run all files that start with <code class="docutils literal notranslate"><span class="pre">test</span></code>. All classes that inherit from <code class="docutils literal notranslate"><span class="pre">unitttes.TestCase</span></code> are interpreted as test classes. In each test class, all methods starting with <code class="docutils literal notranslate"><span class="pre">test</span></code> will be executed.</p>
+<hr class="docutils" />
+<p>The following cells creates testing project with different options.</p>
+<ul class="simple">
+<li><p>Files that starts with <code class="docutils literal notranslate"><span class="pre">test</span></code> and not.</p></li>
+<li><p>Classes that contains <code class="docutils literal notranslate"><span class="pre">Test</span></code> in it’s name and not.</p></li>
+<li><p>Methods that starts with <code class="docutils literal notranslate"><span class="pre">test</span></code> and not.</p></li>
+</ul>
+<p>So we can learn in which cases naming is important and in which cases is not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>rm<span class="w"> </span>/tmp/testing_folder<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>mkdir<span class="w"> </span>/tmp/testing_folder<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/testing_folder/test_file.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestClass</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test method in test class in test file&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">some_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;some method in test class in test file&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SomeClass</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test method in some class in test file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/testing_folder/test_file.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/testing_folder/some_file.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestClass</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test method in test class in some file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/testing_folder/some_file.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell runs <code class="docutils literal notranslate"><span class="pre">unittest</span></code> without any additional configuration in the “project” folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+cd /tmp/testing_folder
+python3 -m unittest
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>test method in some class in test file
+test method in test class in test file
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can understand from the messages:</p>
+<ul class="simple">
+<li><p>File name is important - because test in <code class="docutils literal notranslate"><span class="pre">some_file.py</span></code> wasn’t executed.</p></li>
+<li><p>Name of the method is important - because <code class="docutils literal notranslate"><span class="pre">TestClass.some_method</span></code> wasn’t executed.</p></li>
+<li><p>Name of the <code class="docutils literal notranslate"><span class="pre">TestCase</span></code> child doesn’t matter - because <code class="docutils literal notranslate"><span class="pre">SomeClass.test_method</span></code> was executed.</p></li>
+</ul>
+</section>
+<section id="skip-case">
+<h2>Skip case<a class="headerlink" href="#skip-case" title="Link to this heading">#</a></h2>
+<p>If you want some child of <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code> not to be executed by <code class="docutils literal notranslate"><span class="pre">unittest</span></code> you can wrap it with the <code class="docutils literal notranslate"><span class="pre">unittest.skip</span></code> decorator - <code class="docutils literal notranslate"><span class="pre">unittest</span></code> will ignore it.</p>
+<hr class="docutils" />
+<p>The following cell creates test file with <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code> wrapped in the <code class="docutils literal notranslate"><span class="pre">unittest.skip</span></code> decorator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/skip_test.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+
+<span class="nd">@unittest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;some text&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestClass</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test_method executed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/skip_test.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell runs tests.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+cd /tmp
+python3 -m unittest skip_test.py
+true
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK (skipped=1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, no tests are executed - but one is skipped.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1008,6 +1146,8 @@ OK
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-file">Run from file</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-package">Tests package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming">Naming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-case">Skip case</a></li>
 </ul>
   </nav></div>
 

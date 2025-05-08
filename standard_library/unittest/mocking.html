@@ -277,7 +277,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type_annotations/annotation_cases.html">Annotation cases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
@@ -732,6 +732,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#call-details">Call details</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-attributes">Dynamic attributes</a></li>
 </ul>
             </nav>
         </div>
@@ -748,7 +749,7 @@ document.write(`
 <p>Sometimes our programmes depend on external circumstances, but during unit testing we shouldn’t worry about whether they work. And only test our code. So there are ways to change the behaviour of functions called in the programs being tested, to make it convenient for us to do the testing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest.mock</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock</span>
 </pre></div>
 </div>
 </div>
@@ -868,6 +869,48 @@ Hello patch
 </div>
 </div>
 </section>
+<section id="dynamic-attributes">
+<h2>Dynamic attributes<a class="headerlink" href="#dynamic-attributes" title="Link to this heading">#</a></h2>
+<p>Mock object automatically attributes that program refers to at the some stage. So you can mock any object and consider how program refers to it at the different stages of the program.</p>
+<hr class="docutils" />
+<p>Consider a real-world example - suppose you need to check which query was passed to the cursor of the database.</p>
+<p>The following cell creates a mocked <code class="docutils literal notranslate"><span class="pre">cursor</span></code> mocked object and sets to its <code class="docutils literal notranslate"><span class="pre">execute</span></code> attribute (which actually wasn’t defined anywhere before) to <code class="docutils literal notranslate"><span class="pre">return_value</span> <span class="pre">=</span> <span class="pre">&quot;hello&quot;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span> <span class="o">=</span> <span class="n">mock</span><span class="o">.</span><span class="n">Mock</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">mock_calls</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell calls the “method” we just defined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;some input&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>It returns the value defined in the <code class="docutils literal notranslate"><span class="pre">return_value</span></code> argument. You can interact with <code class="docutils literal notranslate"><span class="pre">cursor.exexcute</span></code> just like a normal mock object. For example following cell shows details of the call we created earlier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">mock_calls</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[call(&#39;some input&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -938,6 +981,7 @@ Hello patch
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#call-details">Call details</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-attributes">Dynamic attributes</a></li>
 </ul>
   </nav></div>
 

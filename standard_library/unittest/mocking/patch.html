@@ -277,7 +277,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../type_annotations/annotation_cases.html">Annotation cases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
@@ -743,7 +743,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-handler">Patch handler</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-object">Patch object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-object">Patch object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-in-module">Patch in module</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create">Create</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new">New</a></li>
 </ul>
@@ -1148,6 +1151,52 @@ method2 class decoration patching
 </div>
 </div>
 </div>
+<section id="patch-in-module">
+<h3>Patch in module<a class="headerlink" href="#patch-in-module" title="Link to this heading">#</a></h3>
+<p>A really useful practical application is that the module in python is an objece as well, so you can select any attribute of the module and mock it using the <code class="docutils literal notranslate"><span class="pre">patch.object</span></code> approach.</p>
+<hr class="docutils" />
+<p>The following cell creates the module that we’ll use as an example. It contains <code class="docutils literal notranslate"><span class="pre">mocked_function</span></code>, which does nothing and should to be mocked and <code class="docutils literal notranslate"><span class="pre">tested_function</span></code>, which returns the output of the <code class="docutils literal notranslate"><span class="pre">tested_function</span></code> - so all this will work if <code class="docutils literal notranslate"><span class="pre">mocked_funciton</span></code> really replaced <code class="docutils literal notranslate"><span class="pre">mocked_function</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/module_for_testing.py
+<span class="k">def</span><span class="w"> </span><span class="nf">mocked_function</span><span class="p">():</span> <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tested_function</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">mocked_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/module_for_testing.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The main features of the following cell is how it uses <code class="docutils literal notranslate"><span class="pre">patch.object</span></code>: <code class="docutils literal notranslate"><span class="pre">target</span></code> takes module <code class="docutils literal notranslate"><span class="pre">attribute</span></code> is a name of the function to be patched.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">module_for_testing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">module_for_testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">tested_function</span>
+
+<span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+    <span class="n">target</span><span class="o">=</span><span class="n">module_for_testing</span><span class="p">,</span>
+    <span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;mocked_function&quot;</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">mock</span><span class="p">:</span>
+    <span class="n">mock</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;I was mocked&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tested_function</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I was mocked
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finnaly in the <code class="docutils literal notranslate"><span class="pre">patch</span></code> context, <code class="docutils literal notranslate"><span class="pre">tested_function()</span></code> returns the value specified in the <code class="docutils literal notranslate"><span class="pre">mock.return_value</span></code>.</p>
+</section>
 </section>
 <section id="create">
 <h2>Create<a class="headerlink" href="#create" title="Link to this heading">#</a></h2>
@@ -1323,7 +1372,10 @@ handler: hello from mock
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-handler">Patch handler</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-object">Patch object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-object">Patch object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-in-module">Patch in module</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create">Create</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new">New</a></li>
 </ul>

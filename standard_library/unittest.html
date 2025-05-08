@@ -277,7 +277,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_annotations/annotation_cases.html">Annotation cases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
@@ -735,6 +735,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mocking">Mocking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
 </ul>
             </nav>
         </div>
@@ -851,6 +852,77 @@ OK
 </div>
 </div>
 </section>
+<section id="inheritance">
+<h2>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h2>
+<p>Sometimes you can benefit from using inheritance in <code class="docutils literal notranslate"><span class="pre">unittest</span></code>. A common case is when you want to implement shared code for a set of test cases — code that serves as a template or abstraction for child classes that define the actual tests. To do this, you apply basic inheritance principles. Importantly, if you don’t want the base class itself to be executed by <code class="docutils literal notranslate"><span class="pre">unittest</span></code>, simply avoid inheriting it from <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code>. However, the concrete test implementations must inherit both from the base class and from <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code> to be recognized and run by <code class="docutils literal notranslate"><span class="pre">unittest</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell shows the implementation of the <code class="docutils literal notranslate"><span class="pre">BaseClass</span></code> which defines the typical for <code class="docutils literal notranslate"><span class="pre">unittest</span></code> methods <code class="docutils literal notranslate"><span class="pre">setUpClass</span></code> and <code class="docutils literal notranslate"><span class="pre">tearDownClass</span></code> - but it is not a child of the <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code> so it won’t be interpreted by <code class="docutils literal notranslate"><span class="pre">unittest</span></code> as tests to execute. It also defines two classes <code class="docutils literal notranslate"><span class="pre">Test1</span></code> and <code class="docutils literal notranslate"><span class="pre">Test2</span></code>, which are actually tests - but they don’t implement any code - all tests and other actions are inherited from the <code class="docutils literal notranslate"><span class="pre">BaseClass</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/inheritance_unittest.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseClass</span><span class="p">:</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUpClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;set up in:&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tearDownClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tear down in:&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test in:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Test1</span><span class="p">(</span><span class="n">BaseClass</span><span class="p">,</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Test2</span><span class="p">(</span><span class="n">BaseClass</span><span class="p">,</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/inheritance_unittest.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell performs the tests shown above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+cd /tmp
+python3 -m unittest inheritance_unittest.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>set up in: &lt;class &#39;inheritance_unittest.Test1&#39;&gt;
+test in: &lt;class &#39;inheritance_unittest.Test1&#39;&gt;
+tear down in: &lt;class &#39;inheritance_unittest.Test1&#39;&gt;
+set up in: &lt;class &#39;inheritance_unittest.Test2&#39;&gt;
+test in: &lt;class &#39;inheritance_unittest.Test2&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>..
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tear down in: &lt;class &#39;inheritance_unittest.Test2&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are 6 messages - 3 from <code class="docutils literal notranslate"><span class="pre">Test1</span></code> and 3 from <code class="docutils literal notranslate"><span class="pre">Test2</span></code>.</p>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -924,6 +996,7 @@ OK
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mocking">Mocking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
 </ul>
   </nav></div>
 

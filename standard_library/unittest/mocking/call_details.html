@@ -277,7 +277,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../type_annotations/annotation_cases.html">Annotation cases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
@@ -851,7 +851,7 @@ FAILED (failures=1)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sum_wrapper</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
     <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-    <span class="nb">sum</span><span class="p">(</span><span class="n">iterable</span> <span class="o">=</span> <span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="nb">sum</span><span class="p">(</span><span class="n">iterable</span><span class="o">=</span><span class="p">(</span><span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]))</span>
 
 <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;__main__.sum&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mocked_sum</span><span class="p">:</span>
     <span class="n">sum_wrapper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>

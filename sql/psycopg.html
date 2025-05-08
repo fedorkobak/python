@@ -277,7 +277,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/annotation_cases.html">Annotation cases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
@@ -735,6 +735,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-data">No data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#row-count">Row count</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#server-messages">Server messages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-sets">Output sets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cursor-attributes">Cursor attributes</a></li>
@@ -866,17 +867,59 @@ Data [(50, &#39;test&#39;)]
 </section>
 <section id="no-data">
 <h2>No data<a class="headerlink" href="#no-data" title="Link to this heading">#</a></h2>
-<p>Some queries should not to return any data. You can check if the given query returnes any data by checking the <code class="docutils literal notranslate"><span class="pre">cursor.rowcount</span></code> attribute. If it takes <code class="docutils literal notranslate"><span class="pre">-1</span></code> value, it means that query doesn’t return anything.</p>
+<p>Some queries should not to return any data. You can check if the given result set returns any data by checking the <code class="docutils literal notranslate"><span class="pre">cursor.description</span></code> attribute. If it takes the value <code class="docutils literal notranslate"><span class="pre">None</span></code> value, it means that the current result set corresponds to the sql command that doesn’t return any data.</p>
 <hr class="docutils" />
-<p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">cursor.rowcount</span></code> attribute in the case of a <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> query.</p>
+<p>The following cell executes some commands through <code class="docutils literal notranslate"><span class="pre">psycopg</span></code> and displays <code class="docutils literal notranslate"><span class="pre">cursor.description</span></code> for each SQL command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
-    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE table1 (val1 INT, val2 INT);&quot;</span><span class="p">)</span>
-    <span class="n">rowcount</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
-    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DROP TABLE table1;&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">get_connection</span><span class="p">()</span>
 
-<span class="n">rowcount</span>
+<span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE table1 (val1 INT, val2 INT);</span>
+<span class="s2">        INSERT INTO table1 VALUES (3,2), (4,5);</span>
+<span class="s2">        SELECT * FROM table1;</span>
+<span class="s2">        DROP TABLE table1;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">cursor</span><span class="o">.</span><span class="n">nextset</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+None
+[&lt;Column &#39;val1&#39;, type: int4 (oid: 23)&gt;, &lt;Column &#39;val2&#39;, type: int4 (oid: 23)&gt;]
+None
+</pre></div>
+</div>
+</div>
+</div>
+<p>All descriptions take <code class="docutils literal notranslate"><span class="pre">None</span></code> except the one corresponding to the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>.</p>
+</section>
+<section id="row-count">
+<h2>Row count<a class="headerlink" href="#row-count" title="Link to this heading">#</a></h2>
+<p>Check corresponding section of the <a class="reference external" href="https://www.psycopg.org/psycopg3/docs/api/cursors.html#psycopg.Cursor.rowcount">official documentation</a>.</p>
+<p>Number of records affected by the operation that produced the current result set. Term “affected” isn’t really clear, but according to my experience it refer to the:</p>
+<ul class="simple">
+<li><p>Number of rows inserted by the <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> operation</p></li>
+<li><p>Number of rows returned by the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>.</p></li>
+</ul>
+<p>All other operations usually result in  <code class="docutils literal notranslate"><span class="pre">rowcount</span></code> taking value -1.</p>
+<hr class="docutils" />
+<p>The following cell shows <code class="docutils literal notranslate"><span class="pre">cursor.rowcount</span></code> for commands that only work with tables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">get_connection</span><span class="p">()</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    DROP TABLE IF EXISTS my_table;</span>
+<span class="s2">    CREATE TABLE my_table (val INT);</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
 </pre></div>
 </div>
 </div>
@@ -886,19 +929,40 @@ Data [(50, &#39;test&#39;)]
 </div>
 </div>
 </div>
-<p>As a result, <code class="docutils literal notranslate"><span class="pre">cursor.rowcount</span></code> takes the value <code class="docutils literal notranslate"><span class="pre">-1</span></code>. The next cell shows the same case but for the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query to show difference.</p>
+<p>So <code class="docutils literal notranslate"><span class="pre">cursor.rowcount</span></code> takes the value -1, because it doesn’t interact with any row in the database.</p>
+<p>The following cell considers the opration of inserting some rows into the table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
-    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT 50;&quot;</span><span class="p">)</span>
-    <span class="n">rowcount</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
-
-<span class="n">rowcount</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO my_table (val) VALUES (1), (2), (3), (4);&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, <code class="docutils literal notranslate"><span class="pre">cursor.rowcount</span></code> takes the value as the number of inserted rows.</p>
+<p>The same result can be obtained by loading from the table - as it has 4 rows loaded.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM my_table;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -914,7 +978,7 @@ Data [(50, &#39;test&#39;)]
 <p>Check details:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.psycopg.org/psycopg3/docs/advanced/async.html#server-messages">Server messages</a> section of the official documentation.</p></li>
-<li><p>Description of the <a class="reference external" href="https://www.psycopg.org/docs/cursor.html#cursor.statusmessage"><code class="docutils literal notranslate"><span class="pre">statusmessage</span></code></a> attribute.</p></li>
+<li><p>Description of the <a class="reference external" href="https://www.psycopg.org/psycopg3/docs/api/cursors.html#psycopg.Cursor.statusmessage"><code class="docutils literal notranslate"><span class="pre">statusmessage</span></code></a> attribute.</p></li>
 </ul>
 <hr class="docutils" />
 <p>The following cell shows how you can extract various messagee that appear during the execution of the <code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">TABLE</span> <span class="pre">IF</span> <span class="pre">EXISTS</span></code> command.</p>
@@ -1138,6 +1202,7 @@ Rows count: 1
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-data">No data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#row-count">Row count</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#server-messages">Server messages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-sets">Output sets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cursor-attributes">Cursor attributes</a></li>

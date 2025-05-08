@@ -277,7 +277,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/annotation_cases.html">Usecases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/annotation_cases.html">Annotation cases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/mypy.html">Mypy</a></li>
 </ul>
 </details></li>
@@ -730,7 +730,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executing">Executing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-methods">Execute methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multistatement">Multistatement</a></li>
 </ul>
             </nav>
         </div>
@@ -747,7 +748,8 @@ document.write(`
 <p>This section provides an overview of features related to intefacing with the Clickhouse database. The <a class="reference external" href="https://pypi.org/project/clickhouse-connect/"><code class="docutils literal notranslate"><span class="pre">clickhouse_connect</span></code></a> is a database driver for python. Check the the description at the <a class="reference external" href="https://clickhouse.com/docs/integrations/python">clickhouse site</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">clickhouse_connect</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">clickhouse_connect</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.rerun_docker</span><span class="w"> </span><span class="kn">import</span> <span class="n">reload_docker_container</span>
 
 <span class="n">container</span> <span class="o">=</span> <span class="n">reload_docker_container</span><span class="p">(</span>
@@ -757,22 +759,11 @@ document.write(`
     <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">ports</span><span class="o">=</span><span class="p">{</span>
         <span class="s2">&quot;8123&quot;</span><span class="p">:</span> <span class="mi">8123</span><span class="p">,</span>
-        <span class="s2">&quot;9000&quot;</span><span class="p">:</span> <span class="mi">9000</span><span class="p">,</span>
-        <span class="s2">&quot;9009&quot;</span><span class="p">:</span> <span class="mi">9009</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="executing">
-<h2>Executing<a class="headerlink" href="#executing" title="Link to this heading">#</a></h2>
-<p>To execute the command, you must create a client using the <code class="docutils literal notranslate"><span class="pre">clickhouse_connect.get_client</span></code> method and use the <code class="docutils literal notranslate"><span class="pre">query</span></code> method of the gotten object.</p>
-<hr class="docutils" />
-<p>The following cell shows the process of creating a connection.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">clickhouse_connect</span><span class="o">.</span><span class="n">get_client</span><span class="p">(</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">clickhouse_connect</span><span class="o">.</span><span class="n">get_client</span><span class="p">(</span>
     <span class="n">host</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="n">port</span><span class="o">=</span><span class="mi">8123</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -783,7 +774,11 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The following code shows the structure of the output.</p>
+<section id="execute-methods">
+<h2>Execute methods<a class="headerlink" href="#execute-methods" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">clickhouse_connect.client</span></code> has several methods to execute code in it: <code class="docutils literal notranslate"><span class="pre">query</span></code>, <code class="docutils literal notranslate"><span class="pre">command</span></code> and <code class="docutils literal notranslate"><span class="pre">insert</span></code>. The difference isn’t really clear - because in general they all allow you to do the same things. But according to the documentation, they are optimized for the purposes that correspond to their names.</p>
+<hr class="docutils" />
+<p>The following cell shows the execution of the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statement in the <code class="docutils literal notranslate"><span class="pre">query</span></code> method and shows the typical format of the output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;SELECT 10 v10, 20 v20, 30 v30, 40 v40;&quot;</span><span class="p">)</span>
@@ -799,7 +794,7 @@ Data: [(10, 20, 30, 40)]
 </div>
 </div>
 </div>
-<p>Next cell executes some command that shouldn’t have any output.</p>
+<p>The following cell performs a <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> using the <code class="docutils literal notranslate"><span class="pre">query</span></code> method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -816,12 +811,68 @@ Data: [(10, 20, 30, 40)]
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column names: (&#39;read_rows&#39;, &#39;read_bytes&#39;, &#39;written_rows&#39;, &#39;written_bytes&#39;, &#39;total_rows_to_read&#39;, &#39;result_rows&#39;, &#39;result_bytes&#39;, &#39;elapsed_ns&#39;, &#39;query_id&#39;)
-Data: [[0, 0, 0, 0, 0, 0, 0, 570055, &#39;e292ac1e-9886-4af0-b213-bb503e891515&#39;]]
+Data: [[0, 0, 0, 0, 0, 0, 0, 8088019, &#39;76cd5f5f-928d-4a06-a8dc-89bf52477d9b&#39;]]
 </pre></div>
 </div>
 </div>
 </div>
-<p>But it looks like it has some technical information.</p>
+<p>Everything works fine - it looks like the output just returns some technical information.</p>
+<p>And the next cell shows that the <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> operation can also be performed by <code class="docutils literal notranslate"><span class="pre">query</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    INSERT INTO test_table (v10, v20) </span>
+<span class="s2">    VALUES (3, 5), (5, 5)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Column names:&quot;</span><span class="p">,</span> <span class="n">query_result</span><span class="o">.</span><span class="n">column_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data:&quot;</span><span class="p">,</span> <span class="n">query_result</span><span class="o">.</span><span class="n">result_rows</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column names: ()
+Data: []
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, the next cell shows that the <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> and <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> operations were sucessful - the data was inserted into the created table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM test_table;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">result_rows</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(3, 5), (5, 5)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multistatement">
+<h2>Multistatement<a class="headerlink" href="#multistatement" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">clickhouse_connect</span></code> doesn’t allow to run multistatement code.</p>
+<hr class="docutils" />
+<p>The following cell shows the type of the error you would get in attempt to execute <code class="docutils literal notranslate"><span class="pre">multistatement</span></code> sql code using <code class="docutils literal notranslate"><span class="pre">clickhouse_connect</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;SELECT 1 as val1; SELECT 2 as val2;&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HTTPDriver for http://localhost:8123 received ClickHouse error code 62
+ Code: 62. DB::Exception: Syntax error (Multi-statements are not allowed): failed at position 17 (end of query) (line 1, col 17): ; SELECT 2 as val2
+ FORMAT Native. . (SYNTAX_ERROR) (version 24.10.2.80 (official build))
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -889,7 +940,8 @@ Data: [[0, 0, 0, 0, 0, 0, 0, 570055, &#39;e292ac1e-9886-4af0-b213-bb503e891515&#
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executing">Executing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-methods">Execute methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multistatement">Multistatement</a></li>
 </ul>
   </nav></div>
 
