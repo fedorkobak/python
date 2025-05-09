@@ -21,6 +21,7 @@ parts:
         - file: core/syntax/functions/parameters.ipynb
       - file: core/syntax/oop.ipynb
         sections:
+        - file: core/syntax/oop/variables.ipynb
         - file: core/syntax/oop/inheritance.ipynb
         - file: core/syntax/oop/interface.ipynb
         - file: core/syntax/oop/class_method.ipynb
