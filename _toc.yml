@@ -27,11 +27,6 @@ parts:
         - file: core/syntax/oop/class_method.ipynb
         - file: core/syntax/oop/special_methods.ipynb
         - file: core/syntax/oop/special_attributes.ipynb
-      - file: core/syntax/imports.ipynb
-        sections:
-        - file: core/syntax/imports/sys_path.ipynb
-        - file: core/syntax/imports/from_package_import_all.ipynb
-        - file: core/syntax/imports/searching_module.ipynb
       - file: core/syntax/exceptions.ipynb
       - file: core/syntax/decorators.ipynb
     - file: core/datatypes.ipynb
@@ -43,6 +38,12 @@ parts:
         - file: core/datatypes/basic/dict.ipynb
         - file: core/datatypes/basic/set.ipynb
       - file: core/datatypes/datetime.ipynb
+    - file: core/imports.ipynb
+      sections:
+      - file: core/imports/sys_path.ipynb
+      - file: core/imports/from_package_import_all.ipynb
+      - file: core/imports/searching_module.ipynb
+      - file: core/imports/importlib.ipynb
     - file: core/files_folders.ipynb
       sections:
       - file: core/files_folders/pathlib.ipynb
