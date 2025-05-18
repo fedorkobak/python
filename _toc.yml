@@ -102,6 +102,8 @@ parts:
     - file: standard_library/zipfile.ipynb
     - file: standard_library/socket.ipynb
     - file: standard_library/importlib.ipynb
+      sections:
+      - file: standard_library/importlib/reload.ipynb
   - caption: Pandas
     chapters:
     - file: pandas/intro.ipynb
