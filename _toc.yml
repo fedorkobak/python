@@ -42,7 +42,7 @@ parts:
       sections:
       - file: core/imports/sys_path.ipynb
       - file: core/imports/from_package_import_all.ipynb
-      - file: core/imports/searching_module.ipynb
+      - file: core/imports/find_module.ipynb
       - file: core/imports/importlib.ipynb
     - file: core/files_folders.ipynb
       sections:
