@@ -44,6 +44,7 @@ parts:
       - file: core/imports/from_package_import_all.ipynb
       - file: core/imports/find_module.ipynb
       - file: core/imports/importlib.ipynb
+      - file: core/imports/relative_import.ipynb
     - file: core/files_folders.ipynb
       sections:
       - file: core/files_folders/pathlib.ipynb
