@@ -127,20 +127,20 @@ parts:
   - caption: Scikit-learn
     chapters:
     - file: sklearn/intro.md
-    - file: sklearn/dataset_transformations
+    - file: sklearn/data_transform.ipynb
       sections:
-      - file: sklearn/dataset_transformations/pipeline.ipynb
+      - file: sklearn/data_transform/pipeline.ipynb
         sections:
-        - file: sklearn/dataset_transformations/pipeline/features_names.ipynb
-      - file: sklearn/dataset_transformations/pipeline/memory_parameter.ipynb
-      - file: sklearn/dataset_transformations/columns_transformer.ipynb
-      - file: sklearn/dataset_transformations/features_names_out.ipynb
-      - file: sklearn/dataset_transformations/one_hot_encoder.ipynb
-      - file: sklearn/dataset_transformations/developing_transformer.ipynb
+        - file: sklearn/data_transform/pipeline/features_names.ipynb
+      - file: sklearn/data_transform/pipeline/memory_parameter.ipynb
+      - file: sklearn/data_transform/columns_transformer.ipynb
+      - file: sklearn/data_transform/features_names_out.ipynb
+      - file: sklearn/data_transform/one_hot_encoder.ipynb
+      - file: sklearn/data_transform/developing_transformer.ipynb
         sections:
-        - file: sklearn/dataset_transformations/developing_transformer/features_names_out.ipynb
-      - file: sklearn/dataset_transformations/frozen_steps.ipynb
-      - file: sklearn/dataset_transformations/estimator_to_transformer.ipynb
+        - file: sklearn/data_transform/developing_transformer/features_names_out.ipynb
+      - file: sklearn/data_transform/frozen_steps.ipynb
+      - file: sklearn/data_transform/estimator_to_transformer.ipynb
     - file: sklearn/grid_search_cv.ipynb
     - file: sklearn/saving_models.ipynb
     - file: sklearn/nearest_neighbors.ipynb
