@@ -16,30 +16,33 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -61,10 +64,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Inheritance" href="oop/inheritance.html" />
+    <link rel="next" title="Variables" href="oop/variables.html" />
     <link rel="prev" title="Parameters" href="functions/parameters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -80,19 +84,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -100,7 +93,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -108,8 +100,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -125,7 +117,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -155,21 +148,17 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Python - Home"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Python - Home"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Python - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -198,17 +187,12 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="oop/variables.html">Variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/class_method.html">Class method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/special_methods.html">Special methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/special_attributes.html">Special attributes</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="imports.html">Imports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="imports/sys_path.html">sys.path list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="imports/from_package_import_all.html"><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">&lt;package&gt;</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="imports/searching_module.html">Searching module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
@@ -224,6 +208,14 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../datatypes/datetime.html">Datetime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../imports.html">Imports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../imports/sys_path.html">sys.path list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imports/from_package_import_all.html"><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">&lt;package&gt;</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imports/find_module.html">Find module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imports/importlib.html">Importlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imports/relative_import.html">Relative import</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../files_folders.html">Files &amp; folders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -297,7 +289,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../standard_library/socket.html">Socket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../standard_library/importlib.html">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -330,21 +321,21 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../sklearn/intro.html">Intro</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../sklearn/dataset_transformations.html">Dataset transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../sklearn/dataset_transformations/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../sklearn/dataset_transformations/pipeline/features_names.html">Features names</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sklearn/data_transform/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sklearn/data_transform/pipeline/features_names.html">Features names</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sklearn/dataset_transformations/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sklearn/dataset_transformations/columns_transformer.html">Specific processing for column</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sklearn/dataset_transformations/features_names_out.html">Features names out</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sklearn/dataset_transformations/one_hot_encoder.html">One hot encoder</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../sklearn/dataset_transformations/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../sklearn/dataset_transformations/developing_transformer/features_names_out.html">Feature names out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/columns_transformer.html">Specific processing for column</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/features_names_out.html">Features names out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/encoders.html">Encoders</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sklearn/data_transform/developing_transformer/features_names_out.html">Feature names out</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sklearn/dataset_transformations/frozen_steps.html">Frozen steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sklearn/dataset_transformations/estimator_to_transformer.html">Estimator to transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/frozen_steps.html">Frozen steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/estimator_to_transformer.html">Estimator to transformer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sklearn/grid_search_cv.html">Grid search CV</a></li>
@@ -567,6 +558,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/langchain.html">LangChain</a></li>
 </ul>
 
     </div>
@@ -575,9 +567,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -689,24 +686,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -731,13 +720,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects">Objects</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute">Attribute</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-attributes">Private attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-methods">Special methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes">Special attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-attributes">Dynamic attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstractions">Abstractions</a></li>
 </ul>
             </nav>
@@ -753,7 +742,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="oop">
 <h1>OOP<a class="headerlink" href="#oop" title="Link to this heading">#</a></h1>
 <p>Object-Oriented Programming (OOP) is a programming paradigm that provides a way to structure code by organizing it into objects. Objects are instances of classes, which are blueprints that define the behavior and characteristics of the objects. Python is an object-oriented programming language that fully supports OOP principles.</p>
-<p>The most complete description of how objects interact in python is given in the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#">Data model</a> section of the official documentation.</p>
+<p>For more information check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#">Data model</a> section of the official documentation.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">Classes</a> tutorial in the official documentation.</p></li>
+</ul>
 <section id="objects">
 <h2>Objects<a class="headerlink" href="#objects" title="Link to this heading">#</a></h2>
 <p>Everything in python is an object. Each object has it’s unique identifier which you can load using the <code class="docutils literal notranslate"><span class="pre">id</span></code> build-in function. The <code class="docutils literal notranslate"><span class="pre">is</span></code> operator allows you to check if two names refer to the same object.</p>
@@ -826,78 +819,88 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="attribute">
-<h2>Attribute<a class="headerlink" href="#attribute" title="Link to this heading">#</a></h2>
-<p>Every object in python has attributes - other objects that belong to that object. It’s important to understand that the class itself is also an object, so its own have it’s own attributes.</p>
+<section id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h2>
+<p>Classes and their instances can contain variables (sometimes called data attributes) - it’s a peace of data that corresponds to the class or its instances.</p>
+<p>There are few important concepts you need to know about “data attributes”:</p>
+<ul class="simple">
+<li><p>There are attributes defined for whole class and attributes unique for each instance.</p></li>
+<li><p>There are special dynamic attributes that during operation wite class behaves like a regular data attribute, but in real it’s a method - so you can compute value of the attribute dynamically.</p></li>
+</ul>
+<p>Find out more accurate description in the <a class="reference internal" href="oop/variables.html"><span class="std std-doc">corresponding page</span></a>.</p>
 <hr class="docutils" />
-<p>The following cell defines the class with the attribute <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">=</span> <span class="pre">10</span></code>.</p>
+<p>The following cell defines class where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">class_var</span></code>: is a class variable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">instance_var</span></code>: is a variable that will correspond to each instance of the class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dynamic_attribute</span></code>: is an attribute whose value is counted at the moment of reference to it.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">:</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="mi">10</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>So you can work with it without creating an instance.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyClass</span><span class="o">.</span><span class="n">val</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
-</pre></div>
-</div>
-</div>
-</div>
-<p>But each instance will have the same attribute.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_class</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
-<span class="n">my_class</span><span class="o">.</span><span class="n">val</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
-</pre></div>
-</div>
-</div>
-</div>
-<p>Even more - this is the same object.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_class</span><span class="o">.</span><span class="n">val</span> <span class="ow">is</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">val</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
-</div>
-</div>
-<p>But if you access to the of the instance, it will create the new attribute that’s not realted to the attribute of the class.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_class</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="mi">9</span>
-<span class="n">MyClass</span><span class="o">.</span><span class="n">val</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+    <span class="n">class_var</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instance_var</span> <span class="o">=</span> <span class="mi">45</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dynamic_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_var</span> <span class="o">+</span> <span class="mi">7</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<section id="private-attributes">
+<h2>Private attributes<a class="headerlink" href="#private-attributes" title="Link to this heading">#</a></h2>
+<p>There is just a convention in the python community - to consider attributes starting with underscore (e.g. <code class="docutils literal notranslate"><span class="pre">_spam</span></code>) as a private part of the API, but there are no mechanisms that prevent you from using/modifying it.</p>
+<p>There is only one mechanism to prevent duplicate names during inheritance. If you define an attribute with a name that starts with two underscores like <code class="docutils literal notranslate"><span class="pre">__spam</span></code>, python will automatically create another reference to that attribute with name that follows pattern: <code class="docutils literal notranslate"><span class="pre">_&lt;name</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">class&gt;__&lt;name</span> <span class="pre">of</span> <span class="pre">attribute&gt;</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell creates an attribute that has a method which name starts with double underscore: <code class="docutils literal notranslate"><span class="pre">__private_method</span></code>. But from instance of the <code class="docutils literal notranslate"><span class="pre">MyClass</span></code> it calls <code class="docutils literal notranslate"><span class="pre">__MyClass__private_method</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__private_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Private method from MyClass&quot;</span><span class="p">)</span>
+
+<span class="n">my_class</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+<span class="n">my_class</span><span class="o">.</span><span class="n">_MyClass__private_method</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Private method from MyClass
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the program behaves exactly as it was declared in the <code class="docutils literal notranslate"><span class="pre">_private_method</span></code>.</p>
+<p>The following cell creates a subclass for <code class="docutils literal notranslate"><span class="pre">MyClass</span></code> and shows that even if you reassign <code class="docutils literal notranslate"><span class="pre">__private_method</span></code>, extra reference automatically created by the python <code class="docutils literal notranslate"><span class="pre">_MyClass__private_method</span></code> still exits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MySubClass</span><span class="p">(</span><span class="n">MyClass</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__private_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Private method from MySubClass&quot;</span><span class="p">)</span>
+
+<span class="n">my_sub_class</span> <span class="o">=</span> <span class="n">MySubClass</span><span class="p">()</span>
+<span class="n">my_sub_class</span><span class="o">.</span><span class="n">_MyClass__private_method</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Private method from MyClass
+</pre></div>
+</div>
+</div>
+</div>
+<p>And behaves as it declared in the <code class="docutils literal notranslate"><span class="pre">MyClass.__private_method</span></code>.</p>
+</section>
 <section id="inheritance">
 <h2>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h2>
 <p>One of the key features of OOP is inheritance, which allows a class to inherit attributes and methods from another class. The class that inherits is called a subclass or derived class, and the class from which it inherits is called a superclass or base class.</p>
 <p>Check details on features of the inheritance in the <a class="reference internal" href="oop/inheritance.html"><span class="std std-doc">corresponding page</span></a>.</p>
+<hr class="docutils" />
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class, which implements the general car, and creates the <code class="docutils literal notranslate"><span class="pre">ElectricCar</span></code> subclass, which inherits all the properties from the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class, but adds properties specific to the electric car.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
@@ -1363,62 +1366,6 @@ Check out more about static methods in the <a class="reference external" href="h
 </div>
 </div>
 </section>
-<section id="dynamic-attributes">
-<h2>Dynamic attributes<a class="headerlink" href="#dynamic-attributes" title="Link to this heading">#</a></h2>
-<p>There is a build-in <code class="docutils literal notranslate"><span class="pre">property</span></code> decorator in python that allows you to use methods just like just variable attributes of the class - the value the method returns is interpreted as the value of the corresponding attribute.</p>
-<hr class="docutils" />
-<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">RandGen</span></code> class, which defines the <code class="docutils literal notranslate"><span class="pre">value</span></code> method under the <code class="docutils literal notranslate"><span class="pre">property</span></code> decorator - it just returns random values.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RandGen</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="nb">min</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="nb">max</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following code shows that with <code class="docutils literal notranslate"><span class="pre">RandGen</span></code> you can operate just like a regular variable in case of reading information.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rg</span> <span class="o">=</span> <span class="n">RandGen</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
-<span class="p">[</span><span class="n">rg</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6.646884067379181,
- 6.3595125203166845,
- 7.164334806512267,
- 7.855654367739249,
- 7.763809778902321]
-</pre></div>
-</div>
-</div>
-</div>
-<p>But obviously, you can’t set a new value for the attribute easily - that leads to the specific error shown in the next cell.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">rg</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>property &#39;value&#39; of &#39;RandGen&#39; object has no setter
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="abstractions">
 <h2>Abstractions<a class="headerlink" href="#abstractions" title="Link to this heading">#</a></h2>
 <p>Abstract class is a class which instance can’t be created. Typically it is used to define rules for defining children of the class - from these child classes instances of the class can be created. To define an abstract class, you must create it as a child of the <code class="docutils literal notranslate"><span class="pre">abc.ABC</span></code> and define methods there that must be overloaded in children classes.</p>
@@ -1511,11 +1458,11 @@ Check out more about static methods in the <a class="reference external" href="h
       </div>
     </a>
     <a class="right-next"
-       href="oop/inheritance.html"
+       href="oop/variables.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Inheritance</p>
+        <p class="prev-next-title">Variables</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1526,7 +1473,8 @@ Check out more about static methods in the <a class="reference external" href="h
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1536,13 +1484,13 @@ Check out more about static methods in the <a class="reference external" href="h
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects">Objects</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute">Attribute</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-attributes">Private attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-methods">Special methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes">Special attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-attributes">Dynamic attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstractions">Abstractions</a></li>
 </ul>
   </nav></div>
@@ -1592,8 +1540,8 @@ By Fedor Kobak
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

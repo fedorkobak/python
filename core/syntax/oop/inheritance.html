@@ -16,30 +16,33 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -62,9 +65,10 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Interface" href="interface.html" />
-    <link rel="prev" title="OOP" href="../oop.html" />
+    <link rel="prev" title="Variables" href="variables.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -80,19 +84,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -100,7 +93,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -108,8 +100,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -125,7 +117,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -155,21 +148,17 @@
     
     
     <img src="../../../_static/logo.png" class="logo__image only-light" alt="Python - Home"/>
-    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Python - Home"/>`);</script>
+    <img src="../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Python - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -198,17 +187,12 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../oop.html">OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="class_method.html">Class method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="special_methods.html">Special methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="special_attributes.html">Special attributes</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../imports.html">Imports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../imports/sys_path.html">sys.path list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../imports/from_package_import_all.html"><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">&lt;package&gt;</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../imports/searching_module.html">Searching module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
@@ -224,6 +208,14 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../datatypes/datetime.html">Datetime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../imports.html">Imports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../imports/sys_path.html">sys.path list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../imports/from_package_import_all.html"><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">&lt;package&gt;</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../imports/find_module.html">Find module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../imports/importlib.html">Importlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../imports/relative_import.html">Relative import</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../files_folders.html">Files &amp; folders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -297,7 +289,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../standard_library/hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../standard_library/zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../standard_library/socket.html">Socket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../standard_library/importlib.html">Importlib</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
 <ul class="nav bd-sidenav">
@@ -330,21 +321,21 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../sklearn/intro.html">Intro</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../sklearn/dataset_transformations.html">Dataset transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../sklearn/dataset_transformations/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../sklearn/dataset_transformations/pipeline/features_names.html">Features names</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../sklearn/data_transform/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../sklearn/data_transform/pipeline/features_names.html">Features names</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/dataset_transformations/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/dataset_transformations/columns_transformer.html">Specific processing for column</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/dataset_transformations/features_names_out.html">Features names out</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/dataset_transformations/one_hot_encoder.html">One hot encoder</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../sklearn/dataset_transformations/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../sklearn/dataset_transformations/developing_transformer/features_names_out.html">Feature names out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/data_transform/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/data_transform/columns_transformer.html">Specific processing for column</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/data_transform/features_names_out.html">Features names out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/data_transform/encoders.html">Encoders</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../sklearn/data_transform/developing_transformer/features_names_out.html">Feature names out</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/dataset_transformations/frozen_steps.html">Frozen steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/dataset_transformations/estimator_to_transformer.html">Estimator to transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/data_transform/frozen_steps.html">Frozen steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sklearn/data_transform/estimator_to_transformer.html">Estimator to transformer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../sklearn/grid_search_cv.html">Grid search CV</a></li>
@@ -567,6 +558,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages/langchain.html">LangChain</a></li>
 </ul>
 
     </div>
@@ -575,9 +567,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -689,24 +686,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -730,6 +719,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linearization">Linearization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-inheritance">Multiple inheritance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#child-defining-logic">Child defining logic</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-attributes">Required attributes</a></li>
 </ul>
@@ -748,6 +739,125 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="inheritance">
 <h1>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h1>
 <p>This page disscusses various features of the python related to inheritance.</p>
+<p>You can find helpful details in the <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">Classes</a> python tutorial.</p>
+<section id="linearization">
+<h2>Linearization<a class="headerlink" href="#linearization" title="Link to this heading">#</a></h2>
+<p>Sometimes in the python literature the term “linearization”. Linearization is an ordered list of classes where each class searches for attributes and takes an attribute from the first class in which it appears.</p>
+<p>Python classes keep their linearization in the <code class="docutils literal notranslate"><span class="pre">__mro__</span></code> attribute.</p>
+<hr class="docutils" />
+<p>The following cell shows the output of the <code class="docutils literal notranslate"><span class="pre">__mro__</span></code> attribute for the <code class="docutils literal notranslate"><span class="pre">int</span></code> type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="o">.</span><span class="vm">__mro__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(int, object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or more complex linearization for the <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.LinearRegresssion</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="n">LinearRegression</span><span class="o">.</span><span class="vm">__mro__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(sklearn.linear_model._base.LinearRegression,
+ sklearn.base.MultiOutputMixin,
+ sklearn.base.RegressorMixin,
+ sklearn.linear_model._base.LinearModel,
+ sklearn.base.BaseEstimator,
+ sklearn.utils._estimator_html_repr._HTMLDocumentationLinkMixin,
+ sklearn.utils._metadata_requests._MetadataRequester,
+ object)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-inheritance">
+<h2>Multiple inheritance<a class="headerlink" href="#multiple-inheritance" title="Link to this heading">#</a></h2>
+<p>In python you are able to inherit your class from multiple classes. But with this feature come some complexity - it’s hard to define the order of searching for attributes in the ancestors.</p>
+<p>There is a detailed explanation of how it works in modern python, as well as a justification for why it is done this way on this page <a class="reference external" href="https://docs.python.org/3/howto/mro.html#python-2-3-mro">Method Resolution Order</a>.</p>
+<p>It uses “C3” method resolution order, which can result in non-trivial resolution order. It clearly described in <a class="reference external" href="https://docs.python.org/3/howto/mro.html#examples">corresponding section of documentation</a>.</p>
+<hr class="docutils" />
+<p>The following cell implements example that will help crusial feature of the C3 linearalization method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">O</span> <span class="o">=</span> <span class="nb">object</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">E</span><span class="p">(</span><span class="n">O</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">D</span><span class="p">(</span><span class="n">O</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Methon of D&quot;</span><span class="p">)</span> 
+<span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Method of C&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">(</span><span class="n">D</span><span class="p">):</span> <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is the corresponding schema.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                              <span class="o">---</span>
+    <span class="n">Level</span> <span class="mi">3</span>                  <span class="o">|</span> <span class="n">O</span> <span class="o">|</span>
+                              <span class="o">---</span> 
+                            <span class="o">/</span>     \
+                           <span class="o">/</span>       \
+                          <span class="o">---</span>     <span class="o">---</span>
+    <span class="n">Level</span> <span class="mi">2</span>              <span class="o">|</span> <span class="n">D</span> <span class="o">|</span>   <span class="o">|</span> <span class="n">E</span> <span class="o">|</span>
+                          <span class="o">---</span>     <span class="o">---</span>
+                           <span class="o">|</span>       <span class="o">|</span>
+                           <span class="o">|</span>       <span class="o">|</span>
+                          <span class="o">---</span>     <span class="o">---</span>
+    <span class="n">Level</span> <span class="mi">1</span>              <span class="o">|</span> <span class="n">B</span> <span class="o">|</span>   <span class="o">|</span> <span class="n">C</span> <span class="o">|</span>
+                          <span class="o">---</span>     <span class="o">---</span>
+                           \       <span class="o">/</span>
+                            \     <span class="o">/</span>
+                              <span class="o">---</span>
+    <span class="n">Level</span> <span class="mi">0</span>                  <span class="o">|</span> <span class="n">A</span> <span class="o">|</span>
+                              <span class="o">---</span>
+</pre></div>
+</div>
+<p>The following cell inherits from the classes <code class="docutils literal notranslate"><span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code> class <code class="docutils literal notranslate"><span class="pre">A</span></code>. It seems that <code class="docutils literal notranslate"><span class="pre">A</span></code> have to load <code class="docutils literal notranslate"><span class="pre">method</span></code> from <code class="docutils literal notranslate"><span class="pre">C</span></code> (as it closest) definition of <code class="docutils literal notranslate"><span class="pre">method</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span> <span class="k">pass</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Methon of D
+</pre></div>
+</div>
+</div>
+</div>
+<p>But in fact, it uses the implementation that comes from <code class="docutils literal notranslate"><span class="pre">D</span></code>. This happens according to the C3 linearization rule. Specifically, in this case, <code class="docutils literal notranslate"><span class="pre">D</span></code> does not appear in the ancestors of <code class="docutils literal notranslate"><span class="pre">C</span></code>, so for <code class="docutils literal notranslate"><span class="pre">A</span></code>, it is the unique ancestor of <code class="docutils literal notranslate"><span class="pre">B</span></code> that has higher priority (since it is declared first in the definition of <code class="docutils literal notranslate"><span class="pre">A</span></code>).</p>
+<p>But if <code class="docutils literal notranslate"><span class="pre">C</span></code> somehow inherits from <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code> will use <code class="docutils literal notranslate"><span class="pre">method</span></code> from <code class="docutils literal notranslate"><span class="pre">C</span></code>. The following cell changes inheritance hierarchy accordingly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Method of C&quot;</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span> <span class="k">pass</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method of C
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">A</span></code> takes <code class="docutils literal notranslate"><span class="pre">method</span></code> from <code class="docutils literal notranslate"><span class="pre">C</span></code>. It’s convenient to think of it as “<code class="docutils literal notranslate"><span class="pre">C</span></code> redefined <code class="docutils literal notranslate"><span class="pre">method</span></code> from D”, so now it uses method from <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+</section>
 <section id="child-defining-logic">
 <h2>Child defining logic<a class="headerlink" href="#child-defining-logic" title="Link to this heading">#</a></h2>
 <p>You can define some custom logic for the creating for the child classes by using the <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code> method.</p>
@@ -853,12 +963,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../oop.html"
+       href="variables.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">OOP</p>
+        <p class="prev-next-title">Variables</p>
       </div>
     </a>
     <a class="right-next"
@@ -877,7 +987,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -886,6 +997,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linearization">Linearization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-inheritance">Multiple inheritance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#child-defining-logic">Child defining logic</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-attributes">Required attributes</a></li>
 </ul>
@@ -938,8 +1051,8 @@ By Fedor Kobak
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
