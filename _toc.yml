@@ -135,7 +135,7 @@ parts:
       - file: sklearn/data_transform/pipeline/memory_parameter.ipynb
       - file: sklearn/data_transform/columns_transformer.ipynb
       - file: sklearn/data_transform/features_names_out.ipynb
-      - file: sklearn/data_transform/one_hot_encoder.ipynb
+      - file: sklearn/data_transform/encoders.ipynb
       - file: sklearn/data_transform/developing_transformer.ipynb
         sections:
         - file: sklearn/data_transform/developing_transformer/features_names_out.ipynb
