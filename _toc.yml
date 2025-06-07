@@ -180,6 +180,8 @@ parts:
       - file: torch/managing_network/saving_model.ipynb
     - file: torch/devices.ipynb
     - file: torch/data_primitives.ipynb
+      sections:
+      - file: torch/data_primitives/data_set.ipynb
     - file: torch/vision
       sections:
       - file: torch/vision/basic.ipynb
