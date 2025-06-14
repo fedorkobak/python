@@ -118,6 +118,7 @@ parts:
       sections:
       - file: pandas/data_transformations/groupby.ipynb
         sections:
+        - file: pandas/data_transformations/groupby/groupby_parameters.ipynb
         - file: pandas/data_transformations/groupby/usage_options.ipynb
     - file: pandas/data_selecting.ipynb
     - file: pandas/data_visualisation.ipynb
