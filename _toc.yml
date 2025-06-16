@@ -176,6 +176,7 @@ parts:
         - file: torch/layers/recurrent_layers/forward_input.ipynb
         - file: torch/layers/recurrent_layers/layers_number.ipynb
       - file: torch/layers/flatten_unflatten.ipynb
+      - file: torch/layers/transformers.ipynb
     - file: torch/managing_network.ipynb
       sections:
       - file: torch/managing_network/sequential.ipynb
