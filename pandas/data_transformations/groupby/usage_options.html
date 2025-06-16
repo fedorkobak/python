@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -65,10 +62,9 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Data selecting" href="../../data_selecting.html" />
-    <link rel="prev" title="Groupby" href="../groupby.html" />
+    <link rel="prev" title="groupby parameters" href="groupby_parameters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -84,8 +80,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -93,6 +100,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -100,8 +108,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -117,8 +125,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -148,17 +155,21 @@
     
     
     <img src="../../../_static/logo.png" class="logo__image only-light" alt="Python - Home"/>
-    <img src="../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Python - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Python - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -305,6 +316,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../creating_loading.html">Creating &amp; loading</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../data_transformations.html">Data transformations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../groupby.html">Groupby</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="groupby_parameters.html"><code class="docutils literal notranslate"><span class="pre">groupby</span></code> parameters</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Usage options</a></li>
 </ul>
 </details></li>
@@ -373,9 +385,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../torch/layers/normalisation_layers.html">Normalisation layers</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../torch/layers/recurrent_layers.html">Recurrent layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../torch/layers/recurrent_layers/forward_input.html">Forward input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../torch/layers/recurrent_layers/layers_number.html">Layers number</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../torch/layers/flatten_unflatten.html">Flatten/unflatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../torch/layers/transformers.html">Transformers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../torch/managing_network.html">Managing network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -384,7 +398,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../torch/devices.html">Devices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../torch/data_primitives.html">Data primitives</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../torch/data_primitives.html">Data primitives</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../torch/data_primitives/data_set.html">Data set</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../torch/vision.html">Vision</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../torch/vision/basic.html">Basic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../torch/vision/augmentations.html">Augmentations</a></li>
@@ -567,14 +584,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -686,16 +698,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -720,15 +740,10 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating">Iterating</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg-rule-by-dict"><code class="docutils literal notranslate"><span class="pre">agg</span></code> - rule by dict</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-combine-results"><code class="docutils literal notranslate"><span class="pre">apply</span></code> - combine results</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-idea">Basic idea</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-case">Use case</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-agg">vs <code class="docutils literal notranslate"><span class="pre">agg</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg"><code class="docutils literal notranslate"><span class="pre">agg</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply"><code class="docutils literal notranslate"><span class="pre">apply</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transform"><code class="docutils literal notranslate"><span class="pre">transform</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding-cumulation">Expanding (cumulation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding"><code class="docutils literal notranslate"><span class="pre">expanding</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -747,14 +762,6 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
-
-<span class="n">basic_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
-    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
-<span class="p">})</span>
-
-<span class="n">basic_frame</span>
 </pre></div>
 </div>
 </div>
@@ -831,12 +838,98 @@
 <li><p>Sub-sampling from the original data set corresponding to the considered value of the grouping variable.</p></li>
 </ul>
 <hr class="docutils" />
+<p>The following cell defines example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>2</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>a</td>
+      <td>1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>b</td>
+      <td>3</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>b</td>
+      <td>4</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>c</td>
+      <td>6</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>c</td>
+      <td>5</td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p>The following cell creates a <code class="docutils literal notranslate"><span class="pre">groupby</span></code> object and displays the result of the first iteration over it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">basic_frame</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
 <span class="n">ans</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">gb</span><span class="p">))</span>
 <span class="n">ans</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;a&#39;,
+    A  B   C
+ 0  a  2  10
+ 1  a  1  20)
 </pre></div>
 </div>
 </div>
@@ -903,19 +996,31 @@
 </div></div></div>
 </div>
 </section>
-<section id="agg-rule-by-dict">
-<h2><code class="docutils literal notranslate"><span class="pre">agg</span></code> - rule by dict<a class="headerlink" href="#agg-rule-by-dict" title="Link to this heading">#</a></h2>
+<section id="agg">
+<h2><code class="docutils literal notranslate"><span class="pre">agg</span></code><a class="headerlink" href="#agg" title="Link to this heading">#</a></h2>
 <p>This is a way to apply aggregation functions using syntax <code class="docutils literal notranslate"><span class="pre">{&lt;var_name_1&gt;:&lt;aggregation_function_1&gt;,</span> <span class="pre">&lt;var_name_2&gt;:&lt;aggregation_function_2&gt;,</span> <span class="pre">...}</span></code>.</p>
-<p>So in the following example, I use the above syntax to aggregate max <code class="docutils literal notranslate"><span class="pre">B</span></code> values and sum of <code class="docutils literal notranslate"><span class="pre">C</span></code> values by <code class="docutils literal notranslate"><span class="pre">A</span></code> subsets:</p>
+<hr class="docutils" />
+<p>The next cell defines a data frame containing the <code class="docutils literal notranslate"><span class="pre">group</span></code> and two variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Aggregation&lt;/b&gt;&quot;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">basic_frame</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;B&quot;</span><span class="p">:</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span><span class="s2">&quot;sum&quot;</span><span class="p">}))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;variable1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="s2">&quot;variable2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell illustrates how different aggregation functions must be applied to the different columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;variable1&quot;</span><span class="p">:</span> <span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="s2">&quot;variable2&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><b>Aggregation</b></div><div class="output text_html"><div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -933,11 +1038,11 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>B</th>
-      <th>C</th>
+      <th>variable1</th>
+      <th>variable2</th>
     </tr>
     <tr>
-      <th>A</th>
+      <th>group</th>
       <th></th>
       <th></th>
     </tr>
@@ -945,31 +1050,37 @@
   <tbody>
     <tr>
       <th>a</th>
-      <td>2</td>
-      <td>30</td>
+      <td>7</td>
+      <td>7</td>
     </tr>
     <tr>
       <th>b</th>
-      <td>4</td>
-      <td>70</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>6</td>
-      <td>110</td>
+      <td>5</td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 </section>
-<section id="apply-combine-results">
-<h2><code class="docutils literal notranslate"><span class="pre">apply</span></code> - combine results<a class="headerlink" href="#apply-combine-results" title="Link to this heading">#</a></h2>
-<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.DataFrameGroupBy.apply.html#pandas.core.groupby.DataFrameGroupBy.apply">Pandas documentation about apply function.</a></p>
-<section id="basic-idea">
-<h3>Basic idea<a class="headerlink" href="#basic-idea" title="Link to this heading">#</a></h3>
-<p>The peculiarity of this method is that it uses <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> as the input for the aggregation function.</p>
-<p>The following example shows this: `example_funtion’ just prints the input and it always prints a DataFrame for each “A” variable option.</p>
+<section id="apply">
+<h2><code class="docutils literal notranslate"><span class="pre">apply</span></code><a class="headerlink" href="#apply" title="Link to this heading">#</a></h2>
+<p>This method applies a specific function to each subset corresponding to a group.</p>
+<p>Check more at the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.DataFrameGroupBy.apply.html#pandas.core.groupby.DataFrameGroupBy.apply">corresponding page</a>.</p>
+<hr class="docutils" />
+<p>The following cell defines a data frame that we will used as an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">example_function</span></code> which prints the input it receives and uses it as an argument for the <code class="docutils literal notranslate"><span class="pre">apply</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">example_funtion</span><span class="p">(</span><span class="n">subdf</span><span class="p">):</span>
@@ -977,112 +1088,35 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">subdf</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">5</span>
 
-<span class="n">res</span> <span class="o">=</span> <span class="n">basic_frame</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)[</span>
-    <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
-<span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">example_funtion</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">example_funtion</span><span class="p">,</span> <span class="n">include_groups</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=========
-   A  B   C
-0  a  2  10
-1  a  1  20
+   a  b
+0  1  7
+1  2  8
 =========
-   A  B   C
-2  b  3  30
-3  b  4  40
-=========
-   A  B   C
-4  c  6  50
-5  c  5  60
+   a  b
+2  3  1
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="use-case">
-<h3>Use case<a class="headerlink" href="#use-case" title="Link to this heading">#</a></h3>
-<p>So it’s perfect for cases where you need to get, for each variant of variable A, some value of variable C conditioned on the value of variable B.</p>
-<p>In particular, the following example shows how to obtain for each option of “A” the “C” value corresponding to the minimum “B” value.</p>
-<ul class="simple">
-<li><p>For <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span> <span class="pre">==</span> <span class="pre">&quot;a&quot;</span></code> I got <code class="docutils literal notranslate"><span class="pre">&quot;C&quot;</span> <span class="pre">==</span> <span class="pre">20</span></code>, because it corresponds to <code class="docutils literal notranslate"><span class="pre">&quot;B&quot;==</span> <span class="pre">1</span></code>, which is the minimum for every <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span> <span class="pre">==</span> <span class="pre">&quot;a&quot;</span></code>;</p></li>
-<li><p>For <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span> <span class="pre">==</span> <span class="pre">&quot;b&quot;</span></code> I got <code class="docutils literal notranslate"><span class="pre">&quot;C&quot;</span> <span class="pre">==</span> <span class="pre">30</span></code>, because it corresponds to <code class="docutils literal notranslate"><span class="pre">&quot;B&quot;==</span> <span class="pre">3</span></code>, which is the minimum for every <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span> <span class="pre">==</span> <span class="pre">&quot;b&quot;</span></code>;</p></li>
-<li><p>For <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span> <span class="pre">==</span> <span class="pre">&quot;c&quot;</span></code> I got <code class="docutils literal notranslate"><span class="pre">&quot;C&quot;</span> <span class="pre">==</span> <span class="pre">60</span></code>, because it corresponds to <code class="docutils literal notranslate"><span class="pre">&quot;B&quot;==</span> <span class="pre">5</span></code>, which is the minimum for every <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span> <span class="pre">==</span> <span class="pre">&quot;c&quot;</span></code>.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">basic_frame</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)[[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-    <span class="k">lambda</span> <span class="n">subset</span><span class="p">:</span> <span class="n">subset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(),</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
-<span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Result&lt;/b&gt;&quot;</span><span class="p">))</span>
-<span class="n">result</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><b>Result</b></div><div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>C</th>
-    </tr>
-    <tr>
-      <th>A</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>a</th>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>60</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</section>
-<section id="vs-agg">
-<h3>vs <code class="docutils literal notranslate"><span class="pre">agg</span></code><a class="headerlink" href="#vs-agg" title="Link to this heading">#</a></h3>
-<p>Other common function may seem useless because this function can do everything they can. However, according to the <a href="https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.DataFrameGroupBy.apply.html#pandas.core.groupby.DataFrameGroupBy.apply">pandas documentation</a>, they may work a little faster. I have not been able to test this yet.</p>
-</section>
 </section>
 <section id="transform">
 <h2><code class="docutils literal notranslate"><span class="pre">transform</span></code><a class="headerlink" href="#transform" title="Link to this heading">#</a></h2>
 <p>This is a function that allows you to get aggregations as <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code>/<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> indexed like the original <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p>
-<p>For example, in the following cell, throw the <code class="docutils literal notranslate"><span class="pre">transform</span></code> function, for each record in the original <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> I got the mean value of <code class="docutils literal notranslate"><span class="pre">B</span></code> for each group in <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell creates a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> that will be used as an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp_frame</span> <span class="o">=</span> <span class="n">basic_frame</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-<span class="n">temp_frame</span><span class="p">[</span><span class="s2">&quot;mean B by A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">temp_frame</span><span class="o">.</span>
-    <span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span><span class="o">.</span>
-    <span class="n">transform</span><span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">temp_frame</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -1107,65 +1141,40 @@
       <th></th>
       <th>A</th>
       <th>B</th>
-      <th>C</th>
-      <th>mean B by A</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>a</td>
-      <td>2</td>
-      <td>10</td>
-      <td>1.5</td>
+      <td>15</td>
     </tr>
     <tr>
       <th>1</th>
       <td>a</td>
-      <td>1</td>
-      <td>20</td>
-      <td>1.5</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>2</th>
       <td>b</td>
-      <td>3</td>
-      <td>30</td>
-      <td>3.5</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>3</th>
       <td>b</td>
-      <td>4</td>
-      <td>40</td>
-      <td>3.5</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>c</td>
-      <td>6</td>
-      <td>50</td>
-      <td>5.5</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>c</td>
       <td>5</td>
-      <td>60</td>
-      <td>5.5</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Here I have a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> that for each record from the original <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> matches the mean value of the <code class="docutils literal notranslate"><span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code> columns to the <code class="docutils literal notranslate"><span class="pre">A</span></code> column in a command.</p>
+<p>Suppose you need to each line correspond the maximum value of <code class="docutils literal notranslate"><span class="pre">B</span></code> among the group determined by the <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
-    <span class="n">temp_frame</span><span class="o">.</span>
-    <span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)[[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]]</span><span class="o">.</span>
-    <span class="n">transform</span><span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;max B in A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">)</span>
 <span class="p">)</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -1188,48 +1197,43 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>A</th>
       <th>B</th>
-      <th>C</th>
+      <th>min B in A</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.5</td>
-      <td>15.0</td>
+      <td>a</td>
+      <td>15</td>
+      <td>15</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1.5</td>
-      <td>15.0</td>
+      <td>a</td>
+      <td>10</td>
+      <td>15</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3.5</td>
-      <td>35.0</td>
+      <td>b</td>
+      <td>4</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>3.5</td>
-      <td>35.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5.5</td>
-      <td>55.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>5.5</td>
-      <td>55.0</td>
+      <td>b</td>
+      <td>5</td>
+      <td>5</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 </section>
-<section id="expanding-cumulation">
-<h2>Expanding (cumulation)<a class="headerlink" href="#expanding-cumulation" title="Link to this heading">#</a></h2>
+<section id="expanding">
+<h2><code class="docutils literal notranslate"><span class="pre">expanding</span></code><a class="headerlink" href="#expanding" title="Link to this heading">#</a></h2>
 <p>If you need count expanding (cumulating) values over groups use <code class="docutils literal notranslate"><span class="pre">expanding</span></code> method of the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> objects.</p>
 <hr class="docutils" />
 <p>The following cell defines and displays the data frame that will be used as examle.</p>
@@ -1376,12 +1380,12 @@ Name: values, dtype: float64
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../groupby.html"
+       href="groupby_parameters.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Groupby</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">groupby</span></code> parameters</p>
       </div>
     </a>
     <a class="right-next"
@@ -1400,8 +1404,7 @@ Name: values, dtype: float64
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1411,15 +1414,10 @@ Name: values, dtype: float64
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating">Iterating</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg-rule-by-dict"><code class="docutils literal notranslate"><span class="pre">agg</span></code> - rule by dict</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-combine-results"><code class="docutils literal notranslate"><span class="pre">apply</span></code> - combine results</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-idea">Basic idea</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-case">Use case</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-agg">vs <code class="docutils literal notranslate"><span class="pre">agg</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg"><code class="docutils literal notranslate"><span class="pre">agg</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply"><code class="docutils literal notranslate"><span class="pre">apply</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transform"><code class="docutils literal notranslate"><span class="pre">transform</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding-cumulation">Expanding (cumulation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding"><code class="docutils literal notranslate"><span class="pre">expanding</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -1468,8 +1466,8 @@ By Fedor Kobak
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

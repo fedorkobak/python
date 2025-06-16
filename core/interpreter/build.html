@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -68,7 +65,6 @@
     <link rel="prev" title="Interpreter" href="../interpreter.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -84,8 +80,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -93,6 +100,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -100,8 +108,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -117,8 +125,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -148,17 +155,21 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Python - Home"/>
-    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Python - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -305,6 +316,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../pandas/creating_loading.html">Creating &amp; loading</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../pandas/data_transformations.html">Data transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../pandas/data_transformations/groupby.html">Groupby</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/data_transformations/groupby/groupby_parameters.html"><code class="docutils literal notranslate"><span class="pre">groupby</span></code> parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../pandas/data_transformations/groupby/usage_options.html">Usage options</a></li>
 </ul>
 </details></li>
@@ -373,9 +385,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../torch/layers/normalisation_layers.html">Normalisation layers</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../torch/layers/recurrent_layers.html">Recurrent layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../torch/layers/recurrent_layers/forward_input.html">Forward input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/layers/recurrent_layers/layers_number.html">Layers number</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../torch/layers/flatten_unflatten.html">Flatten/unflatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/layers/transformers.html">Transformers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/managing_network.html">Managing network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -384,7 +398,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../torch/devices.html">Devices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../torch/data_primitives.html">Data primitives</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/data_primitives.html">Data primitives</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/data_primitives/data_set.html">Data set</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/vision.html">Vision</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../torch/vision/basic.html">Basic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../torch/vision/augmentations.html">Augmentations</a></li>
@@ -567,14 +584,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -686,16 +698,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -719,8 +739,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depencies">Depencies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#must-have-options">Must have options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#builtin-packages">Builtin packages</a></li>
 </ul>
             </nav>
         </div>
@@ -787,14 +806,102 @@ tar<span class="w"> </span>-xzf<span class="w"> </span><span class="m">3</span>.
 </div>
 </div>
 </div>
-<section id="depencies">
-<h2>Depencies<a class="headerlink" href="#depencies" title="Link to this heading">#</a></h2>
-<p>Python building depends on some packages awailable in your system. Here are listed some of the common issues.</p>
-<p>Without <code class="docutils literal notranslate"><span class="pre">openSSL</span></code> installed, python would not be able to build the ssl module, so use <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">libssl-dev</span></code> on ubuntu.</p>
-</section>
-<section id="must-have-options">
-<h2>Must have options<a class="headerlink" href="#must-have-options" title="Link to this heading">#</a></h2>
-<p>Here are the options that I think are really necessary for a comfortable usa of python.</p>
+<section id="builtin-packages">
+<h2>Builtin packages<a class="headerlink" href="#builtin-packages" title="Link to this heading">#</a></h2>
+<p>There is a set of python packages that can only be installed by building python.</p>
+<p>Some packages can only be included in the Python build if the corresponding tools are installed on the system. The following table lists some of the required utilities.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Python Module</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Required System Package(s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bz2</span></code></p></td>
+<td><p>bzip2 compression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libbz2-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lzma</span></code></p></td>
+<td><p>LZMA compression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">liblzma-dev</span></code> (or <code class="docutils literal notranslate"><span class="pre">xz-devel</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ssl</span></code></p></td>
+<td><p>SSL/TLS support</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libssl-dev</span></code> (or <code class="docutils literal notranslate"><span class="pre">openssl-devel</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sqlite3</span></code></p></td>
+<td><p>SQLite support</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libsqlite3-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_ctypes</span></code></p></td>
+<td><p>C foreign function interface</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libffi-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tkinter</span></code></p></td>
+<td><p>GUI support with Tk</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tk-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">libtk8.6</span></code>, <code class="docutils literal notranslate"><span class="pre">libtcl8.6-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">readline</span></code></p></td>
+<td><p>Command line editing (e.g., <code class="docutils literal notranslate"><span class="pre">input()</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libreadline-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gdbm</span></code></p></td>
+<td><p>GNU dbm database</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libgdbm-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dbm.ndbm</span></code></p></td>
+<td><p>Unix ndbm database</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libndbm-dev</span></code> (or part of <code class="docutils literal notranslate"><span class="pre">libc6-dev</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_uuid</span></code></p></td>
+<td><p>UUID support</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uuid-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zlib</span></code></p></td>
+<td><p>Compression support</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zlib1g-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_decimal</span></code></p></td>
+<td><p>Decimal floating point</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libmpdec-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_sqlite3</span></code></p></td>
+<td><p>SQLite bindings</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libsqlite3-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_ssl</span></code></p></td>
+<td><p>SSL module</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libssl-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_hashlib</span></code></p></td>
+<td><p>Hashing (SHA, MD5)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libssl-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_tkinter</span></code></p></td>
+<td><p>GUI support</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tk-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">tcl-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_curses</span></code></p></td>
+<td><p>Terminal handling</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libncursesw5-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_bz2</span></code></p></td>
+<td><p>bzip2 support</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libbz2-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_lzma</span></code></p></td>
+<td><p>xz compression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">liblzma-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">termios</span></code>, <code class="docutils literal notranslate"><span class="pre">fcntl</span></code>, etc.</p></td>
+<td><p>Terminal and system call interfaces</p></td>
+<td><p>Usually always built on Unix</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here are the parameters required for package installation, the absence of which caused some problems in my practice:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--with-ensurepip</span></code>: garantees that python will have the <code class="docutils literal notranslate"><span class="pre">ensurepip</span></code> package, which installes pip in python and possble virtual environments.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--with-ssl-default-sites=openssl</span></code> to include the ssl module in the build.</p></li>
@@ -857,8 +964,7 @@ tar<span class="w"> </span>-xzf<span class="w"> </span><span class="m">3</span>.
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -867,8 +973,7 @@ tar<span class="w"> </span>-xzf<span class="w"> </span><span class="m">3</span>.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depencies">Depencies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#must-have-options">Must have options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#builtin-packages">Builtin packages</a></li>
 </ul>
   </nav></div>
 
@@ -917,8 +1022,8 @@ By Fedor Kobak
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
