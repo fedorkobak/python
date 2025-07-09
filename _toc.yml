@@ -255,6 +255,7 @@ parts:
       - file: sql/sqlalchemy/relations.ipynb
   - caption: Packages
     chapters:
+    - file: packages/intro.ipynb
     - file: packages/numpy
       sections:
       - file: packages/numpy/norm.ipynb
