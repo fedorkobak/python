@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Library argparse &#8212; Python</title>
+    <title>Argparse &#8212; Python</title>
   
   
   
@@ -235,7 +235,7 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_classes.html">Data class</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../cli_arguments.html">Cli arguments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Library <code class="docutils literal notranslate"><span class="pre">argparse</span></code></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Argparse</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -499,6 +499,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../packages/intro.html">Packages</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../packages/numpy/norm.html">Norm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../packages/numpy/array_splitting.html">Array splitting</a></li>
@@ -729,7 +730,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Library argparse</h1>
+    <h1>Argparse</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -743,6 +744,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pring-help">Pring help</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#name-with-dash">Name with dash</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metavar"><code class="docutils literal notranslate"><span class="pre">metavar</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-values">Default values</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-deafults"><code class="docutils literal notranslate"><span class="pre">set_deafults</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subparsers">Subparsers</a></li>
 </ul>
             </nav>
         </div>
@@ -754,8 +760,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="library-argparse">
-<h1>Library <code class="docutils literal notranslate"><span class="pre">argparse</span></code><a class="headerlink" href="#library-argparse" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="argparse">
+<h1>Argparse<a class="headerlink" href="#argparse" title="Link to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">argparse</span></code> is Python’s built-in library that allows the creation of typical command-line interfaces for Python scripts. Findout more in the <a class="reference external" href="https://docs.python.org/3/library/argparse.html">specific section of the official documentation</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -784,7 +790,20 @@ document.write(`
 </div>
 </div>
 </div>
-<p>It returns the same object as it would if defined in a script.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArgumentParser.parse_args</span></code> returns a special object that stores all the values of the command-line arguments. The following cell shows its type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>argparse.Namespace
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can access the values for your arguments using the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span><span class="o">.</span><span class="n">value</span>
@@ -926,6 +945,157 @@ options:
 </div>
 </div>
 </section>
+<section id="default-values">
+<h2>Default values<a class="headerlink" href="#default-values" title="Link to this heading">#</a></h2>
+<p>There are two ways to specify a default value for an argument:</p>
+<ul class="simple">
+<li><p>Specify the <code class="docutils literal notranslate"><span class="pre">deafult</span></code> parameter for the <code class="docutils literal notranslate"><span class="pre">ArgumentParser.add_argument</span></code>.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">ArgumentParser.set_deafults</span></code> method.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell defines a parser that will be used as example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next code shows an argument that is added through the <code class="docutils literal notranslate"><span class="pre">add_argument</span></code> method with a specified <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--arg&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="n">my_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Namespace(arg=&#39;default&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The empty <code class="docutils literal notranslate"><span class="pre">parse_args</span></code> call returned a namespace with <code class="docutils literal notranslate"><span class="pre">arg='default'</span></code>.</p>
+<p>The following cell illustrates the approach of using <code class="docutils literal notranslate"><span class="pre">ArgumentParser.set_deafults</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">arg</span><span class="o">=</span><span class="s2">&quot;default from set_deafults&quot;</span><span class="p">)</span>
+<span class="n">my_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Namespace(arg=&#39;default from set_deafults&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As specified in code default value of the <code class="docutils literal notranslate"><span class="pre">arg</span></code> argument is changed to <code class="docutils literal notranslate"><span class="pre">'default</span> <span class="pre">from</span> <span class="pre">set_defaults'</span></code></p>
+<section id="set-deafults">
+<h3><code class="docutils literal notranslate"><span class="pre">set_deafults</span></code><a class="headerlink" href="#set-deafults" title="Link to this heading">#</a></h3>
+<p>Take a closer look at the <code class="docutils literal notranslate"><span class="pre">set_defaults</span></code> approach, as it has an some important property:</p>
+<p>If you don’t add an argument that is mentioned in the <code class="docutils literal notranslate"><span class="pre">set_defaults</span></code> method, it will be added automatically. However it won’t be displayed in the <code class="docutils literal notranslate"><span class="pre">help</span></code> message.</p>
+<hr class="docutils" />
+<p>The following cell creates a new parser and applies <code class="docutils literal notranslate"><span class="pre">set_defaults</span></code> to it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">my_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">new_arg</span><span class="o">=</span><span class="s2">&quot;new arg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Any <code class="docutils literal notranslate"><span class="pre">parse_args</span></code> call results in a namespace containing <code class="docutils literal notranslate"><span class="pre">new_arg</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Namespace(new_arg=&#39;new arg&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are no any mentions of <code class="docutils literal notranslate"><span class="pre">new_arg</span></code> in the <code class="docutils literal notranslate"><span class="pre">print_help</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: ipykernel_launcher.py [-h]
+
+options:
+  -h, --help  show this help message and exit
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="subparsers">
+<h2>Subparsers<a class="headerlink" href="#subparsers" title="Link to this heading">#</a></h2>
+<p>Sometimes in your program, you have to define two different approaches to build process your input. For example, in machine learning, it’s a common task to train different models with completely different sets of arguments in the same model building pipeline.</p>
+<p>In that case, you must define a subparser that handles the parameters of the different models differently.</p>
+<hr class="docutils" />
+<p>The following cell illustrates how to define a parser with subparsers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">subparsers</span> <span class="o">=</span> <span class="n">my_parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="s2">&quot;submodule&quot;</span><span class="p">)</span>
+
+<span class="n">subparser1</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+    <span class="s2">&quot;subparser1&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;This is subparser1&quot;</span>
+<span class="p">)</span>
+<span class="n">subparser1</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--arg_of_sp1&quot;</span><span class="p">)</span>
+
+<span class="n">subparser2</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+    <span class="s2">&quot;subparser2&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;This is subparser2&quot;</span>
+<span class="p">)</span>
+<span class="n">subparser2</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--arg_of_sp2&quot;</span><span class="p">)</span>
+<span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Help of the parser with subparsers is illustrated in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: ipykernel_launcher.py [-h] {subparser1,subparser2} ...
+
+positional arguments:
+  {subparser1,subparser2}
+    subparser1          This is subparser1
+    subparser2          This is subparser2
+
+options:
+  -h, --help            show this help message and exit
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next code shows the kind of <code class="docutils literal notranslate"><span class="pre">arparse.Namespace</span></code> that you will get from the parser that defines supparser.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s2">&quot;subparser1&quot;</span><span class="p">,</span> <span class="s2">&quot;--arg_of_sp1&quot;</span><span class="p">,</span> <span class="s2">&quot;10&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Namespace(submodule=&#39;subparser1&#39;, arg_of_sp1=&#39;10&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -996,6 +1166,11 @@ options:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pring-help">Pring help</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#name-with-dash">Name with dash</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metavar"><code class="docutils literal notranslate"><span class="pre">metavar</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-values">Default values</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-deafults"><code class="docutils literal notranslate"><span class="pre">set_deafults</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subparsers">Subparsers</a></li>
 </ul>
   </nav></div>
 
