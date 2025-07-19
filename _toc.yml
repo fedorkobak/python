@@ -64,6 +64,7 @@ parts:
       - file: core/interpreter/build.ipynb
   - caption: "Standard library"
     chapters:
+    - file: standard_library/intro.ipynb
     - file: standard_library/collections.ipynb
     - file: standard_library/unittest.ipynb
       sections:
