@@ -254,6 +254,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/collections.html">collections</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/run_tests.html">Run tests</a></li>
@@ -279,9 +280,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/root_logger.html">Root logger</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/annotation_cases.html">Annotation cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/mypy.html">Mypy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/linting/tools.html">Tools</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -743,12 +747,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-folders">Files &amp; folders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-class">Data class</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functools">Functools</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial">Partial</a></li>
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -922,42 +921,6 @@ def main(args: Optional[List[str]] = None) -&gt; int:
 </div>
 </div>
 </section>
-<section id="logging">
-<h2>Logging<a class="headerlink" href="#logging" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">Logging</span></code> is a built-in Python library for organizing logs. Its purpose is to create different <code class="docutils literal notranslate"><span class="pre">Logger</span></code> objects, each of which can be used in a specific part of the program, allowing you to maintain control over your program’s output.</p>
-<p>For more details check <a class="reference internal" href="#logging.ipynb"><span class="xref myst">corresponding page</span></a>.</p>
-<hr class="docutils" />
-<p>The following example demonstrates how to create a logger, <code class="docutils literal notranslate"><span class="pre">show_logger</span></code>, and attach different handlers to it. Handlers define the destination of the output, and each handler has a unique formatter—an object that defines the format of the records produced by the corresponding handler.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-
-<span class="n">show_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;show logger&quot;</span><span class="p">)</span>
-
-<span class="n">handler1</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
-<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">handler1</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-
-<span class="n">handler2</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
-<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(message)s</span><span class="s1">|</span><span class="si">%(asctime)s</span><span class="s1">|</span><span class="si">%(levelname)s</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">handler2</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-
-<span class="n">show_logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler1</span><span class="p">)</span>
-<span class="n">show_logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler2</span><span class="p">)</span>
-
-<span class="n">show_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;This is my message&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-08-30 11:58:58,516 - CRITICAL - This is my message
-This is my message|2024-08-30 11:58:58,516|CRITICAL
-</pre></div>
-</div>
-</div>
-</div>
-<p>In the end, we receive messages formatted according to the logger’s settings.</p>
-</section>
 <section id="data-class">
 <h2>Data class<a class="headerlink" href="#data-class" title="Link to this heading">#</a></h2>
 <p>There is a special tool in Python called dataclasses. Dataclasses allow you to build classes that store data and provide some built-in tools for operating with them. The crusial features are:</p>
@@ -1009,83 +972,6 @@ False
 </div>
 </div>
 </div>
-</section>
-<section id="functools">
-<h2>Functools<a class="headerlink" href="#functools" title="Link to this heading">#</a></h2>
-<p>Functools is a module in Python that provides functions that return other functions that have specific properties. Check <a class="reference external" href="https://docs.python.org/3/library/functools.html">corresponding documentation</a>.</p>
-<section id="partial">
-<h3>Partial<a class="headerlink" href="#partial" title="Link to this heading">#</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code> you can create a function that wraps another function in order to define default values for the arguments of the wrapped function. This is really useful when you need to pass the same set of arguments many times for example in unit tests.</p>
-<hr class="docutils" />
-<p>The following cell defines a function with three parameters and demostrates how to call it.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">some_fun</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">some_fun</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 2, 3
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now created <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> function, which is the same as <code class="docutils literal notranslate"><span class="pre">some_fun</span></code> but uses <code class="docutils literal notranslate"><span class="pre">a=3</span></code> and <code class="docutils literal notranslate"><span class="pre">b=10</span></code> as default values.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">some_fun</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> call with <code class="docutils literal notranslate"><span class="pre">b</span></code> set to “hello”</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3, hello, 10
-</pre></div>
-</div>
-</div>
-</div>
-<p>Obviously it is just like <code class="docutils literal notranslate"><span class="pre">some_fun(3,</span> <span class="pre">&quot;hello&quot;,</span> <span class="pre">10)</span></code>.</p>
-<p><strong>Note:</strong> It is possible to redefine values specified in <code class="docutils literal notranslate"><span class="pre">parital</span></code>. The following code calls <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> with new value for <code class="docutils literal notranslate"><span class="pre">a</span></code> parameter.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>three, hello, 10
-</pre></div>
-</div>
-</div>
-</div>
-<p>As a result, instead of <code class="docutils literal notranslate"><span class="pre">3</span></code> specified by partical, we get <code class="docutils literal notranslate"><span class="pre">three</span></code> specified in the call to the result.</p>
-<p><strong>Note:</strong> With <code class="docutils literal notranslate"><span class="pre">partial</span></code> you can redefine any callable you like not only functions, for example you can specify a class that will always have the same argument of the <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. The following cell creates a special object that will behave just like a <code class="docutils literal notranslate"><span class="pre">dict</span></code> but will have a default <code class="docutils literal notranslate"><span class="pre">hello:</span> <span class="pre">10</span></code> key-value pair.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">hello</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">value</span><span class="p">(),</span> <span class="n">value</span><span class="p">(</span><span class="n">new</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>({&#39;hello&#39;: 10}, {&#39;hello&#39;: 10, &#39;new&#39;: 3})
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 </section>
 
@@ -1156,12 +1042,7 @@ False
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-folders">Files &amp; folders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-class">Data class</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functools">Functools</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial">Partial</a></li>
-</ul>
-</li>
 </ul>
   </nav></div>
 

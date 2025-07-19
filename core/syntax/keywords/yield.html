@@ -254,6 +254,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../standard_library/intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../standard_library/collections.html">collections</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../standard_library/unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../standard_library/unittest/run_tests.html">Run tests</a></li>
@@ -279,9 +280,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../standard_library/logging/root_logger.html">Root logger</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../standard_library/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../standard_library/type_annotations/annotation_cases.html">Annotation cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../standard_library/type_annotations/mypy.html">Mypy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../standard_library/linting/tools.html">Tools</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -740,8 +744,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison">Comparison</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#return-value">Return value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generator-object">Generator object</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yield-and-return"><code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">return</span></code></a></li>
 </ul>
             </nav>
@@ -756,56 +759,73 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="yield">
 <h1>yield<a class="headerlink" href="#yield" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">yield</span></code> is a keyword in Python that is used to return from a function while preserving the state of its local variables, and when such a function is called again, execution continues from the <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement where it was interrupted. Any function containing the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword is called a generator. We can say that <code class="docutils literal notranslate"><span class="pre">yield</span></code> is what makes it a generator.</p>
-<section id="comparison">
-<h2>Comparison<a class="headerlink" href="#comparison" title="Link to this heading">#</a></h2>
-<p>Consider an example where we extract only even numbers from a list. <code class="docutils literal notranslate"><span class="pre">basic_fun</span></code> represents the solution without using <code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">yield_fun</span></code> represents the solution with the <code class="docutils literal notranslate"><span class="pre">yield</span></code> function.</p>
-<p>You can use <code class="docutils literal notranslate"><span class="pre">yield</span></code> just like <code class="docutils literal notranslate"><span class="pre">return</span></code>, but remember - it returns to the function for the next iteration.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> is a keyword in python that is used to return from a function while preserving the state of its local variables, and when such a function is called again, execution continues from the <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement where it was interrupted. Any function containing the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword is called a generator. We can say that <code class="docutils literal notranslate"><span class="pre">yield</span></code> is what makes it a generator.</p>
+<hr class="docutils" />
+<p>The followoing cell defines generator that iterates over list but returns only those values that are even. It also prints the corresponding message before returning.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">basic_fun</span><span class="p">(</span><span class="n">list_of_nums</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_of_nums</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="k">2</span>) == 0]
-
-<span class="k">def</span><span class="w"> </span><span class="nf">yield_fun</span><span class="p">(</span><span class="n">list_of_nums</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">even_generator</span><span class="p">(</span><span class="n">list_of_nums</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_of_nums</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Returning </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">yield</span> <span class="n">i</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>So here both functions have been applied to a list of values. And of course we got the same result:</p>
+<p>Next code demonstrates the direct result of the generator call.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_of_nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">42</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span>
-    <span class="s2">&quot;basic_fun result:&quot;</span><span class="p">,</span> 
-    <span class="n">basic_fun</span><span class="p">(</span><span class="n">list_of_nums</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span>
-    <span class="s2">&quot;get_even result:&quot;</span><span class="p">,</span>
-    <span class="nb">list</span><span class="p">(</span><span class="n">yield_fun</span><span class="p">(</span><span class="n">list_of_nums</span><span class="p">))</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generator_object</span> <span class="o">=</span> <span class="n">even_generator</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">generator_object</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>basic_fun result: [2, 8, 42]
-get_even result: [2, 8, 42]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object even_generator at 0x7e93fc460900&gt;
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="return-value">
-<h2>Return value<a class="headerlink" href="#return-value" title="Link to this heading">#</a></h2>
-<p>Functions that exits with <code class="docutils literal notranslate"><span class="pre">yield</span></code> returns <code class="docutils literal notranslate"><span class="pre">generator</span></code> - is special object in python.</p>
+<p>It’s an object that will produce a result when the function <code class="docutils literal notranslate"><span class="pre">next</span></code> is applied to it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">generator_object</span><span class="p">),</span> <span class="nb">next</span><span class="p">(</span><span class="n">generator_object</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Returning 2
+Returning 4
+2 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Applying the <code class="docutils literal notranslate"><span class="pre">list</span></code> function to it simply collects all the outputs into one list object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">even_generator</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Returning 2
+Returning 4
+Returning 10
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 4, 10]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Standard output messages indicate that the next element is computed only when the <code class="docutils literal notranslate"><span class="pre">next</span></code> call is applied to the generator. This is actually a really important feature - you can operate on arrays just as you would with regular iterable objects, but they are not necessary in memory, which is imporant when you need to save memory.</p>
+<section id="generator-object">
+<h2>Generator object<a class="headerlink" href="#generator-object" title="Link to this heading">#</a></h2>
+<p>Functions that exit using <code class="docutils literal notranslate"><span class="pre">yield</span></code> return a generator. A generator is a special kind of iterator that represents a “frozen” procedure, which resumes execution when the program requests the next element.</p>
+<hr class="docutils" />
 <p>The following example simply iterates over a list of numbers using the <code class="docutils literal notranslate"><span class="pre">yield</span></code> operator and prints each element.</p>
-<p>The key idea here is that</p>
-<ul class="simple">
-<li><p>During the function call, the function wasn’t actually executed - we don’t have any output from <code class="docutils literal notranslate"><span class="pre">print</span></code>, and we got the <code class="docutils literal notranslate"><span class="pre">generator</span></code> object as a result;</p></li>
-<li><p>But when we unpacked the <code class="docutils literal notranslate"><span class="pre">generator</span></code> into a list, we got messages and a list as a result.</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">experiment_fun</span><span class="p">(</span><span class="n">list_of_nums</span><span class="p">):</span>
@@ -839,11 +859,17 @@ Result: [10, 20, 30, 40, 50]
 </div>
 </div>
 </div>
+<p>The key idea here is that</p>
+<ul class="simple">
+<li><p>During the function call, the function wasn’t actually executed - we don’t have any output from <code class="docutils literal notranslate"><span class="pre">print</span></code>, and we got the <code class="docutils literal notranslate"><span class="pre">generator</span></code> object as a result;</p></li>
+<li><p>But when we unpacked the <code class="docutils literal notranslate"><span class="pre">generator</span></code> into a list, we got messages and a list as a result.</p></li>
+</ul>
 </section>
 <section id="yield-and-return">
 <h2><code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">return</span></code><a class="headerlink" href="#yield-and-return" title="Link to this heading">#</a></h2>
 <p>But what happens if you use both <code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">return</span></code> in the same function? Nothing special - the function will create generator, but if it has <code class="docutils literal notranslate"><span class="pre">return</span></code> in it - it will just stop iterating over <code class="docutils literal notranslate"><span class="pre">generator</span></code>.</p>
-<p>So the following cell just shows how it might look - it iterates over the passed array while for the first three elements, but then <code class="docutils literal notranslate"><span class="pre">return</span></code> is executed so that elements after the third have not been processed.</p>
+<hr class="docutils" />
+<p>The following cell just shows how it might look - it iterates over the passed array while for the first three elements, but then <code class="docutils literal notranslate"><span class="pre">return</span></code> is executed so that elements after the third have not been processed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">experiment_fun</span><span class="p">(</span><span class="n">list_of_nums</span><span class="p">):</span>
@@ -938,8 +964,7 @@ processing object: (30, 2)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison">Comparison</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#return-value">Return value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generator-object">Generator object</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yield-and-return"><code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">return</span></code></a></li>
 </ul>
   </nav></div>

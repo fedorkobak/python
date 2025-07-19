@@ -254,6 +254,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../standard_library/intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../standard_library/collections.html">collections</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../standard_library/unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../standard_library/unittest/run_tests.html">Run tests</a></li>
@@ -279,9 +280,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../standard_library/logging/root_logger.html">Root logger</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../standard_library/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../standard_library/type_annotations/annotation_cases.html">Annotation cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../standard_library/type_annotations/mypy.html">Mypy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../standard_library/linting/tools.html">Tools</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -740,7 +744,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line">Command line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start">Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line">Command line</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-recognized-options">Not recognized options</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -756,18 +764,57 @@ document.write(`
 <h1>Application<a class="headerlink" href="#application" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">traitlets</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traitlets</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">traitlets.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Application</span>
 <span class="n">Application</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># During the start of the notebook, different CLI parameters can be passed to</span>
+<span class="c1"># the process that literally keeps the notebook. Traitlets are implemented in</span>
+<span class="c1"># such a way that they take arguments that are common to the environment. The</span>
+<span class="c1"># following code removes all additional arguments so that the outputs are not</span>
+<span class="c1"># affected by arguments specified for the jupyter run.</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">arg</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">arg</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
 </div>
+<section id="start">
+<h2>Start<a class="headerlink" href="#start" title="Link to this heading">#</a></h2>
+<p>The method <code class="docutils literal notranslate"><span class="pre">start</span></code> is called when the application starts. It is usually used as an action code for the application, most commonly to start the application loop.</p>
+<hr class="docutils" />
+<p>The following cell defines the ancestor of the <code class="docutils literal notranslate"><span class="pre">Application</span></code>, which overloads the <code class="docutils literal notranslate"><span class="pre">start</span></code> method to <code class="docutils literal notranslate"><span class="pre">print(&quot;application</span> <span class="pre">started&quot;)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">traitlets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Unicode</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomApplication</span><span class="p">(</span><span class="n">Application</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s2">&quot;some&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;application started&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When the application launches, it prints the corresponding message to the standard output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">application</span> <span class="o">=</span> <span class="n">CustomApplication</span><span class="p">()</span>
+<span class="n">application</span><span class="o">.</span><span class="n">launch_instance</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>application started
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="command-line">
 <h2>Command line<a class="headerlink" href="#command-line" title="Link to this heading">#</a></h2>
-<p>The core feature of the <code class="docutils literal notranslate"><span class="pre">Application</span></code> class is that it behaves like <code class="docutils literal notranslate"><span class="pre">traitlets.config.Config</span></code>, but it can override class properties from the command line arguments. You just jave to pass arguments like <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">name&gt;.&lt;attribute&gt;=&lt;value&gt;</span></code> when calling the prograr, just in the configuration script for the <code class="docutils literal notranslate"><span class="pre">traitlets.config.Config</span></code>.</p>
+<p>The core feature of the <code class="docutils literal notranslate"><span class="pre">Application</span></code> class is that it behaves like <code class="docutils literal notranslate"><span class="pre">traitlets.config.Config</span></code>, but it can override class properties from the command line arguments. You just have to pass arguments like <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">name&gt;.&lt;attribute&gt;=&lt;value&gt;</span></code> when calling the program, just in the configuration script for the <code class="docutils literal notranslate"><span class="pre">traitlets.config.Config</span></code>.</p>
 <hr class="docutils" />
-<p>The following cell defines pythhon script that defines the inheritor of the <code class="docutils literal notranslate"><span class="pre">Application</span></code>, that has the <code class="docutils literal notranslate"><span class="pre">parameter</span></code> trait in it - consider how to set the value of <code class="docutils literal notranslate"><span class="pre">parameter</span></code>.</p>
+<p>The following cell defines python script that defines the inheritor of the <code class="docutils literal notranslate"><span class="pre">Application</span></code>, that has the <code class="docutils literal notranslate"><span class="pre">parameter</span></code> trait in it - consider how to set the value of <code class="docutils literal notranslate"><span class="pre">parameter</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/my_application.py
@@ -839,6 +886,72 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="not-recognized-options">
+<h3>Not recognized options<a class="headerlink" href="#not-recognized-options" title="Link to this heading">#</a></h3>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Application</span></code> detects arguments during launch that weren’t specified in the application class, it’ll throw corresponding messages to the output.</p>
+<hr class="docutils" />
+<p>The following cell defines the child of the <code class="docutils literal notranslate"><span class="pre">Application</span></code> with <strong>only</strong> <code class="docutils literal notranslate"><span class="pre">correct_arg</span></code> in it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleApplication</span><span class="p">(</span><span class="n">Application</span><span class="p">):</span>
+    <span class="n">correct_arg</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">Unicode</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next code launches the application on the class defined earlier, but passes two arguments, one of which was no specified as a trait.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ExampleApplication</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">ExampleApplication</span><span class="o">.</span><span class="n">launch_instance</span><span class="p">(</span>
+    <span class="n">argv</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;--ExampleApplication.wrong_arg&quot;</span><span class="p">,</span> <span class="s2">&quot;original&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--ExampleApplication.correct_arg&quot;</span><span class="p">,</span> <span class="s2">&quot;new&quot;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">ExampleApplication</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">correct_arg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ExampleApplication] WARNING | Config option `wrong_arg` not recognized by `ExampleApplication`.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;new&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, there is the message indicating that the application doesn’t recognize the argument.</p>
+<p>The most annoying consequence is that if the program is runned with arguments that are not supposed to be used by this application, you will receive a corresponding message.</p>
+<hr class="docutils" />
+<p>The following cell adds some arguments to the <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> to simulate them being passed during interpreter startup.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--wrong_arg_from_sys=new value&quot;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--ExampleApplication.correct_arg=new value&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Launching the application is accompained by the described warnings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ExampleApplication</span><span class="o">.</span><span class="n">launch_instance</span><span class="p">()</span>
+<span class="n">ExampleApplication</span><span class="p">()</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">correct_arg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ExampleApplication] WARNING | Unrecognized alias: &#39;wrong_arg_from_sys&#39;, it will have no effect.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;new value&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -906,7 +1019,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line">Command line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start">Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line">Command line</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-recognized-options">Not recognized options</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

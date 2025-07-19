@@ -256,6 +256,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/collections.html">collections</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/run_tests.html">Run tests</a></li>
@@ -281,9 +282,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/root_logger.html">Root logger</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/annotation_cases.html">Annotation cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/mypy.html">Mypy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/linting/tools.html">Tools</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -745,6 +749,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keywords">Keywords</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#with">With</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#several-managers">Several managers</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decorators">Decorators</a></li>
 </ul>
             </nav>
@@ -1105,6 +1113,110 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="with">
+<h2>With<a class="headerlink" href="#with" title="Link to this heading">#</a></h2>
+<p>Python allows you to define a context in which certain objects are accessible and specific setup and cleanup operations are automatically performed before and after the context is executed.</p>
+<p>For more information, see:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#the-with-statement">The <code class="docutils literal notranslate"><span class="pre">with</span></code> statement</a> section on the “Compound statements” page of the official documentation.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers">With Statement Context Managers</a> section on the “Data model” page.</p></li>
+</ul>
+<p>The typical syntax for the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement is:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">EXPRESSION</span> <span class="k">as</span> <span class="n">TARGET</span><span class="p">:</span>
+    <span class="n">SUITE</span>
+</pre></div>
+</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">EXPRESSION</span></code> is a call that returns a context manager.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TARGET</span></code> is the object created by the context manager to interact with the context.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SUITE</span></code> is the block of code that will be executed within the context.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The most common use of the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement is probably in conjunction with the <code class="docutils literal notranslate"><span class="pre">open</span></code> function. In this case, the target would be an object representing a file, which will definitely be closed at the end of the context.</p>
+<p>The following cell demonstrates opening and closing a file without the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/some_file&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">closed</span><span class="p">)</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">closed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;_io.BufferedWriter&#39;&gt;
+False
+True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Special attention is given to the type of object that the <code class="docutils literal notranslate"><span class="pre">open</span></code> function returns. Also, attention is given to the state of the <code class="docutils literal notranslate"><span class="pre">closed</span></code> attribute of the file before and after the call to <code class="docutils literal notranslate"><span class="pre">file.close</span></code>.</p>
+<p>The same idea, but using <code class="docutils literal notranslate"><span class="pre">with</span></code> statement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/some_file&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">closed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">closed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;_io.BufferedWriter&#39;&gt;
+False
+True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The target has the same type as the one returned by <code class="docutils literal notranslate"><span class="pre">open</span></code> in regular conditions. The values of the <code class="docutils literal notranslate"><span class="pre">file.closed</span></code> attribute inside and outside the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement show that the file is opened in the context created by the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement and closed immediately after the context ends.</p>
+<section id="several-managers">
+<h3>Several managers<a class="headerlink" href="#several-managers" title="Link to this heading">#</a></h3>
+<p>You can use multiple managers in one <code class="docutils literal notranslate"><span class="pre">with</span></code> statement. Simply separate all expressions produsing context managers with commas:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="p">(</span>
+    <span class="n">expression1</span> <span class="k">as</span> <span class="n">target1</span><span class="p">,</span>
+    <span class="n">expression2</span> <span class="k">as</span> <span class="n">target2</span>
+<span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>For me, the typical usage of the described approach for me was the mocking with the <code class="docutils literal notranslate"><span class="pre">unittest</span></code> package. It’s common to alter the behavior of the several functions called in the code being tested.</p>
+<p>The following cell shows the case with <code class="docutils literal notranslate"><span class="pre">fun1</span></code> and <code class="docutils literal notranslate"><span class="pre">fun2</span></code>, whose behavior in the <code class="docutils literal notranslate"><span class="pre">consider</span></code> is changed due to the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement containing several context managers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fun1</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;fun1 original&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fun2</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;fun2 original&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">consider</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">fun1</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; and &quot;</span> <span class="o">+</span> <span class="n">fun2</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="p">(</span>
+    <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;__main__.fun1&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_fun1</span><span class="p">,</span>
+    <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;__main__.fun2&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_fun2</span>
+<span class="p">):</span>
+    <span class="n">mock_fun1</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;modified fun1&quot;</span>
+    <span class="n">mock_fun2</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;modified fun2&quot;</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="n">consider</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>modified fun1 and modified fun2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="decorators">
 <h2>Decorators<a class="headerlink" href="#decorators" title="Link to this heading">#</a></h2>
 <p>It’s a sugar that allows to modify behaviour of the functions or classes. Find out more in the <a class="reference internal" href="#basics/decorators.ipynb"><span class="xref myst">specific page</span></a>.</p>
@@ -1225,6 +1337,10 @@ Original functionality
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keywords">Keywords</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#with">With</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#several-managers">Several managers</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decorators">Decorators</a></li>
 </ul>
   </nav></div>

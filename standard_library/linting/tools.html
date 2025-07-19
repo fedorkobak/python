@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Mypy &#8212; Python</title>
+    <title>Tools &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/type_annotations/mypy';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/linting/tools';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="re" href="../re.html" />
-    <link rel="prev" title="Annotation cases" href="annotation_cases.html" />
+    <link rel="prev" title="Annotation cases" href="annotations/annotations_cases.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -254,6 +254,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../collections.html">collections</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../unittest/run_tests.html">Run tests</a></li>
@@ -279,9 +280,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../logging/root_logger.html">Root logger</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../type_annotations.html">Type annotations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="annotation_cases.html">Annotation cases</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mypy</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../linting.html">Linting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Tools</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -646,7 +650,7 @@
       
       
       
-      <li><a href="../../_sources/standard_library/type_annotations/mypy.ipynb" target="_blank"
+      <li><a href="../../_sources/standard_library/linting/tools.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -730,7 +734,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mypy</h1>
+    <h1>Tools</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -740,8 +744,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mypy-types">Get mypy types</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-syntax">Wrong syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mypy">Mypy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mypy-types">Get mypy types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-syntax">Wrong syntax</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -753,18 +760,27 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mypy">
-<h1>Mypy<a class="headerlink" href="#mypy" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tools">
+<h1>Tools<a class="headerlink" href="#tools" title="Link to this heading">#</a></h1>
+<p>There is the set of tools that designed to organize the process of annotations verification:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://mypy-lang.org/">mypy</a>: static type checking for python.</p></li>
+<li><p><a class="reference external" href="https://github.com/microsoft/pyright">pyright</a>: static type checking for python.</p></li>
+<li><p><a class="reference external" href="https://typeguard.readthedocs.io/en/latest/">typeguard</a>: runtime type checking.</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/flake8/">flake8</a>: code style chcker.</p></li>
+</ul>
+<section id="mypy">
+<h2>Mypy<a class="headerlink" href="#mypy" title="Link to this heading">#</a></h2>
 <p>Mypy is a static type checker for python. Check <a class="reference external" href="https://mypy-lang.org/">official documentation</a>.</p>
 <section id="get-mypy-types">
-<h2>Get mypy types<a class="headerlink" href="#get-mypy-types" title="Link to this heading">#</a></h2>
+<h3>Get mypy types<a class="headerlink" href="#get-mypy-types" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Mypy</span></code> has it’s own type detection system, so sometimes it’s useful to know how to check what type it’s detecting. You can do this using the <code class="docutils literal notranslate"><span class="pre">reveal_type</span></code> and <code class="docutils literal notranslate"><span class="pre">reveal_locals</span></code> functions.</p>
 <p><strong>Note</strong> You don’t need to import them or something <code class="docutils literal notranslate"><span class="pre">mypy</span></code> will understand them by itself.</p>
 <hr class="docutils" />
 <p>Here is an example of the <code class="docutils literal notranslate"><span class="pre">reveal_type</span></code> function, which allows you to understand how mypy interprets the type of a given name.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/mypy_reveal_type.py
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_reveal_type</span><span class="o">.</span><span class="n">py</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="n">reveal_type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
 </pre></div>
@@ -778,7 +794,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/mypy_reveal_type.py
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">mypy</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_reveal_type</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 </div>
@@ -792,7 +808,7 @@ Success: no issues found in 1 source file
 <p>And an example of <code class="docutils literal notranslate"><span class="pre">reveal_locals</span></code>, which prints out information about all the variables in the namespace.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/mypy_reveal_locals.py
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_reveal_locals</span><span class="o">.</span><span class="n">py</span>
 <span class="n">my_float</span> <span class="o">=</span> <span class="mf">10.</span>
 <span class="n">my_int</span> <span class="o">=</span> <span class="mi">10</span>
 
@@ -808,7 +824,7 @@ Success: no issues found in 1 source file
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/mypy_reveal_locals.py
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">mypy</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_reveal_locals</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 </div>
@@ -823,13 +839,13 @@ Success: no issues found in 1 source file
 </div>
 </section>
 <section id="wrong-syntax">
-<h2>Wrong syntax<a class="headerlink" href="#wrong-syntax" title="Link to this heading">#</a></h2>
+<h3>Wrong syntax<a class="headerlink" href="#wrong-syntax" title="Link to this heading">#</a></h3>
 <p>The Python interpreter doesn’t throw exceptions even if there are annotations that are defined incorrectly. But <code class="docutils literal notranslate"><span class="pre">mypy</span></code> will throw errors on it’s side.</p>
 <hr class="docutils" />
 <p>Here is an example where we are trying to annotate the dictionary, but instead of annotating key and value types, we have only annotated one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/mypy_wrong_syntax.py
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_wrong_syntax</span><span class="o">.</span><span class="n">py</span>
 <span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -843,7 +859,7 @@ Success: no issues found in 1 source file
 <p>If you try to run it just with the python interpreter, it works fine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>/tmp/mypy_wrong_syntax.py
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python3</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_wrong_syntax</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 </div>
@@ -851,7 +867,7 @@ Success: no issues found in 1 source file
 <p>But <code class="docutils literal notranslate"><span class="pre">mypy</span></code> raises corresponding error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/mypy_wrong_syntax.py
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">mypy</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_wrong_syntax</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 </div>
@@ -862,6 +878,7 @@ Found 1 error in 1 file (checked 1 source file)
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 
@@ -878,7 +895,7 @@ Found 1 error in 1 file (checked 1 source file)
         },
         kernelOptions: {
             name: "python3",
-            path: "./standard_library/type_annotations"
+            path: "./standard_library/linting"
         },
         predefinedOutput: true
     }
@@ -896,7 +913,7 @@ Found 1 error in 1 file (checked 1 source file)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="annotation_cases.html"
+       href="annotations/annotations_cases.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -929,8 +946,11 @@ Found 1 error in 1 file (checked 1 source file)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mypy-types">Get mypy types</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-syntax">Wrong syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mypy">Mypy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mypy-types">Get mypy types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-syntax">Wrong syntax</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

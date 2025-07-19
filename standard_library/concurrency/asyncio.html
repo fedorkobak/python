@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Annotation cases &#8212; Python</title>
+    <title>Asyncio &#8212; Python</title>
   
   
   
@@ -57,12 +57,10 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/type_annotations/annotation_cases';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/concurrency/asyncio';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Mypy" href="mypy.html" />
-    <link rel="prev" title="Type annotations" href="../type_annotations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -253,7 +253,8 @@
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../collections.html">collections</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../unittest/run_tests.html">Run tests</a></li>
@@ -279,9 +280,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../logging/root_logger.html">Root logger</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../type_annotations.html">Type annotations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Annotation cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mypy.html">Mypy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../linting/annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../linting/tools.html">Tools</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -289,12 +293,12 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../concurrency/multiprocessing/pool.html">Pool</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiprocessing/start_methods.html">Start methods</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../concurrency/threading.html">Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threading.html">Threading</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../hashlib.html">Hashlib</a></li>
@@ -646,7 +650,7 @@
       
       
       
-      <li><a href="../../_sources/standard_library/type_annotations/annotation_cases.ipynb" target="_blank"
+      <li><a href="../../_sources/standard_library/concurrency/asyncio.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -730,7 +734,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Annotation cases</h1>
+    <h1>Asyncio</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -740,12 +744,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#union">Union</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#void-functions">Void functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typing-noreturn"><code class="docutils literal notranslate"><span class="pre">typing.NoReturn</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple">Tuple</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#any-type">Any type</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence">Sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coroutine">Coroutine</a></li>
 </ul>
             </nav>
         </div>
@@ -757,309 +756,35 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="annotation-cases">
-<h1>Annotation cases<a class="headerlink" href="#annotation-cases" title="Link to this heading">#</a></h1>
-<p>This page considers details of annotation in some special cases.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="asyncio">
+<h1>Asyncio<a class="headerlink" href="#asyncio" title="Link to this heading">#</a></h1>
+<section id="coroutine">
+<h2>Coroutine<a class="headerlink" href="#coroutine" title="Link to this heading">#</a></h2>
+<p>Waiting for coroutine</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">typeguard</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">coroutine</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
 
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="union">
-<h2>Union<a class="headerlink" href="#union" title="Link to this heading">#</a></h2>
-<p>If a value can take multiple types, you have to annotate it as an enumeration of types with <code class="docutils literal notranslate"><span class="pre">|</span></code> symbol. Using the syntax `typing.Union[&lt;type 1&gt;, &lt;type 2&gt;, …] will have a similar result.</p>
-<hr class="docutils" />
-<p>The following cell shows how <code class="docutils literal notranslate"><span class="pre">typeguard.check_type</span></code> passes the literals <code class="docutils literal notranslate"><span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code> when comparing with the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">|</span> <span class="pre">str</span></code> annotation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">union_type</span> <span class="o">=</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span>
-<span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">union_type</span><span class="p">)</span>
-<span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">union_type</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">coroutine</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">typing.Union</span></code> syntax can look a bit inconvenient if you compare it to enumeration by <code class="docutils literal notranslate"><span class="pre">|</span></code>, but it has advantage of possibility to list awailable types in the different place.</p>
-<p>For example, the following cell shows how you can define <code class="docutils literal notranslate"><span class="pre">typing.Union</span></code> with types defined as the elements of the list.</p>
+<p>Coroutine object</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
-<span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="o">*</span><span class="n">types</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coroutine</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>typing.Union[int, str, float]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="void-functions">
-<h2>Void functions<a class="headerlink" href="#void-functions" title="Link to this heading">#</a></h2>
-<p>If function doesn’t return anything you have to specify <code class="docutils literal notranslate"><span class="pre">None</span></code> as type of output. In other cases, type analisis tools will allow you to assign the function’s returns to any value - which is incorrect behavior.</p>
-<hr class="docutils" />
-<p>The following cell defines the void function and assigns its result to the variable - which is nonsence.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/none_output.py
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-
-<span class="n">val</span> <span class="o">=</span> <span class="n">fun</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/none_output.py
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/none_output.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Success: no issues found in 1 source file
-</pre></div>
-</div>
-</div>
-</div>
-<p>But <code class="docutils literal notranslate"><span class="pre">mypy</span></code> sees no problem here - just because the output of the function is not defined.</p>
-<p>In contrast, the following cell creates the same file, but function return is annotated as <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/none_output.py
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-
-<span class="n">val</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/none_output.py
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/none_output.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/none_output.py:4: error: &quot;fun&quot; does not return a value (it only ever returns None)  [func-returns-value]
-Found 1 error in 1 file (checked 1 source file)
-</pre></div>
-</div>
-</div>
-</div>
-<p>As result <code class="docutils literal notranslate"><span class="pre">mypy</span></code> returns corresponding error.</p>
-</section>
-<section id="typing-noreturn">
-<h2><code class="docutils literal notranslate"><span class="pre">typing.NoReturn</span></code><a class="headerlink" href="#typing-noreturn" title="Link to this heading">#</a></h2>
-<p>In case some can be stopped during execution without returning anything outside - you must use <code class="docutils literal notranslate"><span class="pre">typing.NoReturn</span></code> as return type for the function. <code class="docutils literal notranslate"><span class="pre">None</span></code> is not suitable here because it means that the variable to which the return value is assigned must accept the type <code class="docutils literal notranslate"><span class="pre">None</span></code> - but it’s not correct if the exception or some other termination function doesn’t return anything.</p>
-<hr class="docutils" />
-<p>The following cell creates a function that can return <code class="docutils literal notranslate"><span class="pre">int</span></code> in some cases or just raise the exception.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/none_output.py
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mi">5</span>
-
-<span class="n">val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/none_output.py
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/none_output.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/none_output.py:6: error: Incompatible types in assignment (expression has type &quot;int | None&quot;, variable has type &quot;int&quot;)  [assignment]
-Found 1 error in 1 file (checked 1 source file)
-</pre></div>
-</div>
-</div>
-</div>
-<p>As a result, trying to assign the result of the <code class="docutils literal notranslate"><span class="pre">fun</span></code> to an integer value will result in an error.</p>
-<p>But if you use <code class="docutils literal notranslate"><span class="pre">typing.NoReturn</span></code> everything works fine.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/none_output.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">NoReturn</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mi">5</span>
-
-<span class="n">val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/none_output.py
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/none_output.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Success: no issues found in 1 source file
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="tuple">
-<h2>Tuple<a class="headerlink" href="#tuple" title="Link to this heading">#</a></h2>
-<p>There are significant differences between annotations for lists or sets and annotations for tuples. In tuples, you have to define the type of each element individually, which means you need to count the number of elements in the tuple. However, for lists or sets, it’s sufficient to annotate the types that can be stored in the collection.</p>
-<hr class="docutils" />
-<p>The following cell shows that the annotation <code class="docutils literal notranslate"><span class="pre">tuple[int,</span> <span class="pre">bool,</span> <span class="pre">float,</span> <span class="pre">str]</span></code> does not correspond to the value <code class="docutils literal notranslate"><span class="pre">(10,</span> <span class="pre">True,</span> <span class="pre">3.0)</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span>
-        <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-    <span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tuple has wrong number of elements (expected 4, got 3 instead)
-</pre></div>
-</div>
-</div>
-</div>
-<p>It expects another <code class="docutils literal notranslate"><span class="pre">str</span></code> value as the last element of the <code class="docutils literal notranslate"><span class="pre">tuple</span></code>. The following cell compares the tuple <code class="docutils literal notranslate"><span class="pre">(10,</span> <span class="pre">True,</span> <span class="pre">3.0,</span> <span class="pre">&quot;hello&quot;)</span></code> with the given annotation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">),</span>
-    <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, True, 3.0, &#39;hello&#39;)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now everything is fine.</p>
-</section>
-<section id="any-type">
-<h2>Any type<a class="headerlink" href="#any-type" title="Link to this heading">#</a></h2>
-<p>Some times you’ll meet cases where object can take any type. In most cases you can just ignore typing for it. But there are reasons why you should have option to declare that expression can have any type:</p>
-<ul class="simple">
-<li><p>To show that any type is a deliberate decision.</p></li>
-<li><p>To have an option for cases where a type must be specified, such as the type of keys in a dictionary or the type of a particular element in a tuple.</p></li>
-</ul>
-<hr class="docutils" />
-<p>Consider the example where there are functions that return the key of the item with the maximum value from dict. But keys can be of any type that is acceptable to be keys for dictionaries. So it can be completed with syntax below.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">max_key</span><span class="p">(</span><span class="n">inp_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">inp_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">inp_dict</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
-
-<span class="n">max_key</span><span class="p">({</span><span class="mi">10</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello&#39;
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="sequence">
-<h2>Sequence<a class="headerlink" href="#sequence" title="Link to this heading">#</a></h2>
-<p>With <code class="docutils literal notranslate"><span class="pre">typing.Sequence</span></code>, you can annotate any subscriptable type and those that have a defined <code class="docutils literal notranslate"><span class="pre">__len__</span></code> dunder.</p>
-<hr class="docutils" />
-<p>The following two cells show the comparison of the <code class="docutils literal notranslate"><span class="pre">list</span></code> and the <code class="docutils literal notranslate"><span class="pre">tuple</span></code> with the <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> annotation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-    <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-    <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, &#39;hello&#39;, False)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-    <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
-    <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[True, &#39;hello&#39;, False]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Everything works fine. But the following cell shows that the <code class="docutils literal notranslate"><span class="pre">set</span></code> doesn’t refer to the <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-        <span class="p">{</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">},</span>
-        <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span>
-    <span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>set is not a sequence
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;coroutine object coroutine at 0x792ae83f4700&gt;
 </pre></div>
 </div>
 </div>
@@ -1080,7 +805,7 @@ Found 1 error in 1 file (checked 1 source file)
         },
         kernelOptions: {
             name: "python3",
-            path: "./standard_library/type_annotations"
+            path: "./standard_library/concurrency"
         },
         predefinedOutput: true
     }
@@ -1097,24 +822,6 @@ Found 1 error in 1 file (checked 1 source file)
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../type_annotations.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Type annotations</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="mypy.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Mypy</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1131,12 +838,7 @@ Found 1 error in 1 file (checked 1 source file)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#union">Union</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#void-functions">Void functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typing-noreturn"><code class="docutils literal notranslate"><span class="pre">typing.NoReturn</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple">Tuple</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#any-type">Any type</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence">Sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coroutine">Coroutine</a></li>
 </ul>
   </nav></div>
 

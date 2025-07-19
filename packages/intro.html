@@ -254,6 +254,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/collections.html">collections</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/run_tests.html">Run tests</a></li>
@@ -279,9 +280,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/root_logger.html">Root logger</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/annotation_cases.html">Annotation cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../standard_library/type_annotations/mypy.html">Mypy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/linting/tools.html">Tools</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -745,7 +749,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#psutil">Psutil</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apscheduler">APScheduler</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging face</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawsvg">Drawsvg</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawsvg">Drawsvg</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewbox">Viewbox</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1043,6 +1050,11 @@ rm -r zip_example_file archive.zip
 <p>Hugging Face is a site that allows you to publish and download models. It’s convenient because you can automate the process using Python scripting. For this, you need the <code class="docutils literal notranslate"><span class="pre">huggingface-hub</span></code> package. Aspects of working with it are discussed on this page.</p>
 <p>The first thing you need to do is log in:</p>
 <p><code class="docutils literal notranslate"><span class="pre">huggingface-cli</span> <span class="pre">login</span> <span class="pre">--token</span> <span class="pre">&lt;your</span> <span class="pre">HF</span> <span class="pre">token&gt;</span></code></p>
+<p>Check the set of tutorials:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://huggingface.co/learn/llm-course/chapter0/1">LLM course</a> from hugging face.</p></li>
+<li><p>The <a class="reference internal" href="transformers.html"><span class="std std-doc">transformers</span></a> package, provided by the Hugging Face, allows you to use a variety of popular transformer-based models.</p></li>
+</ul>
 </section>
 <section id="drawsvg">
 <h2>Drawsvg<a class="headerlink" href="#drawsvg" title="Link to this heading">#</a></h2>
@@ -1086,6 +1098,29 @@ rm -r zip_example_file archive.zip
 </div>
 </div>
 </div>
+<section id="viewbox">
+<h3>Viewbox<a class="headerlink" href="#viewbox" title="Link to this heading">#</a></h3>
+<p>Applying a viewbox can be a bit confusing. This is because original SVG syntax allows for some flexibility. In <code class="docutils literal notranslate"><span class="pre">drawsvg</span></code>, you have to specify exactly <code class="docutils literal notranslate"><span class="pre">viewBox</span></code> name (camel naming) and enter the value as a sting with four numbers separated by the space.</p>
+<hr class="docutils" />
+<p>The following cell illustrates the use of the <code class="docutils literal notranslate"><span class="pre">viewBox</span></code>. It sets the viewbox to display only a corner of the rectangle added later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">dw</span><span class="o">.</span><span class="n">Drawing</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">viewBox</span><span class="o">=</span><span class="s2">&quot;-10 -10 100 100&quot;</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dw</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">stroke_width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">stroke</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+<span class="p">))</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f28b5e445d7b9cdc357100f4e4e56419e7bb5f1e6db7bd312432b4d08bae7b81.svg" src="../_images/f28b5e445d7b9cdc357100f4e4e56419e7bb5f1e6db7bd312432b4d08bae7b81.svg" />
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -1158,7 +1193,10 @@ rm -r zip_example_file archive.zip
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#psutil">Psutil</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apscheduler">APScheduler</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging face</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawsvg">Drawsvg</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawsvg">Drawsvg</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewbox">Viewbox</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

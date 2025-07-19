@@ -254,6 +254,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="collections.html">collections</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="unittest/run_tests.html">Run tests</a></li>
@@ -279,9 +280,12 @@
 <li class="toctree-l2"><a class="reference internal" href="logging/root_logger.html">Root logger</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="type_annotations.html">Type annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="type_annotations/annotation_cases.html">Annotation cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="type_annotations/mypy.html">Mypy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="linting/annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="linting/tools.html">Tools</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -759,8 +763,14 @@ document.write(`
 <section id="asyncio">
 <h2>Asyncio<a class="headerlink" href="#asyncio" title="Link to this heading">#</a></h2>
 <p>Python offers tools for organizing asynchronous programming. The main components are the <code class="docutils literal notranslate"><span class="pre">async</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code> keywords, along with the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> library.</p>
+<p>Here are a few basic terms that you may find useful in an asyncio context:</p>
+<ul class="simple">
+<li><p><strong>Coroutine</strong>: A function defined with <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">def</span></code>, which returns a coroutine object.</p></li>
+<li><p><strong>Task</strong>: A wrapper around a coroutine that runs it concurrently in the event loop.</p></li>
+<li><p><strong>Event Loop</strong>: The core of asyncio. It runs and manages async tasks and callbacks.</p></li>
+</ul>
 <hr class="docutils" />
-<p>The following cell demonstrates a classical asynchronous program. It uses the functions <code class="docutils literal notranslate"><span class="pre">fun1</span></code> and <code class="docutils literal notranslate"><span class="pre">fun2</span></code>, which are essentially the same—each prints a number in a loop. Each record identifies which function produced it.</p>
+<p>The following cell demonstrates a classical asynchronous program. It uses the functions <code class="docutils literal notranslate"><span class="pre">fun1</span></code> and <code class="docutils literal notranslate"><span class="pre">fun2</span></code>, which are essentially the same - each prints a number in a loop. Each record identifies which function produced it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
@@ -786,29 +796,30 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=========begin cycle=========
 fun 1|iteration 0
 fun 2|iteration 0
-fun 2|iteration 1
 fun 1|iteration 1
 fun 1|iteration 2
-fun 1|iteration 3
+fun 2|iteration 1
 fun 2|iteration 2
+fun 1|iteration 3
 fun 2|iteration 3
 fun 2|iteration 4
 fun 1|iteration 4
 fun 2|iteration 5
+fun 1|iteration 5
 fun 2|iteration 6
 fun 2|iteration 7
-fun 2|iteration 8
-fun 1|iteration 5
 fun 1|iteration 6
-fun 2|iteration 9
 fun 1|iteration 7
+fun 2|iteration 8
 fun 1|iteration 8
 fun 1|iteration 9
+fun 2|iteration 9
 =========end cycle=========
 </pre></div>
 </div>
 </div>
 </div>
+<p>The output clearly shows that the functions are executed simultaneously, rather than one by one.</p>
 </section>
 <section id="multiprocessing">
 <h2>Multiprocessing<a class="headerlink" href="#multiprocessing" title="Link to this heading">#</a></h2>
