@@ -49,7 +49,10 @@ parts:
     - file: core/files_folders.ipynb
       sections:
       - file: core/files_folders/pathlib.ipynb
-    - file: core/data_classes.ipynb
+    - file: core/constructs.ipynb
+      sections:
+      - file: core/constructs/iterator.ipynb
+      - file: core/constructs/data_classes.ipynb
     - file: core/cli_arguments
       sections:
       - file: core/cli_arguments/argparse.ipynb
@@ -63,7 +66,6 @@ parts:
     - file: core/interpreter.ipynb
       sections:
       - file: core/interpreter/build.ipynb
-    - file: core/iterator.ipynb
   - caption: "Standard library"
     chapters:
     - file: standard_library/intro.ipynb
