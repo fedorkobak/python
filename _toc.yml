@@ -63,6 +63,7 @@ parts:
     - file: core/interpreter.ipynb
       sections:
       - file: core/interpreter/build.ipynb
+    - file: core/iterator.ipynb
   - caption: "Standard library"
     chapters:
     - file: standard_library/intro.ipynb
