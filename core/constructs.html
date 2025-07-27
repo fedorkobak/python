@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data class &#8212; Python</title>
+    <title>Constructs &#8212; Python</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'core/data_classes';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'core/constructs';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Cli arguments" href="cli_arguments.html" />
+    <link rel="next" title="Iterator" href="constructs/iterator.html" />
     <link rel="prev" title="Pathlib" href="files_folders/pathlib.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -233,7 +233,11 @@
 <li class="toctree-l2"><a class="reference internal" href="files_folders/pathlib.html">Pathlib</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data class</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Constructs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="constructs/iterator.html">Iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructs/data_classes.html">Data class</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cli_arguments.html">Cli arguments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cli_arguments/argparse.html">Argparse</a></li>
 </ul>
@@ -301,6 +305,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../standard_library/concurrency/threading.html">Threading</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/tracemalloc.html">Tracemalloc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../standard_library/socket.html">Socket</a></li>
@@ -650,7 +655,7 @@
       
       
       
-      <li><a href="../_sources/core/data_classes.ipynb" target="_blank"
+      <li><a href="../_sources/core/constructs.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -734,7 +739,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data class</h1>
+    <h1>Constructs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -744,9 +749,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining">Defining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization-logic">Initialization logic</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-dict">To dict</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterator">Iterator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-class">Data class</a></li>
 </ul>
             </nav>
         </div>
@@ -758,187 +762,140 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="data-class">
-<h1>Data class<a class="headerlink" href="#data-class" title="Link to this heading">#</a></h1>
-<p>There is a special tool in Python called dataclasses. Dataclasses allow you to build classes that store data and provide some built-in tools for operating with them. <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html">Refer</a> to the official documentation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">asdict</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="defining">
-<h2>Defining<a class="headerlink" href="#defining" title="Link to this heading">#</a></h2>
-<p>When defining a dataclass, you can specify values for attributes; however, you can skip them during instance initialization. But the <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> does not allow you to define an attribute of a mutable datatype directly. Instead, you have to use <code class="docutils literal notranslate"><span class="pre">dataclass.field(default_factory=&lt;type&gt;)</span></code> to define a default value for a mutable datatype.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="constructs">
+<h1>Constructs<a class="headerlink" href="#constructs" title="Link to this heading">#</a></h1>
+<p>This page focuses on terms that are implemented to python and allows you to explore its syntax.</p>
+<section id="iterator">
+<h2>Iterator<a class="headerlink" href="#iterator" title="Link to this heading">#</a></h2>
+<p>An iterator is an object that implements the iterator protocol.</p>
+<p>The iterator protocol suggests that an object have the following:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> dunder that returns object with a <code class="docutils literal notranslate"><span class="pre">__next__</span></code> dunder.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">__next__</span></code> dunder is supposed to return the elements of the iterator one by one and raise a <code class="docutils literal notranslate"><span class="pre">StopIteration</span></code> exception when there are no more elements to iterate.</p></li>
+</ul>
+<p>Check details on the <a class="reference internal" href="constructs/iterator.html"><span class="std std-doc">iterator</span></a>.</p>
 <hr class="docutils" />
-<p>The following cell shows that you can easily add a default value for an <code class="docutils literal notranslate"><span class="pre">int</span></code> field.</p>
+<p>Probably the most representive example of the iterator is a regular python <code class="docutils literal notranslate"><span class="pre">list</span></code>. The following cells show that the descripted iterator protcol is fair for the iterator.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">iter</span></code> function can be applied to the list, showing that the <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> dunder is implemented for <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">SomeData</span><span class="p">:</span>
-    <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="n">SomeData</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">lst_iterator</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+<span class="n">lst_iterator</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SomeData(value=10)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;list_iterator at 0x71db0e506c80&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>But in the case of a mutable datatype, such as <code class="docutils literal notranslate"><span class="pre">list</span></code>, you’ll get the corresponding error.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> dunder should also return an iterator. This could be the same object, or something else as in the <code class="docutils literal notranslate"><span class="pre">list</span></code> case. A <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code> instance is returned.</p>
+<p>The following cell shows that the <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code> has an <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> dunder as well. However, the dunder returns the object itself.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">SomeData</span><span class="p">:</span>
-    <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    
-<span class="n">SomeData</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst_iterator</span> <span class="ow">is</span> <span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code> has a <code class="docutils literal notranslate"><span class="pre">__next__</span></code> dunder. For each call, it returns the corresponding element of the <code class="docutils literal notranslate"><span class="pre">list</span></code> from which the <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code> comes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__next__</span><span class="p">(),</span> <span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__next__</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>When there are no longer any corresponding elements - the <code class="docutils literal notranslate"><span class="pre">StopIteration</span></code> error will be raised.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">lst_iterator</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="nd">@dataclass</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">class</span><span class="w"> </span><span class="nc">SomeData</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">SomeData</span><span class="p">()</span>
 
-<span class="nn">File /usr/lib/python3.10/dataclasses.py:1184,</span> in <span class="ni">dataclass</span><span class="nt">(cls, init, repr, eq, order, unsafe_hash, frozen, match_args, kw_only, slots)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1181</span>     <span class="k">return</span> <span class="n">wrap</span>
-<span class="g g-Whitespace">   </span><span class="mi">1183</span> <span class="c1"># We&#39;re called as @dataclass without parens.</span>
-<span class="ne">-&gt; </span><span class="mi">1184</span> <span class="k">return</span> <span class="n">wrap</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+<span class="ne">StopIteration</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
 
-<span class="nn">File /usr/lib/python3.10/dataclasses.py:1175,</span> in <span class="ni">dataclass.&lt;locals&gt;.wrap</span><span class="nt">(cls)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1174</span> <span class="k">def</span><span class="w"> </span><span class="nf">wrap</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1175</span>     <span class="k">return</span> <span class="n">_process_class</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="nb">repr</span><span class="p">,</span> <span class="n">eq</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">unsafe_hash</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1176</span>                           <span class="n">frozen</span><span class="p">,</span> <span class="n">match_args</span><span class="p">,</span> <span class="n">kw_only</span><span class="p">,</span> <span class="n">slots</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">84</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 
-<span class="nn">File /usr/lib/python3.10/dataclasses.py:955,</span> in <span class="ni">_process_class</span><span class="nt">(cls, init, repr, eq, order, unsafe_hash, frozen, match_args, kw_only, slots)</span>
-<span class="g g-Whitespace">    </span><span class="mi">952</span>         <span class="n">kw_only</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">953</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">954</span>         <span class="c1"># Otherwise it&#39;s a field of some type.</span>
-<span class="ne">--&gt; </span><span class="mi">955</span>         <span class="n">cls_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_get_field</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">kw_only</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">957</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">cls_fields</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">958</span>     <span class="n">fields</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">next</span><span class="p">(</span><span class="n">lst_iterator</span><span class="p">)</span>
 
-<span class="nn">File /usr/lib/python3.10/dataclasses.py:812,</span> in <span class="ni">_get_field</span><span class="nt">(cls, a_name, a_type, default_kw_only)</span>
-<span class="g g-Whitespace">    </span><span class="mi">810</span> <span class="c1"># For real fields, disallow mutable defaults for known types.</span>
-<span class="g g-Whitespace">    </span><span class="mi">811</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">_field_type</span> <span class="ow">is</span> <span class="n">_FIELD</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">default</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">set</span><span class="p">)):</span>
-<span class="ne">--&gt; </span><span class="mi">812</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mutable default </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">default</span><span class="p">)</span><span class="si">}</span><span class="s1"> for field &#39;</span>
-<span class="g g-Whitespace">    </span><span class="mi">813</span>                      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> is not allowed: use default_factory&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">815</span> <span class="k">return</span> <span class="n">f</span>
 
-<span class="ne">ValueError</span>: mutable default &lt;class &#39;list&#39;&gt; for field items is not allowed: use default_factory
-</pre></div>
-</div>
-</div>
-</div>
-<p>You can achieve your goal by using <code class="docutils literal notranslate"><span class="pre">field(default_factory=list)</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">SomeData</span><span class="p">:</span>
-    <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-    
-<span class="n">SomeData</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SomeData(items=[])
+
+<span class="ne">StopIteration</span>: 
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="initialization-logic">
-<h2>Initialization logic<a class="headerlink" href="#initialization-logic" title="Link to this heading">#</a></h2>
-<p>As <code class="docutils literal notranslate"><span class="pre">dataclasses</span></code> define their own <code class="docutils literal notranslate"><span class="pre">__init__</span></code> methods, you need a way to implement initialization logic specific to your case. For this purpose, you should use the <code class="docutils literal notranslate"><span class="pre">__post_init__</span></code> dunder method, which is exclusive to dataclasses.</p>
+<section id="data-class">
+<h2>Data class<a class="headerlink" href="#data-class" title="Link to this heading">#</a></h2>
+<p>There is a special tool in Python called dataclasses. Dataclasses allow you to build classes that store data and provide some built-in tools for operating with them. The crusial features are:</p>
+<ul class="simple">
+<li><p>Automatically generated <code class="docutils literal notranslate"><span class="pre">__init__</span></code> that will create all required attributes.</p></li>
+<li><p>Converting to string as <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> method will be defined in dataclass.</p></li>
+<li><p>Comparing as <code class="docutils literal notranslate"><span class="pre">__eq__</span></code> method will be implemented.</p></li>
+</ul>
+<p>Find out more in the <a class="reference internal" href="constructs/data_classes.html"><span class="std std-doc">special page</span></a>.</p>
 <hr class="docutils" />
-<p>Suppose you need a dataclass with two variables, <code class="docutils literal notranslate"><span class="pre">minimum</span></code> and <code class="docutils literal notranslate"><span class="pre">maximum</span></code>, and you want to guarantee that <code class="docutils literal notranslate"><span class="pre">minimum</span></code> will definitely be less than <code class="docutils literal notranslate"><span class="pre">maximum</span></code>. The following cell shows a dataclass that will print a message in case <code class="docutils literal notranslate"><span class="pre">minimum</span> <span class="pre">&gt;</span> <span class="pre">maximum</span></code>.</p>
+<p>To define a dataclass, you have to use the <code class="docutils literal notranslate"><span class="pre">dataclasses.dataclass</span></code> decorator. The following cell defines one that we’ll use:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">SomeData</span><span class="p">:</span>
-    <span class="n">minimum</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">maximum</span><span class="p">:</span> <span class="nb">float</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Miminum can&#39;t be bigger than maximum.&quot;</span><span class="p">)</span>
-    
-<span class="n">SomeData</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Miminum can&#39;t be bigger than maximum.
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SomeData(minimum=5, maximum=4)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="to-dict">
-<h2>To dict<a class="headerlink" href="#to-dict" title="Link to this heading">#</a></h2>
-<p>Converting a dataclass to a dictionary is a common requirement. You can achieve this with the <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.asdict"><code class="docutils literal notranslate"><span class="pre">asdict</span></code></a> function.</p>
-<hr class="docutils" />
-<p>The following examle shows basic usage of the <code class="docutils literal notranslate"><span class="pre">asdict</span></code> function.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">SomeData</span><span class="p">:</span>
-    <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">b</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">c</span><span class="p">:</span> <span class="nb">bool</span>
-
-<span class="n">asdict</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 10, &#39;b&#39;: 20, &#39;c&#39;: 30}
-</pre></div>
-</div>
-</div>
-</div>
-<p>It’s important to note that inner dataclasses will also be transformed into dictionaries—resulting in a <strong>dictionary within a dictionary</strong>, <strong>not</strong> a dataclass within a dictionary.</p>
-<hr class="docutils" />
-<p>The following cell sets one dataclass as an attribute of another. However, when applying <code class="docutils literal notranslate"><span class="pre">asdict</span></code> to the instance, both dataclasses are converted into dictionaries in the result.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">InnerData</span><span class="p">:</span>
-    <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">b</span><span class="p">:</span> <span class="nb">float</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">OutherData</span><span class="p">:</span>
-    <span class="nb">id</span><span class="p">:</span> <span class="n">InnerData</span>
-    <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">b</span><span class="p">:</span> <span class="nb">bool</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">OutherData</span><span class="p">(</span><span class="n">InnerData</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">asdict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SomeData</span><span class="p">:</span>
+    <span class="n">value1</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">value2</span><span class="p">:</span> <span class="nb">str</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Any instance of such a class can be transformed into a string in the format <code class="docutils literal notranslate"><span class="pre">&lt;ClassName&gt;(&lt;attr1&gt;=&lt;val1&gt;,</span> <span class="pre">...)</span></code>. The following cell shows this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;id&#39;: {&#39;a&#39;: 10, &#39;b&#39;: 20}, &#39;a&#39;: 30, &#39;b&#39;: True}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SomeData(value1=1, value2=&#39;wow&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can compare dataclasses out of the box, and if their attributes have the same values, you will find that the instances are equal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">SomeData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;oh my gosh&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+False
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -981,11 +938,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="cli_arguments.html"
+       href="constructs/iterator.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Cli arguments</p>
+        <p class="prev-next-title">Iterator</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1005,9 +962,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining">Defining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization-logic">Initialization logic</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-dict">To dict</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterator">Iterator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-class">Data class</a></li>
 </ul>
   </nav></div>
 

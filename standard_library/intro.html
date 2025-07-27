@@ -233,7 +233,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../core/files_folders/pathlib.html">Pathlib</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../core/data_classes.html">Data class</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/constructs.html">Constructs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/constructs/iterator.html">Iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/constructs/data_classes.html">Data class</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../core/cli_arguments.html">Cli arguments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../core/cli_arguments/argparse.html">Argparse</a></li>
 </ul>
@@ -301,6 +305,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency/threading.html">Threading</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="tracemalloc.html">Tracemalloc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hashlib.html">Hashlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zipfile.html">Zipfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="socket.html">Socket</a></li>
@@ -749,6 +754,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial">Partial</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracemalloc">Tracemalloc</a></li>
 </ul>
             </nav>
         </div>
@@ -771,7 +777,7 @@ document.write(`
 <p>The following example demonstrates how to create a logger, <code class="docutils literal notranslate"><span class="pre">show_logger</span></code>, and attach different handlers to it. Handlers define the destination of the output, and each handler has a unique formatter—an object that defines the format of the records produced by the corresponding handler.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
 <span class="n">show_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;show logger&quot;</span><span class="p">)</span>
 
@@ -809,7 +815,7 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 <p>The following cell defines a function with three parameters and demostrates how to call it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">some_fun</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -827,7 +833,7 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 <p>Now created <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> function, which is the same as <code class="docutils literal notranslate"><span class="pre">some_fun</span></code> but uses <code class="docutils literal notranslate"><span class="pre">a=3</span></code> and <code class="docutils literal notranslate"><span class="pre">b=10</span></code> as default values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">some_fun</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">some_fun</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -835,7 +841,7 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 <p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> call with <code class="docutils literal notranslate"><span class="pre">b</span></code> set to “hello”</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -849,7 +855,7 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 <p><strong>Note:</strong> It is possible to redefine values specified in <code class="docutils literal notranslate"><span class="pre">parital</span></code>. The following code calls <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> with new value for <code class="docutils literal notranslate"><span class="pre">a</span></code> parameter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -863,7 +869,7 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 <p><strong>Note:</strong> With <code class="docutils literal notranslate"><span class="pre">partial</span></code> you can redefine any callable you like not only functions, for example you can specify a class that will always have the same argument of the <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. The following cell creates a special object that will behave just like a <code class="docutils literal notranslate"><span class="pre">dict</span></code> but will have a default <code class="docutils literal notranslate"><span class="pre">hello:</span> <span class="pre">10</span></code> key-value pair.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">hello</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">hello</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">value</span><span class="p">(),</span> <span class="n">value</span><span class="p">(</span><span class="n">new</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -875,6 +881,49 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 </div>
 </div>
 </section>
+</section>
+<section id="tracemalloc">
+<h2>Tracemalloc<a class="headerlink" href="#tracemalloc" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">tracemalloc</span></code> package allows you to monitor memory in python. For more information, check <a class="reference external" href="https://docs.python.org/3/library/tracemalloc.html"><code class="docutils literal notranslate"><span class="pre">tracemalloc</span></code> - Trace memory allocations</a> page of official documentation.</p>
+<p>Check more detainls in the <a class="reference internal" href="tracemalloc.html"><span class="std std-doc">Tracemalloc</span></a> page.</p>
+<hr class="docutils" />
+<p>To eliminate calls associated with the jupyter notebook, separate script supposed to be reated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/my_file.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">tracemalloc</span>
+
+<span class="c1"># Start monitoring</span>
+<span class="n">tracemalloc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Taking information from the calls up to the present moment</span>
+<span class="n">snapshot</span> <span class="o">=</span> <span class="n">tracemalloc</span><span class="o">.</span><span class="n">take_snapshot</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">snapshot</span><span class="o">.</span><span class="n">statistics</span><span class="p">(</span><span class="s1">&#39;lineno&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/my_file.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The script’s run is in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>/tmp/my_file.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">snapshot.statistisc('lineno')</span></code> returns a list of different memory allocations. In the example under consideration, there is just one line that corresponds to the  <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">=</span> <span class="pre">10</span></code> call.</p>
 </section>
 </section>
 
@@ -947,6 +996,7 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial">Partial</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracemalloc">Tracemalloc</a></li>
 </ul>
   </nav></div>
 
