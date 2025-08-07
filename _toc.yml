@@ -320,6 +320,7 @@ parts:
     - file: packages/requests.ipynb
     - file: packages/mlflow
       sections:
+      - file: packages/mlflow/tracking.ipynb
       - file: packages/mlflow/example_of_use.ipynb
       - file: packages/mlflow/deploy.ipynb
       - file: packages/mlflow/custom_model.ipynb
