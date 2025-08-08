@@ -324,6 +324,7 @@ parts:
       - file: packages/mlflow/example_of_use.ipynb
       - file: packages/mlflow/deploy.ipynb
       - file: packages/mlflow/custom_model.ipynb
+      - file: packages/mlflow/flavours.ipynb
     - file: packages/tkinter.ipynb
       sections:
       - file: packages/tkinter/widgets_overview.ipynb
