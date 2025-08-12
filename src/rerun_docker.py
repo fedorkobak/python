@@ -38,8 +38,9 @@ def ensure_container_remove(container: Container) -> None:
     container.stop()
     if not container.attrs["HostConfig"]["AutoRemove"]:
         container.remove(force=True)
-    while check_container(container.name):
-        time.sleep(1)
+    if container.name is not None:
+        while check_container(container.name):
+            time.sleep(1)
 
 
 def reload_docker_container(name: str, **kwargs) -> Container:
