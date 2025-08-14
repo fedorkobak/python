@@ -237,6 +237,7 @@ parts:
       sections:
       - file: visualisation/matplotlib/table_in_matplotlib.ipynb
       - file: visualisation/matplotlib/gif_creation.ipynb
+    - file: visualisation/seaborn.ipynb
     - file: visualisation/plotly
       sections:
       - file: visualisation/plotly/hovers.ipynb
