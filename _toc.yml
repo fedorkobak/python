@@ -261,70 +261,74 @@ parts:
       - file: sql/sqlalchemy/query.ipynb
       - file: sql/sqlalchemy/add_record.ipynb
       - file: sql/sqlalchemy/relations.ipynb
+  - caption: "DS/ML"
+    chapters:
+    - file: ds_ml/intro.ipynb
+    - file: ds_ml/numpy
+      sections:
+      - file: ds_ml/numpy/create_array.ipynb
+      - file: ds_ml/numpy/operations.ipynb
+      - file: ds_ml/numpy/norm.ipynb
+      - file: ds_ml/numpy/array_splitting.ipynb
+      - file: ds_ml/numpy/apply_along_axis.ipynb
+      - file: ds_ml/numpy/set_printoptions.ipynb
+    - file: ds_ml/jupyter.ipynb
+      sections:
+      - file: ds_ml/jupyter/ipython.ipynb
+        sections:
+        - file: ds_ml/jupyter/ipython/syntax.ipynb
+        - file: ds_ml/jupyter/ipython/reloading_modules.ipynb
+      - file: ds_ml/jupyter/kernel.ipynb
+        sections:
+        - file: ds_ml/jupyter/kernel/run_from_jupyter.ipynb
+      - file: ds_ml/jupyter/client.ipynb
+      - file: ds_ml/jupyter/traitlets.ipynb
+        sections:
+        - file: ds_ml/jupyter/traitlets/application.ipynb
+    - file: ds_ml/transformers.ipynb
+      sections:
+      - file: ds_ml/transformers/pipeline.ipynb
+      - file: ds_ml/transformers/tokenizer.ipynb
+    - file: ds_ml/airflow
+      sections:
+      - file: ds_ml/airflow/run_airflow.ipynb
+      - file: ds_ml/airflow/tutorial_dag.ipynb
+      - file: ds_ml/airflow/tasks.ipynb
+    - file: ds_ml/geopy
+      sections:
+      - file: ds_ml/geopy/distances.ipynb
+      - file: ds_ml/geopy/request.ipynb
+    - file: ds_ml/ranx.ipynb
+      sections:
+      - file: ds_ml/ranx/entry_queries_documents.ipynb
+    - file: ds_ml/mlflow
+      sections:
+      - file: ds_ml/mlflow/tracking.ipynb
+      - file: ds_ml/mlflow/example_of_use.ipynb
+      - file: ds_ml/mlflow/deploy.ipynb
+      - file: ds_ml/mlflow/custom_model.ipynb
+      - file: ds_ml/mlflow/flavours.ipynb
+    - file: ds_ml/langchain.ipynb
   - caption: Packages
     chapters:
     - file: packages/intro.ipynb
-    - file: packages/numpy
-      sections:
-      - file: packages/numpy/create_array.ipynb
-      - file: packages/numpy/operations.ipynb
-      - file: packages/numpy/norm.ipynb
-      - file: packages/numpy/array_splitting.ipynb
-      - file: packages/numpy/apply_along_axis.ipynb
-      - file: packages/numpy/set_printoptions.ipynb
     - file: packages/excel_export.ipynb
     - file: packages/zipfile.ipynb
       sections:
       - file: packages/zipfile/extraction.ipynb
-    - file: packages/jupyter.ipynb
-      sections:
-      - file: packages/jupyter/ipython.ipynb
-        sections:
-        - file: packages/jupyter/ipython/syntax.ipynb
-        - file: packages/jupyter/ipython/reloading_modules.ipynb
-      - file: packages/jupyter/kernel.ipynb
-        sections:
-        - file: packages/jupyter/kernel/run_from_jupyter.ipynb
-      - file: packages/jupyter/client.ipynb
-      - file: packages/jupyter/traitlets.ipynb
-        sections:
-        - file: packages/jupyter/traitlets/application.ipynb
     - file: packages/jinja.ipynb
     - file: packages/docker_sdk.ipynb
       sections:
       - file: packages/docker_sdk/containers.ipynb
-    - file: packages/transformers.ipynb
-      sections:
-      - file: packages/transformers/pipeline.ipynb
-      - file: packages/transformers/tokenizer.ipynb
     - file: packages/apscheduler.ipynb
     - file: packages/selenium.ipynb
-    - file: packages/ranx.ipynb
-      sections:
-      - file: packages/ranx/entry_queries_documents.ipynb
     - file: packages/tqdm.ipynb
     - file: packages/redis.ipynb
       sections:
       - file: packages/redis/redis_client.ipynb
     - file: packages/surprise.ipynb
-    - file: packages/airflow
-      sections:
-      - file: packages/airflow/run_airflow.ipynb
-      - file: packages/airflow/tutorial_dag.ipynb
-      - file: packages/airflow/tasks.ipynb
-    - file: packages/geopy
-      sections:
-      - file: packages/geopy/distances.ipynb
-      - file: packages/geopy/request.ipynb
     - file: packages/socket.ipynb
     - file: packages/requests.ipynb
-    - file: packages/mlflow
-      sections:
-      - file: packages/mlflow/tracking.ipynb
-      - file: packages/mlflow/example_of_use.ipynb
-      - file: packages/mlflow/deploy.ipynb
-      - file: packages/mlflow/custom_model.ipynb
-      - file: packages/mlflow/flavours.ipynb
     - file: packages/tkinter.ipynb
       sections:
       - file: packages/tkinter/widgets_overview.ipynb
@@ -334,4 +338,3 @@ parts:
         - file: packages/tkinter/widgets_overview/list_box.ipynb
       - file: packages/tkinter/pack.ipynb
       - file: packages/tkinter/change_elements_position.ipynb
-    - file: packages/langchain.ipynb
