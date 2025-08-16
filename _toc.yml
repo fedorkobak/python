@@ -28,6 +28,8 @@ parts:
         - file: core/syntax/oop/special_methods.ipynb
         - file: core/syntax/oop/special_attributes.ipynb
       - file: core/syntax/exceptions.ipynb
+        sections:
+        - file: core/syntax/exceptions/try_except.ipynb
       - file: core/syntax/iterator.ipynb
       - file: core/syntax/decorators.ipynb
     - file: core/datatypes.ipynb
