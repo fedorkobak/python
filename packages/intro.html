@@ -206,7 +206,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_attributes.html">Special attributes</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../core/syntax/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/exceptions/try_except.html">Try/except</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../core/syntax/decorators.html">Decorators</a></li>
 </ul>
 </details></li>
@@ -464,6 +467,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../visualisation/matplotlib/gif_creation.html">Gif creation</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualisation/seaborn.html">Seaborn</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/plotly.html">Plotly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/hovers.html">Hovers</a></li>
 
@@ -1059,6 +1063,98 @@ rm -r zip_example_file archive.zip
 <section id="drawsvg">
 <h2>Drawsvg<a class="headerlink" href="#drawsvg" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">drawsvg</span></code> is a package that allows you to describe SVG graphics with python code. Check out the <a class="reference external" href="https://cduck.github.io/drawsvg/">Drawsvg quick reference</a>.</p>
+<p>The following table represents the basic features of the <code class="docutils literal notranslate"><span class="pre">drawsvg</span></code> package:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Function / Class</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Drawing</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Drawing</span></code></p></td>
+<td><p>Create a drawing container.</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Drawing.append</span></code></p></td>
+<td><p>Append elements to the drawing.</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Drawing.to_svg</span></code></p></td>
+<td><p>Export as an SVG string.</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Drawing.save_svg</span></code></p></td>
+<td><p>Save SVG directly to file.</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Drawing.save_png</span></code></p></td>
+<td><p>Export as PNG (requires <code class="docutils literal notranslate"><span class="pre">cairosvg</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Composition</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Group</span></code></p></td>
+<td><p>Group multiple elements (<code class="docutils literal notranslate"><span class="pre">&lt;g&gt;</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Use</span></code></p></td>
+<td><p>Reuse elements by reference (<code class="docutils literal notranslate"><span class="pre">&lt;use&gt;</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Shapes</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Rectangle</span></code></p></td>
+<td><p>Draw rectangles.</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Circle</span></code></p></td>
+<td><p>Draw circles.</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Ellipse</span></code></p></td>
+<td><p>Draw ellipses.</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Line</span></code></p></td>
+<td><p>Draw straight lines.</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Polygon</span></code></p></td>
+<td><p>Draw polygons.</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Path</span></code></p></td>
+<td><p>Freeform path drawing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Text</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Text</span></code></p></td>
+<td><p>Add text elements.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Transformations</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Translate</span></code></p></td>
+<td><p>Apply translation transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Scale</span></code></p></td>
+<td><p>Apply scaling transform.</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">drawsvg.Rotate</span></code></p></td>
+<td><p>Apply rotation transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">element.set_transform</span></code></p></td>
+<td><p>Set transform on an element.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Accessibility</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">element.append_title</span></code></p></td>
+<td><p>Add title (tooltip).</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">element.append_desc</span></code></p></td>
+<td><p>Add description (for accessibility/metadata).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr class="docutils" />
 <p>The following cell shows how to draw a cross on a red background using svg.</p>
 <div class="cell docutils container">

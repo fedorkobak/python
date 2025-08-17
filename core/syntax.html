@@ -208,7 +208,10 @@
 <li class="toctree-l3"><a class="reference internal" href="syntax/oop/special_attributes.html">Special attributes</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="syntax/exceptions.html">Exceptions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="syntax/exceptions/try_except.html">Try/except</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="syntax/decorators.html">Decorators</a></li>
 </ul>
 </details></li>
@@ -466,6 +469,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../visualisation/matplotlib/gif_creation.html">Gif creation</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualisation/seaborn.html">Seaborn</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/plotly.html">Plotly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/hovers.html">Hovers</a></li>
 
@@ -1106,20 +1110,42 @@ document.write(`
 </section>
 <section id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h2>
-<p>The separate section is for cases of using <code class="docutils literal notranslate"><span class="pre">try/except</span></code> operators. With try you can create block that’ll monitor specific types of errors and transfer control to the execpt unit if necessary. For more details check <a class="reference internal" href="syntax/exceptions.html"><span class="std std-doc">specific page</span></a>.</p>
+<p>Exceptions are python’s way to deal with cases when something goes wrong. There are several important concepts associated with exceptions in python:</p>
+<ul class="simple">
+<li><p>An exception class/object - this is a descendant of the <code class="docutils literal notranslate"><span class="pre">ExceptionBaseclass</span></code> that representes a particular type of the exception.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raise</span> <span class="pre">&lt;instance</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">exception</span> <span class="pre">class&gt;</span></code> keyword allows to raise an exception.</p></li>
+<li><p>To handle expceptions that may occur in different parts of the programm, use the <code class="docutils literal notranslate"><span class="pre">try/except</span></code> construct.</p></li>
+</ul>
+<p>For more check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/errors.html">Errors and Exceptions</a> python tutorial.</p></li>
+<li><p>In <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#bltin-exceptions">Build-in Exception</a> are listed all basic expceptions awailable in the python.</p></li>
+</ul>
 <hr class="docutils" />
-<p>The following code wraps the <code class="docutils literal notranslate"><span class="pre">10/0</span></code> command, which would normally lead to an error, inside a <code class="docutils literal notranslate"><span class="pre">try</span></code> block. The <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">ZeroDivisionError</span></code> block is used to define the code that will be executed if the error occurs.</p>
+<p>The following cell tries to include as much as possible python exception concepts in just one really short snippet: it raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> in the <code class="docutils literal notranslate"><span class="pre">try</span></code> block, catches the expcetion instance as <code class="docutils literal notranslate"><span class="pre">e</span></code>, prints its type, and re-rise an exception.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="mi">10</span><span class="o">/</span><span class="mi">0</span>
-<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I&#39;m an exception&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="k">raise</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I&#39;m an exception
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;ValueError&#39;&gt;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+<span class="ne">ValueError</span>: hello
 </pre></div>
 </div>
 </div>
