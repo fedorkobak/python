@@ -288,10 +288,12 @@ parts:
       - file: ds_ml/jupyter/traitlets.ipynb
         sections:
         - file: ds_ml/jupyter/traitlets/application.ipynb
-    - file: ds_ml/transformers.ipynb
+    - file: ds_ml/hugging_face.ipynb
       sections:
-      - file: ds_ml/transformers/pipeline.ipynb
-      - file: ds_ml/transformers/tokenizer.ipynb
+      - file: ds_ml/hugging_face/transformers.ipynb
+        sections:
+        - file: ds_ml/hugging_face/transformers/pipeline.ipynb
+        - file: ds_ml/hugging_face/transformers/tokenizer.ipynb
     - file: ds_ml/airflow
       sections:
       - file: ds_ml/airflow/run_airflow.ipynb
