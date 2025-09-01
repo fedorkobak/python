@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pipeline &#8212; Python</title>
+    <title>Transformers &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ds_ml/transformers/pipeline';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ds_ml/hugging_face/transformers';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Tokenizer" href="tokenizer.html" />
-    <link rel="prev" title="Transformers" href="../transformers.html" />
+    <link rel="next" title="Pipeline" href="transformers/pipeline.html" />
+    <link rel="prev" title="Tokenizers" href="tokenizers.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -539,9 +539,13 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../transformers.html">Transformers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tokenizer.html">Tokenizer</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../hugging_face.html">Hugging Face</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Transformers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -666,7 +670,7 @@
       
       
       
-      <li><a href="../../_sources/ds_ml/transformers/pipeline.ipynb" target="_blank"
+      <li><a href="../../_sources/ds_ml/hugging_face/transformers.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -750,7 +754,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pipeline</h1>
+    <h1>Transformers</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -760,7 +764,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-task">Pipeline task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline">Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-to-dataset">Apply to dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loader">Loader</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -772,32 +783,37 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pipeline">
-<h1>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">transformers.Pipeline</span></code> provides the most straightforward way to use models available in Hugging Face, combining all procedures into a single class. Learn more on the <a class="reference external" href="https://huggingface.co/docs/transformers/main_classes/pipelines">dedicated documentation page</a>.</p>
-<p>This page considers features of using this tool.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="transformers">
+<h1>Transformers<a class="headerlink" href="#transformers" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">transformers</span></code> is python package that allows you to use pre-trained machine learning models that belong to the transformers architecture.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">transformers</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">exp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="pipeline-task">
-<h2>Pipeline task<a class="headerlink" href="#pipeline-task" title="Link to this heading">#</a></h2>
-<p>The behavior of the pipeline strongly depends on its <code class="docutils literal notranslate"><span class="pre">task</span></code>. Each task returns a different object. For a full list of tasks and links to the corresponding objects, check <a class="reference external" href="https://huggingface.co/docs/transformers/v4.47.1/en/main_classes/pipelines#transformers.pipeline.task">this link</a>.</p>
-<p>You can specify different options for different tasks, both when you’re creating the pipeline and when you’re working on it.</p>
+<section id="pipeline">
+<h2>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading">#</a></h2>
+<p>With pipeline you can easily define any model you like. Find out more:</p>
+<ul class="simple">
+<li><p>Corresponding <a class="reference external" href="https://huggingface.co/docs/transformers/main_classes/pipelines">documentation page</a>.</p></li>
+<li><p><a class="reference internal" href="transformers/pipeline.html"><span class="std std-doc">Special page on this site</span></a>.</p></li>
+</ul>
 <hr class="docutils" />
-<p>The following cell shows an example of using <code class="docutils literal notranslate"><span class="pre">task=&quot;text-classification&quot;</span></code>. For this, you can specify <code class="docutils literal notranslate"><span class="pre">function_to_apply</span></code>, which is exclusive to <code class="docutils literal notranslate"><span class="pre">text-classification</span></code>. In the example, <code class="docutils literal notranslate"><span class="pre">'none'</span></code> is specified, indicating that the result shouldn’t be transformed.</p>
+<p>The following page shows a very simple example of loading pipeline for text classification purposes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
     <span class="n">task</span><span class="o">=</span><span class="s2">&quot;text-classification&quot;</span><span class="p">,</span>
-    <span class="n">function_to_apply</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="s2">&quot;distilbert/distilbert-base-uncased-finetuned-sst-2-english&quot;</span>
-<span class="p">)(</span><span class="s2">&quot;wow&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">ans</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;Wow this is awesome&quot;</span><span class="p">),</span>
+    <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;The fish had really strange taste&quot;</span><span class="p">),</span>
+    <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -805,59 +821,25 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Device set to use cpu
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;label&#39;: &#39;POSITIVE&#39;, &#39;score&#39;: 4.055374622344971}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;label&#39;: &#39;POSITIVE&#39;, &#39;score&#39;: 0.9998487234115601}]
+[{&#39;label&#39;: &#39;NEGATIVE&#39;, &#39;score&#39;: 0.8964248299598694}]
 </pre></div>
 </div>
 </div>
 </div>
-<p>The following cell applies a sigmoid function to the result of the previous cell:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">ans</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9829661915068255
-</pre></div>
-</div>
-</div>
-</div>
-<p>The same result using pipeline with <code class="docutils literal notranslate"><span class="pre">function_to_apply=&quot;sigmoid&quot;</span></code> on the same phrase:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
-    <span class="n">task</span><span class="o">=</span><span class="s2">&quot;text-classification&quot;</span><span class="p">,</span>
-    <span class="n">function_to_apply</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;distilbert/distilbert-base-uncased-finetuned-sst-2-english&quot;</span>
-<span class="p">)(</span><span class="s2">&quot;wow&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">ans</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Device set to use cpu
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;label&#39;: &#39;POSITIVE&#39;, &#39;score&#39;: 0.9829661846160889}
-</pre></div>
-</div>
-</div>
-</div>
-<p>Consider another example: using the <code class="docutils literal notranslate"><span class="pre">question-answering</span></code> pipeline. For it, the argument <code class="docutils literal notranslate"><span class="pre">function_to_apply</span></code> doesn’t make sense at all. Moreover, you need to pass data to it in a different manner.</p>
-<hr class="docutils" />
-<p>The following cell defines the pipeline and shows errors if you don’t pass data to it in the right way.</p>
+<p>In some cases, you may need to explicitly specify the <code class="docutils literal notranslate"><span class="pre">task</span></code>, <code class="docutils literal notranslate"><span class="pre">model</span></code> and <code class="docutils literal notranslate"><span class="pre">tokinizer</span></code> arguments. The following cell shows using this case for access to the <code class="docutils literal notranslate"><span class="pre">question-answering</span></code> mode of the <code class="docutils literal notranslate"><span class="pre">distilbert-base-cased-distilled-squad</span></code> model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qa_pipeline</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
     <span class="n">task</span><span class="o">=</span><span class="s2">&quot;question-answering&quot;</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="s2">&quot;distilbert-base-cased-distilled-squad&quot;</span><span class="p">,</span> 
+    <span class="n">tokenizer</span><span class="o">=</span><span class="s2">&quot;distilbert-base-cased-distilled-squad&quot;</span>
 <span class="p">)</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">qa_pipeline</span><span class="p">(</span><span class="s2">&quot;wow&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">qa_pipeline</span><span class="p">(</span>
+    <span class="n">question</span><span class="o">=</span><span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">=</span><span class="s2">&quot;France&#39;s capital is Paris.&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -865,36 +847,355 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Device set to use cpu
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>w argument needs to be of type (SquadExample, dict)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/fedor/Documents/knowledge/venv/lib/python3.12/site-packages/transformers/pipelines/question_answering.py:391: FutureWarning: Passing a list of SQuAD examples to the pipeline is deprecated and will be removed in v5. Inputs should be passed using the `question` and `context` keyword arguments instead.
-  warnings.warn(
-</pre></div>
-</div>
-</div>
-</div>
-<p>This type of pipeline needs <code class="docutils literal notranslate"><span class="pre">question</span></code> and <code class="docutils literal notranslate"><span class="pre">context</span></code> arguments to work correctly, the following cell shows the case of using it.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qa_pipeline</span><span class="p">(</span>
-    <span class="n">question</span><span class="o">=</span><span class="s2">&quot;How tall is John&quot;</span><span class="p">,</span>
-    <span class="n">context</span><span class="o">=</span><span class="p">(</span>
-        <span class="s2">&quot;John was a really tall men. &quot;</span> 
-        <span class="s2">&quot;His height was around 2m. &quot;</span>
-        <span class="s2">&quot;But it was nothing special for him.&quot;</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;score&#39;: 0.6897236108779907, &#39;start&#39;: 50, &#39;end&#39;: 52, &#39;answer&#39;: &#39;2m&#39;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;score&#39;: 0.9831558465957642, &#39;start&#39;: 20, &#39;end&#39;: 25, &#39;answer&#39;: &#39;Paris&#39;}
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<section id="tokenizer">
+<h2>Tokenizer<a class="headerlink" href="#tokenizer" title="Link to this heading">#</a></h2>
+<p>You can opearte separately with tokenizer by using corresponding objects. Check more features in the <a class="reference internal" href="transformers/tokenizer.html"><span class="std std-doc">corresponding page</span></a>.</p>
+<hr class="docutils" />
+<p>The following cell loading of the <code class="docutils literal notranslate"><span class="pre">bert-base-cased</span></code> tokenizer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;bert-base-cased&#39;</span><span class="p">)</span>
+<span class="n">tokenizer</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BertTokenizerFast(name_or_path=&#39;bert-base-cased&#39;, vocab_size=28996, model_max_length=512, is_fast=True, padding_side=&#39;right&#39;, truncation_side=&#39;right&#39;, special_tokens={&#39;unk_token&#39;: &#39;[UNK]&#39;, &#39;sep_token&#39;: &#39;[SEP]&#39;, &#39;pad_token&#39;: &#39;[PAD]&#39;, &#39;cls_token&#39;: &#39;[CLS]&#39;, &#39;mask_token&#39;: &#39;[MASK]&#39;}, clean_up_tokenization_spaces=False, added_tokens_decoder={
+	0: AddedToken(&quot;[PAD]&quot;, rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	100: AddedToken(&quot;[UNK]&quot;, rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	101: AddedToken(&quot;[CLS]&quot;, rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	102: AddedToken(&quot;[SEP]&quot;, rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	103: AddedToken(&quot;[MASK]&quot;, rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+}
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>So here is example how “Hello world!” phrase can be tokinized.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode_plus</span><span class="p">(</span>
+    <span class="s1">&#39;Hello world!&#39;</span><span class="p">,</span> 
+    <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">return_token_type_ids</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;input_ids&#39;: tensor([[ 101, 8667, 1362,  106,  102]]), &#39;attention_mask&#39;: tensor([[1, 1, 1, 1, 1]])}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model">
+<h2>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h2>
+<p>Model can be loaded separately as well ass tokenizer.</p>
+<hr class="docutils" />
+<p>The following cell load model <code class="docutils literal notranslate"><span class="pre">Bert</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">BertModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;bert-base-cased&#39;</span><span class="p">)</span>
+<span class="n">model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BertModel(
+  (embeddings): BertEmbeddings(
+    (word_embeddings): Embedding(28996, 768, padding_idx=0)
+    (position_embeddings): Embedding(512, 768)
+    (token_type_embeddings): Embedding(2, 768)
+    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (encoder): BertEncoder(
+    (layer): ModuleList(
+      (0-11): 12 x BertLayer(
+        (attention): BertAttention(
+          (self): BertSdpaSelfAttention(
+            (query): Linear(in_features=768, out_features=768, bias=True)
+            (key): Linear(in_features=768, out_features=768, bias=True)
+            (value): Linear(in_features=768, out_features=768, bias=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (output): BertSelfOutput(
+            (dense): Linear(in_features=768, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (intermediate): BertIntermediate(
+          (dense): Linear(in_features=768, out_features=3072, bias=True)
+          (intermediate_act_fn): GELUActivation()
+        )
+        (output): BertOutput(
+          (dense): Linear(in_features=3072, out_features=768, bias=True)
+          (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+  )
+  (pooler): BertPooler(
+    (dense): Linear(in_features=768, out_features=768, bias=True)
+    (activation): Tanh()
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next cell shows the use of the model. Input must first be tokinised before it can be passed to the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-cased&quot;</span><span class="p">)</span>
+<span class="n">tokenized</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode_plus</span><span class="p">(</span>
+    <span class="s1">&#39;Hello!&#39;</span><span class="p">,</span> 
+    <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">return_token_type_ids</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span>
+<span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">tokenized</span><span class="p">)</span>
+<span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="p">:</span><span class="mi">50</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[[ 0.6283,  0.2166,  0.5605,  ...,  0.0136,  0.6158, -0.1712],
+          [ 0.6108, -0.2253,  0.9263,  ..., -0.3028,  0.4500, -0.0714],
+          [ 0.8040,  0.1809,  0.7076,  ..., -0.0685,  0.4837, -0.0774],
+          [ 1.3290,  0.2360,  0.4567,  ...,  0.1509,  0.9621, -0.4841]]],
+        grad_fn=&lt;NativeLayerNormBackward0&gt;),
+ tensor([[-0.7105,  0.4876,  0.9999, -0.9947,  0.9599,  0.9521,  0.9767, -0.9946,
+          -0.9815, -0.6238,  0.9776,  0.9984, -0.9989, -0.9998,  0.8559, -0.9755,
+           0.9895, -0.5281, -1.0000, -0.7414, -0.7056, -0.9999,  0.2901,  0.9786,
+           0.9729,  0.0734,  0.9828,  1.0000,  0.8981, -0.1109,  0.2780, -0.9920,
+           0.8693, -0.9985,  0.1461,  0.2067,  0.8092, -0.2430,  0.8580, -0.9585,
+          -0.8130, -0.6138,  0.7961, -0.5727,  0.9737,  0.2362, -0.1194, -0.0789,
+           0.0031,  0.9997]], grad_fn=&lt;SliceBackward0&gt;))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="apply-to-dataset">
+<h2>Apply to dataset<a class="headerlink" href="#apply-to-dataset" title="Link to this heading">#</a></h2>
+<p>This section shows how the BERT model can be applied to a dataset.</p>
+<section id="dataset">
+<h3>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h3>
+<p>We will be working with the <code class="docutils literal notranslate"><span class="pre">datasets</span></code> library, which is usually used in conjunction with the <code class="docutils literal notranslate"><span class="pre">transformers</span></code> library. So in the following cell we have extracted the <code class="docutils literal notranslate"><span class="pre">imdb</span></code> library, which contains reviews for the movies. We use a small subset of the dataframe to reduce the amount of calculations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;imdb&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+<span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;text&#39;: &quot;The Film must have been shot in a day,there are scenes where you can see the camera reflections and its red pointer,even the scenery&#39;s green light that blends with the actors!!!The plot and the lines are really awful without even the slightest inspiration(At least as a thriller genre movie).Everything that got to do with Poe in the movie,has a shallow and childish approach.The film is full of clise and no thrilling.If you want to watch a funny b-movie for a relaxing evening with friends then go for it you will enjoy it (As I Did) but there&#39;s no way to take this film seriously!&quot;,
+ &#39;label&#39;: 0}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Applying tokenization to the dataset. Finally for each element of the dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tokenization</span><span class="p">(</span><span class="n">example</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_encode_plus</span><span class="p">(</span>
+        <span class="n">example</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">],</span>
+        <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+        <span class="n">return_token_type_ids</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+        <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="n">tokenization</span><span class="p">,</span> <span class="n">batched</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> 
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">,</span> <span class="s2">&quot;attention_mask&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After that we have extra keys for each object <code class="docutils literal notranslate"><span class="pre">input_ids</span></code> and <code class="docutils literal notranslate"><span class="pre">attention_mask</span></code> - wich is required for bert model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Keys:&lt;/b&gt;&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;Tokens:&lt;/b&gt;&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;input_ids&#39;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;Mask:&lt;/b&gt;&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><b>Keys:</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;input_ids&#39;, &#39;attention_mask&#39;]
+</pre></div>
+</div>
+<div class="output text_html"><br><b>Tokens:</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([  101,  1109,  2352,  1538,  1138,  1151,  2046,  1107,   170,  1285,
+          117,  1175,  1132,  4429,  1187,  1128,  1169,  1267,  1103,  4504,
+        26906,  1105,  1157,  1894,  1553,  1200,   117,  1256,  1103, 19335,
+          112,   188,  2448,  1609,  1115, 13390,  1116,  1114,  1103,  5681,
+          106,   106,   106,  1109,  4928,  1105,  1103,  2442,  1132,  1541,
+         9684,  1443,  1256,  1103, 16960,  7670,   113,  1335,  1655,  1112,
+          170, 11826,  6453,  2523,   114,   119,  5268,  1115,  1400,  1106,
+         1202,  1114, 21377,  1107,  1103,  2523,   117,  1144,   170,  8327,
+         1105,  2027,  2944,  3136,   119,  1109,  1273,  1110,  1554,  1104,
+          172,  6137,  1162,  1105,  1185, 21401,  1158,   119,  1409,  1128,
+         1328,  1106,  2824,   170,  6276,   171,   118,  2523,  1111,   170,
+        22187,  3440,  1114,  2053,  1173,  1301,  1111,  1122,  1128,  1209,
+         5548,  1122,   113,  1249,   146,  2966,   114,  1133,  1175,   112,
+          188,  1185,  1236,  1106,  1321,  1142,  1273,  5536,   106,   102])
+</pre></div>
+</div>
+<div class="output text_html"><br><b>Mask:</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loader">
+<h3>Loader<a class="headerlink" href="#loader" title="Link to this heading">#</a></h3>
+<p>Preparing the classical <code class="docutils literal notranslate"><span class="pre">torch.loader</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataCollatorWithPadding</span>
+
+<span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorWithPadding</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> 
+    <span class="n">collate_fn</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span> 
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s look at what the first element of <code class="docutils literal notranslate"><span class="pre">loader</span></code> will be - it’s dict, with all the necessary stuff for fitting and forwarding through bert model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">item</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">loader</span><span class="p">))</span>
+<span class="n">item</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You&#39;re using a BertTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;input_ids&#39;, &#39;attention_mask&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally you can pass <code class="docutils literal notranslate"><span class="pre">item</span></code> to the <code class="docutils literal notranslate"><span class="pre">model</span></code> to get prediction, but you need high-performance hardware to run this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">item</span><span class="p">)[</span><span class="s2">&quot;pooler_output&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Finally, we need to model all the batches. In the following cell we have just extracted embeddings for the whole <code class="docutils literal notranslate"><span class="pre">imdb</span></code> dataset.</p>
+<p><strong>Note</strong>:</p>
+<ul class="simple">
+<li><p>This cell should be started on powerful hardware;</p></li>
+<li><p>The function nested in <code class="docutils literal notranslate"><span class="pre">torch.inference_mode</span></code> is crucial, without it the model takes too much memory.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda:0&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_embeddings</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    
+    <span class="n">total_embeddings</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">loader</span><span class="p">):</span>
+
+        <span class="n">batch</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> 
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">,</span> <span class="s1">&#39;input_ids&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">batch</span><span class="p">)[</span><span class="s1">&#39;last_hidden_state&#39;</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">total_embeddings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">total_embeddings</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">get_embeddings</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cpu
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7/7 [01:37&lt;00:00, 13.89s/it]
+</pre></div>
+</div>
+</div>
+</div>
+<p>So for each line from the dataset we got an embedding from the model. It’s representation and shape is shown below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Embeddings:&lt;/b&gt;&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;Shape:&lt;/b&gt;&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">embeddings</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><b>Embeddings:</b></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.6028,  0.1125, -0.2223,  ..., -0.1698,  0.1655,  0.0645],
+        [ 0.6183,  0.0239, -0.2428,  ..., -0.1532,  0.1792,  0.1111],
+        [ 0.3977,  0.1045, -0.1627,  ..., -0.0737,  0.2369,  0.1243],
+        ...,
+        [ 0.5241,  0.1857, -0.4136,  ..., -0.2503,  0.0959,  0.2350],
+        [ 0.6121,  0.0789, -0.1658,  ..., -0.1467,  0.4310,  0.1626],
+        [ 0.6343,  0.0062, -0.1479,  ..., -0.2116,  0.1337,  0.1664]])
+</pre></div>
+</div>
+<div class="output text_html"><br><b>Shape:</b></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([200, 768])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -910,7 +1211,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./ds_ml/transformers"
+            path: "./ds_ml/hugging_face"
         },
         predefinedOutput: true
     }
@@ -928,20 +1229,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../transformers.html"
+       href="tokenizers.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Transformers</p>
+        <p class="prev-next-title">Tokenizers</p>
       </div>
     </a>
     <a class="right-next"
-       href="tokenizer.html"
+       href="transformers/pipeline.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tokenizer</p>
+        <p class="prev-next-title">Pipeline</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -961,7 +1262,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-task">Pipeline task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline">Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-to-dataset">Apply to dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loader">Loader</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

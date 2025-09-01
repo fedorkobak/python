@@ -541,9 +541,13 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/transformers/pipeline.html">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/transformers/tokenizer.html">Tokenizer</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/hugging_face/tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/hugging_face/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/hugging_face/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -765,6 +769,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order">Order</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-operator"><code class="docutils literal notranslate"><span class="pre">/</span></code> - division operator</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-division"><code class="docutils literal notranslate"><span class="pre">//</span></code> - integer division</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inplace-or"><code class="docutils literal notranslate"><span class="pre">|=</span></code> - inplace or</a></li>
 </ul>
             </nav>
         </div>
@@ -886,6 +891,44 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="inplace-or">
+<h2><code class="docutils literal notranslate"><span class="pre">|=</span></code> - inplace or<a class="headerlink" href="#inplace-or" title="Link to this heading">#</a></h2>
+<p>It ususally describes the process of adding elements from the right operand to the left operand. It generally like the pipe symbol (<code class="docutils literal notranslate"><span class="pre">|</span></code>), but assigned to the left operand.</p>
+<hr class="docutils" />
+<p>Consider the application of the operator to the basic datatypes.</p>
+<p>The following cell adds elements to the set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+<span class="n">s1</span> <span class="o">|=</span> <span class="n">s2</span>
+<span class="n">s1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1, 2, 3, 5, 6, 7}
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s the same procedure, but for a dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">d1</span> <span class="o">|=</span> <span class="n">d2</span>
+<span class="n">d1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 10, &#39;b&#39;: 20, &#39;c&#39;: 30, &#39;d&#39;: 40}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -957,6 +1000,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order">Order</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-operator"><code class="docutils literal notranslate"><span class="pre">/</span></code> - division operator</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-division"><code class="docutils literal notranslate"><span class="pre">//</span></code> - integer division</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inplace-or"><code class="docutils literal notranslate"><span class="pre">|=</span></code> - inplace or</a></li>
 </ul>
   </nav></div>
 

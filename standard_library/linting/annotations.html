@@ -539,9 +539,13 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/transformers/pipeline.html">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/transformers/tokenizer.html">Tokenizer</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/hugging_face/tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/hugging_face/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/hugging_face/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -764,6 +768,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-cases">Annotation cases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-aliases">Type aliases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations-attribute"><code class="docutils literal notranslate"><span class="pre">__annotations__</span></code> attribute</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overloads">Overloads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
 </ul>
             </nav>
         </div>
@@ -1067,6 +1073,214 @@ Found 1 error in 1 file (checked 1 source file)
 </div>
 </div>
 </section>
+<section id="overloads">
+<h2>Overloads<a class="headerlink" href="#overloads" title="Link to this heading">#</a></h2>
+<p>Overloads in Python allow you to define multiple function signatures with different argument and return type annotations, while sharing a single implementation.</p>
+<p>Check the <a class="reference external" href="https://typing.python.org/en/latest/spec/overload.html">Overloads</a> page of the official python documentation.</p>
+<hr class="docutils" />
+<p>The following cells defines a <code class="docutils literal notranslate"><span class="pre">foo</span></code> function with overloads: it is annotated to return an <code class="docutils literal notranslate"><span class="pre">int</span></code> when given an <code class="docutils literal notranslate"><span class="pre">int</span></code> input, and a <code class="docutils literal notranslate"><span class="pre">str</span></code> when given a <code class="docutils literal notranslate"><span class="pre">str</span></code> input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+rm -fr /tmp/test_module
+mkdir /tmp/test_module
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/test_module/foo.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">overload</span>
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="o">...</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span> 
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/test_module/foo.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell contains a simple script that uses <code class="docutils literal notranslate"><span class="pre">foo</span></code> and lints it with <code class="docutils literal notranslate"><span class="pre">mypy</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/test_module/s.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">foo</span><span class="w"> </span><span class="kn">import</span> <span class="n">foo</span>
+
+
+<span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">foo</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">b</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">foo</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/test_module/s.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/test_module/s.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Success: no issues found in 1 source file
+</pre></div>
+</div>
+</div>
+</div>
+<p>In case of an <code class="docutils literal notranslate"><span class="pre">int</span></code> implementation, the function is assigned an <code class="docutils literal notranslate"><span class="pre">int</span></code> variable and a <code class="docutils literal notranslate"><span class="pre">str</span></code> implementation is assigned to the <code class="docutils literal notranslate"><span class="pre">str</span></code> variable.</p>
+<p>The following cell performs the same trick, but assigns a function with <code class="docutils literal notranslate"><span class="pre">str</span></code> value to an<code class="docutils literal notranslate"><span class="pre">int</span></code> variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/test_module/s.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">foo</span><span class="w"> </span><span class="kn">import</span> <span class="n">foo</span>
+
+<span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">foo</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/test_module/s.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/test_module/s.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/test_module/s.py:3: error: Incompatible types in assignment (expression has type &quot;str&quot;, variable has type &quot;int&quot;)  [assignment]
+Found 1 error in 1 file (checked 1 source file)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As the <code class="docutils literal notranslate"><span class="pre">str</span></code> input, there is just overload that returns <code class="docutils literal notranslate"><span class="pre">str</span></code> - we got the error.</p>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h2>
+<p>Practice shows that it’s difficult to write fully type-annotated code in python, especially if you’re a data scientist. It’s common for packages to violate the rules of specific linting systems. However, this is not a reason to avoid linting your code; there are tools for such cases:</p>
+<ul class="simple">
+<li><p>Most linters understand comment <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">type:</span> <span class="pre">ingore</span></code> as a reason to ignore linting mistakes in some code.</p></li>
+<li><p>If package doesn’t provide annotations or makes it in the definitely wrong way you can use <code class="docutils literal notranslate"><span class="pre">typing.cast</span></code> to specify the type for the linting systems.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Consider a really typical example: a package is actually annotated, yet there are still issues with the linters you’re using.</p>
+<p>The following cell creates a module containing a <code class="docutils literal notranslate"><span class="pre">funciton</span></code> for which for which the <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> are not annotated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+rm -rf /tmp/typing_exceptions
+mkdir /tmp/typing_exceptions
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/typing_exceptions/function.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">overload</span>
+
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/typing_exceptions/function.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code represents a module that uses the “wrong” function from the linter’s perspective.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/typing_exceptions/main.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">function</span>
+<span class="n">function</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/typing_exceptions/main.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the “strict” configuration, the <code class="docutils literal notranslate"><span class="pre">pyright</span></code> returns an error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+cd /tmp/typing_exceptions
+cat &lt;&lt; EOF &gt; pyrightconfig.json
+{
+    &quot;typeCheckingMode&quot;: &quot;strict&quot;
+}
+EOF
+
+python3 -m pyright main.py &amp; true
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/typing_exceptions/main.py
+  /tmp/typing_exceptions/main.py:<span class=" -Color -Color-Yellow">2</span>:<span class=" -Color -Color-Yellow">1</span> - <span class=" -Color -Color-Red">error</span>: Type of &quot;function&quot; is partially unknown
+    Type of &quot;function&quot; is &quot;Overload[(a: int, **kwargs: Unknown) -&gt; int, (a: str, **kwargs: Unknown) -&gt; str]&quot; (reportUnknownMemberType)
+1 error, 0 warnings, 0 informations
+</pre></div>
+</div>
+</div>
+</div>
+<p>In a real-world project, there are no other solutions besides using the <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">type:</span> <span class="pre">ignore</span></code> instruction of linter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/typing_exceptions/main.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">function</span>
+<span class="n">function</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># type: ignore</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/typing_exceptions/main.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">pyright</span></code> doesn’t have any issues with the use of <code class="docutils literal notranslate"><span class="pre">funciton</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+cd /tmp/typing_exceptions
+python3 -m pyright main.py &amp; true
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 errors, 0 warnings, 0 informations
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1139,6 +1353,8 @@ Found 1 error in 1 file (checked 1 source file)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-cases">Annotation cases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-aliases">Type aliases</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations-attribute"><code class="docutils literal notranslate"><span class="pre">__annotations__</span></code> attribute</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overloads">Overloads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
 </ul>
   </nav></div>
 

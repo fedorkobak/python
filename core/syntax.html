@@ -541,9 +541,13 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/transformers/pipeline.html">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/transformers/tokenizer.html">Tokenizer</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/hugging_face/tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/hugging_face/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/hugging_face/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -879,59 +883,63 @@ document.write(`
 <td><p><code class="docutils literal notranslate"><span class="pre">//=</span></code></p></td>
 <td><p>Floor divide and assign</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Logical</strong></p></td>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">|=</span></code></p></td>
+<td><p>Inplace or</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Logical</strong></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></td>
 <td><p>Logical AND</p></td>
 </tr>
-<tr class="row-even"><td><p></p></td>
+<tr class="row-odd"><td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
 <td><p>Logical OR</p></td>
 </tr>
-<tr class="row-odd"><td><p></p></td>
+<tr class="row-even"><td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">not</span></code></p></td>
 <td><p>Logical NOT</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Bitwise</strong></p></td>
+<tr class="row-odd"><td><p><strong>Bitwise</strong></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
 <td><p>Bitwise AND</p></td>
 </tr>
-<tr class="row-odd"><td><p></p></td>
+<tr class="row-even"><td><p></p></td>
 <td><p>`</p></td>
 <td><p>`</p></td>
 </tr>
-<tr class="row-even"><td><p></p></td>
+<tr class="row-odd"><td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
 <td><p>Bitwise XOR</p></td>
 </tr>
-<tr class="row-odd"><td><p></p></td>
+<tr class="row-even"><td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>
 <td><p>Bitwise NOT</p></td>
 </tr>
-<tr class="row-even"><td><p></p></td>
+<tr class="row-odd"><td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code></p></td>
 <td><p>Left shift</p></td>
 </tr>
-<tr class="row-odd"><td><p></p></td>
+<tr class="row-even"><td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code></p></td>
 <td><p>Right shift</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Membership</strong></p></td>
+<tr class="row-odd"><td><p><strong>Membership</strong></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">in</span></code></p></td>
 <td><p>Membership test</p></td>
 </tr>
-<tr class="row-odd"><td><p></p></td>
+<tr class="row-even"><td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code></p></td>
 <td><p>Non-membership test</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Identity</strong></p></td>
+<tr class="row-odd"><td><p><strong>Identity</strong></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">is</span></code></p></td>
 <td><p>Identity test</p></td>
 </tr>
-<tr class="row-odd"><td><p></p></td>
+<tr class="row-even"><td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code></p></td>
 <td><p>Negated identity test</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Conditional</strong></p></td>
+<tr class="row-odd"><td><p><strong>Conditional</strong></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">if</span> <span class="pre">condition</span> <span class="pre">else</span> <span class="pre">y</span></code></p></td>
 <td><p>Conditional expression</p></td>
 </tr>
