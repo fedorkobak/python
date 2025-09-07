@@ -540,6 +540,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="hugging_face/hub.html">Hub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hugging_face/tokenizers.html">Tokenizers</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="hugging_face/transformers/pipeline.html">Pipeline</a></li>
@@ -770,6 +771,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-transformer">Sentence transformer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
 </ul>
             </nav>
         </div>
@@ -965,6 +967,42 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 </div>
 </section>
+<section id="langchain">
+<h2>LangChain<a class="headerlink" href="#langchain" title="Link to this heading">#</a></h2>
+<p>The Lang chain is the core library for developing modern, agent-based solutions. The following table lists and describes the central components of the lang chain package.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Component</p></th>
+<th class="head text-left"><p>Analogy</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Models</strong></p></td>
+<td class="text-left"><p>The brains</p></td>
+<td class="text-left"><p>These are the core language models (LLMs) that handle the actual work, like generating text, holding conversations, or creating embeddings.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Prompts</strong></p></td>
+<td class="text-left"><p>The instructions</p></td>
+<td class="text-left"><p>These are the templates used to provide specific instructions and context to the models. They ensure the model responds in a consistent and desired format.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Chains</strong></p></td>
+<td class="text-left"><p>The workflow</p></td>
+<td class="text-left"><p>A way to link multiple components together into a single, automated sequence. This allows you to perform multi-step tasks, like combining a prompt with a model call.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Agents</strong></p></td>
+<td class="text-left"><p>The reasoning engine</p></td>
+<td class="text-left"><p>A more advanced chain that uses an LLM to decide which external <strong>Tools</strong> to use to achieve a goal. It can think, act, and observe, repeating the process until the task is complete.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Tools</strong></p></td>
+<td class="text-left"><p>The external capabilities</p></td>
+<td class="text-left"><p>These are functionalities an agent can use to interact with the world. Examples include a search engine, a calculator, or a database lookup.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check more in <a class="reference internal" href="langchain.html"><span class="std std-doc">Lang Chain</span></a> package.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1037,6 +1075,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-transformer">Sentence transformer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
 </ul>
   </nav></div>
 

@@ -540,6 +540,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="hugging_face/hub.html">Hub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hugging_face/tokenizers.html">Tokenizers</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="hugging_face/transformers/pipeline.html">Pipeline</a></li>
@@ -765,6 +766,9 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms">LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messages">Messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
 </ul>
             </nav>
         </div>
@@ -794,17 +798,275 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Please provide me with the details of the test you&#39;d like to request.  To help me understand your request, please tell me:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Please provide me with the details of your test request.  I need information such as:
 
-* **What kind of test is it?** (e.g., unit test, integration test, performance test, usability test, A/B test, etc.)
-* **What is the subject of the test?** (e.g., a specific piece of code, a website, a software application, a marketing campaign, etc.)
-* **What are the goals of the test?** (e.g., to identify bugs, to measure performance, to compare different versions, to assess user experience, etc.)
-* **What are the inputs or data required for the test?** (e.g., specific files, parameters, user accounts, etc.)
-* **What are the expected outputs or results?** (e.g., pass/fail status, performance metrics, user feedback, etc.)
-* **What is the testing environment?** (e.g., operating system, browser, hardware specifications, etc.)
-* **Are there any specific test cases or scenarios you want to include?**
+* **What kind of test are you requesting?** (e.g., a unit test, an integration test, a performance test, a stress test, a usability test, a grammar test, a logic test, a factual accuracy test, etc.)
+* **What is the subject of the test?** (e.g., a piece of code, a website, a document, a sentence, an argument, etc.)
+* **What are the inputs or data for the test?** (If applicable)
+* **What are the expected outputs or results?** (If applicable)
+* **What are the acceptance criteria?** (How will you know if the test passed or failed?)
 
-The more information you provide, the better I can understand your request and potentially help you.
+The more information you give me, the better I can assist you.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="llms">
+<h2>LLMs<a class="headerlink" href="#llms" title="Link to this heading">#</a></h2>
+<p>That’s an excellent point. It’s crucial to know the specific package needed for each integration to correctly set up the environment. LLM is a core component of the any agent based system the following cell shows the classes that implement different LLMs into the LangChain module.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Provider</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>LangChain Class Name (Python)</p></th>
+<th class="head"><p>Python Package</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OpenAI</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_openai.chat_models.ChatOpenAI</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_openai.llms.OpenAI</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-openai</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Google</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_google_genai.chat_models.ChatGoogleGenerativeAI</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-google-genai</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Anthropic</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_anthropic.chat_models.ChatAnthropic</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_anthropic.llms.AnthropicLLM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-anthropic</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Mistral AI</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_mistralai.chat_models.ChatMistralAI</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-mistralai</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Cohere</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_cohere.chat_models.ChatCohere</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_cohere.llms.CohereLLM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-cohere</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>AWS</p></td>
+<td><p>Cloud Platform</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_aws.chat_models.ChatBedrock</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_aws.llms.BedrockLLM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-aws</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Hugging Face</p></td>
+<td><p>Community/Open-Source</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_huggingface.llms.HuggingFaceHub</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_huggingface.llms.HuggingFacePipeline</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-huggingface</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ollama</p></td>
+<td><p>On-Premise/Local</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_community.chat_models.ChatOllama</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_community.llms.OllamaLLM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-ollama</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Llama.cpp</p></td>
+<td><p>On-Premise/Local</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_community.llms.LlamaCpp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">llama-cpp-python</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Replicate</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_replicate.llms.Replicate</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-replicate</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Fireworks AI</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_fireworks.chat_models.ChatFireworks</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_fireworks.llms.FireworksLLM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-fireworks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Databricks</p></td>
+<td><p>Cloud Platform</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks_langchain.llms.Databricks</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks-langchain</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Azure OpenAI</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_openai.chat_models.AzureChatOpenAI</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_openai.llms.AzureOpenAI</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-openai</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>AI21 Labs</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_ai21.llms.AI21LLM</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_ai21.chat_models.ChatAI21</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-ai21</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Aleph Alpha</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_community.llms.AlephAlpha</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-aleph-alpha</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Groq</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_groq.chat_models.ChatGroq</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-groq</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Together AI</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_together.llms.TogetherLLM</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_together.chat_models.ChatTogether</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-together</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>IBM</p></td>
+<td><p>Cloud Platform</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_community.chat_models.ChatWatsonx</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-ibm</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>DeepInfra</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_deepinfra.llms.DeepInfra</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-deepinfra</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Yandex</p></td>
+<td><p>Commercial API</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_community.llms.YandexGPT</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_community.llms.YandexGPTPredictor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-yandex</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="messages">
+<h2>Messages<a class="headerlink" href="#messages" title="Link to this heading">#</a></h2>
+<p>There are several classes that represent different aspects of prompting with LangChain.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Class Name</p></th>
+<th class="head"><p>Role</p></th>
+<th class="head"><p>General Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SystemMessage</p></td>
+<td><p>System</p></td>
+<td><p>Provides instructions or context to “prime” the model’s behavior. It sets the persona, tone, or rules for the entire conversation. Typically the first message in a list.</p></td>
+</tr>
+<tr class="row-odd"><td><p>HumanMessage</p></td>
+<td><p>Human</p></td>
+<td><p>Represents the user’s input. This is the message that a human sends to the model to ask a question or provide a command.</p></td>
+</tr>
+<tr class="row-even"><td><p>AIMessage</p></td>
+<td><p>AI (Assistant)</p></td>
+<td><p>Represents the response from the language model. This is the output you get after invoking a model. It can contain text, tool calls, or other data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ToolMessage</p></td>
+<td><p>Tool</p></td>
+<td><p>Represents the output or result of a tool function that was invoked by the AI. This is used to pass the outcome of a tool call back to the model for further processing.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The primary design of LangChain is to pass a list of objects to the model. It returns an output of type <code class="docutils literal notranslate"><span class="pre">AIMessage</span></code>.</p>
+<p>All LangChain messages are children of the <code class="docutils literal notranslate"><span class="pre">langchain_core.messages.BaseMessage</span></code> class. The  follwing cell shows the relationship:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HumanMessage</span><span class="p">,</span>
+    <span class="n">SystemMessage</span><span class="p">,</span>
+    <span class="n">AIMessage</span><span class="p">,</span>
+    <span class="n">ToolMessage</span><span class="p">,</span>
+    <span class="n">BaseMessage</span>
+<span class="p">)</span>
+
+<span class="p">(</span>
+    <span class="nb">issubclass</span><span class="p">(</span><span class="n">HumanMessage</span><span class="p">,</span> <span class="n">BaseMessage</span><span class="p">),</span>
+    <span class="nb">issubclass</span><span class="p">(</span><span class="n">SystemMessage</span><span class="p">,</span> <span class="n">BaseMessage</span><span class="p">),</span>
+    <span class="nb">issubclass</span><span class="p">(</span><span class="n">AIMessage</span><span class="p">,</span> <span class="n">BaseMessage</span><span class="p">),</span>
+    <span class="nb">issubclass</span><span class="p">(</span><span class="n">ToolMessage</span><span class="p">,</span> <span class="n">BaseMessage</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, True, True, True)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prompts">
+<h2>Prompts<a class="headerlink" href="#prompts" title="Link to this heading">#</a></h2>
+<p>In the LangChain paradigm, a prompt is a structured input for a model. It can include a system message, user input, or messaging history. The <code class="docutils literal notranslate"><span class="pre">lang_chain</span></code> package provides various tools for prompt templating. The following cell lists the most popular classes used for templating and their descriptions.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Class / Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>BasePromptTemplate</strong></p></td>
+<td><p>Abstract base class for all prompt templates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>StringPromptTemplate</strong></p></td>
+<td><p>Base class for string-based templates (like f-string).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PromptTemplate</strong></p></td>
+<td><p>Core template class for generating prompts with variables. Supports methods like <code class="docutils literal notranslate"><span class="pre">from_template</span></code>, <code class="docutils literal notranslate"><span class="pre">from_file</span></code>, <code class="docutils literal notranslate"><span class="pre">from_examples</span></code>, <code class="docutils literal notranslate"><span class="pre">format</span></code>, <code class="docutils literal notranslate"><span class="pre">invoke</span></code>, <code class="docutils literal notranslate"><span class="pre">ainvoke</span></code>, and batching.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>FewShotPromptTemplate</strong></p></td>
+<td><p>String-based prompt template with few-shot example support.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>FewShotPromptWithTemplates</strong></p></td>
+<td><p>String template variant with embedded few-shot examples.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>PipelinePromptTemplate</strong></p></td>
+<td><p>Combines multiple prompt templates into a pipeline.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>BaseChatPromptTemplate</strong></p></td>
+<td><p>Base class for chat-style prompt templates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ChatPromptTemplate</strong></p></td>
+<td><p>Template for chat models; build multi-role messages. Supports <code class="docutils literal notranslate"><span class="pre">from_messages</span></code> and dynamic placeholders.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>AgentScratchPadChatPromptTemplate</strong></p></td>
+<td><p>Specialized chat prompt for agent scratchpad patterns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>AutoGPTPrompt</strong></p></td>
+<td><p>Chat prompt variant used in AutoGPT-style workflows.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>BaseMessagePromptTemplate</strong></p></td>
+<td><p>Base for message-level prompt templates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>BaseStringMessagePromptTemplate</strong></p></td>
+<td><p>Base class for message templates using string patterns.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ChatMessagePromptTemplate</strong></p></td>
+<td><p>Generates chat messages (with roles, e.g. system/human/AI) from template strings.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>HumanMessagePromptTemplate</strong></p></td>
+<td><p>Template specifically for human messages.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>AIMessagePromptTemplate</strong></p></td>
+<td><p>Template specifically for AI messages.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SystemMessagePromptTemplate</strong></p></td>
+<td><p>Template specifically for system messages.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MessagesPlaceholder</strong></p></td>
+<td><p>Placeholder to inject dynamic message history into a chat template.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p>Consider the <code class="docutils literal notranslate"><span class="pre">PromptTemplate</span></code> class. You can use the <code class="docutils literal notranslate"><span class="pre">from_template</span></code> method to create a template. A substitutable pattern is specified by the <code class="docutils literal notranslate"><span class="pre">{}</span></code>. The <code class="docutils literal notranslate"><span class="pre">format</span></code> method of the <code class="docutils literal notranslate"><span class="pre">PromptTempalate</span></code> class returns a string with all substituted values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="n">ans</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="s2">&quot;Your input is: </span><span class="si">{here}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+<span class="n">ans</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">here</span><span class="o">=</span><span class="s2">&quot;Hello!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;langchain_core.prompts.prompt.PromptTemplate&#39;&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Your input is: Hello!&#39;
 </pre></div>
 </div>
 </div>
@@ -877,6 +1139,9 @@ The more information you provide, the better I can understand your request and p
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms">LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messages">Messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
 </ul>
   </nav></div>
 
