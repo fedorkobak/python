@@ -318,6 +318,7 @@ parts:
     - file: ds_ml/langchain.ipynb
       sections:
       - file: ds_ml/langchain/texts_processing.ipynb
+      - file: ds_ml/langchain/tools.ipynb
   - caption: Packages
     chapters:
     - file: packages/intro.ipynb
