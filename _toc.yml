@@ -322,6 +322,7 @@ parts:
       - file: ds_ml/langchain/langsmith.ipynb
     - file: ds_ml/spark.ipynb
       sections:
+      - file: ds_ml/spark/data_sources.ipynb
       - file: ds_ml/spark/groupby.ipynb
   - caption: Packages
     chapters:
