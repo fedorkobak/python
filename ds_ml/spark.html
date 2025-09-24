@@ -1,0 +1,1524 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Spark &#8212; Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ds_ml/spark';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data sources" href="spark/data_sources.html" />
+    <link rel="prev" title="LangSmith" href="langchain/langsmith.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Python - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/syntax.html">Syntax</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/operators.html">Operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/operators/order.html">Order</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/keywords.html">Keywords</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/keywords/in.html">Is in array (in)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/keywords/yield.html">yield</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/functions.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/functions/parameters.html">Parameters</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/oop.html">OOP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/variables.html">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/interface.html">Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/class_method.html">Class method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_methods.html">Special methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/exceptions/try_except.html">Try/except</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/syntax/decorators.html">Decorators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/datatypes.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/datatypes/basic.html">Basic</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/str.html">str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/list.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/dict.html">dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/set.html">set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/datatypes/datetime.html">Datetime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/imports.html">Imports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/sys_path.html">sys.path list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/from_package_import_all.html"><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">&lt;package&gt;</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/find_module.html">Find module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/importlib.html">Importlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/relative_import.html">Relative import</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/files_folders.html">Files &amp; folders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/files_folders/pathlib.html">Pathlib</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/constructs.html">Constructs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/constructs/iterator.html">Iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/constructs/data_classes.html">Data class</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/cli_arguments.html">Cli arguments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/cli_arguments/argparse.html">Argparse</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/packages/pip.html">PIP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/packages/pip/install_uninstall.html">Install &amp; uninstall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/packages/pyproject_toml.html">Pyproject.toml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/packages/hatch.html">Hatch</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/interpreter.html">Interpreter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/interpreter/build.html">Build</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/collections.html">collections</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/run_tests.html">Run tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/run_before_after.html">Run code before/after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/check_error.html">Check error (assertRaises)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/unittest/mocking.html">Mocking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/unittest/mocking/call_details.html">Call details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/unittest/mocking/syntax.html">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/unittest/mocking/patch.html">Patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/unittest/mocking/raising_errors.html">Raising errors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/logging.html">Logging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/loggers.html">Loggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/handlers.html">Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/exception_information.html">Exceptions information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/logging_to_file.html">Logging to file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/logger_handler_level.html">Logger/Handler level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/root_logger.html">Root logger</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/linting/tools.html">Tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/re/match_search.html">Match/Search</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/tracemalloc.html">Tracemalloc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/hashlib.html">Hashlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/zipfile.html">Zipfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/socket.html">Socket</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pandas/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/data_types.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/data_types/datetime.html">Date &amp; time</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../pandas/data_types/columns_by_types.html">Columns by types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/creating_loading.html">Creating &amp; loading</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/data_transformations.html">Data transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pandas/data_transformations/groupby.html">Groupby</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/data_transformations/groupby/groupby_parameters.html"><code class="docutils literal notranslate"><span class="pre">groupby</span></code> parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/data_transformations/groupby/usage_options.html">Usage options</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/data_selecting.html">Data selecting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/data_visualisation.html">Data visualisation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../pandas/styles.html">Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/display_options.html">Display options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/inline_columns_add.html">Inline column add (assign)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pipeline/features_names.html">Features names</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/columns_transformer.html">Specific processing for column</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/features_names_out.html">Features names out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/encoders.html">Encoders</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/developing_transformer/features_names_out.html">Feature names out</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/frozen_steps.html">Frozen steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/estimator_to_transformer.html">Estimator to transformer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/grid_search_cv.html">Grid search CV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/saving_models.html">Saving models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/nearest_neighbors.html">Nearest neighbors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/nearest_neighbors/metric.html">Metric</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Torch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../torch/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/tensor.html">Tensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../torch/tensor/creating_methods.html">Creating methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/creating_methods/random_distributions.html">Random distributions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../torch/tensor/dimentionality.html">Dimentionality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/dimentionality/reshape_like.html">Reshape like</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/dimentionality/transpose_permute.html">Transpose/permute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/dimentionality/add_dimention.html">Add dimention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/dimentionality/squeeze.html">Squeeze</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/tensor/concatenation_splitting.html">Concatenation/splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/tensor/indexing.html">Indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/tensor/broadcasting.html">Broadcasting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../torch/loss_functions.html">Loss functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torch/gradient.html">Gradient</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/layers.html">Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/linear.html">Linear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/dropout.html">Dropout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/normalisation_layers.html">Normalisation layers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../torch/layers/recurrent_layers.html">Recurrent layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../torch/layers/recurrent_layers/forward_input.html">Forward input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/layers/recurrent_layers/layers_number.html">Layers number</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/flatten_unflatten.html">Flatten/unflatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/transformers.html">Transformers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/managing_network.html">Managing network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/managing_network/sequential.html">Sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/managing_network/saving_model.html">Saving model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../torch/devices.html">Devices</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/data_primitives.html">Data primitives</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/data_primitives/data_set.html">Data set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/vision.html">Vision</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/vision/basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/vision/augmentations.html">Augmentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/vision/datasets.html">Datasets</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/logistic_regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/multiclass_task.html">Multiclass task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/texts_classification.html">Text classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/mnist.html">MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/symbols_classification.html">Symbols classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/resnet_finetuning.html">Resnet finetuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/cnn_classification.html">CNN classification</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../torch/examples/unet.html">Unet</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../torch/examples/unet/oxford_pet.html">Oxford pet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/examples/unet/voc_segmentation.html">Voc segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/gan.html">GAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/conditional_gan.html">Conditional GAN</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FastAPI</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/run_application.html">Run application</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/requests.html">Requests</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/requests/request_object.html">Request object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/requests/pydantic_model.html">Pydantic model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/responses.html">Responses</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/responses/json.html">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/responses/exceptions.html">Exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/logging.html">Logging</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/documentation.html">Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/documentation/parameters.html">Parameters</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/cors.html">CORS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/matplotlib.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/matplotlib/table_in_matplotlib.html">matplotlib tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/matplotlib/gif_creation.html">Gif creation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualisation/seaborn.html">Seaborn</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/plotly.html">Plotly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/hovers.html">Hovers</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/dragmode.html">Dragmode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/color_from_scheme.html">Color from scheme</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/dash.html">Dash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/callbacks.html">Callbacks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/components.html">Components</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/select_clear_all.html">Select/Clear All</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/multipage_applications.html">Multipage applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/empty_figure.html">Empty figure</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sql/psycopg.html">Psycopg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sql/clickhouse.html">Clickhouse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sql/sqlite.html">sqlite</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sql/sqlalchemy.html">SQLAlchemy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/metadata.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/create_table.html">Create table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/query.html">Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/add_record.html">Add record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/relations.html">Relations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DS/ML</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="numpy/create_array.html">Create array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numpy/operations.html">Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numpy/norm.html">Norm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numpy/array_splitting.html">Array splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numpy/apply_along_axis.html">Apply along axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numpy/set_printoptions.html">Print options</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/ipython/syntax.html">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/ipython/reloading_modules.html">Reload modules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="jupyter/client.html">Client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="hugging_face/hub.html">Hub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hugging_face/tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="hugging_face/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hugging_face/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="airflow/run_airflow.html">Run airflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="airflow/tutorial_dag.html">Tutorial DAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="airflow/tasks.html">Tasks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="geopy/distances.html">Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geopy/request.html">Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ranx.html">Ranx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ranx/entry_queries_documents.html">Queries documents entry</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/tracking.html">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/example_of_use.html">Example of usе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/deploy.html">Deploy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/custom_model.html">Custom model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/flavours.html">Flavours</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="langchain/texts_processing.html">Texts transforming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Spark</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="spark/data_sources.html">Data sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/transformations.html">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/groupby.html">Group by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/ml.html">ML</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../packages/intro.html">Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/excel_export.html">To excel import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/jinja.html">Jinja</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/docker_sdk.html">Docker SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/docker_sdk/containers.html">Containers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/apscheduler.html">APScheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/selenium.html">Selenium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/tqdm.html">TQDM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/redis.html">Redis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/redis/redis_client.html">Redis client</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/requests.html">Requests</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/tkinter/widgets_overview.html">Widgets overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/scrolling.html">Scrolling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/treeview.html">Treeview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/list_box.html">Listbox</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/pack.html">Pack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/change_elements_position.html">Change elements position</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/fedorkobak/knowledge" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ds_ml/spark.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Spark</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session">Session</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">Dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources">Data sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#columns">Columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by">Group by</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml">ML</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="spark">
+<h1>Spark<a class="headerlink" href="#spark" title="Link to this heading">#</a></h1>
+<p>This page considers the python SDK for Spark. For more information, check out the<a class="reference external" href="https://spark.apache.org/docs/latest/api/python/index.html">PySpark Overveiew</a> tutorial on the official website.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+
+<span class="n">spark_session</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s1">&#39;Temp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark&#39;s default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/09/23 11:20:27 WARN Utils: Your hostname, user-ThinkPad-E16-Gen-2, resolves to a loopback address: 127.0.1.1; using 10.202.22.210 instead (on interface enp0s31f6)
+25/09/23 11:20:27 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Using Spark&#39;s default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to &quot;WARN&quot;.
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/09/23 11:20:28 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+</pre></div>
+</div>
+</div>
+</div>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<p>Some configuration is required to start experimenting with Spark in local mode:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">pyspark</span></code>: for spark instalation.</p></li>
+<li><p>Install java: <code class="docutils literal notranslate"><span class="pre">openjdk-17-jdk</span></code> package in <code class="docutils literal notranslate"><span class="pre">apt</span></code>. Set path to the jdk to the <code class="docutils literal notranslate"><span class="pre">$JAVA_HOME</span></code> variable. In ubuntu case <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64</span></code>.</p></li>
+</ul>
+<hr class="docutils" />
+<p>If you have completed the specified configuration correctly, you will be able to run the script below, which creates a local <code class="docutils literal notranslate"><span class="pre">SparkContext</span></code> - way to experiment with spark without any clusters.</p>
+<p><strong>Spark Context</strong>: is a low-level API for manipulating with computational resources provided by Spark.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">(</span><span class="n">conf</span><span class="o">=</span><span class="n">SparkConf</span><span class="p">()</span><span class="o">.</span><span class="n">setMaster</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark&#39;s default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/09/19 09:04:44 WARN Utils: Your hostname, user-ThinkPad-E16-Gen-2, resolves to a loopback address: 127.0.1.1; using 10.202.22.210 instead (on interface enp0s31f6)
+25/09/19 09:04:44 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Using Spark&#39;s default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to &quot;WARN&quot;.
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/09/19 09:04:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+</pre></div>
+</div>
+</div>
+</div>
+<section id="session">
+<h3>Session<a class="headerlink" href="#session" title="Link to this heading">#</a></h3>
+<p><strong>Spark Session</strong>: is built on top of the SparkContext tool to implement the way users interact with SparkSQL.</p>
+<p>The following list shows the different functions that allow manipulation of the session lifecycle:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">SparkSession.builder.getOrCreate()</span></code> creates the session.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">SparkSession.getActiveSession()</span></code> to get the active session, it will return <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no active session.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">stop</span></code> method allows you to stop the current session. <strong>Note.</strong> Spark does not allow to keep two sessions on the same JVM.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell illustrates an example of how to create a Spark session.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Temp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">spark</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyspark.sql.session.SparkSession
+</pre></div>
+</div>
+</div>
+</div>
+<p>After that, <code class="docutils literal notranslate"><span class="pre">SparkSession.getActiveSession</span></code> returns an object representing the session.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">getActiveSession</span><span class="p">()</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyspark.sql.session.SparkSession
+</pre></div>
+</div>
+</div>
+</div>
+<p>After calling <code class="docutils literal notranslate"><span class="pre">stop</span></code> from the Spark session the <code class="docutils literal notranslate"><span class="pre">getActiveSession</span></code> returns just <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="n">SparkSession</span><span class="o">.</span><span class="n">getActiveSession</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="dataframe">
+<h2>Dataframe<a class="headerlink" href="#dataframe" title="Link to this heading">#</a></h2>
+<p>Spark SQL contains a DataFrame objects that provide a way to interact with tabular data.</p>
+<p>You can define a data frame:</p>
+<ul class="simple">
+<li><p>Directly from your code using the <code class="docutils literal notranslate"><span class="pre">createDataFrame</span></code> method of the session object.</p></li>
+<li><p>Using some special methods to read from external sources stored in the <code class="docutils literal notranslate"><span class="pre">read</span></code> attribute of the session.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell defines the Spark dataset, which is formatted so that each row is a tuple whose values correspond to each column. And shows it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Cathy&quot;</span><span class="p">,</span> <span class="mi">35</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                                
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----+---+
+|   _1| _2|
++-----+---+
+|Alice| 25|
+|  Bob| 30|
+|Cathy| 35|
++-----+---+
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell shows an alternative way to define the same data frame. Each row here is represented as a dictionary, and the values are specified under the keys, which correesponds to the column names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cathy&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---+-----+
+|age| name|
++---+-----+
+| 25|Alice|
+| 30|  Bob|
+| 35|Cathy|
++---+-----+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-sources">
+<h2>Data sources<a class="headerlink" href="#data-sources" title="Link to this heading">#</a></h2>
+<p>Spark is a typical tool for building ETL pipelines, which include cyclical improvements through the process of saving and loading data. More over spark have special tools for data versioning.</p>
+<p>For more details check:</p>
+<ul class="simple">
+<li><p>A comprehensive <a class="reference external" href="https://spark.apache.org/docs/latest/sql-data-sources.html">Data Sources</a> guide in the corresponding page.</p></li>
+<li><p><a class="reference internal" href="spark/data_sources.html"><span class="std std-doc">Data Sources</span></a> for more practical examples.</p></li>
+</ul>
+<p>The Spark data frame contains the <code class="docutils literal notranslate"><span class="pre">write</span></code> interface, for saving data into the storage. The following table lists important methods of the interface.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Method</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Primary Use Case</p></th>
+<th class="head text-left"><p>Key Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">save()</span></code></strong></p></td>
+<td class="text-left"><p>Writes the DataFrame to a file system path. You specify the format (e.g., Parquet, CSV, JSON).</p></td>
+<td class="text-left"><p>Simple, file-based persistence of data.</p></td>
+<td class="text-left"><p>Creates <strong>unmanaged</strong> data; Spark does not track its metadata. Dropping the table (if you create one) does not delete the files.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">csv()</span></code>, <code class="docutils literal notranslate"><span class="pre">json()</span></code>, <code class="docutils literal notranslate"><span class="pre">parquet()</span></code></strong></p></td>
+<td class="text-left"><p>Writes the DataFrame to a file system path, in a corresponding format</p></td>
+<td class="text-left"><p>Simple, file-based persistence of data.</p></td>
+<td class="text-left"><p>Creates <strong>unmanaged</strong> data; Spark does not track its metadata. Dropping the table (if you create one) does not delete the files.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">parquet()</span></code></strong></p></td>
+<td class="text-left"><p>A specific and highly-recommended way to save data in the Parquet format.</p></td>
+<td class="text-left"><p>High-performance, schema-aware storage for analytics.</p></td>
+<td class="text-left"><p><strong>Columnar storage</strong>, automatic schema preservation, and efficient compression. This is the <strong>default</strong> for <code class="docutils literal notranslate"><span class="pre">save()</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">saveAsTable()</span></code></strong></p></td>
+<td class="text-left"><p>Creates a <strong>managed table</strong> in the Hive Metastore.</p></td>
+<td class="text-left"><p>Creating a named table for easy querying with Spark SQL.</p></td>
+<td class="text-left"><p>Spark manages both the data and its metadata. Dropping the table deletes both the catalog entry and the data files.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">jdbc()</span></code></strong></p></td>
+<td class="text-left"><p>Writes the DataFrame to a relational database using a JDBC connection.</p></td>
+<td class="text-left"><p>Storing data in a traditional database for transactional or reporting purposes.</p></td>
+<td class="text-left"><p>Requires a JDBC driver and connection string. Allows you to specify table names, modes, and connection properties.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">format('...').save()</span></code></strong></p></td>
+<td class="text-left"><p>A more generic way to save data, explicitly specifying the format and path.</p></td>
+<td class="text-left"><p>When using a format that isn’t a dedicated method (e.g., Avro, ORC).</p></td>
+<td class="text-left"><p>Gives you full control over the data source format. Also used for setting format-specific options.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">partitionBy()</span></code></strong></p></td>
+<td class="text-left"><p>A method to partition the data on disk based on one or more columns.</p></td>
+<td class="text-left"><p>Optimizing queries that frequently filter on specific columns.</p></td>
+<td class="text-left"><p>Creates subdirectories for each unique value of the specified partition column(s), significantly speeding up read operations.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The Spark data frame implements the <code class="docutils literal notranslate"><span class="pre">read</span></code> interface, which has the following specific methods:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Method</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Primary Use Case</p></th>
+<th class="head text-left"><p>Key Options</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">load()</span></code></strong></p></td>
+<td class="text-left"><p>A generic method to read data from a source. You must explicitly specify the format.</p></td>
+<td class="text-left"><p>Reading from a data source when you need full control over the format and options.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">format()</span></code>, <code class="docutils literal notranslate"><span class="pre">path()</span></code>, and any format-specific options (e.g., <code class="docutils literal notranslate"><span class="pre">header</span></code>). It defaults to Parquet if no format is specified.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">parquet()</span></code></strong></p></td>
+<td class="text-left"><p>A dedicated, highly-optimized method for reading Parquet files.</p></td>
+<td class="text-left"><p>Loading high-performance data that was previously saved by Spark.</p></td>
+<td class="text-left"><p>This method automatically infers the schema from the Parquet file’s metadata, so it requires fewer options.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">csv()</span></code></strong></p></td>
+<td class="text-left"><p>Loads data from CSV files.</p></td>
+<td class="text-left"><p>Reading human-readable, simple-structured data where the schema is not embedded.</p></td>
+<td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">header=True</span></code></strong> (to use the first row as column names) and <strong><code class="docutils literal notranslate"><span class="pre">inferSchema=True</span></code></strong> (to automatically detect data types).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">json()</span></code></strong></p></td>
+<td class="text-left"><p>Loads data from line-delimited JSON files.</p></td>
+<td class="text-left"><p>Reading semi-structured data from web logs, APIs, or data dumps.</p></td>
+<td class="text-left"><p>The method automatically infers the schema, but you can provide a schema to avoid inference.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">jdbc()</span></code></strong></p></td>
+<td class="text-left"><p>Connects to and reads data from a relational database table.</p></td>
+<td class="text-left"><p>Loading data from a traditional database for ETL or analysis.</p></td>
+<td class="text-left"><p>Requires a <code class="docutils literal notranslate"><span class="pre">url</span></code>, <code class="docutils literal notranslate"><span class="pre">table</span></code>, and <code class="docutils literal notranslate"><span class="pre">driver</span></code> string. You can also specify <code class="docutils literal notranslate"><span class="pre">partitionColumn</span></code>, <code class="docutils literal notranslate"><span class="pre">lowerBound</span></code>, and <code class="docutils literal notranslate"><span class="pre">upperBound</span></code> for parallel reads.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">table()</span></code></strong></p></td>
+<td class="text-left"><p>Reads a managed table from the Spark/Hive Metastore.</p></td>
+<td class="text-left"><p>Reading a table that was previously created using <code class="docutils literal notranslate"><span class="pre">df.write.saveAsTable()</span></code>.</p></td>
+<td class="text-left"><p>This is the easiest way to load data since you only need the table name. Spark handles locating the data and its schema automatically.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>It’s also important to know that Spark’s most native data sources its <em>spark SQL catalog</em>, which in different configuratoins can be different. Possible options are:</p>
+<ul class="simple">
+<li><p>Just folder that stores all necesarry files.</p></li>
+<li><p>Hive storage.</p></li>
+<li><p>Delta Lake.</p></li>
+<li><p>Apahce Iceberg.</p></li>
+</ul>
+</section>
+<section id="columns">
+<h2>Columns<a class="headerlink" href="#columns" title="Link to this heading">#</a></h2>
+<p>Data frame consists of a set of columns. There are two concepts important to know for refering the columns:</p>
+<ul class="simple">
+<li><p>There are corresponding attibute of the data frame.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pyspark.sql.functions.col</span></code> allows you to define a reference to a column, when applied to a particular dataset, will be interpreted as a specific column in that dataset.</p></li>
+</ul>
+<p>The following table shows the typical use cases in which you may be required to reference a column.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Method / Operator</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Comparison</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">col(&quot;age&quot;)</span> <span class="pre">&gt;</span> <span class="pre">18</span></code></p></td>
+<td><p>Compares column values. Returns a boolean column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Boolean</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, `</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">,</span> </code>~`</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(col(&quot;age&quot;)</span> <span class="pre">&gt;</span> <span class="pre">18)</span> <span class="pre">&amp;</span> <span class="pre">(col(&quot;vip&quot;)</span> <span class="pre">==</span> <span class="pre">True)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Arithmetic</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(col(&quot;price&quot;)</span> <span class="pre">*</span> <span class="pre">col(&quot;qty&quot;))</span></code></p></td>
+<td><p>Arithmetic operations between columns or with literals.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Aliasing</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.alias(name)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">col(&quot;age&quot;).alias(&quot;user_age&quot;)</span></code></p></td>
+<td><p>Renames the column in the resulting DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Casting</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.cast(dataType)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">col(&quot;age&quot;).cast(&quot;string&quot;)</span></code></p></td>
+<td><p>Changes the column type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Null Handling</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.isNull()</span></code>, <code class="docutils literal notranslate"><span class="pre">.isNotNull()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">col(&quot;name&quot;).isNotNull()</span></code></p></td>
+<td><p>Tests for <code class="docutils literal notranslate"><span class="pre">NULL</span></code> values.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>String Ops</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.contains()</span></code>, <code class="docutils literal notranslate"><span class="pre">.startswith()</span></code>, <code class="docutils literal notranslate"><span class="pre">.endswith()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">col(&quot;name&quot;).contains(&quot;Al&quot;)</span></code></p></td>
+<td><p>String matching and filtering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Math</strong></p></td>
+<td><p>(via <code class="docutils literal notranslate"><span class="pre">pyspark.sql.functions</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sqrt(col(&quot;value&quot;))</span></code></p></td>
+<td><p>Use functions like <code class="docutils literal notranslate"><span class="pre">abs</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>, <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, <code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code class="docutils literal notranslate"><span class="pre">pow</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Aggregation</strong></p></td>
+<td><p>(via <code class="docutils literal notranslate"><span class="pre">pyspark.sql.functions</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sum(col(&quot;value&quot;))</span></code></p></td>
+<td><p>Use <code class="docutils literal notranslate"><span class="pre">avg</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">count</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Conditional</strong></p></td>
+<td><p>(via <code class="docutils literal notranslate"><span class="pre">when</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">when(col(&quot;age&quot;)</span> <span class="pre">&gt;</span> <span class="pre">18,</span> <span class="pre">&quot;adult&quot;)</span></code></p></td>
+<td><p>Build conditional expressions.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Window Ops</strong></p></td>
+<td><p>(via <code class="docutils literal notranslate"><span class="pre">over</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">row_number().over(windowSpec)</span></code></p></td>
+<td><p>Used for ranking, lead/lag, etc.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Collection</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.getItem(index)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">col(&quot;array_col&quot;).getItem(0)</span></code></p></td>
+<td><p>Access element of array column.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Struct Access</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.getField(name)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">col(&quot;struct_col&quot;).getField(&quot;x&quot;)</span></code></p></td>
+<td><p>Access field of struct column.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Spark uses these references to the columns when performing operations like: <code class="docutils literal notranslate"><span class="pre">withColumn</span></code> and <code class="docutils literal notranslate"><span class="pre">filter</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell defines the data frame that will be used as an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_df</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">43</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">88</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;column1&quot;</span><span class="p">,</span> <span class="s2">&quot;column2&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">test_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------+-------+
+|column1|column2|
++-------+-------+
+|      8|     20|
+|      9|     43|
+|     15|     88|
++-------+-------+
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell apply the <code class="docutils literal notranslate"><span class="pre">filter</span></code> with the condition specified using a direct reference to the <code class="docutils literal notranslate"><span class="pre">test_df.column1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_df</span><span class="o">.</span><span class="n">column1</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">condition</span><span class="p">))</span>
+<span class="n">test_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">condition</span><span class="o">=</span><span class="n">condition</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pyspark.sql.classic.column.Column&#39;&gt;
++-------+-------+
+|column1|column2|
++-------+-------+
+|     15|     88|
++-------+-------+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alternatively, the next cell specifies the <code class="docutils literal notranslate"><span class="pre">calculation</span></code> using the abstract <code class="docutils literal notranslate"><span class="pre">column2</span></code>. However, the <code class="docutils literal notranslate"><span class="pre">withColumn</span></code> function of the <code class="docutils literal notranslate"><span class="pre">test_df</span></code> interprets it as a reference to <code class="docutils literal notranslate"><span class="pre">column2</span></code> it contains.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculation</span> <span class="o">=</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;column2&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">8</span>
+<span class="n">test_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="n">calculation</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------+-------+------+
+|column1|column2|result|
++-------+-------+------+
+|      8|     20|    28|
+|      9|     43|    51|
+|     15|     88|    96|
++-------+-------+------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="transformations">
+<h2>Transformations<a class="headerlink" href="#transformations" title="Link to this heading">#</a></h2>
+<p>This section consdiers general data transformation accessible in PySpark:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">withColumn</span></code>: allows to specify the result column, and a computation that would be used to produce values.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">selectExr</span></code>: allows you to specify the operations under the columns using SQL syntax to produce the new ones.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">na</span></code> attribute gathers methods that specify transformation how to handle missing values: <code class="docutils literal notranslate"><span class="pre">na.fill</span></code>, <code class="docutils literal notranslate"><span class="pre">na.drop</span></code> and <code class="docutils literal notranslate"><span class="pre">na.replace</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">replace</span></code> method allows to specify which values to replace.</p></li>
+</ul>
+<p>Check <a class="reference internal" href="spark/transformations.html"><span class="std std-doc">Transformations</span></a> page.</p>
+</section>
+<section id="group-by">
+<h2>Group by<a class="headerlink" href="#group-by" title="Link to this heading">#</a></h2>
+<p>The data frame contains the <code class="docutils literal notranslate"><span class="pre">groupBy</span></code> method method, which returns a special <code class="docutils literal notranslate"><span class="pre">GroupedData</span></code> object. This object contains a set of tools for building an aggregations over the data:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">agg</span></code></p></td>
+<td><p>General aggregation with one or more expressions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">avg</span></code></p></td>
+<td><p>Computes the average of the given columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mean</span></code></p></td>
+<td><p>Alias for <code class="docutils literal notranslate"><span class="pre">avg()</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max</span></code></p></td>
+<td><p>Maximum value for each column.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min</span></code></p></td>
+<td><p>Minimum value for each column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum</span></code></p></td>
+<td><p>Sum of values for each column.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">count</span></code></p></td>
+<td><p>Count of rows for each group.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pivot</span></code></p></td>
+<td><p>Performs a pivot (like SQL <code class="docutils literal notranslate"><span class="pre">PIVOT</span></code>) on the specified column, turning its values into new columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">applyInPandas</span></code></p></td>
+<td><p>Apply a function to each group as a Pandas DataFrame and return a new DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">apply</span></code></p></td>
+<td><p>Apply a user-defined function to each group (returns an RDD, not a DataFrame — less common).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check more details in the <a class="reference internal" href="spark/groupby.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">groupby</span></code></span></a> page.</p>
+<hr class="docutils" />
+<p>The following cell defines an example data frame. It constructs and shows the <code class="docutils literal notranslate"><span class="pre">GroupedData</span></code> object based on it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_df</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">grouped_expression</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span>
+<span class="n">grouped_expression</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GroupedData[grouping expressions: [group], value: [group: string, value: bigint], type: GroupBy]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code shows how to use the <code class="docutils literal notranslate"><span class="pre">agg</span></code> function to compute the aggregations based on the groups.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="nb">sum</span><span class="p">,</span> <span class="n">avg</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span>
+<span class="n">grouped_expression</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="nb">sum</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">),</span>
+    <span class="n">avg</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">),</span>
+    <span class="nb">min</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">),</span>
+    <span class="nb">max</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----+----------+----------+----------+----------+
+|group|sum(value)|avg(value)|min(value)|max(value)|
++-----+----------+----------+----------+----------+
+|    a|         5|       2.5|         2|         3|
+|    c|        11|       5.5|         4|         7|
++-----+----------+----------+----------+----------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ml">
+<h2>ML<a class="headerlink" href="#ml" title="Link to this heading">#</a></h2>
+<p>There is a <code class="docutils literal notranslate"><span class="pre">pyspark.ml</span></code> package that contains a set of tools that implements a typical ml transformations. The following table provides an overwiew of its capabilities:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Module / Class</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Pipeline</strong></p></td>
+<td><p>Combines multiple stages (transformers + estimators) into a single workflow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Transformer</strong></p></td>
+<td><p>An object that transforms a DataFrame (e.g., feature scaling).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Estimator</strong></p></td>
+<td><p>An object that fits a model from data and returns a Transformer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Evaluator</strong></p></td>
+<td><p>Computes metrics to evaluate model performance.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>tuning</strong></p></td>
+<td><p>Tools for hyperparameter tuning (<code class="docutils literal notranslate"><span class="pre">CrossValidator</span></code>, <code class="docutils literal notranslate"><span class="pre">TrainValidationSplit</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>feature</strong></p></td>
+<td><p>Feature engineering utilities (e.g., <code class="docutils literal notranslate"><span class="pre">StringIndexer</span></code>, <code class="docutils literal notranslate"><span class="pre">VectorAssembler</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>classification</strong></p></td>
+<td><p>Classification algorithms (e.g., <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code>, <code class="docutils literal notranslate"><span class="pre">RandomForest</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>regression</strong></p></td>
+<td><p>Regression algorithms (e.g., <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>, <code class="docutils literal notranslate"><span class="pre">GBTRegressor</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>clustering</strong></p></td>
+<td><p>Clustering algorithms (e.g., <code class="docutils literal notranslate"><span class="pre">KMeans</span></code>, <code class="docutils literal notranslate"><span class="pre">GaussianMixture</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>recommendation</strong></p></td>
+<td><p>Collaborative filtering (e.g., <code class="docutils literal notranslate"><span class="pre">ALS</span></code> for matrix factorization).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>stat</strong></p></td>
+<td><p>Statistical functions (e.g., <code class="docutils literal notranslate"><span class="pre">ChiSquareTest</span></code>, <code class="docutils literal notranslate"><span class="pre">Correlation</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more details check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://spark.apache.org/docs/latest/ml-guide.html">Machine Learning Library Guide</a> in spark documentation.</p></li>
+<li><p><a class="reference internal" href="spark/ml.html"><span class="std std-doc">ML</span></a> page.</p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ds_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="langchain/langsmith.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">LangSmith</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="spark/data_sources.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data sources</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session">Session</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">Dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources">Data sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#columns">Columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by">Group by</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml">ML</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fedor Kobak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

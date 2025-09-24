@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Packages" href="../packages/intro.html" />
+    <link rel="next" title="Texts transforming" href="langchain/texts_processing.html" />
     <link rel="prev" title="Flavours" href="mlflow/flavours.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -572,7 +572,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow/flavours.html">Flavours</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">LangChain</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">LangChain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="langchain/texts_processing.html">Texts transforming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="spark/data_sources.html">Data sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/transformations.html">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/groupby.html">Group by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/ml.html">ML</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -766,6 +778,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#texts-transforming">Texts transforming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-stores">Vector stores</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retriever">Retriever</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms">LLMs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messages">Messages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
@@ -782,7 +800,54 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="langchain">
 <h1>LangChain<a class="headerlink" href="#langchain" title="Link to this heading">#</a></h1>
-<p>LangCain is software that allows to build applications based on LLMs.</p>
+<p>LangCain is software that enables the development of applications based on LLMs. Since all models/providers/inference servers have a slightly it different input/ouput format. Langchain builds a set of unified APIs. The same or nearly the same code can be used to build systems with different models and their hosting principles.</p>
+<p>There is a set of packages that implement a typical integrations of the langchain. The following table lists the most typical of them.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Package Name</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-community</span></code></p></td>
+<td class="text-left"><p>A general package for a wide variety of community-contributed tools and integrations, including web search (DuckDuckGo, Tavily), Python REPL, and various database connectors.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-core</span></code></p></td>
+<td class="text-left"><p>The foundational package with the core tool abstractions and base classes.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-experimental</span></code></p></td>
+<td class="text-left"><p>A package for new and experimental tools, which may not yet be stable.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-tavily</span></code></p></td>
+<td class="text-left"><p>A dedicated package for the Tavily search tool.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-brave-search</span></code></p></td>
+<td class="text-left"><p>A dedicated package for the Brave Search tool.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-google-genai</span></code></p></td>
+<td class="text-left"><p>Includes tools for interacting with Google’s Generative AI services.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-anthropic</span></code></p></td>
+<td class="text-left"><p>Includes tools for interacting with the Anthropic API.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-openai</span></code></p></td>
+<td class="text-left"><p>Contains integrations for OpenAI’s models and services.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-mongodb</span></code></p></td>
+<td class="text-left"><p>A package for interacting with MongoDB.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-postgres</span></code></p></td>
+<td class="text-left"><p>A package for interacting with PostgreSQL.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-ollama</span></code></p></td>
+<td class="text-left"><p>A package implements tools to request models lanched with ollama.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">langchain-huggingface</span></code></p></td>
+<td class="text-left"><p>A package implements tools to interact with models from hugging face.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <p>Typically, you must export the API key corresponding to the model type you want to use from your environment.</p>
@@ -811,6 +876,368 @@ The more information you give me, the better I can assist you.
 </div>
 </div>
 </div>
+<p>Some examles use ollama-specfic tools. Therefore, you must have have Ollama launched in your system. The most usitable option for me is to launch the Ollama in Docker. The following command lauches Ollama with the most basic settings in Docker:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-v<span class="w"> </span>ollama:/root/.ollama<span class="w"> </span>-p<span class="w"> </span><span class="m">11434</span>:11434<span class="w"> </span>--name<span class="w"> </span>ollama<span class="w"> </span>ollama/ollama
+</pre></div>
+</div>
+<p>After launching ollama, you should also pull the models you’re interested in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ollama<span class="w"> </span>ollama<span class="w"> </span>pull<span class="w"> </span>&lt;model<span class="w"> </span>name&gt;
+</pre></div>
+</div>
+</section>
+<section id="texts-transforming">
+<h2>Texts transforming<a class="headerlink" href="#texts-transforming" title="Link to this heading">#</a></h2>
+<p>There is a set of tools in the langchain for texts transforming. They are includes:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://python.langchain.com/docs/integrations/document_loaders/">Document loaders</a>: For loading documents into the standard LangChain document format.</p></li>
+<li><p><a class="reference external" href="https://python.langchain.com/docs/concepts/text_splitters/">Text splitters</a>: Useful for splitting documents, especially for chunking.</p></li>
+<li><p><a class="reference external" href="https://python.langchain.com/docs/integrations/text_embedding/">Embedding models</a>: Builds a vector representation of the embeddings.</p></li>
+</ul>
+<p>Check <a class="reference internal" href="langchain/texts_processing.html"><span class="std std-doc">Texts transforming</span></a> page for details.</p>
+<hr class="docutils" />
+<p>For example, consider the process of loading, chunking, and building embeddings for the <a class="reference external" href="https://www.gnu.org/gnu/gnu-history.html">GNU Opearting System</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">OllamaEmbeddings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.document_loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">WebBaseLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_text_splitters</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell uses the <code class="docutils literal notranslate"><span class="pre">WebBaseLoader</span></code> to load the HTML page.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">WebBaseLoader</span><span class="p">(</span>
+    <span class="n">web_path</span><span class="o">=</span><span class="s2">&quot;https://www.gnu.org/gnu/gnu-history.html&quot;</span>
+<span class="p">)</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">page_content</span><span class="p">[</span><span class="mi">1000</span><span class="p">:</span><span class="mi">2000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>onym for “GNU&#39;s Not
+Unix,” second, because it was a real word, and third, it was fun
+to say (or
+
+sing).
+
+The word “free” in “free software” pertains to
+freedom, not price.  You may or
+may not pay a price to get GNU software.  Either way, once you have
+the software you have four specific freedoms in using it.  The freedom
+to run the program as you wish; the freedom to copy the program and
+give it away to your friends and co-workers; the freedom to change the
+program as you wish, by having full access to source code; the freedom
+to distribute an improved version and thus help build the community.
+(If you redistribute GNU software, you may charge a fee for the
+physical act of transferring a copy, or you may give away copies.)
+
+The project to develop the GNU system is called the “GNU
+Project.”  The GNU Project was conceived in 1983 as a way of
+bringing back the cooperative spirit that prevailed in the computing
+community in earlier days—to make cooperation possible once again by
+removing t
+</pre></div>
+</div>
+</div>
+</div>
+<p>Following cell splits the input text to chunks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recursive_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">splist</span> <span class="o">=</span> <span class="n">recursive_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">([</span><span class="n">page</span><span class="p">])</span>
+<span class="n">splist</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Document(metadata={&#39;source&#39;: &#39;https://www.gnu.org/gnu/gnu-history.html&#39;, &#39;title&#39;: &#39;Overview of the GNU System\n- GNU Project - Free Software Foundation&#39;, &#39;language&#39;: &#39;en&#39;}, page_content=&quot;Overview of the GNU System\n- GNU Project - Free Software Foundation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSkip to main text\n\n\n\n\n\n\n\n\n\nFree Software Supporter:\n  \n\n\n\n\nJOIN\xa0THE\xa0FSF\n\n\n\n\n\nGNU Operating System\nSupported by the\n Free Software Foundation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSite navigation\nSkip\n\n\n=\nABOUT\xa0GNU\n\n=\n\nPHILOSOPHY\nLICENSES\nEDUCATION\nSOFTWARE\nDISTROS\nDOCS\nMALWARE\nHELP\xa0GNU\nAUDIO\xa0&amp;\xa0VIDEO\nGNU\xa0ART\nFUN\nGNU&#39;S\xa0WHO?\nSOFTWARE\xa0DIRECTORY\nHARDWARE\nSITEMAP\n\n\n\n\n\n\n\n\xa0/\nAbout\xa0GNU\xa0/\nGNU\xa0history\xa0/\n\n\n\nOverview of the GNU System\n\n\nThe GNU operating system is a complete free software system,\nupward-compatible with Unix.  GNU stands for “GNU&#39;s Not Unix.”\nIt is pronounced as one syllable with a\nhard g.\nRichard Stallman made the\nInitial Announcement of\nthe GNU Project in September 1983.  A longer version called\nthe GNU Manifesto was published in\nMarch 1985.  It has been translated into several\nother languages.&quot;),
+ Document(metadata={&#39;source&#39;: &#39;https://www.gnu.org/gnu/gnu-history.html&#39;, &#39;title&#39;: &#39;Overview of the GNU System\n- GNU Project - Free Software Foundation&#39;, &#39;language&#39;: &#39;en&#39;}, page_content=&quot;The name “GNU” was chosen because it met a few\nrequirements; first, it was a recursive acronym for “GNU&#39;s Not\nUnix,” second, because it was a real word, and third, it was fun\nto say (or\n\nsing).\n\nThe word “free” in “free software” pertains to\nfreedom, not price.  You may or\nmay not pay a price to get GNU software.  Either way, once you have\nthe software you have four specific freedoms in using it.  The freedom\nto run the program as you wish; the freedom to copy the program and\ngive it away to your friends and co-workers; the freedom to change the\nprogram as you wish, by having full access to source code; the freedom\nto distribute an improved version and thus help build the community.\n(If you redistribute GNU software, you may charge a fee for the\nphysical act of transferring a copy, or you may give away copies.)&quot;),
+ Document(metadata={&#39;source&#39;: &#39;https://www.gnu.org/gnu/gnu-history.html&#39;, &#39;title&#39;: &#39;Overview of the GNU System\n- GNU Project - Free Software Foundation&#39;, &#39;language&#39;: &#39;en&#39;}, page_content=&#39;The project to develop the GNU system is called the “GNU\nProject.”  The GNU Project was conceived in 1983 as a way of\nbringing back the cooperative spirit that prevailed in the computing\ncommunity in earlier days—to make cooperation possible once again by\nremoving the obstacles to cooperation imposed by the owners of\nproprietary software.\n\nIn 1971, when Richard Stallman started his career at MIT, he worked in\na group which used free\nsoftware exclusively.  Even computer companies often distributed\nfree software.  Programmers were free to cooperate with each other,\nand often did.\n\nBy the 1980s, almost all software was\nproprietary,\nwhich means that it had owners who forbid and\nprevent cooperation by users.  This made the GNU Project necessary.&#39;),
+ Document(metadata={&#39;source&#39;: &#39;https://www.gnu.org/gnu/gnu-history.html&#39;, &#39;title&#39;: &#39;Overview of the GNU System\n- GNU Project - Free Software Foundation&#39;, &#39;language&#39;: &#39;en&#39;}, page_content=&quot;By the 1980s, almost all software was\nproprietary,\nwhich means that it had owners who forbid and\nprevent cooperation by users.  This made the GNU Project necessary.\n\nEvery computer user needs an operating system; if there is no free\noperating system, then you can&#39;t even get started using a computer\nwithout resorting to proprietary software.  So the first item on the\nfree software agenda obviously had to be a free operating system.\n\nWe decided to make the operating system compatible with Unix because\nthe overall design was already proven and portable, and because\ncompatibility makes it easy for Unix users to switch from Unix to GNU.&quot;),
+ Document(metadata={&#39;source&#39;: &#39;https://www.gnu.org/gnu/gnu-history.html&#39;, &#39;title&#39;: &#39;Overview of the GNU System\n- GNU Project - Free Software Foundation&#39;, &#39;language&#39;: &#39;en&#39;}, page_content=&#39;A Unix-like operating system includes a kernel, compilers, editors,\ntext formatters, mail software, graphical interfaces, libraries, games\nand many other things.  Thus, writing a whole operating system is a\nvery large job.  We started in January 1984.\nThe  Free Software Foundation was\nfounded in October 1985, initially to raise funds to help develop\nGNU.\nBy 1990 we had either found or written all the major components\nexcept one—the kernel.  Then Linux, a Unix-like kernel, was\ndeveloped by Linus Torvalds in 1991 and made free software in 1992.\nCombining Linux with the almost-complete GNU system resulted in a\ncomplete operating system: the GNU/Linux system.  Estimates are that\ntens of millions of people now use GNU/Linux systems, typically\nvia GNU/Linux distributions.  The principal\nversion of Linux now contains nonfree firmware “blobs”;\nfree software activists now maintain a modified free version of Linux,\ncalled \nLinux-libre.&#39;),
+ Document(metadata={&#39;source&#39;: &#39;https://www.gnu.org/gnu/gnu-history.html&#39;, &#39;title&#39;: &#39;Overview of the GNU System\n- GNU Project - Free Software Foundation&#39;, &#39;language&#39;: &#39;en&#39;}, page_content=&#39;However, the GNU Project is not limited to the core operating system.\nWe aim to provide a whole spectrum of software, whatever many users\nwant to have.  This includes application software.  See\nthe Free Software Directory for a catalogue\nof free software application programs.\n\nWe also want to provide software for users who are not computer\nexperts.  Therefore we developed a\ngraphical desktop (called GNOME) to help\nbeginners use the GNU system.\nWe also want to provide games and other recreations.  Plenty of free games are\nalready available.\n\nHow far can free software go?  There are no limits, except\nwhen laws such as\nthe patent system prohibit free software.  The ultimate goal is to\nprovide free software to do all of the jobs computer users want to\ndo—and thus make proprietary software a thing of the past.\n\n\n\n\n\n\n\n▲\n\n\n\nBACK TO TOP\n\n\n\n\n   Set language\n   \n\n\nAvailable for this page:&#39;),
+ Document(metadata={&#39;source&#39;: &#39;https://www.gnu.org/gnu/gnu-history.html&#39;, &#39;title&#39;: &#39;Overview of the GNU System\n- GNU Project - Free Software Foundation&#39;, &#39;language&#39;: &#39;en&#39;}, page_content=&#39;▲\n\n\n\nBACK TO TOP\n\n\n\n\n   Set language\n   \n\n\nAvailable for this page:\n\n\n[en]\xa0English \xa0\n[ar]\xa0العربية \xa0\n[bg]\xa0български \xa0\n[ca]\xa0català \xa0\n[cs]\xa0čeština \xa0\n[de]\xa0Deutsch \xa0\n[el]\xa0ελληνικά \xa0\n[es]\xa0español \xa0\n[fa]\xa0فارسی \xa0\n[fr]\xa0français \xa0\n[hr]\xa0hrvatski \xa0\n[it]\xa0italiano \xa0\n[ja]\xa0日本語 \xa0\n[ml]\xa0മലയാളം \xa0\n[nl]\xa0Nederlands \xa0\n[pl]\xa0polski \xa0\n[pt-br]\xa0português \xa0\n[ro]\xa0română \xa0\n[ru]\xa0русский \xa0\n[sq]\xa0Shqip \xa0\n[sr]\xa0српски \xa0\n[tr]\xa0Türkçe \xa0\n[uk]\xa0українська \xa0\n[zh-cn]\xa0简体中文 \xa0\n[zh-tw]\xa0繁體中文 \xa0\n\n\n\n\n\n\n\nBACK TO TOP ▲\n\n\n\n\n“The Free Software Foundation (FSF) is a nonprofit with a worldwide\nmission to promote computer user freedom. We defend the rights of all\nsoftware users.”\n\n\nJOIN\nDONATE\nSHOP\n\n\n\n\n\nPlease send general FSF &amp; GNU inquiries to\n&lt;gnu@gnu.org&gt;.\nThere are also other ways to contact\nthe FSF.  Broken links and other corrections or suggestions can be sent\nto &lt;webmasters@gnu.org&gt;.\n\nPlease see the Translations\nREADME for information on coordinating and contributing translations\nof this article.&#39;),
+ Document(metadata={&#39;source&#39;: &#39;https://www.gnu.org/gnu/gnu-history.html&#39;, &#39;title&#39;: &#39;Overview of the GNU System\n- GNU Project - Free Software Foundation&#39;, &#39;language&#39;: &#39;en&#39;}, page_content=&#39;Please see the Translations\nREADME for information on coordinating and contributing translations\nof this article.\n\n\nCopyright © 1996, 1997, 2003, 2005, 2008, 2012, 2017, 2025\nFree Software Foundation, Inc.\nThis page is licensed under a Creative\nCommons Attribution-NoDerivatives 4.0 International License.\n\n\nCopyright Infringement Notification\n\n\n\n\nUpdated:\n\n$Date: 2025/01/20 10:22:06 $&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">OllamaEmbeddings</span></code> transforms each chunk into a vector.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">OllamaEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;all-minilm&quot;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">embeddings</span><span class="o">.</span><span class="n">embed_documents</span><span class="p">([</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">splist</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.0935436 ,  0.02679712, -0.01115783, ..., -0.08409031,
+         0.05330889,  0.04408916],
+       [-0.10084906,  0.03020417, -0.00327516, ..., -0.06176688,
+         0.06849608, -0.04358619],
+       [-0.11154472,  0.04795909, -0.02063497, ..., -0.01737392,
+         0.01384512,  0.02849417],
+       ...,
+       [-0.05303629, -0.01137888,  0.03749163, ..., -0.07315554,
+         0.04760291,  0.02396866],
+       [-0.03733822, -0.04157385, -0.06982869, ..., -0.06890925,
+         0.04996402, -0.01484258],
+       [-0.05137261,  0.02855329, -0.05077768, ..., -0.0165134 ,
+        -0.03141483, -0.08961581]], shape=(8, 384))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Link to this heading">#</a></h2>
+<p>LangChain allow to provide tools for the models. This process have a few stages:</p>
+<ul class="simple">
+<li><p>Defining Tools: Check out the details about what a tool is and its capablities <a class="reference external" href="https://python.langchain.com/docs/concepts/tools/">here</a>.</p></li>
+<li><p>Binding tools to the model.</p></li>
+<li><p>If the model decides to use the tool, you will receive special output that contains instructions how to use the tool: <a class="reference external" href="https://python.langchain.com/docs/how_to/tool_calling/">Tool calls</a>. If application logic requires the use of the tool, there are special instruments for parsing the model’s attempt to use the tool.</p></li>
+<li><p>After all, according to the classical workflow, you are supposed to provide to the model with the output of the tool. There is a corresponding tutorial: <a class="reference external" href="https://python.langchain.com/docs/how_to/tool_results_pass_to_model/">How to pass tool outputs to chat models</a>.</p></li>
+</ul>
+<p>Check more details in the <a class="reference internal" href="langchain/tools.html"><span class="std std-doc">Tools</span></a> page.</p>
+<hr class="docutils" />
+<p>For example, consider a classical workflow with tooling that uses a lang chain.</p>
+<p>The following cell defines the ollama model interface and asks ollama to perform unexisting “fedor transformation”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">choice</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1:latest&quot;</span><span class="p">)</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Perform fedor transformation for &#39;Message&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It seems like you&#39;re asking me to perform a &quot;Fedora Transformation&quot; on the word &quot;Message&quot;. Unfortunately, I&#39;m not aware of any context or definition related to this term. Fedora is primarily known as a Linux distribution and also as a type of hat.
+
+If by &quot;Fedora Transformation,&quot; you mean converting the text into another format (like acronym expansion) or making it more compact but still readable, there are various approaches we could take:
+
+1. **Acronym Expansion**: This would involve breaking down &quot;Message&quot; into a full phrase explaining what each letter stands for. However, &quot;Message&quot; isn&#39;t typically expanded into an acronym.
+
+2. **Abbreviation**: If you mean to shorten the term, &quot;Message&quot; is already relatively concise and might not have a shorter abbreviation that&#39;s commonly used or recognized in most contexts.
+
+3. **Summary/Compression**: This approach involves reducing the text length while maintaining its essence. For &quot;Message&quot;, unless it&#39;s part of a larger context (like a phrase with more words), there isn&#39;t much room for summarization without losing meaning.
+
+4. **Wordplay/Synonyms**: If you&#39;re looking to transform the word into something else, we could explore synonyms or related terms that convey similar meanings (e.g., &quot;Notification&quot;, &quot;Communication&quot;, etc.).
+
+Without further context or a clear understanding of what you mean by &quot;Fedora Transformation,&quot; I&#39;m uncertain which direction would be most appropriate. If you have any specific goals in mind for transforming the word &quot;Message&quot;, please provide more details, and I&#39;ll do my best to assist.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The model begins to hallucinate as it tries to complete a request that it cannot.</p>
+<p>The next code defines the <code class="docutils literal notranslate"><span class="pre">fedor_transformation</span></code> tool and binds it to the model.</p>
+<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">bind_tools</span></code> method does not change the existing object; it returns a new one that is instructed with the tool.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fedor_transformation</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply Fedor transformation to the given string.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">tooled_llm</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">([</span><span class="n">fedor_transformation</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell makes the same “fedor transformation” request, but on an the object with a bound tool.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="s2">&quot;Perform fedor transformation for &#39;Message&#39;&quot;</span><span class="p">)]</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">tooled_llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The content is currently empty. What’s important here is that it contains a new attribute, <code class="docutils literal notranslate"><span class="pre">tool_calls</span></code>, which provides information on how the model “wants” to call the tool:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span><span class="o">.</span><span class="n">tool_calls</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;name&#39;: &#39;fedor_transformation&#39;,
+  &#39;args&#39;: {&#39;a&#39;: &#39;Message&#39;},
+  &#39;id&#39;: &#39;ae97babb-466a-4f5c-ab63-9f4f293a83a1&#39;,
+  &#39;type&#39;: &#39;tool_call&#39;}]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the exact output that takes <code class="docutils literal notranslate"><span class="pre">invoke</span></code> method of the tool:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tool_message</span> <span class="o">=</span> <span class="n">fedor_transformation</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">tool_message</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ToolMessage(content=&#39;egasseM&#39;, name=&#39;fedor_transformation&#39;, tool_call_id=&#39;ae97babb-466a-4f5c-ab63-9f4f293a83a1&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It produces a <code class="docutils literal notranslate"><span class="pre">ToolMessage</span></code> that is supposed to be included in the dialogue context and passed to the model for processing again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tool_message</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tooled_llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The reverse of &quot;Message&quot; is indeed &quot;egassem&quot;. The Fedor transformation, also known as the reverse or word reversal, swaps the characters in a given string. In this case, the original input was &quot;Message&quot;, and the output after applying the Fedor transformation is indeed &quot;egassem&quot;.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vector-stores">
+<h2>Vector stores<a class="headerlink" href="#vector-stores" title="Link to this heading">#</a></h2>
+<p>Langchain integrates with various vector stores. The following table shows a few of them:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Class name</p></th>
+<th class="head"><p>Package</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">InMemoryVectorStore</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-core.vectorstores</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FAISS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_community.vectorstores.faiss</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PGVector</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-postgres</span></code> (<code class="docutils literal notranslate"><span class="pre">langchain.vectorstores.pgvector</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ElasticsearchStore</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-elasticsearch</span></code> (<code class="docutils literal notranslate"><span class="pre">langchain.vectorstores.elasticsearch</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AzureCosmosDBMongoVCoreVectorSearch</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-azure-ai</span></code> (<code class="docutils literal notranslate"><span class="pre">langchain.vectorstores.azure_cosmos_db_mongo_vcore</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AzureCosmosDBNoSqlVectorSearch</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-azure-ai</span></code> (<code class="docutils literal notranslate"><span class="pre">langchain.vectorstores.azure_cosmos_db_no_sql</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AzureSearch</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-azure-ai</span></code> (<code class="docutils literal notranslate"><span class="pre">langchain.vectorstores.azuresearch</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SQLServer_VectorStore</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain-sqlserver</span></code> (<code class="docutils literal notranslate"><span class="pre">langchain.vectorstores.sqlserver</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more details check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://python.langchain.com/docs/integrations/vectorstores/">Vector stores</a> of the official documentation.</p></li>
+<li><p>The description <a class="reference external" href="https://api.python.langchain.com/en/latest/vectorstores/langchain_core.vectorstores.base.VectorStore.html"><code class="docutils literal notranslate"><span class="pre">langchain_core.vectorstores.base.VectorStore</span></code></a> which defines interface for the vector stores.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Consider the simpliest launch option option <code class="docutils literal notranslate"><span class="pre">InMemoryVectorStore</span></code>, for basic opeartions.</p>
+<p>In order to initialize the corresponding object, you must first create the embedding object. In this case, we will use <code class="docutils literal notranslate"><span class="pre">OllamaEmbeddings</span></code>, so you’re supposed to launch Ollama locally first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.vectorstores</span><span class="w"> </span><span class="kn">import</span> <span class="n">InMemoryVectorStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">OllamaEmbeddings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.documents.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Document</span>
+<span class="n">vector_store</span> <span class="o">=</span> <span class="n">InMemoryVectorStore</span><span class="p">(</span><span class="n">OllamaEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;all-minilm&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">add_documents</span></code> method to add items to the vector storage. This method takes a list of documents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Document</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="s2">&quot;This is dog&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;This is cat.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;My car was crased&quot;</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">vector_store</span><span class="o">.</span><span class="n">add_documents</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;5895b10e-af40-4263-b0c6-ff4803bd49a6&#39;,
+ &#39;4ed7ff85-4f40-4881-8dae-59158b608c62&#39;,
+ &#39;bac54e30-a7f8-4d7e-b682-d312b29c580c&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">similarity_search</span></code> method locates documents that are similar to the provided text. The following cells show some outputs for selected examles to make the outputs easier to interpret.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vector_store</span><span class="o">.</span><span class="n">similarity_search</span><span class="p">(</span><span class="s2">&quot;This is cow&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Document(id=&#39;5895b10e-af40-4263-b0c6-ff4803bd49a6&#39;, metadata={}, page_content=&#39;This is dog&#39;),
+ Document(id=&#39;4ed7ff85-4f40-4881-8dae-59158b608c62&#39;, metadata={}, page_content=&#39;This is cat.&#39;),
+ Document(id=&#39;bac54e30-a7f8-4d7e-b682-d312b29c580c&#39;, metadata={}, page_content=&#39;My car was crased&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vector_store</span><span class="o">.</span><span class="n">similarity_search</span><span class="p">(</span><span class="s2">&quot;Accidents sometimes happens&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Document(id=&#39;bac54e30-a7f8-4d7e-b682-d312b29c580c&#39;, metadata={}, page_content=&#39;My car was crased&#39;),
+ Document(id=&#39;5895b10e-af40-4263-b0c6-ff4803bd49a6&#39;, metadata={}, page_content=&#39;This is dog&#39;),
+ Document(id=&#39;4ed7ff85-4f40-4881-8dae-59158b608c62&#39;, metadata={}, page_content=&#39;This is cat.&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="retriever">
+<h3>Retriever<a class="headerlink" href="#retriever" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">as_retriever</span></code> function gives you access a special retriever object that can be used for searching.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retrievier</span> <span class="o">=</span> <span class="n">vector_store</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">retrievier</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;09.11&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Document(id=&#39;bac54e30-a7f8-4d7e-b682-d312b29c580c&#39;, metadata={}, page_content=&#39;My car was crased&#39;),
+ Document(id=&#39;4ed7ff85-4f40-4881-8dae-59158b608c62&#39;, metadata={}, page_content=&#39;This is cat.&#39;),
+ Document(id=&#39;5895b10e-af40-4263-b0c6-ff4803bd49a6&#39;, metadata={}, page_content=&#39;This is dog&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="llms">
 <h2>LLMs<a class="headerlink" href="#llms" title="Link to this heading">#</a></h2>
@@ -861,7 +1288,7 @@ The more information you give me, the better I can assist you.
 </tr>
 <tr class="row-odd"><td><p>Ollama</p></td>
 <td><p>On-Premise/Local</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">langchain_community.chat_models.ChatOllama</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_community.llms.OllamaLLM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">langchain_ollama.ChatOllama</span></code>, <code class="docutils literal notranslate"><span class="pre">langchain_community.llms.OllamaLLM</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">langchain-ollama</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>Llama.cpp</p></td>
@@ -926,6 +1353,25 @@ The more information you give me, the better I can assist you.
 </tr>
 </tbody>
 </table>
+</div>
+<p>For a more detailed description, check out the <a class="reference external" href="https://python.langchain.com/docs/concepts/chat_models/">Chat models</a> page.</p>
+<hr class="docutils" />
+<p>Consider, for example, using Ollama in the LangChain framework. For the following examples to run, ollama must be awailable on your local host.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1:latest&quot;</span><span class="p">)</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The capital of France is Paris.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="messages">
@@ -1072,6 +1518,8 @@ The more information you give me, the better I can assist you.
 </div>
 </div>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1114,11 +1562,11 @@ The more information you give me, the better I can assist you.
       </div>
     </a>
     <a class="right-next"
-       href="../packages/intro.html"
+       href="langchain/texts_processing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Packages</p>
+        <p class="prev-next-title">Texts transforming</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1139,6 +1587,12 @@ The more information you give me, the better I can assist you.
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#texts-transforming">Texts transforming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-stores">Vector stores</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retriever">Retriever</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms">LLMs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messages">Messages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>

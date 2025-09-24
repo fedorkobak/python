@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -572,7 +572,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow/flavours.html">Flavours</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="langchain.html">LangChain</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="langchain/texts_processing.html">Texts transforming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="spark/data_sources.html">Data sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/transformations.html">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/groupby.html">Group by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/ml.html">ML</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -769,6 +781,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers">Transformers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizers">Tokenizers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smolagents">Smolagents</a></li>
 </ul>
             </nav>
         </div>
@@ -1177,6 +1190,115 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="smolagents">
+<h2>Smolagents<a class="headerlink" href="#smolagents" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">smalagents</span></code> package is a tooling for building agents. The following table lists core components that you’re supposed to use:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CodeAgent</span></code></p></td>
+<td><p>A class that incapsulates the agent’s logic</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Tool</span></code></p></td>
+<td><p>A base class for tools. There are some built in tools like: <code class="docutils literal notranslate"><span class="pre">ApiWebSearch</span></code>, <code class="docutils literal notranslate"><span class="pre">VisitWebpageTool</span></code>, <code class="docutils literal notranslate"><span class="pre">PythonInterpreterTool</span></code> etc.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&#64;tool</span></code></p></td>
+<td><p>A decorator that wraps functions that are supposed to be used as tools</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Model</span></code></p></td>
+<td><p>A base class for the interfaces that provide different ways to access the decision-making model: <code class="docutils literal notranslate"><span class="pre">InferenceClientModel</span></code>, <code class="docutils literal notranslate"><span class="pre">TransformersModel</span></code>, etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p>Consider the following example. Suppose you want to make model awailable to perform a really specific transformation, with which the model is unfamiliar. In this case, we’ll consider the “Kobak transformation”.</p>
+<p>The following cell asks the raw model to perform the “Kobak transformation”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">InferenceClient</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">InferenceClient</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;Qwen/Qwen2.5-Coder-32B-Instruct&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat_completion</span><span class="p">(</span>
+    <span class="p">[{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Apply a Kobak transformation on the text &#39;Hello, World!&#39;&quot;</span>
+    <span class="p">}]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Kobak transformation is not a standard text transformation technique that I&#39;m familiar with. It&#39;s possible that you might be referring to a specific context or a custom transformation method. Could you please provide more details or clarify the definition of the Kobak transformation? This will help me give you an accurate and helpful response.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The model indicates that it is not familiar with the type of the required transformation. We can implement the transformation using python code and provide the code to the model as a tool:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">smolagents</span><span class="w"> </span><span class="kn">import</span> <span class="n">CodeAgent</span><span class="p">,</span> <span class="n">InferenceClientModel</span><span class="p">,</span> <span class="n">tool</span>
+
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kobak_transformation</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A tool that fetches the current local time in a specified timezone.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        text: The input text to be transformed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">text</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">InferenceClientModel</span><span class="p">(</span><span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;Qwen/Qwen2.5-Coder-32B-Instruct&quot;</span><span class="p">)</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="n">CodeAgent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">kobak_transformation</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;Apply a Kobak transformation on the text &#39;Hello, World!&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #d4b702; text-decoration-color: #d4b702">╭──────────────────────────────────────────────────── </span><span style="color: #d4b702; text-decoration-color: #d4b702; font-weight: bold">New run</span><span style="color: #d4b702; text-decoration-color: #d4b702"> ────────────────────────────────────────────────────╮</span>
+<span style="color: #d4b702; text-decoration-color: #d4b702">│</span>                                                                                                                 <span style="color: #d4b702; text-decoration-color: #d4b702">│</span>
+<span style="color: #d4b702; text-decoration-color: #d4b702">│</span> <span style="font-weight: bold">Perforam a kobak transformation on the text 'Hello, World!'</span>                                                     <span style="color: #d4b702; text-decoration-color: #d4b702">│</span>
+<span style="color: #d4b702; text-decoration-color: #d4b702">│</span>                                                                                                                 <span style="color: #d4b702; text-decoration-color: #d4b702">│</span>
+<span style="color: #d4b702; text-decoration-color: #d4b702">╰─ InferenceClientModel - Qwen/Qwen2.5-Coder-32B-Instruct ────────────────────────────────────────────────────────╯</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #d4b702; text-decoration-color: #d4b702">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ </span><span style="font-weight: bold">Step 1</span><span style="color: #d4b702; text-decoration-color: #d4b702"> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"> ─ <span style="font-weight: bold">Executing parsed code:</span> ──────────────────────────────────────────────────────────────────────────────────────── 
+  <span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">transformed_text </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> kobak_transformation(text</span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">'Hello, World!'</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">)</span><span style="background-color: #272822">                                                  </span>  
+  <span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(transformed_text)</span><span style="background-color: #272822">                                                                                        </span>  
+ ───────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Execution logs:</span>
+!dlroW ,olleH
+
+Out: None
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #7f7f7f; text-decoration-color: #7f7f7f">[Step 1: Duration 0.96 seconds| Input tokens: 1,994 | Output tokens: 49]</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #d4b702; text-decoration-color: #d4b702">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ </span><span style="font-weight: bold">Step 2</span><span style="color: #d4b702; text-decoration-color: #d4b702"> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"> ─ <span style="font-weight: bold">Executing parsed code:</span> ──────────────────────────────────────────────────────────────────────────────────────── 
+  <span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">final_answer(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"!dlroW ,olleH"</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">)</span><span style="background-color: #272822">                                                                                  </span>  
+ ───────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #d4b702; text-decoration-color: #d4b702; font-weight: bold">Final answer: !dlroW ,olleH</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #7f7f7f; text-decoration-color: #7f7f7f">[Step 2: Duration 1.19 seconds| Input tokens: 4,125 | Output tokens: 120]</span>
+</pre>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>!dlroW ,olleH
+</pre></div>
+</div>
+</div>
+</div>
+<p>The outputs show the “thoughts” of the model, and the final answer corresponds to the idea of the “Kobak transformation”.</p>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1249,6 +1371,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers">Transformers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizers">Tokenizers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smolagents">Smolagents</a></li>
 </ul>
   </nav></div>
 

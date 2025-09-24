@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -572,7 +572,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow/flavours.html">Flavours</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="langchain.html">LangChain</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="langchain/texts_processing.html">Texts transforming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="spark/data_sources.html">Data sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/transformations.html">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/groupby.html">Group by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark/ml.html">ML</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -766,12 +778,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging Face</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark">Spark</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark">Spark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-transformer">Sentence transformer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-sdk">MCP SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow">MLFlow</a></li>
 </ul>
             </nav>
         </div>
@@ -796,49 +807,41 @@ document.write(`
 <thead>
 <tr class="row-odd"><th class="head"><p>Package</p></th>
 <th class="head"><p>Purpose</p></th>
-<th class="head"><p>Example Usage</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>🤗 Hub (<code class="docutils literal notranslate"><span class="pre">huggingface_hub</span></code>)</strong></p></td>
 <td><p>Central repository for models, datasets, and Spaces. Lets you push/pull models and datasets.</p></td>
-<td><p>Upload a fine-tuned model to share with others.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Transformers (<code class="docutils literal notranslate"><span class="pre">transformers</span></code>)</strong></p></td>
 <td><p>High-level library with pretrained NLP, vision, and multimodal models. Handles training, inference, and tokenization (via wrappers).</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">pipeline(&quot;sentiment-analysis&quot;)</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Tokenizers (<code class="docutils literal notranslate"><span class="pre">tokenizers</span></code>)</strong></p></td>
 <td><p>Fast, low-level text tokenization library (written in Rust). Often used inside <code class="docutils literal notranslate"><span class="pre">transformers</span></code>.</p></td>
-<td><p>Train a custom WordPiece/BPE tokenizer.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Datasets (<code class="docutils literal notranslate"><span class="pre">datasets</span></code>)</strong></p></td>
 <td><p>Efficient dataset loading, processing, and streaming. Optimized for large ML datasets.</p></td>
-<td><p>Load <code class="docutils literal notranslate"><span class="pre">imdb</span></code> dataset in one line: <code class="docutils literal notranslate"><span class="pre">datasets.load_dataset(&quot;imdb&quot;)</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Evaluate (<code class="docutils literal notranslate"><span class="pre">evaluate</span></code>)</strong></p></td>
 <td><p>Standardized evaluation metrics library. Works well with <code class="docutils literal notranslate"><span class="pre">datasets</span></code> and <code class="docutils literal notranslate"><span class="pre">transformers</span></code>.</p></td>
-<td><p>Compute accuracy, F1, BLEU, etc.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Diffusers (<code class="docutils literal notranslate"><span class="pre">diffusers</span></code>)</strong></p></td>
 <td><p>Library for diffusion models (e.g., Stable Diffusion) for images, audio, video.</p></td>
-<td><p>Generate images from text prompts.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Accelerate (<code class="docutils literal notranslate"><span class="pre">accelerate</span></code>)</strong></p></td>
 <td><p>Utility for running training on any hardware setup (CPU, GPU, multi-GPU, TPU) with minimal code changes.</p></td>
-<td><p>Scale PyTorch model training across GPUs.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>PEFT (<code class="docutils literal notranslate"><span class="pre">peft</span></code>)</strong></p></td>
 <td><p>Parameter-Efficient Fine-Tuning library (LoRA, adapters, etc.) for large models.</p></td>
-<td><p>Fine-tune a 13B LLM on a laptop GPU.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Optimum (<code class="docutils literal notranslate"><span class="pre">optimum</span></code>)</strong></p></td>
 <td><p>Optimizations for transformers (ONNX, quantization, hardware-specific acceleration).</p></td>
-<td><p>Run models faster on Intel/NVIDIA chips.</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Gradio (<code class="docutils literal notranslate"><span class="pre">gradio</span></code>)</strong> (partnered)</p></td>
+<tr class="row-odd"><td><p><strong>Smollagents (<code class="docutils literal notranslate"><span class="pre">smolagents</span></code>)</strong></p></td>
+<td><p>Building agentic systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Gradio (<code class="docutils literal notranslate"><span class="pre">gradio</span></code>)</strong> (partnered)</p></td>
 <td><p>Simple UI framework to demo models in the browser.</p></td>
-<td><p>Deploy a model demo in a few lines.</p></td>
 </tr>
 </tbody>
 </table>
@@ -852,53 +855,37 @@ document.write(`
 <section id="spark">
 <h2>Spark<a class="headerlink" href="#spark" title="Link to this heading">#</a></h2>
 <p>Spark is a framework for processing large amounts of data. This section covers its Python SDK.</p>
-<p>Some configuration is required to start experimenting with Spark in local mode:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">pyspark</span></code>: for spark instalation.</p></li>
-<li><p>Install java: <code class="docutils literal notranslate"><span class="pre">openjdk-17-jdk</span></code> package in <code class="docutils literal notranslate"><span class="pre">apt</span></code>. Set path to the jdk to the <code class="docutils literal notranslate"><span class="pre">$JAVA_HOME</span></code> variable. In ubuntu case <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64</span></code>.</p></li>
-</ul>
+<p>For more details, check the <a class="reference internal" href="spark.html"><span class="std std-doc">Spark</span></a> page.</p>
 <hr class="docutils" />
-<p>If you have completed the specified configuration correctly, you will be able to run the script below, which creates a local <code class="docutils literal notranslate"><span class="pre">SparkContext</span></code> - way to experiment with spark without any clusters.</p>
+<p>The following cell demonstrates how to create a Spark session, define a data frame, and display it in the framework.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
 
-<span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">(</span><span class="n">conf</span><span class="o">=</span><span class="n">SparkConf</span><span class="p">()</span><span class="o">.</span><span class="n">setMaster</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">))</span>
+<span class="n">spark_session</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Temp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;Fedor&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">1400</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Salary&quot;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: Using incubator modules: jdk.incubator.vector
-Using Spark&#39;s default log4j profile: org/apache/spark/log4j2-defaults.properties
-25/08/22 15:13:04 WARN Utils: Your hostname, user-ThinkPad-E16-Gen-2, resolves to a loopback address: 127.0.1.1; using 10.202.37.58 instead (on interface wlp0s20f3)
-25/08/22 15:13:04 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
-Using Spark&#39;s default log4j profile: org/apache/spark/log4j2-defaults.properties
-Setting default log level to &quot;WARN&quot;.
-To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-25/08/22 15:13:05 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----+------+
+| Name|Salary|
++-----+------+
+|Fedor|   500|
+|Alice|   700|
+|  Bob|  1400|
++-----+------+
 </pre></div>
 </div>
 </div>
 </div>
-<section id="datasets">
-<h3>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">#</a></h3>
-<p>Spark actually operates with Resilient Distributed Datasets (RDDs), but I’ll use the term “dataset”, as this section mosttly focuses on the syntax of <code class="docutils literal notranslate"><span class="pre">pyspark</span></code>, not actual its features associated with the ability to distribute the computations. Check more details on <a class="reference external" href="https://spark.apache.org/docs/latest/rdd-programming-guide.html">RDD Programming Guide</a> page.</p>
-<hr class="docutils" />
-<p>The following cell demonstrates how to create an RDD from a simple python list.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyspark.core.rdd.RDD
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="sentence-transformer">
 <h2>Sentence transformer<a class="headerlink" href="#sentence-transformer" title="Link to this heading">#</a></h2>
@@ -1003,6 +990,71 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 <p>Check more in <a class="reference internal" href="langchain.html"><span class="std std-doc">Lang Chain</span></a> package.</p>
 </section>
+<section id="mcp-sdk">
+<h2>MCP SDK<a class="headerlink" href="#mcp-sdk" title="Link to this heading">#</a></h2>
+<p>There is an MCP SDK for python. It is provided by the <code class="docutils literal notranslate"><span class="pre">mcp[cli]</span></code> package.</p>
+<p>Define the assign a server object using the <code class="docutils literal notranslate"><span class="pre">mcp.server.fastmcp.FastMCP</span></code> class. Use decorators: <code class="docutils literal notranslate"><span class="pre">tool</span></code>, <code class="docutils literal notranslate"><span class="pre">resource</span></code>, <code class="docutils literal notranslate"><span class="pre">prompt</span></code>, and <code class="docutils literal notranslate"><span class="pre">sampling</span></code> to wrap the funcitons that implement the corresponding facilities.</p>
+<hr class="docutils" />
+<p>In the following cell we will consider how to run the server.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> intro_files/mcp_server.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastMCP</span>
+
+<span class="n">mcp</span> <span class="o">=</span> <span class="n">FastMCP</span><span class="p">(</span><span class="s2">&quot;Some service&quot;</span><span class="p">)</span>
+
+<span class="nd">@mcp</span><span class="o">.</span><span class="n">tool</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">some_tool</span><span class="p">(</span><span class="n">inp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Output of some tool for </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">.&quot;</span>
+
+<span class="n">mcp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting intro_files/mcp_server.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>Run your server using the command <code class="docutils literal notranslate"><span class="pre">mcp</span> <span class="pre">dev</span> <span class="pre">intro_files/mcp_server.py</span></code>. The following cell runs the server from python using <code class="docutils literal notranslate"><span class="pre">os.system</span></code> command to demonstrate the expected output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;mcp dev intro_files/mcp_server.py &amp;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting MCP inspector...
+⚙️ Proxy server listening on localhost:6277
+🔑 Session token: 4c21942ece36a04554ee01562067c5b129c3b03eaa945ead9d0b8964d9334fe8
+   Use this token to authenticate requests or set DANGEROUSLY_OMIT_AUTH=true to disable auth
+
+🚀 MCP Inspector is up and running at:
+   http://localhost:6274/?MCP_PROXY_AUTH_TOKEN=4c21942ece36a04554ee01562067c5b129c3b03eaa945ead9d0b8964d9334fe8
+
+🌐 Opening browser...
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note:</strong> To use an inspector tool, you must install <code class="docutils literal notranslate"><span class="pre">npm</span></code> on your system.</p>
+</section>
+<section id="mlflow">
+<h2>MLFlow<a class="headerlink" href="#mlflow" title="Link to this heading">#</a></h2>
+<p>It is a tool for organizing the lifecycle of machine learning models. It includes four componenets:</p>
+<ul class="simple">
+<li><p>Tracking: Record and query experiments: code, data, config, results.</p></li>
+<li><p>Projects: Packaging format for reproducible runs on any platform.</p></li>
+<li><p>Models: General model format that support diverse deployment tools.</p></li>
+<li><p>Model Registry: Centralized and collaborative model lifecycle management.</p></li>
+</ul>
+<p>For more information, check out the <a class="reference internal" href="mlflow.html"><span class="std std-doc">MLFlow</span></a> page.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1070,12 +1122,11 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging Face</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark">Spark</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark">Spark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-transformer">Sentence transformer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-sdk">MCP SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow">MLFlow</a></li>
 </ul>
   </nav></div>
 
