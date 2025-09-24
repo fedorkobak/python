@@ -140,11 +140,10 @@ parts:
     - file: sklearn/intro.md
     - file: sklearn/data_transform.ipynb
       sections:
-      - file: sklearn/data_transform/pipeline.ipynb
+      - file: sklearn/data_transform/pack_object.ipynb
         sections:
         - file: sklearn/data_transform/pipeline/features_names.ipynb
-      - file: sklearn/data_transform/pipeline/memory_parameter.ipynb
-      - file: sklearn/data_transform/columns_transformer.ipynb
+        - file: sklearn/data_transform/pipeline/memory_parameter.ipynb
       - file: sklearn/data_transform/features_names_out.ipynb
       - file: sklearn/data_transform/encoders.ipynb
       - file: sklearn/data_transform/developing_transformer.ipynb
