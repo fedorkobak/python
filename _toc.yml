@@ -309,6 +309,7 @@ parts:
       - file: ds_ml/ranx/entry_queries_documents.ipynb
     - file: ds_ml/mlflow
       sections:
+      - file: ds_ml/mlflow/configuration.ipynb
       - file: ds_ml/mlflow/tracking.ipynb
       - file: ds_ml/mlflow/example_of_use.ipynb
       - file: ds_ml/mlflow/deploy.ipynb
