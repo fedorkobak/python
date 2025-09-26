@@ -319,6 +319,7 @@ parts:
       sections:
       - file: ds_ml/langchain/texts_processing.ipynb
       - file: ds_ml/langchain/tools.ipynb
+      - file: ds_ml/langchain/langgraph.ipynb
       - file: ds_ml/langchain/langsmith.ipynb
     - file: ds_ml/spark.ipynb
       sections:
