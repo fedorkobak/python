@@ -313,6 +313,7 @@ parts:
       - file: ds_ml/mlflow/tracking.ipynb
         sections:
         - file: ds_ml/mlflow/tracking/runs.ipynb
+        - file: ds_ml/mlflow/tracking/experiment.ipynb
       - file: ds_ml/mlflow/example_of_use.ipynb
       - file: ds_ml/mlflow/deploy.ipynb
       - file: ds_ml/mlflow/custom_model.ipynb
