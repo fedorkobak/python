@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="To excel import" href="excel_export.html" />
-    <link rel="prev" title="ML" href="../ds_ml/spark/ml.html" />
+    <link rel="prev" title="Optuna" href="../ds_ml/optuna.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -346,12 +346,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../sklearn/intro.html">Intro</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pipeline/features_names.html">Features names</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pack_object.html">Pack object</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/columns_transformer.html">Columns transformer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/columns_transformer.html">Specific processing for column</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/features_names_out.html">Features names out</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/encoders.html">Encoders</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +564,12 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/tracking.html">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/tracking/experiment.html">Experiment</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/example_of_use.html">Example of usе</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/custom_model.html">Custom model</a></li>
@@ -575,6 +579,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langgraph.html">LangGraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
@@ -585,6 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/ml.html">ML</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="current nav bd-sidenav">
@@ -1297,12 +1303,12 @@ rm -r zip_example_file archive.zip
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../ds_ml/spark/ml.html"
+       href="../ds_ml/optuna.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ML</p>
+        <p class="prev-next-title">Optuna</p>
       </div>
     </a>
     <a class="right-next"

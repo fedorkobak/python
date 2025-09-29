@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ds_ml/intro';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -346,12 +348,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../sklearn/intro.html">Intro</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pipeline/features_names.html">Features names</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pack_object.html">Pack object</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/columns_transformer.html">Columns transformer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/columns_transformer.html">Specific processing for column</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/features_names_out.html">Features names out</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/encoders.html">Encoders</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +566,12 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/tracking.html">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlflow/tracking/experiment.html">Experiment</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/example_of_use.html">Example of usе</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/custom_model.html">Custom model</a></li>
@@ -575,6 +581,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/langgraph.html">LangGraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
@@ -585,6 +592,7 @@
 <li class="toctree-l2"><a class="reference internal" href="spark/ml.html">ML</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="optuna.html">Optuna</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -783,6 +791,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-sdk">MCP SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow">MLFlow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-client">OpenAI client</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optuna">Optuna</a></li>
 </ul>
             </nav>
         </div>
@@ -1055,6 +1068,140 @@ document.write(`
 </ul>
 <p>For more information, check out the <a class="reference internal" href="mlflow.html"><span class="std std-doc">MLFlow</span></a> page.</p>
 </section>
+<section id="databricks-sdk">
+<h2>Databricks SDK<a class="headerlink" href="#databricks-sdk" title="Link to this heading">#</a></h2>
+<p>Databricks is a platform for developing data applications. It provides the python SKD.</p>
+<p>As it provides intercation with cloud based platform you have to set up an authentification in the <code class="docutils literal notranslate"><span class="pre">.databricks</span></code> file. Check more on configuration the authentification in:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/auth/config-profiles">Create a Databricks configuration profile file</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/auth/pat">Databricks personal access token authentification</a>.</p></li>
+</ul>
+<p>There is a special package for interacting with Databricks Feature Store: <a class="reference external" href="https://pypi.org/project/databricks-feature-engineering/">databricks-feature-engineering</a>. After installing the module <code class="docutils literal notranslate"><span class="pre">databricks.feature_engineering</span></code> will be awailable from the environment.</p>
+<p>Check the <a class="reference external" href="https://databricks-sdk-py.readthedocs.io/en/latest/">Databricks SDK for python</a> documentation.</p>
+<hr class="docutils" />
+<p>If the configuration is set up correctly, you should be able to run the following cell without any errors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>databricks.sdk.WorkspaceClient
+</pre></div>
+</div>
+</div>
+</div>
+<section id="openai-client">
+<h3>OpenAI client<a class="headerlink" href="#openai-client" title="Link to this heading">#</a></h3>
+<p>The method <code class="docutils literal notranslate"><span class="pre">serving_endpoints.get_open_ai_client.get_open_ai_client</span></code> returns the  <code class="docutils literal notranslate"><span class="pre">openai.OpenAI</span></code> client, which you can use to requiest some served models.</p>
+<hr class="docutils" />
+<p>The following cell creates the <code class="docutils literal notranslate"><span class="pre">open_ai_client</span></code> and shows that it is really open ai client.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">open_ai_client</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">serving_endpoints</span><span class="o">.</span><span class="n">get_open_ai_client</span><span class="p">()</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">open_ai_client</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openai.OpenAI
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell illustrates the invocation of the embedding model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span> <span class="o">=</span> <span class="n">open_ai_client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+   <span class="n">model</span><span class="o">=</span><span class="s2">&quot;databricks-gte-large-en&quot;</span><span class="p">,</span>
+   <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span>
+<span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openai.types.create_embedding_response.CreateEmbeddingResponse
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is an <code class="docutils literal notranslate"><span class="pre">openai</span></code> embedding response object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.9521484375,
+ -0.7998046875,
+ -0.79931640625,
+ -0.138427734375,
+ -0.79150390625,
+ -0.31787109375,
+ -0.55810546875,
+ 0.392333984375,
+ -0.36767578125,
+ 0.4013671875,
+ -0.0791015625,
+ -0.78515625,
+ -0.4599609375,
+ 0.4189453125,
+ 0.418212890625,
+ -0.36767578125,
+ -0.587890625,
+ -0.466796875,
+ 0.159423828125,
+ -0.359130859375]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="optuna">
+<h2>Optuna<a class="headerlink" href="#optuna" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://optuna.org/">Optuna</a> is a package that enables a hyber parameter optimization.</p>
+<p>For more information, check out the <a class="reference internal" href="optuna.html"><span class="std std-doc">Optuna</span></a> page on this website.</p>
+<hr class="docutils" />
+<p>Consider the function:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = (x-2)^2\]</div>
+<p>The minimum would be the solution of the equasion:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{df}{dx} = 0 \\
+2x-4 = 0 \\
+x = 2
+\end{split}\]</div>
+<p>The following cell performs the same task, but uses Optuna to do so numerically.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">optuna</span>
+
+<span class="n">optuna</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">optuna</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">:</span> <span class="n">optuna</span><span class="o">.</span><span class="n">trial</span><span class="o">.</span><span class="n">Trial</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">()</span>
+<span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">study</span><span class="o">.</span><span class="n">best_params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 2.0017855120396995}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1127,6 +1274,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-sdk">MCP SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow">MLFlow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-client">OpenAI client</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optuna">Optuna</a></li>
 </ul>
   </nav></div>
 

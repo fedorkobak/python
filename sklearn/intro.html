@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'sklearn/intro';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -346,12 +348,11 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Intro</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="data_transform/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="data_transform/pipeline/features_names.html">Features names</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="data_transform/pack_object.html">Pack object</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_transform/pack_object/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_transform/pack_object/columns_transformer.html">Columns transformer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="data_transform/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_transform/columns_transformer.html">Specific processing for column</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_transform/features_names_out.html">Features names out</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_transform/encoders.html">Encoders</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +566,12 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/tracking.html">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/tracking/experiment.html">Experiment</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/example_of_use.html">Example of usе</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/custom_model.html">Custom model</a></li>
@@ -575,6 +581,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langgraph.html">LangGraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
@@ -585,6 +592,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/ml.html">ML</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -754,7 +762,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -770,6 +780,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transform">Data transform</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -782,6 +800,90 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="intro">
 <h1>Intro<a class="headerlink" href="#intro" title="Link to this heading">#</a></h1>
 <p>Is a library that implements many tools for machine learning and advanced data analysis.</p>
+<section id="data-transform">
+<h2>Data transform<a class="headerlink" href="#data-transform" title="Link to this heading">#</a></h2>
+<p>The Sklearn provides a set of tools for data processing. The following table lists some of these classes.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Area of Preprocessing</p></th>
+<th class="head text-left"><p>Class Name</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Scaling &amp; Standardization</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code></p></td>
+<td class="text-left"><p>Standardizes features by removing the mean and scaling to unit variance (<span class="math notranslate nohighlight">\(z\)</span>-score).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code></p></td>
+<td class="text-left"><p>Scales features to a given range, typically <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code></p></td>
+<td class="text-left"><p>Scales each feature by its maximum absolute value, typically to the range <span class="math notranslate nohighlight">\([-1, 1]\)</span>. Useful for sparse data.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">RobustScaler</span></code></p></td>
+<td class="text-left"><p>Scales features using statistics that are robust to outliers (e.g., median and interquartile range).</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Normalization</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Normalizer</span></code></p></td>
+<td class="text-left"><p>Normalizes samples individually to have unit norm (e.g., <span class="math notranslate nohighlight">\(l_1\)</span> or <span class="math notranslate nohighlight">\(l_2\)</span> norm).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Missing Values Imputation</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code></p></td>
+<td class="text-left"><p>Imputes missing values using a simple strategy (e.g., mean, median, most frequent, or a constant value).</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">KNNImputer</span></code></p></td>
+<td class="text-left"><p>Imputes missing values using the K-Nearest Neighbors approach.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">IterativeImputer</span></code></p></td>
+<td class="text-left"><p>Imputes missing values by modeling each feature with missing values as a function of other features and using that estimate for imputation.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Categorical Encoding</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code></p></td>
+<td class="text-left"><p>Encodes categorical features as a one-hot or dummy feature matrix.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code></p></td>
+<td class="text-left"><p>Encodes categorical features into ordinal integers.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Feature Transformation</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code></p></td>
+<td class="text-left"><p>Generates polynomial and interaction features (e.g., <span class="math notranslate nohighlight">\(x_1^2, x_1 x_2, x_2^2\)</span>).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">FunctionTransformer</span></code></p></td>
+<td class="text-left"><p>Allows creating a transformer from an arbitrary function.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">QuantileTransformer</span></code></p></td>
+<td class="text-left"><p>Transforms features using quantiles, forcing the data to follow a uniform or normal distribution.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PowerTransformer</span></code></p></td>
+<td class="text-left"><p>Applies power transforms (e.g., Yeo-Johnson or Box-Cox) to make data more Gaussian-like.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Discretization / Binning</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></p></td>
+<td class="text-left"><p>Bins continuous data into <span class="math notranslate nohighlight">\(k\)</span> discrete intervals.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Pipeline/Composition</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></p></td>
+<td class="text-left"><p>Sequentially applies a list of transformers and a final estimator.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code></p></td>
+<td class="text-left"><p>Applies different transformers to different subsets of features.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more details, check the <a class="reference internal" href="data_transform.html"><span class="std std-doc">Data Transform</span></a> page.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -838,6 +940,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transform">Data transform</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

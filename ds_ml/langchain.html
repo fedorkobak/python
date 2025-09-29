@@ -346,12 +346,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../sklearn/intro.html">Intro</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pipeline/features_names.html">Features names</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pack_object.html">Pack object</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/columns_transformer.html">Columns transformer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/columns_transformer.html">Specific processing for column</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/features_names_out.html">Features names out</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/encoders.html">Encoders</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +564,12 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/tracking.html">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlflow/tracking/experiment.html">Experiment</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/example_of_use.html">Example of usе</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/custom_model.html">Custom model</a></li>
@@ -575,6 +579,7 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">LangChain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/langgraph.html">LangGraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
@@ -585,6 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="spark/ml.html">ML</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="optuna.html">Optuna</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -787,6 +793,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms">LLMs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messages">Messages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langgraph">LangGraph</a></li>
 </ul>
             </nav>
         </div>
@@ -1518,6 +1525,74 @@ Without further context or a clear understanding of what you mean by &quot;Fedor
 </div>
 </div>
 </section>
+<section id="langgraph">
+<h2>LangGraph<a class="headerlink" href="#langgraph" title="Link to this heading">#</a></h2>
+<p>LangGraph is a framework built on top of LangChain that makes it easier to create stateful, multi-step AI frameworks, which are often modeled as graphs or state machines.</p>
+<p>Check more in the <a class="reference internal" href="langchain/langgraph.html"><span class="std std-doc">LangGraph</span></a>.</p>
+<hr class="docutils" />
+<p>The following cell illustrates how to use the <code class="docutils literal notranslate"><span class="pre">langgraph.prebuild.create</span></code> agent to simply define the agent.</p>
+<p><strong>Note.</strong> To run this, you need to have the <code class="docutils literal notranslate"><span class="pre">llama3.2:1b</span></code> model available in your system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_react_agent</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chat_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_chat_model</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">init_chat_model</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.2:1b&quot;</span><span class="p">,</span>
+    <span class="n">model_provider</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_weather</span><span class="p">(</span><span class="n">city</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Get weather for a given city.&#39;&#39;&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The tool is invoked!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;It&#39;s always sunny in </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">!&quot;</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">get_weather</span><span class="p">],</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;You are a helpful assistant&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The final answer is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the weather in sf?&quot;</span><span class="p">}]}</span>
+<span class="p">)[</span><span class="s2">&quot;messages&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The tool is invoked!
+I&#39;m not able to provide real-time weather information or forecasts. I can however suggest some ways for you to find out the current weather conditions in San Francisco.
+
+You can check the weather forecast for San Francisco by visiting a weather website such as weather.com or accuweather.com. These websites provide up-to-date weather conditions, forecasts, and other weather-related information for locations around the world, including San Francisco.
+
+Alternatively, you can also download a weather app on your smartphone to get the current weather conditions and forecast for San Francisco. Some popular weather apps include Dark Sky, Weather Underground, and The Weather Channel.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This may be a bit irrelevant, but the tool was invoked, as it printed the hardcoded message. The following cell shows <code class="docutils literal notranslate"><span class="pre">ToolMessage</span></code> that appeared in the chat history:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ToolMessage(content=&quot;It&#39;s always sunny in sf!&quot;, name=&#39;get_weather&#39;, id=&#39;316e68be-b963-4d43-ab53-7affc8ea5b87&#39;, tool_call_id=&#39;1538c17b-0081-470e-b509-0d258f5f3b40&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1596,6 +1671,7 @@ Without further context or a clear understanding of what you mean by &quot;Fedor
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms">LLMs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messages">Messages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langgraph">LangGraph</a></li>
 </ul>
   </nav></div>
 

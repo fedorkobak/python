@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tracking" href="mlflow/tracking.html" />
+    <link rel="next" title="Configuration" href="mlflow/configuration.html" />
     <link rel="prev" title="Queries documents entry" href="ranx/entry_queries_documents.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -346,12 +346,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../sklearn/intro.html">Intro</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pipeline.html">Pipeline</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pipeline/features_names.html">Features names</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pack_object.html">Pack object</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/columns_transformer.html">Columns transformer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/pipeline/memory_parameter.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter(chacing)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/columns_transformer.html">Specific processing for column</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/features_names_out.html">Features names out</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/encoders.html">Encoders</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +564,12 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">MLflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/tracking.html">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlflow/tracking/experiment.html">Experiment</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/example_of_use.html">Example of usе</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/custom_model.html">Custom model</a></li>
@@ -575,6 +579,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/langgraph.html">LangGraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
@@ -585,6 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="spark/ml.html">ML</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="optuna.html">Optuna</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -777,14 +783,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-tracking-server">Start tracking server</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting">Connecting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcitons">Funcitons</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking">Tracking</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flavours">Flavours</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a></li>
 </ul>
             </nav>
         </div>
@@ -805,136 +808,12 @@ document.write(`
 <li><p><a class="reference external" href="https://mlflow.org/docs/latest/getting-started/intro-quickstart/index.html">MLflow tracking quickstart</a> on official mlflow site;</p></li>
 <li><p><a class="reference external" href="https://mlflow.org/docs/latest/docker.html">Official MLflow docker image</a>.</p></li>
 </ul>
-<section id="start-tracking-server">
-<h2>Start tracking server<a class="headerlink" href="#start-tracking-server" title="Link to this heading">#</a></h2>
-<p>MLflow should have a tracking server. Here we describe how to start it locally from docker. This option will usually be used for the examples in this section.</p>
-<p>Load docker image.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/mlflow/mlflow<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following command will start the mlflow server in docker, but it’s also acceptable in the host.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-docker run -p 5000:5000 -dt --name my_server --rm \
-    ghcr.io/mlflow/mlflow \
-    bash -c &quot;mlflow server --host 0.0.0.0 --port 5000&quot;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b8975190736e71d255d5f3d05f05ad7a38178f045569faa06b592b899ce75644
-</pre></div>
-</div>
-</div>
-</div>
-<p>Don’t forget to stop the server after playing with it.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>stop<span class="w"> </span>my_server
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_server
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now you can access your mlflow UI using the browser url <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code>. Let’s have a look at mlflow using the <code class="docutils literal notranslate"><span class="pre">selenium</span></code> screenshot.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">selenium</span><span class="w"> </span><span class="kn">import</span> <span class="n">webdriver</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.firefox.options</span><span class="w"> </span><span class="kn">import</span> <span class="n">Options</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.firefox.service</span><span class="w"> </span><span class="kn">import</span> <span class="n">Service</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.support.ui</span><span class="w"> </span><span class="kn">import</span> <span class="n">WebDriverWait</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.common.by</span><span class="w"> </span><span class="kn">import</span> <span class="n">By</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
-
-<span class="c1"># Set up Firefox options</span>
-<span class="n">options</span> <span class="o">=</span> <span class="n">Options</span><span class="p">()</span>
-<span class="n">options</span><span class="o">.</span><span class="n">binary_location</span> <span class="o">=</span> <span class="s2">&quot;/usr/bin/firefox&quot;</span>
-
-<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">(</span>
-    <span class="n">options</span><span class="o">=</span><span class="n">Options</span><span class="p">(),</span>
-    <span class="n">service</span><span class="o">=</span><span class="n">Service</span><span class="p">(</span>
-        <span class="c1"># path to the geckodriver on my computer</span>
-        <span class="n">executable_path</span><span class="o">=</span><span class="s2">&quot;/snap/bin/geckodriver&quot;</span><span class="p">,</span>
-        <span class="n">log_output</span><span class="o">=</span><span class="s2">&quot;/dev/null&quot;</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">)</span>
-
-<span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="n">screenshot</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">get_screenshot_as_png</span><span class="p">()</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">screenshot</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-
-<span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/0e3a1a9a8bb77b1a44e21dc018fabf96a562c5f276b93e6898d9a9bc35266bb8.png" src="../_images/0e3a1a9a8bb77b1a44e21dc018fabf96a562c5f276b93e6898d9a9bc35266bb8.png" />
-</div>
-</div>
-</section>
-<section id="connecting">
-<h2>Connecting<a class="headerlink" href="#connecting" title="Link to this heading">#</a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">mlflow.set_tracking_uri</span></code> to specify the uri for the mlflow for the pythonAPI.</p>
-<section id="environment-variables">
-<h3>Environment variables<a class="headerlink" href="#environment-variables" title="Link to this heading">#</a></h3>
-<p>You can specify <strong>environment variables</strong> to connect to MLFlow:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code>: specifies the URI that must be used to connect to the MLFLOW server.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_USERNAME</span></code>: specifies the username to be used to log in to MLFlow.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_PASSWORD</span></code>: specifies the password to be used to log in to MLFlow.</p></li>
-</ul>
-<p>Once these variables are loaded into the Python environment, MLFlow will automatically find and use them.</p>
-</section>
-<section id="funcitons">
-<h3>Funcitons<a class="headerlink" href="#funcitons" title="Link to this heading">#</a></h3>
-<p>Use the functions <code class="docutils literal notranslate"><span class="pre">mlflow.set_tracking_uri</span></code> and <code class="docutils literal notranslate"><span class="pre">mlflow.get_tracking_uri</span></code> to manipulate the tracking uri directly from the code.</p>
-<hr class="docutils" />
-<p>A really typical issue for me is to check if the uri I specified in the <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> is recognized by the <code class="docutils literal notranslate"><span class="pre">mlflow</span></code>. The following cell implements an experiment where to <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> in python is set to some specific value and shows that <code class="docutils literal notranslate"><span class="pre">mlflow.get_tracking_uri</span></code> returns the exactly specified value.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
-
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MLFLOW_TRACKING_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;uri from environ&quot;</span>
-<span class="n">mlflow</span><span class="o">.</span><span class="n">get_tracking_uri</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;uri from environ&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<p>The next cell uses <code class="docutils literal notranslate"><span class="pre">mlflow.set_tracking_uri</span></code> and shows that the uri is updated.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;test uri&quot;</span><span class="p">)</span>
-<span class="n">mlflow</span><span class="o">.</span><span class="n">get_tracking_uri</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;test uri&#39;
-</pre></div>
-</div>
-</div>
-</div>
-</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<p>There are a few aspects of the MLFlow configuration.</p>
+<p>The client-side configuration is mainly involves setting the tracking URI and, if necessary, the credentials to access it. The MLFlow client can work without the server being launched; it simply will stores information in a special format in a local folder.</p>
+<p>The server can easily can be set up just by using the special <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">server</span></code> command from the python environmet where mlflow is installed.</p>
+<p>For more details check the <a class="reference internal" href="mlflow/configuration.html"><span class="std std-doc">Configuration</span></a> page.</p>
 </section>
 <section id="tracking">
 <h2>Tracking<a class="headerlink" href="#tracking" title="Link to this heading">#</a></h2>
@@ -1018,6 +897,339 @@ docker run -p 5000:5000 -dt --name my_server --rm \
 </table>
 </div>
 </section>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
+<p>MLFlow contains a special <code class="docutils literal notranslate"><span class="pre">mlflow.data</span></code> module that makes it easy to save and load datasets used for model training and evaluation.</p>
+<p>It have two interfaces:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Dataset</span></code>: Represents a dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DatasetSource</span></code>: Represents a source of the data.</p></li>
+</ul>
+<p>You can create a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> from many Python data frameworks. The following cell shows the classes that represent data objects from different frameworks, and the methods used to create them:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Framework</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Create method</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.pandas_dataset.PandasDataset</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.from_pandas</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Numpy</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.numpy_dataset.NumpyDataset</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.from_numpy</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Spark</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.spark_dataset.SparkDataset</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.from_spark</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.load_delta</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Hugging</span> <span class="pre">Face</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.huggingface_dataset.HuggingFaceDataset</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.huggingface_dataset.from_huggingface</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.tensorflow_dataset.TensorFlowDataset</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.tensorflow_dataset.from_tensorflow</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.tensorflow_dataset.EvaluationDataset</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">polars</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.polars_dataset.PolarsDataset</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow.data.polars_dataset.from_polars</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more details check:</p>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://mlflow.org/docs/latest/ml/dataset/">MLFlow Dataset Tracking</a>.</p></li>
+<li><p>The <a class="reference external" href="https://mlflow.org/docs/latest/api_reference/python_api/mlflow.data.html">mlflow.data</a> API reference.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Consider the process of creating an MLFlow dataset from a csv file that is published on the internet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlflow.data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;file:///tmp/mlflow_temp&quot;</span><span class="p">)</span>
+
+<span class="n">data_url</span> <span class="o">=</span> <span class="s2">&quot;http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fixed acidity</th>
+      <th>volatile acidity</th>
+      <th>citric acid</th>
+      <th>residual sugar</th>
+      <th>chlorides</th>
+      <th>free sulfur dioxide</th>
+      <th>total sulfur dioxide</th>
+      <th>density</th>
+      <th>pH</th>
+      <th>sulphates</th>
+      <th>alcohol</th>
+      <th>quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7.4</td>
+      <td>0.70</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.9978</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7.8</td>
+      <td>0.88</td>
+      <td>0.00</td>
+      <td>2.6</td>
+      <td>0.098</td>
+      <td>25.0</td>
+      <td>67.0</td>
+      <td>0.9968</td>
+      <td>3.20</td>
+      <td>0.68</td>
+      <td>9.8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.8</td>
+      <td>0.76</td>
+      <td>0.04</td>
+      <td>2.3</td>
+      <td>0.092</td>
+      <td>15.0</td>
+      <td>54.0</td>
+      <td>0.9970</td>
+      <td>3.26</td>
+      <td>0.65</td>
+      <td>9.8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11.2</td>
+      <td>0.28</td>
+      <td>0.56</td>
+      <td>1.9</td>
+      <td>0.075</td>
+      <td>17.0</td>
+      <td>60.0</td>
+      <td>0.9980</td>
+      <td>3.16</td>
+      <td>0.58</td>
+      <td>9.8</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7.4</td>
+      <td>0.70</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.9978</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The following cell starts the run and logs this dataset under the run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">data_url</span><span class="p">)</span>
+
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s2">&quot;test_datasets&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_input</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/user/.virtualenvironments/python/lib/python3.13/site-packages/mlflow/data/dataset_source_registry.py:148: UserWarning: Failed to determine whether UCVolumeDatasetSource can resolve source information for &#39;http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&#39;. Exception: 
+  return _dataset_source_registry.resolve(
+/home/user/.virtualenvironments/python/lib/python3.13/site-packages/mlflow/types/utils.py:452: UserWarning: Hint: Inferred schema contains integer column(s). Integer columns in Python cannot represent missing values. If your input data contains missing values at inference time, it will be encoded as floats and will cause a schema enforcement error. The best way to avoid this problem is to infer the model schema based on a realistic data sample (training dataset) that includes missing values. Alternatively, you can declare integer columns as doubles (float64) whenever these columns may have missing values. See `Handling Integers With Missing Values &lt;https://www.mlflow.org/docs/latest/models.html#handling-integers-with-missing-values&gt;`_ for more details.
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="models">
+<h2>Models<a class="headerlink" href="#models" title="Link to this heading">#</a></h2>
+<p>The Model component of mlflow is responsible for registering and versioning the models. The summary of the usefull function is represented in the following table:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Feature</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Model Packaging</strong></p></td>
+<td><p>Packages models with their environment (conda, pip, or Docker) for reproducible deployment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multiple Flavors</strong></p></td>
+<td><p>Supports multiple “flavors” (e.g., <code class="docutils literal notranslate"><span class="pre">python_function</span></code>, <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>, <code class="docutils literal notranslate"><span class="pre">pytorch</span></code>, <code class="docutils literal notranslate"><span class="pre">onnx</span></code>) to enable deployment across tools.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Model Registry Integration</strong></p></td>
+<td><p>Integrates with MLflow Model Registry to version, approve, and stage models for production.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Deployment Options</strong></p></td>
+<td><p>Deploys to local REST server, cloud services (AWS SageMaker, Azure ML), or custom targets.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Model Signature</strong></p></td>
+<td><p>Captures input and output schema (columns, types, shapes) to enforce interface consistency.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Input Example</strong></p></td>
+<td><p>Stores example input data for testing and documentation.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Custom Inference Logic</strong></p></td>
+<td><p>Allows defining custom <code class="docutils literal notranslate"><span class="pre">predict</span></code> logic using <code class="docutils literal notranslate"><span class="pre">python_function</span></code> flavor for flexible inference.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Environment Reproducibility</strong></p></td>
+<td><p>Captures dependencies using <code class="docutils literal notranslate"><span class="pre">conda.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, or <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> file for exact environment recreation.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CLI &amp; API Support</strong></p></td>
+<td><p>Provides both CLI (<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">models</span> <span class="pre">serve</span></code>, <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">models</span> <span class="pre">predict</span></code>) and Python API for easy model serving and testing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cross-Framework Support</strong></p></td>
+<td><p>Works with Scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM, and many more ML frameworks.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p>The following cell sets up the mlflow and generates an example dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlflow.models</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;file:///tmp/model_registry_example&quot;</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">MlflowClient</span><span class="p">()</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">n_features</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell creates a really simple <code class="docutils literal notranslate"><span class="pre">mlflow</span></code> run, that is not registred by default.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+    <span class="n">gbc</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">signature</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">infer_signature</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+        <span class="n">gbc</span><span class="p">,</span>
+        <span class="n">signature</span><span class="o">=</span><span class="n">signature</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">MlflowClient.search_registred_model</span></code> you can get a list of registered models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">search_registered_models</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected it empty.</p>
+<p>You can declare that a model has to be added to the model registry by specifying the <code class="docutils literal notranslate"><span class="pre">registred_model_name</span></code> argument for the <code class="docutils literal notranslate"><span class="pre">log_model</span></code>. The following cell creates the same run as the previous one, but with the <code class="docutils literal notranslate"><span class="pre">registred_model_name</span></code> is specified.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+    <span class="n">gbc</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">signature</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">infer_signature</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+        <span class="n">gbc</span><span class="p">,</span>
+        <span class="n">signature</span><span class="o">=</span><span class="n">signature</span><span class="p">,</span>
+        <span class="n">registered_model_name</span><span class="o">=</span><span class="s2">&quot;HEY! this is model&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully registered model &#39;HEY! this is model&#39;.
+Created version &#39;1&#39; of model &#39;HEY! this is model&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, there is a model with a corresponding name in the outputs of the <code class="docutils literal notranslate"><span class="pre">search_registered_models</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">search_registered_models</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HEY! this is model
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1062,11 +1274,11 @@ docker run -p 5000:5000 -dt --name my_server --rm \
       </div>
     </a>
     <a class="right-next"
-       href="mlflow/tracking.html"
+       href="mlflow/configuration.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tracking</p>
+        <p class="prev-next-title">Configuration</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1086,14 +1298,11 @@ docker run -p 5000:5000 -dt --name my_server --rm \
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-tracking-server">Start tracking server</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting">Connecting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcitons">Funcitons</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking">Tracking</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flavours">Flavours</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a></li>
 </ul>
   </nav></div>
 
