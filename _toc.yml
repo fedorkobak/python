@@ -329,6 +329,7 @@ parts:
       - file: ds_ml/spark/transformations.ipynb
       - file: ds_ml/spark/groupby.ipynb
       - file: ds_ml/spark/ml.ipynb
+    - file: ds_ml/databricks_sdk.ipynb
     - file: ds_ml/optuna.ipynb
   - caption: Packages
     chapters:
