@@ -332,6 +332,7 @@ parts:
     - file: ds_ml/databricks_sdk.ipynb
       sections:
       - file: ds_ml/databricks_sdk/feature_engineering.ipynb
+      - file: ds_ml/databricks_sdk/serving.ipynb
     - file: ds_ml/optuna.ipynb
   - caption: Packages
     chapters:
