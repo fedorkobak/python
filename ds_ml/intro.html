@@ -572,10 +572,9 @@
 <li class="toctree-l3"><a class="reference internal" href="mlflow/tracking/experiment.html">Experiment</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/example_of_use.html">Example of usе</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/deploy.html">Deploy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/custom_model.html">Custom model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/flavours.html">Flavours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow/models.html">Models</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -590,6 +589,10 @@
 <li class="toctree-l2"><a class="reference internal" href="spark/transformations.html">Transformations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spark/groupby.html">Group by</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spark/ml.html">ML</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="databricks_sdk/feature_engineering.html">Feature engineering</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="optuna.html">Optuna</a></li>
@@ -791,10 +794,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-sdk">MCP SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow">MLFlow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-client">OpenAI client</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optuna">Optuna</a></li>
 </ul>
             </nav>
@@ -1076,9 +1076,29 @@ document.write(`
 <li><p><a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/auth/config-profiles">Create a Databricks configuration profile file</a>.</p></li>
 <li><p><a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/auth/pat">Databricks personal access token authentification</a>.</p></li>
 </ul>
-<p>There is a special package for interacting with Databricks Feature Store: <a class="reference external" href="https://pypi.org/project/databricks-feature-engineering/">databricks-feature-engineering</a>. After installing the module <code class="docutils literal notranslate"><span class="pre">databricks.feature_engineering</span></code> will be awailable from the environment.</p>
-<p>Check the <a class="reference external" href="https://databricks-sdk-py.readthedocs.io/en/latest/">Databricks SDK for python</a> documentation.</p>
+<p>Few important packages:</p>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://pypi.org/project/databricks-connect/">databricks-connect</a> allows to connect to the facilities of the databricks cluster.</p></li>
+<li><p>The <a class="reference external" href="https://pypi.org/project/databricks-feature-engineering/">databricks-feature-engineering</a> API for manaing the databricks featurestore. After installing the module <code class="docutils literal notranslate"><span class="pre">databricks.feature_engineering</span></code> will be awailable from the environment.</p></li>
+</ul>
+<p>For more details check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://databricks-sdk-py.readthedocs.io/en/latest/">Databricks SDK for python</a> documentation.</p></li>
+<li><p><a class="reference internal" href="databricks_sdk.html"><span class="std std-doc">Databricks SDK</span></a> page in this website.</p></li>
+</ul>
 <hr class="docutils" />
+<p>The simpliest way to set up the configuration is through an authentication token.</p>
+<p>Create file <code class="docutils literal notranslate"><span class="pre">~/databrickscfg</span></code>, that should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<span class="n">host</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">////</span><span class="n">dbc</span><span class="o">-&lt;</span><span class="n">some</span> <span class="n">unique</span> <span class="k">for</span> <span class="n">workspace</span><span class="o">&gt;.</span><span class="n">cloud</span><span class="o">.</span><span class="n">databricks</span><span class="o">.</span><span class="n">com</span>
+<span class="n">token</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">here</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">token</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The profile name <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code> is important. You can specify a different name, but this will be used by default.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">host</span></code> you can copy from the browser url line (just host, without path).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">token</span></code> you can get through databricks UI: settings-&gt;developer-&gt;Access tokens-&gt;Manage.</p></li>
+</ul>
 <p>If the configuration is set up correctly, you should be able to run the following cell without any errors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1095,74 +1115,6 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="openai-client">
-<h3>OpenAI client<a class="headerlink" href="#openai-client" title="Link to this heading">#</a></h3>
-<p>The method <code class="docutils literal notranslate"><span class="pre">serving_endpoints.get_open_ai_client.get_open_ai_client</span></code> returns the  <code class="docutils literal notranslate"><span class="pre">openai.OpenAI</span></code> client, which you can use to requiest some served models.</p>
-<hr class="docutils" />
-<p>The following cell creates the <code class="docutils literal notranslate"><span class="pre">open_ai_client</span></code> and shows that it is really open ai client.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">open_ai_client</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">serving_endpoints</span><span class="o">.</span><span class="n">get_open_ai_client</span><span class="p">()</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">open_ai_client</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openai.OpenAI
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell illustrates the invocation of the embedding model.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span> <span class="o">=</span> <span class="n">open_ai_client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-   <span class="n">model</span><span class="o">=</span><span class="s2">&quot;databricks-gte-large-en&quot;</span><span class="p">,</span>
-   <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span>
-<span class="p">)</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openai.types.create_embedding_response.CreateEmbeddingResponse
-</pre></div>
-</div>
-</div>
-</div>
-<p>The result is an <code class="docutils literal notranslate"><span class="pre">openai</span></code> embedding response object.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.9521484375,
- -0.7998046875,
- -0.79931640625,
- -0.138427734375,
- -0.79150390625,
- -0.31787109375,
- -0.55810546875,
- 0.392333984375,
- -0.36767578125,
- 0.4013671875,
- -0.0791015625,
- -0.78515625,
- -0.4599609375,
- 0.4189453125,
- 0.418212890625,
- -0.36767578125,
- -0.587890625,
- -0.466796875,
- 0.159423828125,
- -0.359130859375]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="optuna">
 <h2>Optuna<a class="headerlink" href="#optuna" title="Link to this heading">#</a></h2>
@@ -1274,10 +1226,7 @@ x = 2
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-sdk">MCP SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow">MLFlow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-client">OpenAI client</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optuna">Optuna</a></li>
 </ul>
   </nav></div>
