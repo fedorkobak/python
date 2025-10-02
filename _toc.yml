@@ -314,7 +314,6 @@ parts:
         sections:
         - file: ds_ml/mlflow/tracking/runs.ipynb
         - file: ds_ml/mlflow/tracking/experiment.ipynb
-      - file: ds_ml/mlflow/deploy.ipynb
       - file: ds_ml/mlflow/flavours.ipynb
       - file: ds_ml/mlflow/models.ipynb
     - file: ds_ml/langchain.ipynb
