@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Deploy &#8212; Python</title>
+    <title>Serving &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ds_ml/mlflow/deploy';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ds_ml/databricks_sdk/serving';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Flavours" href="flavours.html" />
-    <link rel="prev" title="Experiment" href="tracking/experiment.html" />
+    <link rel="next" title="Optuna" href="../optuna.html" />
+    <link rel="prev" title="Feature engineering" href="feature_engineering.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -563,16 +563,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../ranx/entry_queries_documents.html">Queries documents entry</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../mlflow.html">MLflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="tracking/runs.html">Runs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tracking/experiment.html">Experiment</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mlflow/tracking/experiment.html">Experiment</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Deploy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flavours.html">Flavours</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mlflow/flavours.html">Flavours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mlflow/models.html">Models</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -589,8 +588,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../spark/ml.html">ML</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../databricks_sdk.html">Databricks SDK</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../optuna.html">Optuna</a></li>
@@ -692,7 +692,7 @@
       
       
       
-      <li><a href="../../_sources/ds_ml/mlflow/deploy.ipynb" target="_blank"
+      <li><a href="../../_sources/ds_ml/databricks_sdk/serving.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -776,7 +776,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Deploy</h1>
+    <h1>Serving</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -786,14 +786,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-model-to-registry">Add model to registry</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-run">Create run</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-run-to-registry">Add run to registry</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-mlflow-side-api">Run MLFlow side API</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-docker-image">Build docker image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-client">OpenAI client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving-endpoint">Serving endpoint</a></li>
 </ul>
             </nav>
         </div>
@@ -805,308 +799,195 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="deploy">
-<h1>Deploy<a class="headerlink" href="#deploy" title="Link to this heading">#</a></h1>
-<p><strong>Sources</strong></p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.youtube.com/watch?v=IUF4s9SXnd4">Tutorial by Tobias Starbak</a>;</p></li>
-<li><p><a class="reference external" href="https://mlflow.org/docs/latest/deployment/index.html">Deployment</a> page in offcial MLflow documentation;</p></li>
-<li><p><a class="reference external" href="https://mlflow.org/docs/latest/deployment/deploy-model-to-kubernetes/index.html#build-docker-for-deployment">Deploy mlflow model to Kubernetes</a> article in the official site.</p></li>
-</ul>
-<section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="serving">
+<h1>Serving<a class="headerlink" href="#serving" title="Link to this heading">#</a></h1>
+<p>Databricks provides many tools for serving ml models, as well as ready-deployed solutions. This page discusses how to use them through the Python SDK.</p>
+<section id="openai-client">
+<h2>OpenAI client<a class="headerlink" href="#openai-client" title="Link to this heading">#</a></h2>
+<p>The method <code class="docutils literal notranslate"><span class="pre">serving_endpoints.get_open_ai_client.get_open_ai_client</span></code> returns the  <code class="docutils literal notranslate"><span class="pre">openai.OpenAI</span></code> client, which you can use to requiest some served models.</p>
+<hr class="docutils" />
+<p>The following cell creates the <code class="docutils literal notranslate"><span class="pre">open_ai_client</span></code> and shows that it is really open ai client.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.models.signature</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelSignature</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.types.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">ColSpec</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We need docker containers with mlflow.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-docker run -p 5000:5000 -dt --name mlflow_deploy --rm \
-    ghcr.io/mlflow/mlflow \
-    bash -c &quot;mlflow server --host 0.0.0.0 --port 5000&quot;
+<span class="n">open_ai_client</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">serving_endpoints</span><span class="o">.</span><span class="n">get_open_ai_client</span><span class="p">()</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">open_ai_client</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4ea5fdd3eeab8fa057ad9c1ad1575039129e8e4b75a187f0c0449d9986c41156
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openai.OpenAI
 </pre></div>
 </div>
 </div>
 </div>
-<p>To be able to work with these started mlflow, we need some setup.</p>
+<p>The following cell illustrates the invocation of the embedding model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">)</span>
-<span class="n">exp_name</span> <span class="o">=</span> <span class="s2">&quot;penguin_classification&quot;</span>
-<span class="n">mlflow</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">(</span><span class="n">exp_name</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">open_ai_client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+   <span class="n">model</span><span class="o">=</span><span class="s2">&quot;databricks-gte-large-en&quot;</span><span class="p">,</span>
+   <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span>
+<span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;448934722381259260&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openai.types.create_embedding_response.CreateEmbeddingResponse
 </pre></div>
 </div>
 </div>
 </div>
-<p>When you have finished playing with the notebook, do not forget to stop the container.</p>
+<p>The result is an <code class="docutils literal notranslate"><span class="pre">openai</span></code> embedding response object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-docker stop mlflow_deploy
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mlflow_deploy
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.9521484375,
+ -0.7998046875,
+ -0.79931640625,
+ -0.138427734375,
+ -0.79150390625,
+ -0.31787109375,
+ -0.55810546875,
+ 0.392333984375,
+ -0.36767578125,
+ 0.4013671875,
+ -0.0791015625,
+ -0.78515625,
+ -0.4599609375,
+ 0.4189453125,
+ 0.418212890625,
+ -0.36767578125,
+ -0.587890625,
+ -0.466796875,
+ 0.159423828125,
+ -0.359130859375]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="add-model-to-registry">
-<h2>Add model to registry<a class="headerlink" href="#add-model-to-registry" title="Link to this heading">#</a></h2>
-<p>We will consider simple example - model that callasify penguins based on parameters of their “culmen”.</p>
-<section id="create-run">
-<h3>Create run<a class="headerlink" href="#create-run" title="Link to this heading">#</a></h3>
-<p>Create a run with the model in question. Everything is basic except the <code class="docutils literal notranslate"><span class="pre">signature</span></code> parameter of the <code class="docutils literal notranslate"><span class="pre">sklearn.log_model</span></code> method.</p>
-<p>So by code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">input_schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([</span>
-  <span class="n">ColSpec</span><span class="p">(</span><span class="s2">&quot;double&quot;</span><span class="p">,</span> <span class="s2">&quot;Culmen Length (mm)&quot;</span><span class="p">),</span>
-  <span class="n">ColSpec</span><span class="p">(</span><span class="s2">&quot;double&quot;</span><span class="p">,</span> <span class="s2">&quot;Culmen Depth (mm)&quot;</span><span class="p">),</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-<p>We have defined that the model takes two parameters: <code class="docutils literal notranslate"><span class="pre">Culmen</span> <span class="pre">Length</span> <span class="pre">(mm)</span></code> and <code class="docutils literal notranslate"><span class="pre">Culmen</span> <span class="pre">Depth</span> <span class="pre">(mm)</span></code>. This is important because it’s exactly the number that should be passed to the model implementation.</p>
+<section id="serving-endpoint">
+<h2>Serving endpoint<a class="headerlink" href="#serving-endpoint" title="Link to this heading">#</a></h2>
+<p>With Databricks, you can launch an endpoint with a registered model. You can do this through the UI Databricks interface, but here we show the option of using the Python SDK.</p>
+<hr class="docutils" />
+<p>The following cell registers the simple function that is logged as an ML model in MLFlow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([</span>
-  <span class="n">ColSpec</span><span class="p">(</span><span class="s2">&quot;double&quot;</span><span class="p">,</span> <span class="s2">&quot;Culmen Length (mm)&quot;</span><span class="p">),</span>
-  <span class="n">ColSpec</span><span class="p">(</span><span class="s2">&quot;double&quot;</span><span class="p">,</span> <span class="s2">&quot;Culmen Depth (mm)&quot;</span><span class="p">),</span>
-<span class="p">])</span>
-<span class="n">output_schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([</span><span class="n">ColSpec</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">)])</span>
-<span class="n">signature</span> <span class="o">=</span> <span class="n">ModelSignature</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_schema</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output_schema</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
 
-<span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="n">exp_name</span><span class="p">)</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;databricks&quot;</span><span class="p">)</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_registry_uri</span><span class="p">(</span><span class="s2">&quot;databricks-uc&quot;</span><span class="p">)</span>
+
+<span class="n">experiment_name</span> <span class="o">=</span> <span class="s2">&quot;/Users/fedor.kobak@innowise.com/serving_tests&quot;</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">get_experiment_by_name</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">experiment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">experiment_id</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">experiment_id</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">experiment_id</span>
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="n">experiment_id</span><span class="p">)</span>
+
+<span class="nd">@mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">pyfunc</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="n">model_input</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">model_input</span><span class="p">]</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;workspace.knowledge.serving_example&quot;</span>
+
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">()</span> <span class="k">as</span> <span class="n">run</span><span class="p">:</span>
-    <span class="n">run_id</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Started run </span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="c1"># Load dataset</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Load dataset...&quot;</span><span class="p">)</span>
-    <span class="n">culmen_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Culmen Length (mm)&quot;</span><span class="p">,</span> <span class="s2">&quot;Culmen Depth (mm)&quot;</span><span class="p">]</span>
-    <span class="n">target_column</span> <span class="o">=</span> <span class="s2">&quot;Species&quot;</span>
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;deploy_files&quot;</span><span class="p">)</span><span class="o">/</span><span class="s2">&quot;penguins_classification.csv&quot;</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+        <span class="n">python_model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">pip_requirements</span><span class="o">=</span><span class="p">[],</span>
+        <span class="n">registered_model_name</span><span class="o">=</span><span class="n">model_name</span>
     <span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prepare a train-test-split...&quot;</span><span class="p">)</span>
-    <span class="n">data</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">culmen_columns</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">target_column</span><span class="p">]</span>
-    <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span><span class="p">,</span> <span class="n">target_train</span><span class="p">,</span> <span class="n">target_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-        <span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="c1"># Initialize and fit a classifier</span>
-    <span class="n">max_depth</span> <span class="o">=</span> <span class="mi">3</span>
-    <span class="n">max_leaf_nodes</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initialize and fit a DecisionTreeClassifier with max_depth=</span><span class="si">{</span><span class="n">max_depth</span><span class="si">}</span><span class="s2">, max_leaf_nodes</span><span class="si">{</span><span class="n">max_leaf_nodes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    
-    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_params</span><span class="p">(</span>
-        <span class="p">{</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="n">max_depth</span><span class="p">,</span> 
-         <span class="s2">&quot;max_leaf_nodes&quot;</span><span class="p">:</span> <span class="n">max_leaf_nodes</span><span class="p">}</span>
-    <span class="p">)</span>
-    <span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span>
-        <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">,</span>
-        <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="n">max_leaf_nodes</span>
-    <span class="p">)</span>
-    <span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">,</span> <span class="n">target_train</span><span class="p">)</span>
-
-    <span class="c1"># Calculate test scores</span>
-    <span class="n">test_score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">data_test</span><span class="p">,</span> <span class="n">target_test</span><span class="p">)</span>
-    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;test_accuracy&quot;</span><span class="p">,</span> <span class="n">test_score</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: Accuracy of the DecisionTreeClassifier: </span><span class="si">{</span><span class="n">test_score</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    
-    <span class="c1"># Log the model</span>
-    <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">signature</span><span class="o">=</span><span class="n">signature</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Started run 1d48d9284dd141018bba82d5cf84ef9f
-Load dataset...
-Prepare a train-test-split...
-Initialize and fit a DecisionTreeClassifier with max_depth=3, max_leaf_nodes4
-Result: Accuracy of the DecisionTreeClassifier: 96.5%
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Registered model &#39;workspace.knowledge.serving_example&#39; already exists. Creating a new version of this model...
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "db37474964f04d149059dfccf5f7038f", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Created version &#39;2&#39; of model &#39;workspace.knowledge.serving_example&#39;.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🏃 View run whimsical-smelt-614 at: https://dbc-6bc9e7c2-e867.cloud.databricks.com/ml/experiments/2555847948754149/runs/f2ecb60bae784c7f8fea0e9bf1c6c456
+🧪 View experiment at: https://dbc-6bc9e7c2-e867.cloud.databricks.com/ml/experiments/2555847948754149
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="add-run-to-registry">
-<h3>Add run to registry<a class="headerlink" href="#add-run-to-registry" title="Link to this heading">#</a></h3>
-<p>There is a special storage for models - the model registry, so the following cell adds the model from the previous run to the registry.</p>
+<p>The following cell defines the endpoint configuration and endpoint name.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;penguins_clf&quot;</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">register_model</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;runs:/</span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">/model&quot;</span><span class="p">,</span> <span class="n">model_name</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk.service.serving</span><span class="w"> </span><span class="kn">import</span> <span class="n">EndpointCoreConfigInput</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">EndpointCoreConfigInput</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
+    <span class="s2">&quot;served_models&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;model_name&quot;</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span>
+            <span class="s2">&quot;model_version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;scale_to_zero_enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;workload_size&quot;</span><span class="p">:</span> <span class="s2">&quot;Small&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">endpoint_name</span> <span class="o">=</span> <span class="s2">&quot;serving-example&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EndpointCoreConfigInput(auto_capture_config=None, name=None, served_entities=[], served_models=[ServedModelInput(scale_to_zero_enabled=True, model_name=&#39;workspace.knowledge.serving_example&#39;, model_version=1, environment_vars=None, instance_profile_arn=None, max_provisioned_concurrency=None, max_provisioned_throughput=None, min_provisioned_concurrency=None, min_provisioned_throughput=None, name=None, provisioned_model_units=None, workload_size=&#39;Small&#39;, workload_type=None)], traffic_config=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Use  <code class="docutils literal notranslate"><span class="pre">WorkspaceClient.serving_endpoitns.create_and_wait</span></code> method to create the endpoint, as shown in the following cell.</p>
+<p><strong>Note.</strong> This cell may take some time to be executed ~10 min.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+<span class="n">w</span><span class="o">.</span><span class="n">serving_endpoints</span><span class="o">.</span><span class="n">create_and_wait</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">endpoint_name</span><span class="p">,</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully registered model &#39;penguins_clf&#39;.
-2024/06/07 17:27:48 INFO mlflow.store.model_registry.abstract_store: Waiting up to 300 seconds for model version to finish creation. Model name: penguins_clf, version 1
-Created version &#39;1&#39; of model &#39;penguins_clf&#39;.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ServingEndpointDetailed(ai_gateway=None, budget_policy_id=None, config=EndpointCoreConfigOutput(auto_capture_config=None, config_version=1, served_entities=[ServedEntityOutput(creation_timestamp=1759322561000, creator=&#39;fedor.kobak@innowise.com&#39;, entity_name=&#39;workspace.knowledge.serving_example&#39;, entity_version=&#39;1&#39;, environment_vars=None, external_model=None, foundation_model=None, instance_profile_arn=None, max_provisioned_concurrency=None, max_provisioned_throughput=None, min_provisioned_concurrency=None, min_provisioned_throughput=None, name=&#39;serving_example-1&#39;, provisioned_model_units=None, scale_to_zero_enabled=True, state=ServedModelState(deployment=&lt;ServedModelStateDeployment.DEPLOYMENT_READY: &#39;DEPLOYMENT_READY&#39;&gt;, deployment_state_message=&#39;&#39;), workload_size=&#39;Small&#39;, workload_type=&lt;ServingModelWorkloadType.CPU: &#39;CPU&#39;&gt;)], served_models=[ServedModelOutput(creation_timestamp=1759322561000, creator=&#39;fedor.kobak@innowise.com&#39;, environment_vars=None, instance_profile_arn=None, max_provisioned_concurrency=None, min_provisioned_concurrency=None, model_name=&#39;workspace.knowledge.serving_example&#39;, model_version=&#39;1&#39;, name=&#39;serving_example-1&#39;, provisioned_model_units=None, scale_to_zero_enabled=True, state=ServedModelState(deployment=&lt;ServedModelStateDeployment.DEPLOYMENT_READY: &#39;DEPLOYMENT_READY&#39;&gt;, deployment_state_message=&#39;&#39;), workload_size=&#39;Small&#39;, workload_type=&lt;ServingModelWorkloadType.CPU: &#39;CPU&#39;&gt;)], traffic_config=TrafficConfig(routes=[Route(traffic_percentage=100, served_entity_name=&#39;serving_example-1&#39;, served_model_name=&#39;serving_example-1&#39;)])), creation_timestamp=1759322561000, creator=&#39;fedor.kobak@innowise.com&#39;, data_plane_info=None, description=&#39;&#39;, email_notifications=None, endpoint_url=None, id=&#39;a4b755e5064c430dba1ef294b40e5010&#39;, last_updated_timestamp=1759322561000, name=&#39;serving-example&#39;, pending_config=None, permission_level=&lt;ServingEndpointDetailedPermissionLevel.CAN_MANAGE: &#39;CAN_MANAGE&#39;&gt;, route_optimized=False, state=EndpointState(config_update=&lt;EndpointStateConfigUpdate.NOT_UPDATING: &#39;NOT_UPDATING&#39;&gt;, ready=&lt;EndpointStateReady.READY: &#39;READY&#39;&gt;), tags=[], task=None)
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="run-mlflow-side-api">
-<h2>Run MLFlow side API<a class="headerlink" href="#run-mlflow-side-api" title="Link to this heading">#</a></h2>
-<p>Now you can run a Flask-based API that will render the model by executing a command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MLFLOW_TRACKING_URI</span><span class="o">=</span>http://localhost:5000<span class="w"> </span>mlflow<span class="w"> </span>models<span class="w"> </span>serve<span class="w"> </span>--no-conda<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;models:/penguins_clf/1&quot;</span><span class="w"> </span>-p<span class="w"> </span><span class="m">4242</span>
-</pre></div>
-</div>
-<p>The following cell starts a new termilan window that will handle the api.</p>
+<p>After that your endpoint is awailable in the internet. The following cell throws <code class="docutils literal notranslate"><span class="pre">curl</span></code> to it.</p>
+<p>To use it you must create the environment variables <code class="docutils literal notranslate"><span class="pre">DATABRICKS_HOST</span></code> and <code class="docutils literal notranslate"><span class="pre">DATABRICKS_TOKEN</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_api_command</span> <span class="o">=</span> <span class="s1">&#39;MLFLOW_TRACKING_URI=http://localhost:5000 mlflow models serve --no-conda -m &quot;models:/penguins_clf/1&quot; -p 4242&#39;</span>
-<span class="n">ans</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span>
-    <span class="s1">&#39;gnome-terminal&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">start_api_command</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>After running the api, you can access it. So here is curl asking it - as a result we got a list with classes of penguins:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-curl http://127.0.0.1:4242/invocations -s -H &#39;Content-Type: application/json&#39; -d &#39;{
-    &quot;inputs&quot;:[
-    {&quot;Culmen Length (mm)&quot;: 1,&quot;Culmen Depth (mm)&quot;: 3},
-    {&quot;Culmen Length (mm)&quot;: 14,&quot;Culmen Depth (mm)&quot;: 120},
-    {&quot;Culmen Length (mm)&quot;: 200,&quot;Culmen Depth (mm)&quot;: 100}
-]}&#39;
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bash</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">s</span>\
+  <span class="o">-</span><span class="n">u</span> <span class="n">token</span><span class="p">:</span><span class="err">$</span><span class="n">DATABRICKS_TOKEN</span> \
+  <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> \
+  <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> \
+  <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;inputs&quot;: [5.0, 10.0]}&#39;</span>\
+  <span class="err">$</span><span class="n">DATABRICKS_HOST</span><span class="o">/</span><span class="n">serving</span><span class="o">-</span><span class="n">endpoints</span><span class="o">/</span><span class="n">serving</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">invocations</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;predictions&quot;: [&quot;Adelie&quot;, &quot;Adelie&quot;, &quot;Chinstrap&quot;]}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;predictions&quot;: [10.0, 20.0]}
 </pre></div>
 </div>
 </div>
 </div>
-<p>Or identical request using python:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://127.0.0.1:4242/invocations&quot;</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;Culmen Length (mm)&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Culmen Depth (mm)&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;Culmen Length (mm)&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;Culmen Depth (mm)&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;Culmen Length (mm)&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;Culmen Depth (mm)&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;predictions&quot;: [&quot;Adelie&quot;, &quot;Adelie&quot;, &quot;Chinstrap&quot;]}
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="build-docker-image">
-<h2>Build docker image<a class="headerlink" href="#build-docker-image" title="Link to this heading">#</a></h2>
-<p>You can create a docker image that represents an api by using command <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">models</span> <span class="pre">build-docker</span></code>. full command will take veiw:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MLFLOW_TRACKING_URI</span><span class="o">=</span>http://localhost:5000<span class="w"> </span>mlflow<span class="w"> </span>models<span class="w"> </span>build-docker<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;models:/penguins_clf/1&quot;</span><span class="w"> </span>-n<span class="w"> </span>penguins_image<span class="w"> </span>--enable-mlserver
-</pre></div>
-</div>
-<p><strong>Note</strong> The <code class="docutils literal notranslate"><span class="pre">--enable-mlserver</span></code> option tells the container to use <code class="docutils literal notranslate"><span class="pre">MLServer</span></code> as a wrapper. Flask is the default option.</p>
-<p>After running the previous command, you’ll have the image <code class="docutils literal notranslate"><span class="pre">penguins_container</span></code> in the local docker demon.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>penguins_image
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>penguins_image           latest    dddd7cdc5ca2   2 minutes ago    1.25GB
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now let’s try to run this container:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">4243</span>:8080<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>penguins_container<span class="w"> </span>penguins_image<span class="w"> </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69c8c7939075e083c5e5e76bc1c669dbb5982332a6679925920685f23bb42500
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Note</strong> We refer to port 8080 of the container docker because this is the default in mlflow.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-curl http://127.0.0.1:4243/invocations -s -H &#39;Content-Type: application/json&#39; -d &#39;{
-    &quot;inputs&quot;:[
-    {&quot;Culmen Length (mm)&quot;: 1,&quot;Culmen Depth (mm)&quot;: 3},
-    {&quot;Culmen Length (mm)&quot;: 14,&quot;Culmen Depth (mm)&quot;: 120},
-    {&quot;Culmen Length (mm)&quot;: 200,&quot;Culmen Depth (mm)&quot;: 100}
-]}&#39;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;predictions&quot;: [&quot;Adelie&quot;, &quot;Adelie&quot;, &quot;Chinstrap&quot;]}
-</pre></div>
-</div>
-</div>
-</div>
-<p>Don’t forget to stop the container with model API:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>stop<span class="w"> </span>penguins_container
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>penguins_container
-</pre></div>
-</div>
-</div>
-</div>
+<p>The outputs, just as was specified in “model”, are twice inputs.</p>
 </section>
 </section>
 
@@ -1123,7 +1004,7 @@ curl http://127.0.0.1:4243/invocations -s -H &#39;Content-Type: application/json
         },
         kernelOptions: {
             name: "python3",
-            path: "./ds_ml/mlflow"
+            path: "./ds_ml/databricks_sdk"
         },
         predefinedOutput: true
     }
@@ -1141,20 +1022,20 @@ curl http://127.0.0.1:4243/invocations -s -H &#39;Content-Type: application/json
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="tracking/experiment.html"
+       href="feature_engineering.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Experiment</p>
+        <p class="prev-next-title">Feature engineering</p>
       </div>
     </a>
     <a class="right-next"
-       href="flavours.html"
+       href="../optuna.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Flavours</p>
+        <p class="prev-next-title">Optuna</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1174,14 +1055,8 @@ curl http://127.0.0.1:4243/invocations -s -H &#39;Content-Type: application/json
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-model-to-registry">Add model to registry</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-run">Create run</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-run-to-registry">Add run to registry</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-mlflow-side-api">Run MLFlow side API</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-docker-image">Build docker image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-client">OpenAI client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving-endpoint">Serving endpoint</a></li>
 </ul>
   </nav></div>
 

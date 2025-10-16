@@ -570,7 +570,6 @@
 <li class="toctree-l3"><a class="reference internal" href="tracking/experiment.html">Experiment</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="flavours.html">Flavours</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Models</a></li>
 </ul>
@@ -591,6 +590,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../databricks_sdk/serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../optuna.html">Optuna</a></li>
@@ -791,6 +791,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signature">Signature</a></li>
 </ul>
             </nav>
         </div>
@@ -918,6 +919,112 @@ Created version &#39;1&#39; of model &#39;pyclass_model&#39;.
 </div>
 </section>
 </section>
+<section id="signature">
+<h2>Signature<a class="headerlink" href="#signature" title="Link to this heading">#</a></h2>
+<p>An MLFlow model signature is declares of the model inputs, outputs, and parameters of a model. It documents the model and provides potential consumers with information about it, particullary built in serving point uses it to validate the model’s inputs.</p>
+<p>The main elements of the MLFlow API associated with signatures are as following:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Element</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ModelSignature</span></code></p></td>
+<td><p>Class</p></td>
+<td><p>Represents the full input/output schema of a model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Schema</span></code></p></td>
+<td><p>Class</p></td>
+<td><p>Collection of column specs describing input/output structure.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ColSpec</span></code></p></td>
+<td><p>Class</p></td>
+<td><p>Describes a single column (type, name, optional).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TensorSpec</span></code></p></td>
+<td><p>Class</p></td>
+<td><p>Describes a tensor (dtype, shape, name).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ParamSchema</span></code></p></td>
+<td><p>Class</p></td>
+<td><p>Schema for parameter-based inputs (non-data, e.g. hyperparams).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DataType</span></code></p></td>
+<td><p>Enum</p></td>
+<td><p>Supported MLflow types: <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">long</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>, <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">binary</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">infer_signature</span></code></p></td>
+<td><p>Function</p></td>
+<td><p>Infers a <code class="docutils literal notranslate"><span class="pre">ModelSignature</span></code> from sample input/output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">to_dict</span></code> / <code class="docutils literal notranslate"><span class="pre">from_dict</span></code></p></td>
+<td><p>Method</p></td>
+<td><p>Serialize/deserialize <code class="docutils literal notranslate"><span class="pre">ModelSignature</span></code> objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__eq__</span></code></p></td>
+<td><p>Method</p></td>
+<td><p>Compare two signatures for equality (useful in tests).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check the informations in the <a class="reference external" href="https://mlflow.org/docs/latest/ml/model/signatures/">Model Signatures and Input Examples</a> models.</p>
+<hr class="docutils" />
+<p>The following cell logs the model with <code class="docutils literal notranslate"><span class="pre">input_example</span></code>, which will be used to generate the model’s signature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_regression</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;feature_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+<span class="n">X</span><span class="p">[</span><span class="s2">&quot;feature_1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s2">&quot;feature_1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+    <span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+        <span class="n">rf</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+        <span class="n">registered_model_name</span><span class="o">=</span><span class="s2">&quot;rf_model&quot;</span><span class="p">,</span>
+        <span class="n">input_example</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/user/.virtualenvironments/python/lib/python3.13/site-packages/mlflow/types/utils.py:452: UserWarning: Hint: Inferred schema contains integer column(s). Integer columns in Python cannot represent missing values. If your input data contains missing values at inference time, it will be encoded as floats and will cause a schema enforcement error. The best way to avoid this problem is to infer the model schema based on a realistic data sample (training dataset) that includes missing values. Alternatively, you can declare integer columns as doubles (float64) whenever these columns may have missing values. See `Handling Integers With Missing Values &lt;https://www.mlflow.org/docs/latest/models.html#handling-integers-with-missing-values&gt;`_ for more details.
+  warnings.warn(
+Registered model &#39;rf_model&#39; already exists. Creating a new version of this model...
+Created version &#39;2&#39; of model &#39;rf_model&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>To obtain the signature of a registered model, retrieve the <code class="docutils literal notranslate"><span class="pre">signature</span></code> attribute from the <code class="docutils literal notranslate"><span class="pre">ModelInfo</span></code> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">get_model_info</span><span class="p">(</span><span class="s2">&quot;models:/rf_model/1&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">signature</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inputs: 
+  [&#39;feature_0&#39;: double (required), &#39;feature_1&#39;: long (required), &#39;feature_2&#39;: double (required), &#39;feature_3&#39;: double (required)]
+outputs: 
+  [double (required)]
+params: 
+  None
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same information you can get from mlflow interface.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -989,6 +1096,7 @@ Created version &#39;1&#39; of model &#39;pyclass_model&#39;.
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signature">Signature</a></li>
 </ul>
   </nav></div>
 

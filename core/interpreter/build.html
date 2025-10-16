@@ -570,7 +570,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/tracking/experiment.html">Experiment</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/models.html">Models</a></li>
 </ul>
@@ -591,6 +590,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/databricks_sdk/serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ds_ml/optuna.html">Optuna</a></li>
@@ -803,7 +803,11 @@ document.write(`
 <p>This page considers details on building python from source.</p>
 <p><strong>Note</strong>: The examples in this notebook must be run in the same environment, as they can alter your system’s configuration.</p>
 <p>You can <strong>download the distribution</strong> from the corresponding <em>releases</em> of the official <a class="reference external" href="https://github.com/python/cpython/tags">github account</a>.</p>
-<p>Check <a class="reference external" href="https://devguide.python.org/getting-started/setup-building/#compile-and-build">Compile and build</a> section of documentation.</p>
+<p>For more details check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://devguide.python.org/getting-started/setup-building/#compile-and-build">Compile and build</a> section of documentation.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/using/configure.html">Configure Python</a> section of documentation.</p></li>
+</ul>
 <p>The following cell installs everything needed to build Python, downloads, and extracts the Python version that we’ll use as an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -856,6 +860,7 @@ tar<span class="w"> </span>-xzf<span class="w"> </span><span class="m">3</span>.
 <section id="builtin-packages">
 <h2>Builtin packages<a class="headerlink" href="#builtin-packages" title="Link to this heading">#</a></h2>
 <p>There is a set of python packages that can only be installed by building python.</p>
+<p>Check details in <a class="reference external" href="https://docs.python.org/3/using/configure.html#configure-options">Configure Options</a> section.</p>
 <p>Some packages can only be included in the Python build if the corresponding tools are installed on the system. The following table lists some of the required utilities.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -944,6 +949,10 @@ tar<span class="w"> </span>-xzf<span class="w"> </span><span class="m">3</span>.
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">termios</span></code>, <code class="docutils literal notranslate"><span class="pre">fcntl</span></code>, etc.</p></td>
 <td><p>Terminal and system call interfaces</p></td>
 <td><p>Usually always built on Unix</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">readline</span></code></p></td>
+<td><p>Reading/writing/history of files</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">libreadline-dev</span></code></p></td>
 </tr>
 </tbody>
 </table>

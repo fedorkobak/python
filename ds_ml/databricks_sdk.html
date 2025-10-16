@@ -570,7 +570,6 @@
 <li class="toctree-l3"><a class="reference internal" href="mlflow/tracking/experiment.html">Experiment</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/models.html">Models</a></li>
 </ul>
@@ -591,6 +590,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Databricks SDK</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="databricks_sdk/serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="optuna.html">Optuna</a></li>
@@ -787,9 +787,16 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace-client">Workspace client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vscode">VSCode</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-session">Spark session</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature engineering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-client">OpenAI client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving">Serving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobs-api">Jobs API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dbutils">dbutils</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jobs">Jobs</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -803,7 +810,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="databricks-sdk">
 <h1>Databricks SDK<a class="headerlink" href="#databricks-sdk" title="Link to this heading">#</a></h1>
-<p>This page considers details on working with databricks SDK.</p>
+<p>This page considers details on working with databricks SDK. Check the <a class="reference external" href="https://databricks-sdk-py.readthedocs.io/en/latest/">Databricks SDK for Python</a> for official reference.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="workspace-client">
 <h2>Workspace client<a class="headerlink" href="#workspace-client" title="Link to this heading">#</a></h2>
 <p>The most popular way to communicate with databricks workspace is through a <code class="docutils literal notranslate"><span class="pre">databricks.sdk.WorkspaceClient</span></code>. To create it, you must set up Databricks authentification:</p>
@@ -832,8 +846,49 @@ document.write(`
 <p>If everything cofigured correctly, the following cell shold be runned without any issues:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vscode">
+<h2>VSCode<a class="headerlink" href="#vscode" title="Link to this heading">#</a></h2>
+<p>Some examples that you can only be run using the Databricks extension for VSCode. Its configuration can be extremely tricky.</p>
+<p>For now (oct 2025) it requires:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">python3.11</span></code>: or any other version which supporst <a class="reference external" href="https://docs.python.org/3/library/distutils.html"><code class="docutils literal notranslate"><span class="pre">distutils</span></code></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">readline</span></code> module can only be added to the Python distribution if it is built with the <code class="docutils literal notranslate"><span class="pre">realine</span></code> package installed on the system.</p></li>
+<li><p>It specifies its own <code class="docutils literal notranslate"><span class="pre">spark</span></code> object, which cannot be created if the regular <code class="docutils literal notranslate"><span class="pre">pyspark</span></code> distribution is installed on the system. Use a special virtual environment.</p></li>
+</ul>
+<p><strong>Note</strong> The extension adds an initialization file to the <code class="docutils literal notranslate"><span class="pre">ipython</span></code> (<code class="docutils literal notranslate"><span class="pre">/home/user/.ipython/profile_default/startup</span></code>), so your <code class="docutils literal notranslate"><span class="pre">ipython</span></code> can change it behavior. To beat this you can follow:</p>
+<ul class="simple">
+<li><p>Create IPython profile: <code class="docutils literal notranslate"><span class="pre">ipython</span> <span class="pre">profile</span> <span class="pre">create</span> <span class="pre">databricks</span></code>.</p></li>
+<li><p>Copy the startup file created by the extension. It is usually named something like <code class="docutils literal notranslate"><span class="pre">00-databricks-init-....py</span></code>. By default, IPython stores its profiles in the <code class="docutils literal notranslate"><span class="pre">~/.ipython</span></code> folder.</p></li>
+<li><p>Create a separate kernel specification that runs <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">ipykernel_launcher</span></code> with the <code class="docutils literal notranslate"><span class="pre">--profile=databricks</span></code> variable. Kernels are usually stored in the <code class="docutils literal notranslate"><span class="pre">share/jupyter/kernels</span></code> catalog of the python virtual environment.</p></li>
+</ul>
+<hr class="docutils" />
+<p>If the setup is correct, you will have access to the <code class="docutils literal notranslate"><span class="pre">spark</span></code> and <code class="docutils literal notranslate"><span class="pre">dbutils</span></code> objects from the notebook without direct assignment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyspark.sql.connect.session.SparkSession at 0x73f9de975a50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbutils</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;databricks.sdk.dbutils.RemoteDbUtils at 0x73f9dc5b51d0&gt;
 </pre></div>
 </div>
 </div>
@@ -926,76 +981,282 @@ document.write(`
 </div>
 <p>For more details and examples check the <a class="reference internal" href="databricks_sdk/feature_engineering.html"><span class="std std-doc">Feature engineering</span></a> page.</p>
 </section>
-<section id="openai-client">
-<h2>OpenAI client<a class="headerlink" href="#openai-client" title="Link to this heading">#</a></h2>
-<p>The method <code class="docutils literal notranslate"><span class="pre">serving_endpoints.get_open_ai_client.get_open_ai_client</span></code> returns the  <code class="docutils literal notranslate"><span class="pre">openai.OpenAI</span></code> client, which you can use to requiest some served models.</p>
+<section id="serving">
+<h2>Serving<a class="headerlink" href="#serving" title="Link to this heading">#</a></h2>
+<p>Databricks offers many possibilities of posibilities for serving machine, learning models as well as served models. You can access many functions can be accessed through the Python SDK. The following talbe lists some of them:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Possibility</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Python SDK Context / Method Category</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Create Endpoint</strong></p></td>
+<td class="text-left"><p>Programmatically create a new model serving endpoint, including configuration for custom models, Foundation Model APIs, or external models.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.create()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Get/List Endpoints</strong></p></td>
+<td class="text-left"><p>Retrieve the status, configuration, and metadata for a specific serving endpoint or list all serving endpoints in the workspace.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.get()</span></code>, <code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.list()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Update Endpoint Configuration</strong></p></td>
+<td class="text-left"><p>Modify an existing serving endpoint’s configuration, such as changing the served model version, adjusting traffic split, or changing the workload size.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.update_config()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Delete Endpoint</strong></p></td>
+<td class="text-left"><p>Remove a serving endpoint.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.delete()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Query Endpoint (Scoring)</strong></p></td>
+<td class="text-left"><p>Send real-time inference requests to a deployed model serving endpoint, often using an OpenAI-compatible client configured via the SDK for LLMs, or standard methods for custom models.</p></td>
+<td class="text-left"><p>Handled via the Databricks-configured OpenAI client or other scoring methods (e.g., <code class="docutils literal notranslate"><span class="pre">mlflow.deployments.get_deploy_client()</span></code> in some contexts).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Manage Provisioned Throughput (PT) Endpoints</strong></p></td>
+<td class="text-left"><p>Create and manage endpoints specifically configured for Foundation Models with guaranteed performance (Provisioned Throughput).</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.create_pt_endpoint()</span></code> (and related PT methods)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Retrieve Build Logs</strong></p></td>
+<td class="text-left"><p>Get the build logs for a served model on a serving endpoint, useful for debugging deployment issues.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.get_served_model_build_logs()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Configure AI Gateway</strong></p></td>
+<td class="text-left"><p>Set configurations related to AI Gateway features like fallbacks, guardrails, inference tables, and usage tracking for the serving endpoint.</p></td>
+<td class="text-left"><p>Used within the <code class="docutils literal notranslate"><span class="pre">ai_gateway</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">create()</span></code>/<code class="docutils literal notranslate"><span class="pre">update_config()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Configure Rate Limits</strong></p></td>
+<td class="text-left"><p>Apply rate limits to the serving endpoint (though documentation suggests using AI Gateway for newer rate limit management).</p></td>
+<td class="text-left"><p>Used within the <code class="docutils literal notranslate"><span class="pre">rate_limits</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">create()</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Route Optimization</strong></p></td>
+<td class="text-left"><p>Enable configuration for route optimization on the serving endpoint for low-latency workloads.</p></td>
+<td class="text-left"><p>Used within the <code class="docutils literal notranslate"><span class="pre">route_optimized</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">create()</span></code>/<code class="docutils literal notranslate"><span class="pre">update_config()</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check more in the <a class="reference internal" href="databricks_sdk/serving.html"><span class="std std-doc">Serving</span></a> page.</p>
+</section>
+<section id="workspace">
+<h2>Workspace<a class="headerlink" href="#workspace" title="Link to this heading">#</a></h2>
+<p>Manage your workspace. You can access this API through <code class="docutils literal notranslate"><span class="pre">WorkSpaceClient().workspace</span></code>. The following table lists the methods and their descriptions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">delete(path:</span> <span class="pre">str,</span> <span class="pre">recursive:</span> <span class="pre">Optional[bool])</span></code></p></td>
+<td><p>Deletes an object or directory (optionally recursively).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">download(path:</span> <span class="pre">str,</span> <span class="pre">format:</span> <span class="pre">ExportFormat)</span></code></p></td>
+<td><p>Downloads a notebook or file from the workspace.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">export(path:</span> <span class="pre">str,</span> <span class="pre">format:</span> <span class="pre">Optional[ExportFormat])</span></code></p></td>
+<td><p>Exports an object or directory (e.g. notebook or folder).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_permission_levels(workspace_object_type:</span> <span class="pre">str,</span> <span class="pre">workspace_object_id:</span> <span class="pre">str)</span></code></p></td>
+<td><p>Gets the permission levels a user can have on an object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_permissions(workspace_object_type:</span> <span class="pre">str,</span> <span class="pre">workspace_object_id:</span> <span class="pre">str)</span></code></p></td>
+<td><p>Gets the current permissions on a workspace object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_status(path:</span> <span class="pre">str)</span></code></p></td>
+<td><p>Gets the status (metadata / existence) of an object or directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">import_(path:</span> <span class="pre">str,</span> <span class="pre">content:</span> <span class="pre">Optional[str],</span> <span class="pre">format:</span> <span class="pre">Optional[ImportFormat],</span> <span class="pre">language:</span> <span class="pre">Optional[Language],</span> <span class="pre">overwrite:</span> <span class="pre">Optional[bool])</span></code></p></td>
+<td><p>Imports an object (notebook / file) or directory into the workspace.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">list(path:</span> <span class="pre">str,</span> <span class="pre">notebooks_modified_after:</span> <span class="pre">int,</span> <span class="pre">recursive:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False)</span></code></p></td>
+<td><p>Lists workspace objects under a path (optionally recursive).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mkdirs(path:</span> <span class="pre">str)</span></code></p></td>
+<td><p>Creates a directory (and any necessary parent dirs).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_permissions(workspace_object_type:</span> <span class="pre">str,</span> <span class="pre">workspace_object_id:</span> <span class="pre">str,</span> <span class="pre">access_control_list:</span> <span class="pre">Optional[List[WorkspaceObjectAccessControlRequest]])</span></code></p></td>
+<td><p>Sets permissions on an object (replacing existing ones).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">update_permissions(workspace_object_type:</span> <span class="pre">str,</span> <span class="pre">workspace_object_id:</span> <span class="pre">str,</span> <span class="pre">access_control_list:</span> <span class="pre">Optional[List[WorkspaceObjectAccessControlRequest]])</span></code></p></td>
+<td><p>Updates permissions on an object (modifies existing ones).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">upload(path:</span> <span class="pre">str,</span> <span class="pre">content:</span> <span class="pre">bytes,</span> <span class="pre">format:</span> <span class="pre">ImportFormat,</span> <span class="pre">language:</span> <span class="pre">Language,</span> <span class="pre">overwrite:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False)</span></code></p></td>
+<td><p>Uploads a notebook / file or directory content to the workspace.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr class="docutils" />
-<p>The following cell creates the <code class="docutils literal notranslate"><span class="pre">open_ai_client</span></code> and shows that it is really open ai client.</p>
+<p>The following cell demonstrates how to create the file can be created in your Databricks API.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk.service</span><span class="w"> </span><span class="kn">import</span> <span class="n">workspace</span>
+
 <span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
 
-<span class="n">open_ai_client</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">serving_endpoints</span><span class="o">.</span><span class="n">get_open_ai_client</span><span class="p">()</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">open_ai_client</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openai.OpenAI
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell illustrates the invocation of the embedding model.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span> <span class="o">=</span> <span class="n">open_ai_client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-   <span class="n">model</span><span class="o">=</span><span class="s2">&quot;databricks-gte-large-en&quot;</span><span class="p">,</span>
-   <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span>
+<span class="n">notebook_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/Workspace/Users/</span><span class="si">{</span><span class="n">w</span><span class="o">.</span><span class="n">current_user</span><span class="o">.</span><span class="n">me</span><span class="p">()</span><span class="o">.</span><span class="n">user_name</span><span class="si">}</span><span class="s2">/knowledge/some_file&quot;</span>
+
+<span class="n">w</span><span class="o">.</span><span class="n">workspace</span><span class="o">.</span><span class="n">import_</span><span class="p">(</span>
+    <span class="n">content</span><span class="o">=</span><span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">((</span><span class="s2">&quot;CREATE LIVE TABLE dlt_sample AS SELECT 1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
+    <span class="nb">format</span><span class="o">=</span><span class="n">workspace</span><span class="o">.</span><span class="n">ImportFormat</span><span class="o">.</span><span class="n">SOURCE</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="n">workspace</span><span class="o">.</span><span class="n">Language</span><span class="o">.</span><span class="n">SQL</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">notebook_path</span>
 <span class="p">)</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openai.types.create_embedding_response.CreateEmbeddingResponse
 </pre></div>
 </div>
 </div>
 </div>
-<p>The result is an <code class="docutils literal notranslate"><span class="pre">openai</span></code> embedding response object.</p>
+</section>
+<section id="jobs-api">
+<h2>Jobs API<a class="headerlink" href="#jobs-api" title="Link to this heading">#</a></h2>
+<p>The Databricks SDK contains a set of wrappers for managing Databricks jobs. Check <a class="reference external" href="https://databricks-sdk-py.readthedocs.io/en/latest/workspace/jobs/jobs.html">w.jobs</a> page of the official documentation.</p>
+<hr class="docutils" />
+<p>The following cell uses the <code class="docutils literal notranslate"><span class="pre">w.jobs.create</span></code> to create a job.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+<span class="n">w</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;knowledge_job&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.9521484375,
- -0.7998046875,
- -0.79931640625,
- -0.138427734375,
- -0.79150390625,
- -0.31787109375,
- -0.55810546875,
- 0.392333984375,
- -0.36767578125,
- 0.4013671875,
- -0.0791015625,
- -0.78515625,
- -0.4599609375,
- 0.4189453125,
- 0.418212890625,
- -0.36767578125,
- -0.587890625,
- -0.466796875,
- 0.159423828125,
- -0.359130859375]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CreateResponse(job_id=714431377314811)
 </pre></div>
 </div>
 </div>
 </div>
+<p>You can access jobs using the <code class="docutils literal notranslate"><span class="pre">w.jobs.list</span></code> method. It returns a generator containing all available jobs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_jobs</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="n">my_jobs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object JobsExt.list at 0x7ae387747220&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next cell shows the properties of the created job.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_job</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">my_jobs</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">my_job</span><span class="o">.</span><span class="n">job_id</span><span class="p">,</span> <span class="n">my_job</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(714431377314811, &#39;knowledge_job&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell deletes the job.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">job_id</span><span class="o">=</span><span class="n">my_job</span><span class="o">.</span><span class="n">job_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The are no more jobs in the databricks now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">list</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dbutils">
+<h2>dbutils<a class="headerlink" href="#dbutils" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">dbutils</span></code> is an object that is pre-initialized in Databricks notebooks. You should only run it in a configured Databricks environment. The following table lists the main modules of dbutils, and their description:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>credentials</p></td>
+<td><p>Utilities for interacting with credentials within notebooks</p></td>
+</tr>
+<tr class="row-odd"><td><p>data</p></td>
+<td><p>Utilities for understanding and interacting with datasets (EXPERIMENTAL)</p></td>
+</tr>
+<tr class="row-even"><td><p>fs</p></td>
+<td><p>Utilities for accessing the Databricks file system (DBFS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>jobs</p></td>
+<td><p>Utilities for leveraging job features</p></td>
+</tr>
+<tr class="row-even"><td><p>library</p></td>
+<td><p>Deprecated. Utilities for managing session-scoped libraries</p></td>
+</tr>
+<tr class="row-odd"><td><p>meta</p></td>
+<td><p>Utilities to hook into the compiler (EXPERIMENTAL)</p></td>
+</tr>
+<tr class="row-even"><td><p>notebook</p></td>
+<td><p>Utilities for managing the control flow of notebooks (EXPERIMENTAL)</p></td>
+</tr>
+<tr class="row-odd"><td><p>preview</p></td>
+<td><p>Utilities in preview</p></td>
+</tr>
+<tr class="row-even"><td><p>secrets</p></td>
+<td><p>Utilities for leveraging secrets within notebooks</p></td>
+</tr>
+<tr class="row-odd"><td><p>widgets</p></td>
+<td><p>Utilities for parameterizing notebooks</p></td>
+</tr>
+<tr class="row-even"><td><p>api</p></td>
+<td><p>Utilities for managing application builds</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check more in <a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/databricks-utils">Databricks Utilities (<code class="docutils literal notranslate"><span class="pre">dbutils</span></code>) reference</a> page.</p>
+<section id="jobs">
+<h3>Jobs<a class="headerlink" href="#jobs" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">dbutils.jobs</span></code> module allows you to manipulate the behavour of Dataricks jobs. To throw messages between jobs use:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dbutils.jobs.taskValues.set</span></code> allows to set message that would be picked up by the some other script.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dbutils.jobs.taskValues.set</span></code> to pick up the message generated by the other job.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell sets the “hello” message under the “test” key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbutils</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">taskValues</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell picks up the <code class="docutils literal notranslate"><span class="pre">test</span></code> message leaved by task <code class="docutils literal notranslate"><span class="pre">some_task</span></code>. For debuging purposes <code class="docutils literal notranslate"><span class="pre">debugValue</span></code> is set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbutils</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">taskValues</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">taskKey</span><span class="o">=</span><span class="s2">&quot;some_task&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">debugValue</span><span class="o">=</span><span class="s2">&quot;not found&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;not found&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the code is not running in the job environment, the <code class="docutils literal notranslate"><span class="pre">debugValue</span></code> is returned.</p>
+</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1066,9 +1327,16 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace-client">Workspace client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vscode">VSCode</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-session">Spark session</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature engineering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-client">OpenAI client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving">Serving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobs-api">Jobs API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dbutils">dbutils</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jobs">Jobs</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

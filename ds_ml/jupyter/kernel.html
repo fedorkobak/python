@@ -570,7 +570,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../mlflow/tracking/experiment.html">Experiment</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../mlflow/deploy.html">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/models.html">Models</a></li>
 </ul>
@@ -591,6 +590,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../databricks_sdk/serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../optuna.html">Optuna</a></li>
@@ -788,6 +788,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulate-kernels">Manipulate kernels</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli">CLI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipykernel">IPykernel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-jupyter">Run from jupyter</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-kernel">Build kernel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-kernel">Register kernel</a></li>
@@ -874,6 +875,17 @@ if __name__ == &#39;__main__&#39;:
 </div>
 </div>
 </div>
+</section>
+<section id="ipykernel">
+<h2>IPykernel<a class="headerlink" href="#ipykernel" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://github.com/ipython/ipykernel"><code class="docutils literal notranslate"><span class="pre">IPykernel</span></code></a> is the most popular Jupyter kernel and the basis for many of other Jupyter kernels.</p>
+<p>To run the kernel use:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">ipykernel_laucher</span></code></p>
+<p>The most important options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--f</span></code>: The file in which to store the connection information.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--profile</span></code>: allows to setup which IPython profile will be used.</p></li>
+</ul>
 </section>
 <section id="run-from-jupyter">
 <h2>Run from jupyter<a class="headerlink" href="#run-from-jupyter" title="Link to this heading">#</a></h2>
@@ -1175,6 +1187,7 @@ To connect another client to this kernel, use:
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulate-kernels">Manipulate kernels</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli">CLI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipykernel">IPykernel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-from-jupyter">Run from jupyter</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-kernel">Build kernel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-kernel">Register kernel</a></li>
