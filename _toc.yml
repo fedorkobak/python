@@ -333,6 +333,7 @@ parts:
       - file: ds_ml/databricks_sdk/feature_engineering.ipynb
       - file: ds_ml/databricks_sdk/serving.ipynb
     - file: ds_ml/optuna.ipynb
+    - file: ds_ml/xgboost.ipynb
   - caption: Packages
     chapters:
     - file: packages/intro.ipynb
