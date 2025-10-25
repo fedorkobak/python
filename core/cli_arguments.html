@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -572,6 +572,7 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -594,6 +595,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -623,6 +625,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/aws_sdk.html">AWS SDK</a></li>
 </ul>
 
     </div>
@@ -788,6 +791,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual">Manual</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#argparse">Argparse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#click">Click</a></li>
 </ul>
             </nav>
         </div>
@@ -943,6 +947,61 @@ option : option_value
 </div>
 </div>
 </section>
+<section id="click">
+<h2>Click<a class="headerlink" href="#click" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://click.palletsprojects.com/en/stable/"><code class="docutils literal notranslate"><span class="pre">click</span></code></a> is the another package for creating command line interfaces.</p>
+<hr class="docutils" />
+<p>The following example creates a script with a single posional argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/click_example.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s1">&#39;positional&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">positional</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Positional argument value: </span><span class="si">{</span><span class="n">positional</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/click_example.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code calls on the help of the defined script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>/tmp/click_example.py<span class="w"> </span>--help
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Usage: click_example.py [OPTIONS] POSITIONAL
+
+Options:
+  --help  Show this message and exit.
+</pre></div>
+</div>
+</div>
+</div>
+<p>And infocation of the script with <code class="docutils literal notranslate"><span class="pre">positional=value1</span></code> argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>/tmp/click_example.py<span class="w"> </span>value1
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Positional argument value: value1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1013,6 +1072,7 @@ option : option_value
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual">Manual</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#argparse">Argparse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#click">Click</a></li>
 </ul>
   </nav></div>
 

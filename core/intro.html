@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -572,6 +572,7 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -594,6 +595,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -623,6 +625,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/aws_sdk.html">AWS SDK</a></li>
 </ul>
 
     </div>
@@ -790,6 +793,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-folders">Files &amp; folders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructs">Constructs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions">Built-in functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order">Order</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1056,6 +1063,62 @@ def main(args: Optional[List[str]] = None) -&gt; int:
 </div>
 <p>Check details in <a class="reference internal" href="constructs.html"><span class="std std-doc">Constructs</span></a> page.</p>
 </section>
+<section id="built-in-functions">
+<h2>Built-in functions<a class="headerlink" href="#built-in-functions" title="Link to this heading">#</a></h2>
+<p>There is a set of python functions that are always available. Following list separate some of them into groups:</p>
+<ul class="simple">
+<li><p>Order functions: <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">sorted</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">print</span></code> function displays some information in the stdout.</p></li>
+<li><p>Iteration functions:</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">iter</span></code> returns special object that can return some elements one by one.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">next</span></code> extrats the next object from the <code class="docutils literal notranslate"><span class="pre">iter</span></code> output</p></li>
+</ul>
+</li>
+<li><p>Code&lt;-&gt;Character:</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">chr</span></code> returns the string containing character that corresponds to the given unicode value.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">ord</span></code> returns the unicode value corresponding to the provided one-character symbol.</p></li>
+</ul>
+</li>
+</ul>
+<p>Check more in <a class="reference external" href="https://docs.python.org/3/library/functions.html">Built-in Functions</a> page.</p>
+<section id="order">
+<h3>Order<a class="headerlink" href="#order" title="Link to this heading">#</a></h3>
+<p>The order functions contain the <code class="docutils literal notranslate"><span class="pre">key</span></code> argument, which specifies the single argument transformation that will be the rule according to which elements must compared.</p>
+<hr class="docutils" />
+<p>Consider constructions in which <code class="docutils literal notranslate"><span class="pre">key</span></code> argument can be usefull.</p>
+<p>The following cell shows how to retrieve the key of the dictionary corresponding to the largest value. It passes the <code class="docutils literal notranslate"><span class="pre">keys</span></code> as a processing sequence, and the <code class="docutils literal notranslate"><span class="pre">key</span></code> returns the correspoding<code class="docutils literal notranslate"><span class="pre">value</span></code> to each key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;smallest&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;intermediate&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;biggest&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="nb">max</span><span class="p">(</span><span class="n">inp</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">inp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;smallest&#39;, &#39;biggest&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The outputs shows the raw application of the <code class="docutils literal notranslate"><span class="pre">min</span></code>, which is performed by string conmarison: ‘smallest’ and by comparing the values of the dictionary: ‘biggest’.</p>
+<p>Another common issue is determining the index of the min/max element in an iterable. As a sequecne is provided with the <code class="docutils literal notranslate"><span class="pre">range</span></code> from 0 to <code class="docutils literal notranslate"><span class="pre">len(inp)</span></code>, which actually corresponds to the indices of the array, the <code class="docutils literal notranslate"><span class="pre">key</span></code> rule will load actual elements by index. Therefore, the index corresponding to the biggest value will be loaded.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+<span class="nb">min</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inp</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">inp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1126,6 +1189,10 @@ def main(args: Optional[List[str]] = None) -&gt; int:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-folders">Files &amp; folders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructs">Constructs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions">Built-in functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order">Order</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

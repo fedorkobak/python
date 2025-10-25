@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="LangChain" href="../langchain.html" />
+    <link rel="next" title="Serving" href="serving.html" />
     <link rel="prev" title="Flavours" href="flavours.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -572,6 +572,7 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="flavours.html">Flavours</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -594,6 +595,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../optuna.html">Optuna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xgboost.html">XGBoost</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -623,6 +625,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/aws_sdk.html">AWS SDK</a></li>
 </ul>
 
     </div>
@@ -791,7 +794,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signature">Signature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signature">Signature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-defition">Manual defition</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -922,6 +928,12 @@ Created version &#39;1&#39; of model &#39;pyclass_model&#39;.
 <section id="signature">
 <h2>Signature<a class="headerlink" href="#signature" title="Link to this heading">#</a></h2>
 <p>An MLFlow model signature is declares of the model inputs, outputs, and parameters of a model. It documents the model and provides potential consumers with information about it, particullary built in serving point uses it to validate the model’s inputs.</p>
+<p>The MLFlow schema is optional, and cosists of followin optional in particular elelemts:</p>
+<ul class="simple">
+<li><p>Input schema: description of the single element that can be processed by the model.</p></li>
+<li><p>Output schema: description of the output that corresponds to the single element of the model.</p></li>
+<li><p>Parameters schema: schema of the parameteres of the model (for example “temperature” of the LLM)</p></li>
+</ul>
 <p>The main elements of the MLFlow API associated with signatures are as following:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -935,11 +947,11 @@ Created version &#39;1&#39; of model &#39;pyclass_model&#39;.
 <td><p>Class</p></td>
 <td><p>Represents the full input/output schema of a model.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Schema</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mlflow.types.Schema</span></code></p></td>
 <td><p>Class</p></td>
 <td><p>Collection of column specs describing input/output structure.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ColSpec</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mlflow.types.ColSpec</span></code></p></td>
 <td><p>Class</p></td>
 <td><p>Describes a single column (type, name, optional).</p></td>
 </tr>
@@ -970,6 +982,11 @@ Created version &#39;1&#39; of model &#39;pyclass_model&#39;.
 </tbody>
 </table>
 </div>
+<p>There are two types of the signatures:</p>
+<ul class="simple">
+<li><p>Column-based: allocates to name of the feature expected datatype.</p></li>
+<li><p>Tensor-based: assumes an array of elements as input, with each value comes in the correct position.</p></li>
+</ul>
 <p>Check the informations in the <a class="reference external" href="https://mlflow.org/docs/latest/ml/model/signatures/">Model Signatures and Input Examples</a> models.</p>
 <hr class="docutils" />
 <p>The following cell logs the model with <code class="docutils literal notranslate"><span class="pre">input_example</span></code>, which will be used to generate the model’s signature.</p>
@@ -1024,6 +1041,51 @@ params:
 </div>
 </div>
 <p>The same information you can get from mlflow interface.</p>
+<section id="manual-defition">
+<h3>Manual defition<a class="headerlink" href="#manual-defition" title="Link to this heading">#</a></h3>
+<p>To define schema manually you have to use <code class="docutils literal notranslate"><span class="pre">mlflow.models.ModelSignature</span></code> class that is initialised by the:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input:</span> <span class="pre">mlflow.types.Schema</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output:</span> <span class="pre">mlfow.types.Schema</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">params:</span> <span class="pre">mlflow.types.ParamSchema</span></code>.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">ModelSignature</span></code>. Here:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code> is defined using a column-based approach and expects an array of the elements with the corresponding column names.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code> uses tensor-based approach where output is a set of 2 elements vectors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">params</span></code> contains a single parameter that by default is defined with 0.7.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">ColSpec</span><span class="p">,</span><span class="n">ParamSchema</span><span class="p">,</span> <span class="n">ParamSpec</span><span class="p">,</span> <span class="n">TensorSpec</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelSignature</span>
+
+<span class="n">input_schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([</span>
+    <span class="n">ColSpec</span><span class="p">(</span><span class="s2">&quot;double&quot;</span><span class="p">,</span> <span class="s2">&quot;value1&quot;</span><span class="p">),</span>
+    <span class="n">ColSpec</span><span class="p">(</span><span class="s2">&quot;integer&quot;</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span><span class="p">),</span>
+    <span class="n">ColSpec</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;value3&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="n">output_schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))])</span>
+<span class="n">parameters_schema</span> <span class="o">=</span> <span class="n">ParamSchema</span><span class="p">([</span><span class="n">ParamSpec</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;double&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)])</span>
+
+<span class="n">ModelSignature</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_schema</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output_schema</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">parameters_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inputs: 
+  [&#39;value1&#39;: double (required), &#39;value2&#39;: integer (required), &#39;value3&#39;: string (required)]
+outputs: 
+  [Tensor(&#39;float32&#39;, (-1, 2))]
+params: 
+  [&#39;temperature&#39;: double (default: 0.7)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -1067,11 +1129,11 @@ params:
       </div>
     </a>
     <a class="right-next"
-       href="../langchain.html"
+       href="serving.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">LangChain</p>
+        <p class="prev-next-title">Serving</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1096,7 +1158,10 @@ params:
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signature">Signature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signature">Signature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-defition">Manual defition</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

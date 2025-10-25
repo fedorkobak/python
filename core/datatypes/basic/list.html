@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -572,6 +572,7 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/mlflow/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/mlflow/serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -594,6 +595,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ds_ml/optuna.html">Optuna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -623,6 +625,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages/aws_sdk.html">AWS SDK</a></li>
 </ul>
 
     </div>
@@ -786,15 +789,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pop-delete-by-index"><code class="docutils literal notranslate"><span class="pre">pop</span></code> - delete by index</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-delete-by-value"><code class="docutils literal notranslate"><span class="pre">remove</span></code> - delete by value</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-index-of-value"><code class="docutils literal notranslate"><span class="pre">index</span></code> - index of value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-by-index">Remove by index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-by-value">Remove by value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-of-the-value">Index of the value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appned-vs"><code class="docutils literal notranslate"><span class="pre">appned</span></code> vs <code class="docutils literal notranslate"><span class="pre">+</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-duplicates">drop duplicates</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-set-input"><code class="docutils literal notranslate"><span class="pre">list(set(&lt;input&gt;))</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-the-order">Saving the order</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-duplicates">Drop duplicates</a></li>
 </ul>
             </nav>
         </div>
@@ -809,13 +808,22 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="list">
 <h1>list<a class="headerlink" href="#list" title="Link to this heading">#</a></h1>
 <p>Is an array that you can change at runtime.</p>
-<section id="pop-delete-by-index">
-<h2><code class="docutils literal notranslate"><span class="pre">pop</span></code> - delete by index<a class="headerlink" href="#pop-delete-by-index" title="Link to this heading">#</a></h2>
-<p>You can delete element by index and get it back.</p>
+<section id="remove-by-index">
+<h2>Remove by index<a class="headerlink" href="#remove-by-index" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pop</span></code> method allows you to delete an element by index and retrieve the deleted element. If an index isn’t passed to the method, it will remove the last element by default.</p>
+<hr class="docutils" />
+<p>Consider removing elements from the following list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poped element&quot;</span><span class="p">,</span> <span class="n">test_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell displays the output of the <code class="docutils literal notranslate"><span class="pre">.pip(2)</span></code> method and the transformation of the input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poped element&quot;</span><span class="p">,</span> <span class="n">test_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result list&quot;</span><span class="p">,</span> <span class="n">test_list</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -827,29 +835,30 @@ Result list [3, 4, 2]
 </div>
 </div>
 </div>
-<p>By default it deltes the first element.</p>
+<p>The following cell shows the same ouputs for the <code class="docutils literal notranslate"><span class="pre">.pip()</span></code> function without a provided index.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poped elemnt&quot;</span><span class="p">,</span> <span class="n">test_list</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poped element&quot;</span><span class="p">,</span> <span class="n">test_list</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result list&quot;</span><span class="p">,</span> <span class="n">test_list</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Poped elemnt 3
-Result list [5, 6, 4]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Poped element 2
+Result list [3, 4]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="remove-delete-by-value">
-<h2><code class="docutils literal notranslate"><span class="pre">remove</span></code> - delete by value<a class="headerlink" href="#remove-delete-by-value" title="Link to this heading">#</a></h2>
-<p>You can delete element by value.</p>
+<section id="remove-by-value">
+<h2>Remove by value<a class="headerlink" href="#remove-by-value" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">remove</span></code> method allows you to specify the value to be removed from the list. Only the first entry of the specified value will be removed. If there is no specified value in the list, you will receive a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell illustrates ho to remove the specified element from the given list.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;initial list&quot;</span><span class="p">,</span> <span class="n">test_list</span><span class="p">)</span>
 <span class="n">test_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;resutl list&quot;</span><span class="p">,</span> <span class="n">test_list</span><span class="p">)</span>
@@ -863,10 +872,10 @@ resutl list [5, 4, 5]
 </div>
 </div>
 </div>
-<p><strong>Note</strong> that if there’s no removing value in the source list, you’ll have an error.</p>
+<p>The following cell shows the output of the <code class="docutils literal notranslate"><span class="pre">remove</span></code> when there is no corresponding element in the processed list.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="n">test_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -874,7 +883,7 @@ resutl list [5, 4, 5]
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">test_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 
@@ -884,14 +893,14 @@ resutl list [5, 4, 5]
 </div>
 </div>
 </section>
-<section id="index-index-of-value">
-<h2><code class="docutils literal notranslate"><span class="pre">index</span></code> - index of value<a class="headerlink" href="#index-index-of-value" title="Link to this heading">#</a></h2>
-<p>Using this method you can get the index by which you can get the first occurrence of this element in the list.</p>
+<section id="index-of-the-value">
+<h2>Index of the value<a class="headerlink" href="#index-of-the-value" title="Link to this heading">#</a></h2>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">index</span></code> method of the <code class="docutils literal notranslate"><span class="pre">list</span></code> you can get the index by which you can get the first occurrence of this element in the list. It always returns the index of the first entry of the element in the list.</p>
+<hr class="docutils" />
 <p>In the following example I ask <code class="docutils literal notranslate"><span class="pre">.index(3)</span></code> and got 2 as a result because the first occurrence of number 3 in the 2 index.</p>
-<p><strong>Note</strong> any other entry of the element will be ignored, just like the second 3 value with 4 index in the example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">test_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -902,10 +911,28 @@ resutl list [5, 4, 5]
 </div>
 </div>
 </div>
+<p>A common way to use this method is in sorting tasks involving related lists. If you have two types of lists, and one determines the order of elements in the other, you can find the index of the maximum or minimum element in the ordering list to extract the corresponding element from the related list.</p>
+<p>The following code shows how to extract the element of the <code class="docutils literal notranslate"><span class="pre">keys</span></code> list that corresponds to the max value in the <code class="docutils literal notranslate"><span class="pre">values</span></code> list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;small&quot;</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="s2">&quot;medium&quot;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="n">keys</span><span class="p">[</span><span class="n">values</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">))]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;big&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="appned-vs">
 <h2><code class="docutils literal notranslate"><span class="pre">appned</span></code> vs <code class="docutils literal notranslate"><span class="pre">+</span></code><a class="headerlink" href="#appned-vs" title="Link to this heading">#</a></h2>
 <p>There are two common ways to extend a Python list: by using the <code class="docutils literal notranslate"><span class="pre">append</span></code> method and the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator. There is a significant difference: <code class="docutils literal notranslate"><span class="pre">+</span></code> creates a new list and copies operands to it, but <code class="docutils literal notranslate"><span class="pre">append</span></code> changes the initial list.</p>
+<hr class="docutils" />
 <p>The following example:</p>
 <ul class="simple">
 <li><p>Prints “Initial list: <id>”;</p></li>
@@ -932,16 +959,25 @@ Append list: 139771686692224
 </div>
 </section>
 <section id="drop-duplicates">
-<h2>drop duplicates<a class="headerlink" href="#drop-duplicates" title="Link to this heading">#</a></h2>
-<section id="list-set-input">
-<h3><code class="docutils literal notranslate"><span class="pre">list(set(&lt;input&gt;))</span></code><a class="headerlink" href="#list-set-input" title="Link to this heading">#</a></h3>
-<p>The easiest way is to convert the input list to <code class="docutils literal notranslate"><span class="pre">set</span></code> and then back to <code class="docutils literal notranslate"><span class="pre">list</span></code>. <code class="docutils literal notranslate"><span class="pre">set</span></code> can’t have duplicates, so they’re dropped.</p>
-<p><strong>Note</strong> this option does not save the original order of the items in the list, because the `set’ data type ignores the order of the items.</p>
+<h2>Drop duplicates<a class="headerlink" href="#drop-duplicates" title="Link to this heading">#</a></h2>
+<p>A popular task when processing lists is to removing duplicate entries.</p>
+<ul class="simple">
+<li><p>Converting to a <code class="docutils literal notranslate"><span class="pre">set</span></code>, allows to remove duplicates. However, converting back to a list will not follow the original order.</p></li>
+<li><p>The second approach is to iterate over the elements of the list and add only those elements to the result list whose indices match the first entry of the original list.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Consider the realization of the different approaches applied to the example defined in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>The following example allows you to obtain unique values, but despite the fact that the elements in the original list are not in ascending order, they are in the result of the transformation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-<span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">test_list</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">test_list</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -951,19 +987,10 @@ Append list: 139771686692224
 </div>
 </div>
 </div>
-</section>
-<section id="saving-the-order">
-<h3>Saving the order<a class="headerlink" href="#saving-the-order" title="Link to this heading">#</a></h3>
-<p>It is possible to loop through the elements of the transformed list and check if the result of the <code class="docutils literal notranslate"><span class="pre">item</span></code> method for the selected element corresponds to the iteration number:</p>
-<ul class="simple">
-<li><p>If the iteration number and the result of the <code class="docutils literal notranslate"><span class="pre">item</span></code> method match, it means that this is the first occurrence of this element and it should be included in the result;</p></li>
-<li><p>Otherwise, it means that this item has already been included in the result earlier and it should not be added to the result.</p></li>
-</ul>
-<p>The following cell shows a possible implementation of the described algorithm. As a result, 4 appears immediately after 1, as in the original list.</p>
+<p>The next cell adds to the output of the list generator only those elements whose index matches with the output of the <code class="docutils literal notranslate"><span class="pre">index</span></code> method for the corresponding value in the original list.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_list</span><span class="p">)</span> <span class="k">if</span> <span class="n">test_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_list</span><span class="p">)</span> <span class="k">if</span> <span class="n">test_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -973,7 +1000,7 @@ Append list: 139771686692224
 </div>
 </div>
 </div>
-</section>
+<p>As a result, the list of unique values preserves the order of elements of the original list.</p>
 </section>
 </section>
 
@@ -1041,15 +1068,11 @@ Append list: 139771686692224
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pop-delete-by-index"><code class="docutils literal notranslate"><span class="pre">pop</span></code> - delete by index</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-delete-by-value"><code class="docutils literal notranslate"><span class="pre">remove</span></code> - delete by value</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-index-of-value"><code class="docutils literal notranslate"><span class="pre">index</span></code> - index of value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-by-index">Remove by index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-by-value">Remove by value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-of-the-value">Index of the value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appned-vs"><code class="docutils literal notranslate"><span class="pre">appned</span></code> vs <code class="docutils literal notranslate"><span class="pre">+</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-duplicates">drop duplicates</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-set-input"><code class="docutils literal notranslate"><span class="pre">list(set(&lt;input&gt;))</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-the-order">Saving the order</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-duplicates">Drop duplicates</a></li>
 </ul>
   </nav></div>
 

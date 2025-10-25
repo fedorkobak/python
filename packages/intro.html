@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="To excel import" href="excel_export.html" />
-    <link rel="prev" title="Optuna" href="../ds_ml/optuna.html" />
+    <link rel="prev" title="XGBoost" href="../ds_ml/xgboost.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -572,6 +572,7 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -594,6 +595,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="current nav bd-sidenav">
@@ -623,6 +625,7 @@
 <li class="toctree-l2"><a class="reference internal" href="tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="aws_sdk.html">AWS SDK</a></li>
 </ul>
 
     </div>
@@ -795,6 +798,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradio">Gradio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sdk">AWS SDK</a></li>
 </ul>
             </nav>
         </div>
@@ -1273,6 +1277,91 @@ rm -r zip_example_file archive.zip
 </div>
 </div>
 </section>
+<section id="aws-sdk">
+<h2>AWS SDK<a class="headerlink" href="#aws-sdk" title="Link to this heading">#</a></h2>
+<p>The AWS SDK for Python is the <code class="docutils literal notranslate"><span class="pre">boto3</span></code> package.</p>
+<p>Obviously, you need a aws subscription to use the <code class="docutils literal notranslate"><span class="pre">boto3</span></code>. Fortunately, if you just familiarise yourself with the API you, can use the <a class="reference external" href="https://docs.getmoto.org/en/latest/"><code class="docutils literal notranslate"><span class="pre">moto</span></code></a> package, which mocks the behaviour of <code class="docutils literal notranslate"><span class="pre">boto3</span></code>.</p>
+<p>The following table lists and describes the key components of the <code class="docutils literal notranslate"><span class="pre">boto3</span></code> package.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Entity</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Abstraction Level</p></th>
+<th class="head text-left"><p>Typical Use</p></th>
+<th class="head text-left"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Client</strong></p></td>
+<td class="text-left"><p>Low-level interface that directly maps to AWS API operations.</p></td>
+<td class="text-left"><p>Low</p></td>
+<td class="text-left"><p>Perform AWS operations with full control over request parameters.</p></td>
+<td class="text-left"><p>Follows AWS API 1:1; returns plain dictionaries (no objects).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Resource</strong></p></td>
+<td class="text-left"><p>Higher-level, object-oriented abstraction built on top of clients.</p></td>
+<td class="text-left"><p>High</p></td>
+<td class="text-left"><p>Work with AWS resources as Python objects instead of manual API calls.</p></td>
+<td class="text-left"><p>Not all AWS services support resources; auto-manages pagination and references.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Collection</strong></p></td>
+<td class="text-left"><p>Iterable abstraction that groups related resources.</p></td>
+<td class="text-left"><p>Medium</p></td>
+<td class="text-left"><p>Iterate or filter groups of resources.</p></td>
+<td class="text-left"><p>Returned by resource properties (e.g. <code class="docutils literal notranslate"><span class="pre">buckets.all()</span></code>, <code class="docutils literal notranslate"><span class="pre">objects.filter()</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Resource Instance</strong></p></td>
+<td class="text-left"><p>Represents a single AWS resource (e.g., an S3 bucket or EC2 instance).</p></td>
+<td class="text-left"><p>High</p></td>
+<td class="text-left"><p>Access attributes or perform actions on that specific resource.</p></td>
+<td class="text-left"><p>Exposes both attributes and actions of the AWS resource.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Resource Meta</strong></p></td>
+<td class="text-left"><p>Holds low-level metadata about a resource.</p></td>
+<td class="text-left"><p>N/A</p></td>
+<td class="text-left"><p>Access client and configuration of a resource.</p></td>
+<td class="text-left"><p>Often used to access the underlying client for unsupported operations.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Waiter</strong></p></td>
+<td class="text-left"><p>Utility that polls AWS APIs until a resource reaches a desired state.</p></td>
+<td class="text-left"><p>Medium</p></td>
+<td class="text-left"><p>Wait for resources to be created, updated, or deleted.</p></td>
+<td class="text-left"><p>Built into clients; waits for specific conditions.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Paginator</strong></p></td>
+<td class="text-left"><p>Handles paginated API responses automatically.</p></td>
+<td class="text-left"><p>Medium</p></td>
+<td class="text-left"><p>Iterate through results that span multiple pages.</p></td>
+<td class="text-left"><p>Available via clients and some resources.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See the <a class="reference internal" href="aws_sdk.html"><span class="std std-doc">AWS SDK</span></a> page for a more detailed description.</p>
+<hr class="docutils" />
+<p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">region</span></code> which is specified in my <code class="docutils literal notranslate"><span class="pre">~/.aws/config</span></code> file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">moto</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_aws</span>
+
+<span class="n">mock</span> <span class="o">=</span> <span class="n">mock_aws</span><span class="p">()</span>
+<span class="n">mock</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">region_name</span><span class="p">)</span>
+
+<span class="n">mock</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>us-east-1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1306,12 +1395,12 @@ rm -r zip_example_file archive.zip
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../ds_ml/optuna.html"
+       href="../ds_ml/xgboost.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Optuna</p>
+        <p class="prev-next-title">XGBoost</p>
       </div>
     </a>
     <a class="right-next"
@@ -1348,6 +1437,7 @@ rm -r zip_example_file archive.zip
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradio">Gradio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sdk">AWS SDK</a></li>
 </ul>
   </nav></div>
 
