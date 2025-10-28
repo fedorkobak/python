@@ -364,4 +364,6 @@ parts:
         - file: packages/tkinter/widgets_overview/list_box.ipynb
       - file: packages/tkinter/pack.ipynb
       - file: packages/tkinter/change_elements_position.ipynb
-    - file: packages/aws_sdk.ipynb
+    - file: packages/cloud.ipynb
+      sections:
+      - file: packages/cloud/aws_sdk.ipynb
