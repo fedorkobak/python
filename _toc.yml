@@ -16,7 +16,7 @@ parts:
         sections:
         - file: core/syntax/keywords/in.ipynb
         - file: core/syntax/keywords/yield.ipynb
-      - file: core/syntax/functions.ipynb
+      - file: core/syntax/callable.ipynb
         sections:
         - file: core/syntax/functions/parameters.ipynb
       - file: core/syntax/oop.ipynb
