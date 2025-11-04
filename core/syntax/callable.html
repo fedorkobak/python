@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Functions &#8212; Python</title>
+    <title>Callable &#8212; Python</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,7 +57,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'core/syntax/functions';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'core/syntax/callable';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -193,7 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="keywords/yield.html">yield</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Callable</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="functions/parameters.html">Parameters</a></li>
 </ul>
 </details></li>
@@ -589,11 +589,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/spark/ml.html">ML</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/databricks_sdk/serving.html">Serving</a></li>
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ds_ml/optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
@@ -625,7 +620,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/cloud.html">Cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -695,7 +698,7 @@
       
       
       
-      <li><a href="../../_sources/core/syntax/functions.ipynb" target="_blank"
+      <li><a href="../../_sources/core/syntax/callable.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -779,7 +782,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Functions</h1>
+    <h1>Callable</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -790,13 +793,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions">Built in functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorted">Sorted</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-argument">Key argument</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions">User-defined functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualified-name">Qualified name</a></li>
 </ul>
             </nav>
         </div>
@@ -808,8 +806,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="callable">
+<h1>Callable<a class="headerlink" href="#callable" title="Link to this heading">#</a></h1>
 <p>A function in Python is a reusable block of code that performs a specific task. It can be executed with different sets of arguments, allowing for code abstraction and modularity by encapsulating operations into a single, callable unit.</p>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
@@ -873,68 +871,162 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="built-in-functions">
-<h2>Built in functions<a class="headerlink" href="#built-in-functions" title="Link to this heading">#</a></h2>
-<p>Python includes a set of built-in functions that are available directly in the interpreter without requiring any imports. This section provides an overview of these functions.</p>
-<section id="sorted">
-<h3>Sorted<a class="headerlink" href="#sorted" title="Link to this heading">#</a></h3>
-<p>Function for sorting in python. Which takes an object and returns a new object with the elements sorted. You can pass any sortable object, such as a list, and receive the sorted result.</p>
+<section id="user-defined-functions">
+<h2>User-defined functions<a class="headerlink" href="#user-defined-functions" title="Link to this heading">#</a></h2>
+<p>The set of attributes specific for user-defined functions is represented in the following table:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Attribute</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Read-only</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">function.__globals__</span></code></p></td>
+<td><p>The dictionary that hold’s the function’s global variables</p></td>
+</tr>
+<tr class="row-odd"><td><p>Writable</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">function.__doc__</span></code></p></td>
+<td><p>The funciton’s documentation string, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unavailable</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">function.__name__</span></code></p></td>
+<td><p>The funciton’s name</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">function.__qualname__</span></code></p></td>
+<td><p>The funciton’s qualified name</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">function.__module__</span></code></p></td>
+<td><p>The name of the module the function was defined in, or <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">funciton.__defaults__</span></code></p></td>
+<td><p>A tuple containing default parameter values, or <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For full list of attributes check: <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#special-read-only-attributes">special read only attributes</a> and <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#special-writable-attributes">special writable attributes</a>.</p>
 <hr class="docutils" />
-<p>The following cell demonstrates how to sort a Python list.</p>
+<p>The following cell defines the function and displays the values of some of the attributes specified user-defined attributes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hello_function</span><span class="p">(</span><span class="n">val</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hello_function</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hello_function</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hello_function</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 2, 3, 4, 8]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello_function
+__main__
+hello_function
 </pre></div>
 </div>
 </div>
 </div>
-<section id="key-argument">
-<h4>Key argument<a class="headerlink" href="#key-argument" title="Link to this heading">#</a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">key</span></code> argument allows you to specify a callable that, for each element of the original array, returns a value used to determine the order of the elements during sorting.</p>
+<p><strong>Note:</strong> The python documentation doesn’t specify it explicitly, but it appears that the instance methods are a kind of subset of the user-defined functions and generally have the same attributes.</p>
 <hr class="docutils" />
-<p>Consider the list <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">12,</span> <span class="pre">15]</span></code>. If we want to treat odd numbers as halves when sorting, the code to achieve this is shown below:</p>
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">MyClass.fun</span></code> method and displays the values of sertain attributes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
-<span class="nb">sorted</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">2</span> else x))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function&#39;s doc-string&quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">hello</span>
+
+<span class="n">my_instance</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">my_instance</span><span class="o">.</span><span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_instance</span><span class="o">.</span><span class="n">fun</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5, 7, 4, 15, 12]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Consider the following example: for each element of the original array, if the number is odd, it is transformed to half of its value; if it is even, it remains unchanged. For the list <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">12,</span> <span class="pre">15]</span></code>, this results in the pairs: <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">→</span> <span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">→</span> <span class="pre">2.5</span></code>, <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">→</span> <span class="pre">3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">12</span> <span class="pre">→</span> <span class="pre">12</span></code>, and <code class="docutils literal notranslate"><span class="pre">15</span> <span class="pre">→</span> <span class="pre">7.5</span></code>. Sorting based on these transformed values gives the order: <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">→</span> <span class="pre">2.5</span></code>, <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">→</span> <span class="pre">3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">→</span> <span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">15</span> <span class="pre">→</span> <span class="pre">7.5</span></code>, and <code class="docutils literal notranslate"><span class="pre">12</span> <span class="pre">→</span> <span class="pre">12</span></code>, which corresponds to the original list order of <code class="docutils literal notranslate"><span class="pre">[5,</span> <span class="pre">7,</span> <span class="pre">4,</span> <span class="pre">15,</span> <span class="pre">12]</span></code>.</p>
-<p>One useful example is sorting dictionary keys based on their corresponding values. By passing a function that retrieves the value for each key, you can obtain a list of keys sorted according to their values.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sort_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;mazda&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-    <span class="s2">&quot;audi&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-    <span class="s2">&quot;mercedes&quot;</span><span class="p">:</span> <span class="mi">43</span><span class="p">,</span>
-    <span class="s2">&quot;bmw&quot;</span><span class="p">:</span> <span class="mi">38</span><span class="p">,</span>
-    <span class="s2">&quot;toyota&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
-    <span class="s2">&quot;ford&quot;</span><span class="p">:</span> <span class="mi">29</span>
-<span class="p">}</span>
-<span class="nb">sorted</span><span class="p">(</span><span class="n">sort_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">sort_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;ford&#39;, &#39;mazda&#39;, &#39;bmw&#39;, &#39;mercedes&#39;, &#39;toyota&#39;, &#39;audi&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fun
+Function&#39;s doc-string
+{&#39;__name__&#39;: &#39;__main__&#39;, &#39;__doc__&#39;: &#39;Automatically created module for IPython interactive environment&#39;, &#39;__package__&#39;: None, &#39;__loader__&#39;: None, &#39;__spec__&#39;: None, &#39;__builtin__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;, &#39;__builtins__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;, &#39;_ih&#39;: [&#39;&#39;, &#39;def hello_function(val = 10):\n    pass\n\nhello_function.__name__&#39;, &#39;def hello_function(val = 10):\n    pass\n\nhello_function.dir&#39;, &#39;def hello_function(val = 10):\n    pass\n\nhello_function.dir()&#39;, &#39;def hello_function(val = 10):\n    pass\n\ndir(hello_function)&#39;, &#39;def hello_function(val = 10):\n    pass\n\nprint(hello_function.__name__)\nprint(hello_function.__module__)&#39;, &#39;def hello_function(val = 10):\n    pass\n\nprint(hello_function.__name__)\nprint(hello_function.__module__)\nprint(hello_function.__qualname__)&#39;, &#39;---&#39;, &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\nmy_instance.fun.__name__&#39;, &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function&quot;&quot;&quot;\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function\&#39;s doc-string&quot;&quot;&quot;\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function\&#39;s doc-string&quot;&quot;&quot;\n        global hello\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)\nprint(my_instance.fun.__globals__)&#39;], &#39;_oh&#39;: {1: &#39;hello_function&#39;, 4: [&#39;__annotations__&#39;, &#39;__builtins__&#39;, &#39;__call__&#39;, &#39;__class__&#39;, &#39;__closure__&#39;, &#39;__code__&#39;, &#39;__defaults__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__get__&#39;, &#39;__getattribute__&#39;, &#39;__getstate__&#39;, &#39;__globals__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__kwdefaults__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__name__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__qualname__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__type_params__&#39;], 8: &#39;fun&#39;}, &#39;_dh&#39;: [PosixPath(&#39;/home/fedor/Documents/code/python/core/syntax&#39;)], &#39;In&#39;: [&#39;&#39;, &#39;def hello_function(val = 10):\n    pass\n\nhello_function.__name__&#39;, &#39;def hello_function(val = 10):\n    pass\n\nhello_function.dir&#39;, &#39;def hello_function(val = 10):\n    pass\n\nhello_function.dir()&#39;, &#39;def hello_function(val = 10):\n    pass\n\ndir(hello_function)&#39;, &#39;def hello_function(val = 10):\n    pass\n\nprint(hello_function.__name__)\nprint(hello_function.__module__)&#39;, &#39;def hello_function(val = 10):\n    pass\n\nprint(hello_function.__name__)\nprint(hello_function.__module__)\nprint(hello_function.__qualname__)&#39;, &#39;---&#39;, &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\nmy_instance.fun.__name__&#39;, &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function&quot;&quot;&quot;\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function\&#39;s doc-string&quot;&quot;&quot;\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function\&#39;s doc-string&quot;&quot;&quot;\n        global hello\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)\nprint(my_instance.fun.__globals__)&#39;], &#39;Out&#39;: {1: &#39;hello_function&#39;, 4: [&#39;__annotations__&#39;, &#39;__builtins__&#39;, &#39;__call__&#39;, &#39;__class__&#39;, &#39;__closure__&#39;, &#39;__code__&#39;, &#39;__defaults__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__get__&#39;, &#39;__getattribute__&#39;, &#39;__getstate__&#39;, &#39;__globals__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__kwdefaults__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__name__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__qualname__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__type_params__&#39;], 8: &#39;fun&#39;}, &#39;get_ipython&#39;: &lt;bound method InteractiveShell.get_ipython of &lt;ipykernel.zmqshell.ZMQInteractiveShell object at 0x7604cc1482f0&gt;&gt;, &#39;exit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall object at 0x7604cc14a900&gt;, &#39;quit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall object at 0x7604cc14a900&gt;, &#39;open&#39;: &lt;function open at 0x7604d12523e0&gt;, &#39;_&#39;: &#39;fun&#39;, &#39;__&#39;: [&#39;__annotations__&#39;, &#39;__builtins__&#39;, &#39;__call__&#39;, &#39;__class__&#39;, &#39;__closure__&#39;, &#39;__code__&#39;, &#39;__defaults__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__get__&#39;, &#39;__getattribute__&#39;, &#39;__getstate__&#39;, &#39;__globals__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__kwdefaults__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__name__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__qualname__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__type_params__&#39;], &#39;___&#39;: &#39;hello_function&#39;, &#39;__vsc_ipynb_file__&#39;: &#39;/home/fedor/Documents/code/python/core/syntax/callable.ipynb&#39;, &#39;_i&#39;: &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function\&#39;s doc-string&quot;&quot;&quot;\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;_ii&#39;: &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function&quot;&quot;&quot;\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;_iii&#39;: &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;_i1&#39;: &#39;def hello_function(val = 10):\n    pass\n\nhello_function.__name__&#39;, &#39;hello_function&#39;: &lt;function hello_function at 0x7604b489d6c0&gt;, &#39;_1&#39;: &#39;hello_function&#39;, &#39;_i2&#39;: &#39;def hello_function(val = 10):\n    pass\n\nhello_function.dir&#39;, &#39;_i3&#39;: &#39;def hello_function(val = 10):\n    pass\n\nhello_function.dir()&#39;, &#39;_i4&#39;: &#39;def hello_function(val = 10):\n    pass\n\ndir(hello_function)&#39;, &#39;_4&#39;: [&#39;__annotations__&#39;, &#39;__builtins__&#39;, &#39;__call__&#39;, &#39;__class__&#39;, &#39;__closure__&#39;, &#39;__code__&#39;, &#39;__defaults__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__get__&#39;, &#39;__getattribute__&#39;, &#39;__getstate__&#39;, &#39;__globals__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__kwdefaults__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__name__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__qualname__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__type_params__&#39;], &#39;_i5&#39;: &#39;def hello_function(val = 10):\n    pass\n\nprint(hello_function.__name__)\nprint(hello_function.__module__)&#39;, &#39;_i6&#39;: &#39;def hello_function(val = 10):\n    pass\n\nprint(hello_function.__name__)\nprint(hello_function.__module__)\nprint(hello_function.__qualname__)&#39;, &#39;_i7&#39;: &#39;---&#39;, &#39;_i8&#39;: &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\nmy_instance.fun.__name__&#39;, &#39;MyClass&#39;: &lt;class &#39;__main__.MyClass&#39;&gt;, &#39;my_instance&#39;: &lt;__main__.MyClass object at 0x7604b48bc980&gt;, &#39;_8&#39;: &#39;fun&#39;, &#39;_i9&#39;: &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;_i10&#39;: &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;_i11&#39;: &#39;class MyClass:\n    def fun(self, val: 10):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;_i12&#39;: &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__defaults__)&#39;, &#39;_i13&#39;: &#39;class MyClass:\n    def fun(self):\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;_i14&#39;: &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function&quot;&quot;&quot;\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;_i15&#39;: &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function\&#39;s doc-string&quot;&quot;&quot;\n        pass\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)&#39;, &#39;_i16&#39;: &#39;class MyClass:\n    def fun(self):\n        &quot;&quot;&quot;Function\&#39;s doc-string&quot;&quot;&quot;\n        global hello\n\nmy_instance = MyClass()\n\nprint(my_instance.fun.__name__)\nprint(my_instance.fun.__doc__)\nprint(my_instance.fun.__globals__)&#39;}
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-</section>
+<section id="qualified-name">
+<h2>Qualified name<a class="headerlink" href="#qualified-name" title="Link to this heading">#</a></h2>
+<p>Qualified name is a dotted “path” of the global module’s namespace: For an object that defined in the current module.</p>
+<p>Callable objects store their qualified names in the <code class="docutils literal notranslate"><span class="pre">__qualname__</span></code> attribute.</p>
+<hr class="docutils" />
+<p>The following cell defines nested classes structure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Outer</span><span class="p">():</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Inner</span><span class="p">():</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">__qualname__</span></code> attribute values for different elements of the structure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Outer</span><span class="o">.</span><span class="vm">__qualname__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Outer&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inner</span> <span class="o">=</span> <span class="n">Outer</span><span class="o">.</span><span class="n">Inner</span>
+<span class="n">inner</span><span class="o">.</span><span class="vm">__qualname__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Outer.Inner&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inner</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="vm">__qualname__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Outer.Inner.method&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">__qualname__</span></code> for imported objects does not include the information about the module.</p>
+<hr class="docutils" />
+<p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">__qualname__</span></code> of the <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCase</span>
+<span class="n">TestCase</span><span class="o">.</span><span class="vm">__qualname__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;TestCase&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1005,13 +1097,8 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions">Built in functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorted">Sorted</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-argument">Key argument</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions">User-defined functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualified-name">Qualified name</a></li>
 </ul>
   </nav></div>
 

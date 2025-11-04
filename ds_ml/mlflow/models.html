@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -193,7 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/keywords/yield.html">yield</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/functions.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/functions/parameters.html">Parameters</a></li>
 </ul>
 </details></li>
@@ -589,11 +589,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../spark/ml.html">ML</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../databricks_sdk/feature_engineering.html">Feature engineering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../databricks_sdk/serving.html">Serving</a></li>
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../xgboost.html">XGBoost</a></li>
 </ul>
@@ -625,7 +620,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/cloud.html">Cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -798,6 +801,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-defition">Manual defition</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow-file">MLflow file</a></li>
 </ul>
             </nav>
         </div>
@@ -1087,6 +1091,82 @@ params:
 </div>
 </section>
 </section>
+<section id="mlflow-file">
+<h2>MLflow file<a class="headerlink" href="#mlflow-file" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">MLflow</span></code> file is the single source of truth about how the model should be loaded and used. It is a yaml-like file and the important fields are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">artifact_path</span></code>: During the training job, the model is logged to this path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flavor</span></code>: The machine learning library with which the model was created.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_uuid</span></code>: The unique identifier of the registered model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_id</span></code>: The unique identifier of job run during which the model was created.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">signature</span></code>: Specifies the schema of the model’s inputs and outputs.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell creates the model and stores it in the registry.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">pyfunc</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_model</span><span class="p">(</span><span class="n">model_intput</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">model_intput</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+        <span class="n">python_model</span><span class="o">=</span><span class="n">example_model</span><span class="p">,</span>
+        <span class="n">registered_model_name</span><span class="o">=</span><span class="s2">&quot;file_example&quot;</span><span class="p">,</span>
+        <span class="n">pip_requirements</span><span class="o">=</span><span class="p">[]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/user/.virtualenvironments/python/lib/python3.13/site-packages/mlflow/pyfunc/utils/data_validation.py:155: FutureWarning: Model&#39;s `predict` method contains invalid parameters: {&#39;model_intput&#39;}. Only the following parameter names are allowed: context, model_input, and params. Note that invalid parameters will no longer be permitted in future versions.
+  param_names = _check_func_signature(func, &quot;predict&quot;)
+Successfully registered model &#39;file_example&#39;.
+Created version &#39;1&#39; of model &#39;file_example&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell displays the MLmodel file for the model that has been created.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">artifact_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;file://&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="o">!</span>cat<span class="w"> </span><span class="nv">$path</span>/MLmodel
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>artifact_path: file:///tmp/models_set_up/0/models/m-ae18ef8017a44d8986e3162c3e3b3be3/artifacts
+flavors:
+  python_function:
+    cloudpickle_version: 3.1.1
+    code: null
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.13.7
+    streamable: false
+is_signature_from_type_hint: true
+mlflow_version: 3.4.0
+model_id: m-ae18ef8017a44d8986e3162c3e3b3be3
+model_size_bytes: 2118
+model_uuid: m-ae18ef8017a44d8986e3162c3e3b3be3
+prompts: null
+run_id: 7f8d210085554901812095e77c091082
+signature:
+  inputs: &#39;[{&quot;type&quot;: &quot;double&quot;, &quot;required&quot;: true}]&#39;
+  outputs: &#39;[{&quot;type&quot;: &quot;double&quot;, &quot;required&quot;: true}]&#39;
+  params: null
+type_hint_from_example: false
+utc_time_created: &#39;2025-10-27 06:35:16.437546&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1162,6 +1242,7 @@ params:
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-defition">Manual defition</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow-file">MLflow file</a></li>
 </ul>
   </nav></div>
 

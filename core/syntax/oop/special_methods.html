@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -193,7 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../keywords/yield.html">yield</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../functions.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../functions/parameters.html">Parameters</a></li>
 </ul>
 </details></li>
@@ -589,11 +589,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/spark/ml.html">ML</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../ds_ml/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/databricks_sdk/serving.html">Serving</a></li>
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ds_ml/optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
@@ -625,7 +620,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../packages/cloud.html">Cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../packages/cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../packages/cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../packages/cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../packages/cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -792,6 +795,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-protocol">Iteration protocol</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switch-number-system">Switch number system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-subclass">Init subclass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subclass-kwargs">Subclass kwargs</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -997,6 +1004,104 @@ Stop iteration is raised
 </div>
 </div>
 </section>
+<section id="init-subclass">
+<h2>Init subclass<a class="headerlink" href="#init-subclass" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init_subclass__(cls)"><code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code></a> will be called each time a new class subclassing the class containing is created.</p>
+<hr class="docutils" />
+<p>The following cell creates a class that implements the <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code> method so that the name of the created class is printed out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The class </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> is created.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next code subclasses the <code class="docutils literal notranslate"><span class="pre">B</span></code> class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The class B is created.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The corresponding message appearsl.</p>
+<p>The second step child <code class="docutils literal notranslate"><span class="pre">C</span></code> works the same way as the <code class="docutils literal notranslate"><span class="pre">B</span></code> class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The class C is created.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="subclass-kwargs">
+<h3>Subclass kwargs<a class="headerlink" href="#subclass-kwargs" title="Link to this heading">#</a></h3>
+<p>If you define the keyword arguments in the <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code> method, they must be passed in the child class’s definition.</p>
+<hr class="docutils" />
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">Base</span></code> class, which <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code> requires <code class="docutils literal notranslate"><span class="pre">some_value</span></code> key word argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="n">some_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Got some value </span><span class="si">{</span><span class="n">some_value</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Got some value Hello from Child!
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the attempt to subclass the <code class="docutils literal notranslate"><span class="pre">Base</span></code> fails.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">pass</span>
+
+<span class="ne">TypeError</span>: Base.__init_subclass__() missing 1 required positional argument: &#39;some_value&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But if pass the <code class="docutils literal notranslate"><span class="pre">some_value</span></code>, everything goes well, and <code class="docutils literal notranslate"><span class="pre">some_value</span></code> will be used as defined in the <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">,</span> <span class="n">some_value</span><span class="o">=</span><span class="s2">&quot;Hello form Child&quot;</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Got some value Hello form Child!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1066,6 +1171,10 @@ Stop iteration is raised
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-protocol">Iteration protocol</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switch-number-system">Switch number system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-subclass">Init subclass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subclass-kwargs">Subclass kwargs</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

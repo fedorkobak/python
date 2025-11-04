@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -195,7 +195,7 @@
 <li class="toctree-l3"><a class="reference internal" href="syntax/keywords/yield.html">yield</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="syntax/functions.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="syntax/callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="syntax/functions/parameters.html">Parameters</a></li>
 </ul>
 </details></li>
@@ -591,11 +591,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/ml.html">ML</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/databricks_sdk/serving.html">Serving</a></li>
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
@@ -627,7 +622,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/cloud.html">Cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -793,6 +796,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keywords">Keywords</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callable">Callable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#with">With</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#several-managers">Several managers</a></li>
@@ -1141,6 +1145,90 @@ document.write(`
 </div>
 <p>Check more details in the <a class="reference internal" href="syntax/keywords.html"><span class="std std-doc">special page</span></a>.</p>
 </section>
+<section id="callable">
+<h2>Callable<a class="headerlink" href="#callable" title="Link to this heading">#</a></h2>
+<p>A callable is an type of object that can be called, i.e., it can run code (check <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#calls">Calls</a> section of the documentation).</p>
+<p>In the language, you can meet such groups of objects to which can be applied call syntax:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#user-defined-functions">User-defined functions</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#instance-methods">Instance methods</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#generator-functions">Generator functions</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#coroutine-functions">Coroutine functions</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#asynchronous-generator-functions">Asynchronous generator function</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#built-in-functions">Built-in functions</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#asynchronous-generator-functions">Built-in methods</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#classes">Classes</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#class-instances">Class Instances</a>.</p></li>
+</ul>
+<p>For more information check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#callable-types">Callable types</a> section in Data model page.</p></li>
+<li><p><a class="reference internal" href="syntax/callable.html"><span class="std std-doc">Callable</span></a> page.</p></li>
+</ul>
+<hr class="docutils" />
+<p>For example, consider some practical difference between user-defined function and .</p>
+<p>The following cell defines a function and attempts to access the <code class="docutils literal notranslate"><span class="pre">__self__</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">user_defined</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;some data&quot;</span><span class="p">)</span>
+
+<span class="n">user_defined</span><span class="o">.</span><span class="vm">__self__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span><span class="w"> </span><span class="nf">user_defined</span><span class="p">():</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;some data&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">user_defined</span><span class="o">.</span><span class="vm">__self__</span>
+
+<span class="ne">AttributeError</span>: &#39;function&#39; object has no attribute &#39;__self__&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is no such attribute in User-defined function, but there is in built-in function, like <code class="docutils literal notranslate"><span class="pre">sorted</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="o">.</span><span class="vm">__self__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;builtins&#39; (built-in)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>They just belong to different types:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">user_defined</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>function
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="nb">sorted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>builtin_function_or_method
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h2>
 <p>Exceptions are python’s way to deal with cases when something goes wrong. There are several important concepts associated with exceptions in python:</p>
@@ -1407,6 +1495,7 @@ Original functionality
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keywords">Keywords</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callable">Callable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#with">With</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#several-managers">Several managers</a></li>

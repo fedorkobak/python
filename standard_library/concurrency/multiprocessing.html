@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -193,7 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/keywords/yield.html">yield</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/functions.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/functions/parameters.html">Parameters</a></li>
 </ul>
 </details></li>
@@ -589,11 +589,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/spark/ml.html">ML</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/databricks_sdk/serving.html">Serving</a></li>
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ds_ml/optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
@@ -625,7 +620,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/cloud.html">Cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packages/cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../packages/cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -792,7 +795,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-process">Single process</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pool">Pool</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-methods">Start methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line">Command line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-parameters">CLI parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-stdout">Hide stdout</a></li>
 </ul>
             </nav>
         </div>
@@ -833,7 +837,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">process_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="n">st_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">25</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">/</span> <span class="mi">25</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">en_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">process_name</span><span class="si">}</span><span class="s2"> is finished </span><span class="si">{</span><span class="n">en_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">st_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -1029,10 +1033,10 @@ Processes were joined
 </div>
 <p>As a result there, is a different list of file descriptors, which practically defines the behaviour of the process.</p>
 </section>
-<section id="command-line">
-<h2>Command line<a class="headerlink" href="#command-line" title="Link to this heading">#</a></h2>
+<section id="cli-parameters">
+<h2>CLI parameters<a class="headerlink" href="#cli-parameters" title="Link to this heading">#</a></h2>
 <p>It’s useful to know that in multiprocessing all child processes inherit <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> from the parent process. <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> is a list that contains the command line arguments passed to the program.</p>
-<p>The only way to somhow deal with this is to reset <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> at the beginning of the process.</p>
+<p>The only way to deal with this is to reset <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> at the beginning of the process.</p>
 <hr class="docutils" />
 <p>The following cell shows an application that prints the arguments passed to it and then launches the new process that also prints it the values of the CLI arguments.</p>
 <div class="cell docutils container">
@@ -1099,6 +1103,56 @@ Sys arg child [&#39;/tmp/some_code.py&#39;, &#39;--this_argument&#39;, &#39;10&#
 </div>
 </div>
 </div>
+</section>
+<section id="hide-stdout">
+<h2>Hide stdout<a class="headerlink" href="#hide-stdout" title="Link to this heading">#</a></h2>
+<p>Sometimes it is useful to be able to view the outputs of each process separately, rather the process sharing the same stdout by default. To prevent a process from printing its output, set the <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code> attribute in the process.</p>
+<hr class="docutils" />
+<p>The following cell runs the process that prints some information to the stdout.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">raw_out</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is stdout from child process&quot;</span><span class="p">)</span>
+
+<span class="n">process</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">raw_out</span><span class="p">)</span>
+<span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is stdout from parent process&quot;</span><span class="p">)</span>
+<span class="n">process</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is stdout from child process
+This is stdout from parent process
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consequently, the outputs from the child and parent processes become mixed.</p>
+<p>The following cell instructs the Python program to print the output to a separate process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">hidden_out</span><span class="p">():</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This will not be shown&quot;</span><span class="p">)</span>
+
+<span class="n">process</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">hidden_out</span><span class="p">)</span>
+<span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ouput from parent process&quot;</span><span class="p">)</span>
+<span class="n">process</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ouput from parent process
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is that only the outputs from the parent process are present.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1171,7 +1225,8 @@ Sys arg child [&#39;/tmp/some_code.py&#39;, &#39;--this_argument&#39;, &#39;10&#
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-process">Single process</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pool">Pool</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-methods">Start methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line">Command line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-parameters">CLI parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-stdout">Hide stdout</a></li>
 </ul>
   </nav></div>
 

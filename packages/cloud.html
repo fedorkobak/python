@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>AWS SDK &#8212; Python</title>
+    <title>Cloud &#8212; Python</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,10 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/aws_sdk';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/cloud';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="AWS SDK" href="cloud/aws_sdk.html" />
     <link rel="prev" title="Change elements position" href="tkinter/change_elements_position.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -192,7 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/keywords/yield.html">yield</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/functions.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/functions/parameters.html">Parameters</a></li>
 </ul>
 </details></li>
@@ -588,11 +589,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/ml.html">ML</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/databricks_sdk/serving.html">Serving</a></li>
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
@@ -624,7 +620,15 @@
 <li class="toctree-l2"><a class="reference internal" href="tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">AWS SDK</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Cloud</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -694,7 +698,7 @@
       
       
       
-      <li><a href="../_sources/packages/aws_sdk.ipynb" target="_blank"
+      <li><a href="../_sources/packages/cloud.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -778,7 +782,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>AWS SDK</h1>
+    <h1>Cloud</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -788,9 +792,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moto">Moto</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#services-names">Services names</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client">Client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws">AWS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#azure">Azure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-model-inference">AI Model Inference</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -802,45 +809,71 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="aws-sdk">
-<h1>AWS SDK<a class="headerlink" href="#aws-sdk" title="Link to this heading">#</a></h1>
-<p>The python SKD for AWS is the <code class="docutils literal notranslate"><span class="pre">boto3</span></code> package. This page covers the details of working with the <code class="docutils literal notranslate"><span class="pre">boto3</span></code> package.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="cloud">
+<h1>Cloud<a class="headerlink" href="#cloud" title="Link to this heading">#</a></h1>
+<p>There is a set of packages that alllows interaction with cloud solutions using Python. This section considers them.</p>
+<section id="databricks-sdk">
+<h2>Databricks SDK<a class="headerlink" href="#databricks-sdk" title="Link to this heading">#</a></h2>
+<p>Databricks is a platform for developing data applications. It provides the python SKD.</p>
+<p>As it provides intercation with cloud based platform you have to set up an authentification in the <code class="docutils literal notranslate"><span class="pre">.databricks</span></code> file. Check more on configuration the authentification in:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/auth/config-profiles">Create a Databricks configuration profile file</a>.</p></li>
+<li><p><a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/auth/pat">Databricks personal access token authentification</a>.</p></li>
+</ul>
+<p>Few important packages:</p>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://pypi.org/project/databricks-connect/">databricks-connect</a> allows to connect to the facilities of the databricks cluster.</p></li>
+<li><p>The <a class="reference external" href="https://pypi.org/project/databricks-feature-engineering/">databricks-feature-engineering</a> API for manaing the databricks featurestore. After installing the module <code class="docutils literal notranslate"><span class="pre">databricks.feature_engineering</span></code> will be awailable from the environment.</p></li>
+<li><p>The <a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/databricks-utils">Databrick Utilities</a> is a module available inside Databricks as <code class="docutils literal notranslate"><span class="pre">dbutils</span></code> that allows you to manipulate with the Databricks environment from python codeq.</p></li>
+</ul>
+<p>For more details check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://databricks-sdk-py.readthedocs.io/en/latest/">Databricks SDK for python</a> documentation.</p></li>
+<li><p><a class="reference internal" href="cloud/databricks_sdk.html"><span class="std std-doc">Databricks SDK</span></a> page in this website.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The simpliest way to set up the configuration is through an authentication token.</p>
+<p>Create file <code class="docutils literal notranslate"><span class="pre">~/databrickscfg</span></code>, that should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<span class="n">host</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">////</span><span class="n">dbc</span><span class="o">-&lt;</span><span class="n">some</span> <span class="n">unique</span> <span class="k">for</span> <span class="n">workspace</span><span class="o">&gt;.</span><span class="n">cloud</span><span class="o">.</span><span class="n">databricks</span><span class="o">.</span><span class="n">com</span>
+<span class="n">token</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">here</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">token</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The profile name <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code> is important. You can specify a different name, but this will be used by default.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">host</span></code> you can copy from the browser url line (just host, without path).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">token</span></code> you can get through databricks UI: settings-&gt;developer-&gt;Access tokens-&gt;Manage.</p></li>
+</ul>
+<p>If the configuration is set up correctly, you should be able to run the following cell without any errors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>databricks.sdk.WorkspaceClient
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="aws">
+<h2>AWS<a class="headerlink" href="#aws" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">boto3</span></code> package implements an AWS SDK for Python. Obviously, you need an AWS subscription ot use it, but you can try some of its functionalities using the <code class="docutils literal notranslate"><span class="pre">moto</span></code> mocking framework.</p>
+<p>For more details check the <a class="reference internal" href="cloud/aws_sdk.html"><span class="std std-doc">AWS SDK</span></a></p>
+<hr class="docutils" />
+<p>The following cell shows the request sent to the AWS s3 service to list the buckets. The behaviour of <code class="docutils literal notranslate"><span class="pre">boto3</span></code> is mocked with <code class="docutils literal notranslate"><span class="pre">moto</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">moto</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="moto">
-<h2>Moto<a class="headerlink" href="#moto" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://docs.getmoto.org/en/latest/">Moto</a> enables the behaviour of AWS services to be mocked.</p>
-<hr class="docutils" />
-<p>The following code creates an <code class="docutils literal notranslate"><span class="pre">s3</span></code> client and attemnts to list available buckets.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">s3</span><span class="o">.</span><span class="n">list_buckets</span><span class="p">()</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unable to locate credentials
-</pre></div>
-</div>
-</div>
-</div>
-<p>The result there is an error message indicating that there are no AWS credentials have been provided.</p>
-<p>The following cell uses the same <code class="docutils literal notranslate"><span class="pre">boto3</span></code> code wrapped by the <code class="docutils literal notranslate"><span class="pre">moto</span></code> mock.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mock</span> <span class="o">=</span> <span class="n">moto</span><span class="o">.</span><span class="n">mock_aws</span><span class="p">()</span>
+<span class="n">mock</span> <span class="o">=</span> <span class="n">moto</span><span class="o">.</span><span class="n">mock_aws</span><span class="p">()</span>
 <span class="n">mock</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
 <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="s2">&quot;us-west-2&quot;</span><span class="p">)</span>
@@ -854,163 +887,66 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Buckets&#39;: [],
  &#39;Owner&#39;: {&#39;DisplayName&#39;: &#39;webfile&#39;, &#39;ID&#39;: &#39;bcaf1ffd86f41161ca5fb16fd081034f&#39;},
  &#39;ResponseMetadata&#39;: {&#39;HTTPHeaders&#39;: {&#39;content-type&#39;: &#39;application/xml&#39;,
-                                      &#39;x-amzn-requestid&#39;: &#39;tzN0rrlVDe1F4epGGP0GictXAyeEdVvaFkcoMC97KHZ3sZqlrJ8p&#39;},
+                                      &#39;x-amzn-requestid&#39;: &#39;cfpTl6w6Ppk4aeXACjlVu84OCADmC68LdAP4wXHowLYEBiKkljR9&#39;},
                       &#39;HTTPStatusCode&#39;: 200,
-                      &#39;RequestId&#39;: &#39;tzN0rrlVDe1F4epGGP0GictXAyeEdVvaFkcoMC97KHZ3sZqlrJ8p&#39;,
+                      &#39;RequestId&#39;: &#39;cfpTl6w6Ppk4aeXACjlVu84OCADmC68LdAP4wXHowLYEBiKkljR9&#39;,
                       &#39;RetryAttempts&#39;: 0}}
 </pre></div>
 </div>
 </div>
 </div>
-<p>The result the is some kind of AWS answer.</p>
+</section>
+<section id="azure">
+<h2>Azure<a class="headerlink" href="#azure" title="Link to this heading">#</a></h2>
+<p>Azure provides a set of SDK packages, each of which covers different aspec of its API. Check the available packages in the <a class="reference external" href="https://azure.github.io/azure-sdk/releases/latest/all/python.html">Azure SDK Releases</a>.</p>
+<section id="ai-model-inference">
+<h3>AI Model Inference<a class="headerlink" href="#ai-model-inference" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">azure-ai-inference</span></code> implements methods to interact with ai models awailable in Azure.</p>
+<p>You can try this package with the <a class="reference external" href="https://github.com/marketplace/models">github models playgroud</a>. Instead of using the Azure credentials you can use your GitHub credentials for the limited access.</p>
 <hr class="docutils" />
-<p>The following cell shows an example of creating a bucket (<code class="docutils literal notranslate"><span class="pre">some-bucket</span></code>), listing it and deleteting it. Moto somehow retains information about the behaviour of the bucket.</p>
+<p>The following cell sends the request to the <code class="docutils literal notranslate"><span class="pre">Llama</span></code> model.</p>
+<p><strong>Note.</strong> Setup the <code class="docutils literal notranslate"><span class="pre">GITHUB_TOKEN</span></code> to be able to access the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">moto</span><span class="o">.</span><span class="n">mock_aws</span><span class="p">():</span>
-    <span class="n">region</span> <span class="o">=</span> <span class="s2">&quot;us-west-2&quot;</span>
-    <span class="n">bucket_name</span> <span class="o">=</span> <span class="s2">&quot;some-bucket&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">azure.ai.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatCompletionsClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">azure.ai.inference.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SystemMessage</span><span class="p">,</span> <span class="n">UserMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">azure.core.credentials</span><span class="w"> </span><span class="kn">import</span> <span class="n">AzureKeyCredential</span>
 
-    <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="n">region</span><span class="p">)</span>
+<span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;https://models.github.ai/inference&quot;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;meta/Llama-4-Scout-17B-16E-Instruct&quot;</span>
+<span class="n">token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GITHUB_TOKEN&quot;</span><span class="p">]</span>
 
-    <span class="n">location</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;LocationConstraint&#39;</span><span class="p">:</span> <span class="n">region</span><span class="p">}</span>
-    <span class="n">s3</span><span class="o">.</span><span class="n">create_bucket</span><span class="p">(</span>
-        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
-        <span class="n">CreateBucketConfiguration</span><span class="o">=</span><span class="n">location</span>
-    <span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">ChatCompletionsClient</span><span class="p">(</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
+    <span class="n">credential</span><span class="o">=</span><span class="n">AzureKeyCredential</span><span class="p">(</span><span class="n">token</span><span class="p">),</span>
+<span class="p">)</span>
 
-    <span class="n">pprint</span><span class="p">(</span><span class="n">s3</span><span class="o">.</span><span class="n">list_buckets</span><span class="p">()[</span><span class="s2">&quot;Buckets&quot;</span><span class="p">])</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">complete</span><span class="p">(</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">SystemMessage</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="n">UserMessage</span><span class="p">(</span><span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">top_p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span>
+<span class="p">)</span>
 
-    <span class="n">s3</span><span class="o">.</span><span class="n">delete_bucket</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;CreationDate&#39;: datetime.datetime(2025, 10, 20, 12, 8, 15, tzinfo=tzutc()),
-  &#39;Name&#39;: &#39;some-bucket&#39;}]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The capital of France is Paris.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="services-names">
-<h2>Services names<a class="headerlink" href="#services-names" title="Link to this heading">#</a></h2>
-<p>Boto provides access to the services thorugh its abstractions: <code class="docutils literal notranslate"><span class="pre">client</span></code>, <code class="docutils literal notranslate"><span class="pre">resources</span></code> etc. You usually have to specify to which service you want to access using a special shortcut. You can get a list of shortcuts from the <code class="docutils literal notranslate"><span class="pre">boto3.session.Session().get_available_services()</span></code> method.</p>
-<p>As there is a huge amount of services awailable in AWS, the following table lists the most imporant for me with a short description:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Group</p></th>
-<th class="head"><p>Shortcut</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">s3</span></code></p></td>
-<td><p>S3 storage</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">iam</span></code></p></td>
-<td><p>Identity and Access Management - managing users and permissions</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">dynamodb</span></code></p></td>
-<td><p>Dynamo database</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">lambda</span></code></p></td>
-<td><p>Lambda functions</p></td>
-</tr>
-<tr class="row-even"><td><p>bedrock</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bedrock</span></code></p></td>
-<td><p>Core Amazon Bedrock service for managing foundation models and configurations.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bedrock-runtime</span></code></p></td>
-<td><p>Runtime APIs for invoking and generating responses from Bedrock models.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bedrock-agent</span></code></p></td>
-<td><p>Control APIs for creating and managing Bedrock AI agents and their resources.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bedrock-agent-runtime</span></code></p></td>
-<td><p>Runtime APIs for invoking Bedrock agents and retrieving their outputs.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bedrock-agentcore</span></code></p></td>
-<td><p>Platform for building and running advanced AI agents with memory and tools.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bedrock-agentcore-control</span></code></p></td>
-<td><p>Control-plane APIs for configuring AgentCore components and deployments.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bedrock-data-automation</span></code></p></td>
-<td><p>Service for automating data processing and transformation workflows.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bedrock-data-automation-runtime</span></code></p></td>
-<td><p>Runtime APIs for executing and monitoring data automation tasks.</p></td>
-</tr>
-<tr class="row-even"><td><p>openserach</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">opensearch</span></code></p></td>
-<td><p>Opensearch database.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">opensearchserverless</span></code></p></td>
-<td><p>Serverless opensearch databse.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Check the <a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/index.html">Available Services</a> page in the boto3 documentation for description of the services.</p>
-<hr class="docutils" />
-<p>The following cell gets a list of the available services prints their amount and prints a few of them.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">moto</span><span class="o">.</span><span class="n">mock_aws</span><span class="p">():</span>
-    <span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-    <span class="n">services</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get_available_services</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">services</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">services</span><span class="p">[:</span><span class="mi">20</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>413
-accessanalyzer
-account
-acm
-acm-pca
-aiops
-amp
-amplify
-amplifybackend
-amplifyuibuilder
-apigateway
-apigatewaymanagementapi
-apigatewayv2
-appconfig
-appconfigdata
-appfabric
-appflow
-appintegrations
-application-autoscaling
-application-insights
-application-signals
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-<section id="client">
-<h2>Client<a class="headerlink" href="#client" title="Link to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/clients.html">client</a> provides a low-level, 1:1 access to the AWS services.</p>
-<p>Create client through <code class="docutils literal notranslate"><span class="pre">boto3.client</span></code> method.</p>
-</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1052,6 +988,15 @@ application-signals
         <p class="prev-next-title">Change elements position</p>
       </div>
     </a>
+    <a class="right-next"
+       href="cloud/aws_sdk.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AWS SDK</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1068,9 +1013,12 @@ application-signals
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moto">Moto</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#services-names">Services names</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client">Client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws">AWS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#azure">Azure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-model-inference">AI Model Inference</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

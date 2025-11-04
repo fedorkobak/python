@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -193,7 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/keywords/yield.html">yield</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/functions.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/functions/parameters.html">Parameters</a></li>
 </ul>
 </details></li>
@@ -589,11 +589,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/ml.html">ML</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/databricks_sdk/serving.html">Serving</a></li>
-</ul>
-</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
 </ul>
@@ -625,7 +620,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/change_elements_position.html">Change elements position</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/cloud.html">Cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -791,6 +794,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asyncio">Asyncio</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiprocessing">Multiprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subprocess">Subprocess</a></li>
 </ul>
             </nav>
         </div>
@@ -805,6 +809,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="concurrency">
 <h1>Concurrency<a class="headerlink" href="#concurrency" title="Link to this heading">#</a></h1>
 <p>Concurrent execution means that multiple tasks are in progress at the same time, but not necessarily running at the exact same time.</p>
+<p>Check the offcial python reference on <a class="reference external" href="https://docs.python.org/3/library/concurrency.html">Concurrent Execution</a>.</p>
 <section id="asyncio">
 <h2>Asyncio<a class="headerlink" href="#asyncio" title="Link to this heading">#</a></h2>
 <p>Python offers tools for organizing asynchronous programming. The main components are the <code class="docutils literal notranslate"><span class="pre">async</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code> keywords, along with the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> library.</p>
@@ -900,6 +905,45 @@ fun 2|iteration 9
 </div>
 <p>As the result there are two different numbers, which showe that the second execution of the function was recognized by the system as completely different program.</p>
 </section>
+<section id="subprocess">
+<h2>Subprocess<a class="headerlink" href="#subprocess" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> package enables the spwaning of processes that are called by commands available in the parent shell. Check the <a class="reference external" href="https://docs.python.org/3/library/subprocess.html">subprocess - Subprocess management</a> page.</p>
+<p>The following table shows the most popular elements of the <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> package:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Element</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">run</span></code> function</p></td>
+<td><p>Runs the process and blocks the parent process</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Popen</span></code> function</p></td>
+<td><p>Runs the process but the python process continues to execution</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p>The following cell shows the output of the <code class="docutils literal notranslate"><span class="pre">pwd</span></code> command executed from the parent shell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;pwd&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/user/Documents/code/python/standard_library
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CompletedProcess(args=[&#39;pwd&#39;], returncode=0)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -970,6 +1014,7 @@ fun 2|iteration 9
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asyncio">Asyncio</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiprocessing">Multiprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subprocess">Subprocess</a></li>
 </ul>
   </nav></div>
 
