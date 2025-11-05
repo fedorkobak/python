@@ -320,10 +320,12 @@ parts:
     - file: ds_ml/langchain.ipynb
       sections:
       - file: ds_ml/langchain/texts_processing.ipynb
-      - file: ds_ml/langchain/tools.ipynb
+      - file: ds_ml/langchain/agents.ipynb
+        sections:
+        - file: ds_ml/langchain/agents/tools.ipynb
+        - file: ds_ml/langchain/agents/middleware.ipynb
       - file: ds_ml/langchain/langgraph.ipynb
       - file: ds_ml/langchain/langsmith.ipynb
-      - file: ds_ml/langchain/middleware.ipynb
     - file: ds_ml/spark.ipynb
       sections:
       - file: ds_ml/spark/data_sources.ipynb
