@@ -323,6 +323,7 @@ parts:
       - file: ds_ml/langchain/tools.ipynb
       - file: ds_ml/langchain/langgraph.ipynb
       - file: ds_ml/langchain/langsmith.ipynb
+      - file: ds_ml/langchain/middleware.ipynb
     - file: ds_ml/spark.ipynb
       sections:
       - file: ds_ml/spark/data_sources.ipynb
