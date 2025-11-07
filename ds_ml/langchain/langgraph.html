@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="LangSmith" href="langsmith.html" />
-    <link rel="prev" title="Tools" href="tools.html" />
+    <link rel="prev" title="Middleware" href="agents/middleware.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -577,7 +577,12 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../langchain.html">LangChain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="texts_processing.html">Texts transforming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="agents/tools.html">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agents/middleware.html">Middleware</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">LangGraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="langsmith.html">LangSmith</a></li>
 </ul>
@@ -792,10 +797,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#react-agent">React agent</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-prompt">Dynamic prompt</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-execution">Parallel execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-output">Merging output</a></li>
 </ul>
             </nav>
         </div>
@@ -809,139 +812,160 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="langgraph">
 <h1>LangGraph<a class="headerlink" href="#langgraph" title="Link to this heading">#</a></h1>
-<p>Is a framework built on top of <code class="docutils literal notranslate"><span class="pre">langchain</span></code> that makes it relatively easy to build complex agentic systems.</p>
-<p>This notebook primarily uses locally served models with Ollama. The following cell defines it in the LangChain abstractions, so you  must have Ollama available locally with the corresponding model pulled.</p>
+<p>LangGraph is a framework that allows you to define execution flows. It is designed for building agentic systems.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chat_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_chat_model</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnyMessage</span><span class="p">,</span> <span class="n">SystemMessage</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.runnables</span><span class="w"> </span><span class="kn">import</span> <span class="n">RunnableConfig</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_react_agent</span> 
-<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt.chat_agent_executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgentState</span>
-
-
-<span class="n">GLOBAL_MODEL</span> <span class="o">=</span> <span class="n">init_chat_model</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.2:1b&quot;</span><span class="p">,</span>
-    <span class="n">model_provider</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">StateGraph</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="react-agent">
-<h2>React agent<a class="headerlink" href="#react-agent" title="Link to this heading">#</a></h2>
-<p>In LangGraph has a predifined agent that can be created using the function <code class="docutils literal notranslate"><span class="pre">langgraph.prebuilt.create_react_agent</span></code>.</p>
+<section id="parallel-execution">
+<h2>Parallel execution<a class="headerlink" href="#parallel-execution" title="Link to this heading">#</a></h2>
+<p>If a node has multiple outgoing edges, the flows defined by those edges will execute in parallel.</p>
 <hr class="docutils" />
-<p>The following cell creates such an agent and displays it’s type.</p>
+<p>The following cell defines and displays this type of graph. The nodes of the graph display information about the start and end of exection, and block the flow for a while.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="n">GLOBAL_MODEL</span><span class="p">,</span>
-    <span class="n">tools</span><span class="o">=</span><span class="p">[],</span>
-    <span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;You are a helpful assistant&quot;</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="k">pass</span>
 
-<span class="nb">type</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+<span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_a</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;executing a&quot;</span><span class="p">)</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;finishing a&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_b</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;executing b&quot;</span><span class="p">)</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;execution b&quot;</span><span class="p">)</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">graph</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>langgraph.graph.state.CompiledStateGraph
-</pre></div>
+<img alt="../../_images/0feb0baa8345e44577ddbf19dcb81da9e399f6e0a5b8554a9d5c26f01843d3ee.png" src="../../_images/0feb0baa8345e44577ddbf19dcb81da9e399f6e0a5b8554a9d5c26f01843d3ee.png" />
 </div>
 </div>
-</div>
-<section id="dynamic-prompt">
-<h3>Dynamic prompt<a class="headerlink" href="#dynamic-prompt" title="Link to this heading">#</a></h3>
-<p>With a dynamic prompt, you can specify the context that will be added to the request with the custom logic. Instead of passing a hardcoded string, you should pass an object that processes the chat state of the chat and configuration and changes the behavior of the final system.</p>
-<hr class="docutils" />
-<p>The following cell defines a special function as a prompt. This function saves the state and the congig to variables awailable from the global environment. It also instructct the model to respond that the capital of France is a city, using a configuration that will be provided upon invocation.</p>
+<p>The project’s invocation is represented in the following cell:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">global_state</span><span class="p">:</span> <span class="n">AgentState</span>
-<span class="n">global_config</span><span class="p">:</span> <span class="n">RunnableConfig</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">prompt</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">RunnableConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">AnyMessage</span><span class="p">]:</span>
-    <span class="k">global</span> <span class="n">global_state</span>
-    <span class="k">global</span> <span class="n">global_config</span>
-
-    <span class="n">global_state</span> <span class="o">=</span> <span class="n">state</span>
-    <span class="n">global_config</span> <span class="o">=</span> <span class="n">config</span>
-
-    <span class="n">capital</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;configurable&quot;</span><span class="p">][</span><span class="s2">&quot;Capital&quot;</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="p">[</span><span class="n">SystemMessage</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Always answer that the capital of France is </span><span class="si">{</span><span class="n">capital</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)]</span>
-
-<span class="n">agent</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="n">GLOBAL_MODEL</span><span class="p">,</span>
-    <span class="n">tools</span><span class="o">=</span><span class="p">[],</span>
-    <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell shows the invocation that passes the additional information to the prompt.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">}]},</span>
-    <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Capital&quot;</span><span class="p">:</span> <span class="s2">&quot;Madrid&quot;</span><span class="p">}}</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">State</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;
-
-That&#39;s incorrect. The capital of France is Paris, not Madrid. Madrid is actually the capital of Spain.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>executing a
+executing b
+finishing a
+execution b
 </pre></div>
 </div>
 </div>
 </div>
-<p>The model’s output was clearly affected by “Madrid”.</p>
-<p>Consider an object that is supposed to carry information about the global state and configuration of a requiest.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">global_state</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;messages&#39;: [HumanMessage(content=&#39;What is the capital of France?&#39;, additional_kwargs={}, response_metadata={}, id=&#39;0b2d7a67-3346-4098-b003-e79704ce3d56&#39;)],
- &#39;remaining_steps&#39;: 24}
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">global_config</span><span class="p">[</span><span class="s2">&quot;configurable&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Capital&#39;: &#39;Madrid&#39;,
- &#39;__pregel_runtime&#39;: Runtime(context=None, store=None, stream_writer=&lt;function Pregel.stream.&lt;locals&gt;.stream_writer at 0x7a3a06f06ac0&gt;, previous=None),
- &#39;__pregel_task_id&#39;: &#39;acd73e3b-3444-b0a8-6e81-8fb8f15dd876&#39;,
- &#39;__pregel_send&#39;: &lt;function deque.extend(iterable, /)&gt;,
- &#39;__pregel_read&#39;: functools.partial(&lt;function local_read at 0x7a3a0703ce00&gt;, PregelScratchpad(step=1, stop=25, call_counter=&lt;langgraph.pregel._algo.LazyAtomicCounter object at 0x7a3a06f39d80&gt;, interrupt_counter=&lt;langgraph.pregel._algo.LazyAtomicCounter object at 0x7a3a06f392a0&gt;, get_null_resume=&lt;function _scratchpad.&lt;locals&gt;.get_null_resume at 0x7a3a06f076a0&gt;, resume=[], subgraph_counter=&lt;langgraph.pregel._algo.LazyAtomicCounter object at 0x7a3a06f393c0&gt;), {&#39;messages&#39;: &lt;langgraph.channels.binop.BinaryOperatorAggregate object at 0x7a3a06f8cf40&gt;, &#39;__start__&#39;: &lt;langgraph.channels.ephemeral_value.EphemeralValue object at 0x7a3a06f8f580&gt;, &#39;__pregel_tasks&#39;: &lt;langgraph.channels.topic.Topic object at 0x7a3a06f8d280&gt;, &#39;branch:to:agent&#39;: &lt;langgraph.channels.ephemeral_value.EphemeralValue object at 0x7a3a06f8fc80&gt;}, {&#39;remaining_steps&#39;: &lt;class &#39;langgraph.managed.is_last_step.RemainingStepsManager&#39;&gt;}, PregelTaskWrites(path=(&#39;__pregel_pull&#39;, &#39;agent&#39;), name=&#39;agent&#39;, writes=deque([(&#39;messages&#39;, [AIMessage(content=&quot;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;\n\nThat&#39;s incorrect. The capital of France is Paris, not Madrid. Madrid is actually the capital of Spain.&quot;, additional_kwargs={}, response_metadata={&#39;model&#39;: &#39;llama3.2:1b&#39;, &#39;created_at&#39;: &#39;2025-09-26T08:00:13.935839621Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 1422177600, &#39;load_duration&#39;: 107996065, &#39;prompt_eval_count&#39;: 25, &#39;prompt_eval_duration&#39;: 54616254, &#39;eval_count&#39;: 27, &#39;eval_duration&#39;: 1258585721, &#39;model_name&#39;: &#39;llama3.2:1b&#39;}, id=&#39;run--544f64ba-98f1-46a2-a354-58d0bdce138c-0&#39;, usage_metadata={&#39;input_tokens&#39;: 25, &#39;output_tokens&#39;: 27, &#39;total_tokens&#39;: 52})])]), triggers=(&#39;branch:to:agent&#39;,))),
- &#39;__pregel_checkpointer&#39;: None,
- &#39;checkpoint_map&#39;: {&#39;&#39;: &#39;1f09aaed-44a0-6411-8000-de45efbeb1cf&#39;},
- &#39;checkpoint_id&#39;: None,
- &#39;checkpoint_ns&#39;: &#39;agent:acd73e3b-3444-b0a8-6e81-8fb8f15dd876&#39;,
- &#39;__pregel_scratchpad&#39;: PregelScratchpad(step=1, stop=25, call_counter=&lt;langgraph.pregel._algo.LazyAtomicCounter object at 0x7a3a06f39d80&gt;, interrupt_counter=&lt;langgraph.pregel._algo.LazyAtomicCounter object at 0x7a3a06f392a0&gt;, get_null_resume=&lt;function _scratchpad.&lt;locals&gt;.get_null_resume at 0x7a3a06f076a0&gt;, resume=[], subgraph_counter=&lt;langgraph.pregel._algo.LazyAtomicCounter object at 0x7a3a06f393c0&gt;),
- &#39;__pregel_call&#39;: functools.partial(&lt;function _call at 0x7a3a070762a0&gt;, &lt;weakref at 0x7a3a06f64540; dead&gt;, retry_policy=None, futures=&lt;weakref at 0x7a3a06f64450; dead&gt;, schedule_task=&lt;bound method SyncPregelLoop.accept_push of &lt;langgraph.pregel._loop.SyncPregelLoop object at 0x7a3a070a3c50&gt;&gt;, submit=&lt;weakref at 0x7a3a06f3e850; to &#39;langgraph.pregel._executor.BackgroundExecutor&#39; at 0x7a3a070a3d90&gt;)}
-</pre></div>
-</div>
-</div>
-</div>
-<p>You can use all that information in your programming logic to provide the model with the necessary context.</p>
+<p>It follows from the result that flows was executed in parallel.</p>
 </section>
+<section id="merging-output">
+<h2>Merging output<a class="headerlink" href="#merging-output" title="Link to this heading">#</a></h2>
+<p>If two graph flows join at the same node and both return a value, there will be a conflict. You must specify a strategy for merging the outputs using a <strong>reducer function</strong>.</p>
+<p>THe <strong>reducer function</strong> can be defined as metatdata of the <code class="docutils literal notranslate"><span class="pre">typing.Annotated</span></code> for the specific attribute. This function will be applied if the outputs from those nodes need to be processed in some way. The most common way is to use the <code class="docutils literal notranslate"><span class="pre">operator.add</span></code> function, which is equivalent to simply apply the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator.</p>
+<hr class="docutils" />
+<p>The following cell shows a regular graph with two flows join at the <code class="docutils literal notranslate"><span class="pre">END</span></code> node, and both return some information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">out</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_a</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="s2">&quot;A output&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_b</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="s2">&quot;B output&quot;</span><span class="p">)</span>
+
+<span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">graph</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0feb0baa8345e44577ddbf19dcb81da9e399f6e0a5b8554a9d5c26f01843d3ee.png" src="../../_images/0feb0baa8345e44577ddbf19dcb81da9e399f6e0a5b8554a9d5c26f01843d3ee.png" />
+</div>
+</div>
+<p>Executing such a graph results in the error displayed in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">State</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="s2">&quot;start&quot;</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>InvalidUpdateError : At key &#39;out&#39;: Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell shows the definition of the state that applies <code class="docutils literal notranslate"><span class="pre">operator.add</span></code> when there are two outputs in a node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is an example of invoking the same graph with an updated state schema.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">node_a</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="s2">&quot;A output&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_b</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="s2">&quot;B output&quot;</span><span class="p">)</span>
+
+<span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">State</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;out&#39;: &#39;valueA outputB output&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the outputs of the different nodes were simply concatenated.</p>
 </section>
 </section>
 
@@ -976,12 +1000,12 @@ That&#39;s incorrect. The capital of France is Paris, not Madrid. Madrid is actu
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="tools.html"
+       href="agents/middleware.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tools</p>
+        <p class="prev-next-title">Middleware</p>
       </div>
     </a>
     <a class="right-next"
@@ -1009,10 +1033,8 @@ That&#39;s incorrect. The capital of France is Paris, not Madrid. Madrid is actu
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#react-agent">React agent</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-prompt">Dynamic prompt</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-execution">Parallel execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-output">Merging output</a></li>
 </ul>
   </nav></div>
 

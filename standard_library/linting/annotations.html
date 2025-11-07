@@ -577,7 +577,12 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/tools.html">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/langgraph.html">LangGraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/langsmith.html">LangSmith</a></li>
 </ul>
@@ -965,7 +970,7 @@ Found 1 error in 1 file (checked 1 source file)
 <td><p>Function never returns</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">fail()</span> <span class="pre">-&gt;</span> <span class="pre">NoReturn:</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Annotated</strong></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://typing.python.org/en/latest/spec/qualifiers.html#annotated"><strong>Annotated</strong></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">typing.Annotated[T,</span> <span class="pre">metadata]</span></code></p></td>
 <td><p>Attach metadata to a type</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">x:</span> <span class="pre">Annotated[int,</span> <span class="pre">&quot;positive&quot;]</span></code></p></td>
@@ -1000,7 +1005,7 @@ Found 1 error in 1 file (checked 1 source file)
 <td><p>Marks values as constants</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">MAX_SIZE:</span> <span class="pre">Final[int]</span> <span class="pre">=</span> <span class="pre">100</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>TypedDict</strong></p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://typing.python.org/en/latest/spec/typeddict.html"><strong>TypedDict</strong></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Movie(typing.TypedDict):</span></code></p></td>
 <td><p>Dict with specific key types</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">title:</span> <span class="pre">str;</span> <span class="pre">year:</span> <span class="pre">int</span></code></p></td>

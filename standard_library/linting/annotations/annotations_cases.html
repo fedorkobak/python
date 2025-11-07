@@ -577,7 +577,12 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ds_ml/langchain/agents/tools.html">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/langgraph.html">LangGraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/langsmith.html">LangSmith</a></li>
 </ul>
@@ -802,6 +807,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotated">Annotated</a></li>
 </ul>
             </nav>
         </div>
@@ -1171,6 +1177,93 @@ Found 1 error in 1 file (checked 1 source file)
 </div>
 </section>
 </section>
+<section id="annotated">
+<h2>Annotated<a class="headerlink" href="#annotated" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">typing.Annotated</span></code> allows the specification of metadata for a variable. This metadata is typically used by frameworks to build a specific patterns that allow to specify how frame work have to deal with the variable.</p>
+<p>The following tools are usfull when working with Annotated:</p>
+<ul class="simple">
+<li><p>Define the metadate with <code class="docutils literal notranslate"><span class="pre">Annotated[&lt;type&gt;,</span> <span class="pre">&lt;metadata1&gt;,</span> <span class="pre">&lt;metadata2&gt;,</span> <span class="pre">...]</span></code>.</p></li>
+<li><p>To load the annotations for the object with metadata use <code class="docutils literal notranslate"><span class="pre">typing.get_type_hints(&lt;object&gt;,</span> <span class="pre">include_extras=True)</span></code>.</p></li>
+<li><p>To access the metadata use, the <code class="docutils literal notranslate"><span class="pre">__metadata__</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">typing.Annotated</span></code> object.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following code defines the <code class="docutils literal notranslate"><span class="pre">Example</span></code> dataclass with <code class="docutils literal notranslate"><span class="pre">x</span></code> attibute to have <code class="docutils literal notranslate"><span class="pre">&quot;positive&quot;</span></code> as metadata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">get_type_hints</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Example</span><span class="p">():</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;positive&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell shows the output of the <code class="docutils literal notranslate"><span class="pre">typing.get_type_hints</span></code> for the <code class="docutils literal notranslate"><span class="pre">Example</span></code> class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hints</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">include_extras</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">hints</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: typing.Annotated[int, &#39;positive&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+<p>And teh way to access exactly metadata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hints</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">__metadata__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;positive&#39;,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consider how metadata can be used. The <code class="docutils literal notranslate"><span class="pre">process</span></code> function checks whether the <code class="docutils literal notranslate"><span class="pre">x</span></code> attribute of the passed object has been annotated as positive.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">inp</span><span class="p">):</span>
+    <span class="n">hints</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">inp</span><span class="p">),</span> <span class="n">include_extras</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hints</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">__metadata__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;positive&quot;</span> <span class="ow">and</span> <span class="n">inp</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Therefore, the warning will be printed for the <code class="docutils literal notranslate"><span class="pre">Example</span></code> instance initialised with a negative <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">process</span><span class="p">(</span><span class="n">Example</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning
+</pre></div>
+</div>
+</div>
+</div>
+<p>But, if the class where <code class="docutils literal notranslate"><span class="pre">x</span></code> annotated with any other value, everything will be fine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Example2</span><span class="p">():</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;any&quot;</span><span class="p">]</span>
+
+<span class="n">process</span><span class="p">(</span><span class="n">Example2</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1247,6 +1340,7 @@ Found 1 error in 1 file (checked 1 source file)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotated">Annotated</a></li>
 </ul>
   </nav></div>
 
