@@ -97,6 +97,8 @@ parts:
       sections:
       - file: standard_library/linting/annotations.ipynb
       - file: standard_library/linting/types.ipynb
+        sections:
+        - file: standard_library/linting/types/generics.ipynb
       - file: standard_library/linting/tools.ipynb
     - file: standard_library/re.ipynb
       sections:
