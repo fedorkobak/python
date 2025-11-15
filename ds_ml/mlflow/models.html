@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -288,8 +288,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/linting/annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/linting/types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/linting/types/generics.html">Generics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../standard_library/linting/tools.html">Tools</a></li>
@@ -578,6 +579,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../langchain/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../langchain/LLMs.html">LLMs</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/agents/middleware.html">Middleware</a></li>
@@ -802,6 +804,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning">Versioning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alias">Alias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latest">Latest</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signature">Signature</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-defition">Manual defition</a></li>
 </ul>
@@ -844,6 +851,7 @@ document.write(`
 <li><p>The funciton was wrapped in the <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc.utils.pyfunc</span></code> decorator.</p></li>
 <li><p>The class is an ancestor of the <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc.PythonModel</span></code>.</p></li>
 </ul>
+<p>Check more in <a class="reference external" href="https://mlflow.org/docs/latest/api_reference/python_api/mlflow.pyfunc.html"><code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> API reference.</p>
 <section id="function">
 <h3>Function<a class="headerlink" href="#function" title="Link to this heading">#</a></h3>
 <hr class="docutils" />
@@ -851,8 +859,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">pyfunc</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">example_model</span><span class="p">(</span><span class="n">model_intput</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">model_intput</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_model</span><span class="p">(</span><span class="n">model_input</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">model_input</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
@@ -865,9 +873,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/user/.virtualenvironments/python/lib/python3.13/site-packages/mlflow/pyfunc/utils/data_validation.py:155: FutureWarning: Model&#39;s `predict` method contains invalid parameters: {&#39;model_intput&#39;}. Only the following parameter names are allowed: context, model_input, and params. Note that invalid parameters will no longer be permitted in future versions.
-  param_names = _check_func_signature(func, &quot;predict&quot;)
-Successfully registered model &#39;pyfunc_model&#39;.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully registered model &#39;pyfunc_model&#39;.
 Created version &#39;1&#39; of model &#39;pyfunc_model&#39;.
 </pre></div>
 </div>
@@ -896,9 +902,11 @@ Created version &#39;1&#39; of model &#39;pyfunc_model&#39;.
 <p>The following cell shows the class definition of the class and it’s logging to the <code class="docutils literal notranslate"><span class="pre">mlflow</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">PythonModel</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.pyfunc.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonModel</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">PythonModel</span><span class="p">):</span>
     <span class="n">test</span> <span class="o">=</span> <span class="s2">&quot;I&#39;m field you want to acess!!!&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">model_input</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_input</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]):</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">model_input</span><span class="p">]</span>
 
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
@@ -928,6 +936,132 @@ Created version &#39;1&#39; of model &#39;pyclass_model&#39;.
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4.0, 8.0]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">#</a></h2>
+<p>When you register a model realisation under an existing registered model, MLFlow automatically saves it as the new version of this model assignes it a corresponding version number. To manage the model versions you can attach to a particular model some <strong>alias</strong>, the name that refers to a specific model version, so you can esily access the model by alias. You can acces the specific version of the model by using uri formatted like <code class="docutils literal notranslate"><span class="pre">models:/{registered</span> <span class="pre">model</span> <span class="pre">name}/{name</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">version}</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell creates registers two versions of the <code class="docutils literal notranslate"><span class="pre">&quot;versioning_example&quot;</span></code> model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">pyfunc</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">model1</span><span class="p">(</span><span class="n">model_input</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;first model&quot;</span> 
+
+<span class="nd">@mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">pyfunc</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">model2</span><span class="p">(</span><span class="n">model_input</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;second model&quot;</span>
+
+<span class="n">registered_model_name</span> <span class="o">=</span> <span class="s2">&quot;versioning_example&quot;</span>
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+    <span class="n">python_model</span><span class="o">=</span><span class="n">model1</span><span class="p">,</span>
+    <span class="n">registered_model_name</span><span class="o">=</span><span class="n">registered_model_name</span><span class="p">,</span>
+    <span class="n">pip_requirements</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+    <span class="n">python_model</span><span class="o">=</span><span class="n">model2</span><span class="p">,</span>
+    <span class="n">registered_model_name</span><span class="o">=</span><span class="n">registered_model_name</span><span class="p">,</span>
+    <span class="n">pip_requirements</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully registered model &#39;versioning_example&#39;.
+Created version &#39;1&#39; of model &#39;versioning_example&#39;.
+Registered model &#39;versioning_example&#39; already exists. Creating a new version of this model...
+Created version &#39;2&#39; of model &#39;versioning_example&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The log contains messages indicating that two versions of the model are stored.</p>
+<p>The next code invokes different versions of the model. There are versions 1 and 2 at the last section of the path.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;models:/</span><span class="si">{</span><span class="n">registered_model_name</span><span class="si">}</span><span class="s2">/1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;first model&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;models:/</span><span class="si">{</span><span class="n">registered_model_name</span><span class="si">}</span><span class="s2">/2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;second model&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The models have the output from the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method as defined.</p>
+<section id="alias">
+<h3>Alias<a class="headerlink" href="#alias" title="Link to this heading">#</a></h3>
+<p>Aliases are a method of querying the correct model. You can attach an alias to a specific version and reset the version the alias is attached anytime. Therefore, instead of hardcoding the version of the model in the production environment and changing it every time another version of the model has to be used for a particular deployment, you can simply attach an alias to the relevant version.</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">mlflow.MlflowClient().set_registeted_model_alias</span></code> to attach an alias to a specified version of the model.</p></li>
+<li><p>You can access the version with a specific alias by using the following uri <code class="docutils literal notranslate"><span class="pre">models:/{registed</span> <span class="pre">model</span> <span class="pre">name}&#64;{alias</span> <span class="pre">name}}]</span></code>.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell is attaches <code class="docutils literal notranslate"><span class="pre">MyAlias</span></code> to the fist version of the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">MlflowClient</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">MlflowClient</span><span class="p">()</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">set_registered_model_alias</span><span class="p">(</span>
+    <span class="n">registered_model_name</span><span class="p">,</span> <span class="s2">&quot;MyAlias&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first registered model is loaded from the URI ending with <code class="docutils literal notranslate"><span class="pre">&#64;MyAlias</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;models:/</span><span class="si">{</span><span class="n">registered_model_name</span><span class="si">}</span><span class="s2">@MyAlias&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;first model&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="latest">
+<h3>Latest<a class="headerlink" href="#latest" title="Link to this heading">#</a></h3>
+<p>Invoking the URL with <code class="docutils literal notranslate"><span class="pre">models:/{registered</span> <span class="pre">model</span> <span class="pre">name}/latest</span></code> will return the latest registered version of the model.</p>
+<hr class="docutils" />
+<p>The following cell loads the model with <code class="docutils literal notranslate"><span class="pre">latest</span></code> URI. It returns the model whose outputs correspond to the second registered model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;models:/</span><span class="si">{</span><span class="n">registered_model_name</span><span class="si">}</span><span class="s2">/latest&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;second model&#39;
 </pre></div>
 </div>
 </div>
@@ -1111,8 +1245,8 @@ params:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">pyfunc</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">example_model</span><span class="p">(</span><span class="n">model_intput</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">model_intput</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_model</span><span class="p">(</span><span class="n">model_input</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">model_input</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
@@ -1125,9 +1259,7 @@ params:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/user/.virtualenvironments/python/lib/python3.13/site-packages/mlflow/pyfunc/utils/data_validation.py:155: FutureWarning: Model&#39;s `predict` method contains invalid parameters: {&#39;model_intput&#39;}. Only the following parameter names are allowed: context, model_input, and params. Note that invalid parameters will no longer be permitted in future versions.
-  param_names = _check_func_signature(func, &quot;predict&quot;)
-Successfully registered model &#39;file_example&#39;.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully registered model &#39;file_example&#39;.
 Created version &#39;1&#39; of model &#39;file_example&#39;.
 </pre></div>
 </div>
@@ -1241,6 +1373,11 @@ utc_time_created: &#39;2025-10-27 06:35:16.437546&#39;
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyfunc">PyFunc</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function">Function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning">Versioning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alias">Alias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latest">Latest</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signature">Signature</a><ul class="nav section-nav flex-column">

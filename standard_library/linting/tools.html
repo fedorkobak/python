@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="re" href="../re.html" />
-    <link rel="prev" title="Annotation cases" href="annotations/annotations_cases.html" />
+    <link rel="prev" title="Generics" href="types/generics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -288,8 +288,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../linting.html">Linting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="annotations/annotations_cases.html">Annotation cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="types/generics.html">Generics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Tools</a></li>
@@ -578,6 +579,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/LLMs.html">LLMs</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
@@ -802,6 +804,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-syntax">Wrong syntax</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyright">Pyright</a></li>
 </ul>
             </nav>
         </div>
@@ -833,7 +836,7 @@ document.write(`
 <p>Here is an example of the <code class="docutils literal notranslate"><span class="pre">reveal_type</span></code> function, which allows you to understand how mypy interprets the type of a given name.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_reveal_type</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/mypy_reveal_type.py
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="n">reveal_type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
 </pre></div>
@@ -847,7 +850,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">mypy</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_reveal_type</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/mypy_reveal_type.py
 </pre></div>
 </div>
 </div>
@@ -861,7 +864,7 @@ Success: no issues found in 1 source file
 <p>And an example of <code class="docutils literal notranslate"><span class="pre">reveal_locals</span></code>, which prints out information about all the variables in the namespace.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_reveal_locals</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/mypy_reveal_locals.py
 <span class="n">my_float</span> <span class="o">=</span> <span class="mf">10.</span>
 <span class="n">my_int</span> <span class="o">=</span> <span class="mi">10</span>
 
@@ -877,7 +880,7 @@ Success: no issues found in 1 source file
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">mypy</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_reveal_locals</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/mypy_reveal_locals.py
 </pre></div>
 </div>
 </div>
@@ -898,7 +901,7 @@ Success: no issues found in 1 source file
 <p>Here is an example where we are trying to annotate the dictionary, but instead of annotating key and value types, we have only annotated one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_wrong_syntax</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/mypy_wrong_syntax.py
 <span class="n">my_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -912,7 +915,7 @@ Success: no issues found in 1 source file
 <p>If you try to run it just with the python interpreter, it works fine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python3</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_wrong_syntax</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>/tmp/mypy_wrong_syntax.py
 </pre></div>
 </div>
 </div>
@@ -920,7 +923,7 @@ Success: no issues found in 1 source file
 <p>But <code class="docutils literal notranslate"><span class="pre">mypy</span></code> raises corresponding error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">mypy</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">mypy_wrong_syntax</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/mypy_wrong_syntax.py
 </pre></div>
 </div>
 </div>
@@ -932,6 +935,41 @@ Found 1 error in 1 file (checked 1 source file)
 </div>
 </div>
 </section>
+</section>
+<section id="pyright">
+<h2>Pyright<a class="headerlink" href="#pyright" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pyright</span></code> is a static code analyzer.</p>
+<hr class="docutils" />
+<p>The following cell creates a file containing a type mismatch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/value.py
+<span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/value.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>Take a look at the output of the <code class="docutils literal notranslate"><span class="pre">pyright</span></code> for this file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pyright<span class="w"> </span>/tmp/value.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/value.py
+  /tmp/value.py:<span class=" -Color -Color-Yellow">1</span>:<span class=" -Color -Color-Yellow">10</span> - <span class=" -Color -Color-Red">error</span>: Type &quot;Literal[&#39;hello&#39;]&quot; is not assignable to declared type &quot;int&quot;
+    &quot;Literal[&#39;hello&#39;]&quot; is not assignable to &quot;int&quot; (reportAssignmentType)
+1 error, 0 warnings, 0 informations
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -966,12 +1004,12 @@ Found 1 error in 1 file (checked 1 source file)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="annotations/annotations_cases.html"
+       href="types/generics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Annotation cases</p>
+        <p class="prev-next-title">Generics</p>
       </div>
     </a>
     <a class="right-next"
@@ -1004,6 +1042,7 @@ Found 1 error in 1 file (checked 1 source file)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-syntax">Wrong syntax</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyright">Pyright</a></li>
 </ul>
   </nav></div>
 

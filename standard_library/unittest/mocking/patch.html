@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -288,8 +288,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../linting/annotations/annotations_cases.html">Annotation cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linting/annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../linting/types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linting/types/generics.html">Generics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linting/tools.html">Tools</a></li>
@@ -578,6 +579,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/LLMs.html">LLMs</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../ds_ml/langchain/agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
@@ -815,7 +817,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create">Create</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new">New</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-object">Replace object</a></li>
 </ul>
             </nav>
         </div>
@@ -1324,9 +1326,9 @@ method2 class decoration patching
 </div>
 </div>
 </section>
-<section id="new">
-<h2>New<a class="headerlink" href="#new" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">patch</span></code> and <code class="docutils literal notranslate"><span class="pre">patch.object</span></code> can set a specific value for the mocked object - using the <code class="docutils literal notranslate"><span class="pre">new</span></code> parameter. It’s useful to test cases where some attributes of the mocked object take specific values.</p>
+<section id="replace-object">
+<h2>Replace object<a class="headerlink" href="#replace-object" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">patch</span></code> and <code class="docutils literal notranslate"><span class="pre">patch.object</span></code> can set a specific value for the mocked object - using the <code class="docutils literal notranslate"><span class="pre">new</span></code> parameter. It’s useful to test cases where some attributes of the mocked object take specific values.</p>
 <p><strong>Note</strong> The argument passed to the funciton by the decorator and the tartet of the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement now will be the value specified in <code class="docutils literal notranslate"><span class="pre">new</span></code>, not the <code class="docutils literal notranslate"><span class="pre">mock</span></code> object.</p>
 <hr class="docutils" />
 <p>The following cell creates a <code class="docutils literal notranslate"><span class="pre">MyExample</span></code> class with a <code class="docutils literal notranslate"><span class="pre">value</span></code> attribute that is supposed to mock.</p>
@@ -1444,7 +1446,7 @@ handler: hello from mock
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create">Create</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new">New</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-object">Replace object</a></li>
 </ul>
   </nav></div>
 

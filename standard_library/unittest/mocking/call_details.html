@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -288,8 +288,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../linting/annotations/annotations_cases.html">Annotation cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linting/annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../linting/types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linting/types/generics.html">Generics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linting/tools.html">Tools</a></li>
@@ -578,6 +579,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/langchain/LLMs.html">LLMs</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../ds_ml/langchain/agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
@@ -838,19 +840,19 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Tests will mock <code class="docutils literal notranslate"><span class="pre">sum</span></code> funtion. In both tests to <code class="docutils literal notranslate"><span class="pre">sum_wrapper</span></code> was passed <code class="docutils literal notranslate"><span class="pre">[1,2,3]</span></code> list. But in second case we use <code class="docutils literal notranslate"><span class="pre">[1,2,5]</span></code> in <code class="docutils literal notranslate"><span class="pre">assert_called_with</span></code>.</p>
+<p>Tests will mock <code class="docutils literal notranslate"><span class="pre">sum</span></code> funtion. In both tests to <code class="docutils literal notranslate"><span class="pre">sum_wrapper</span></code> was passed <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> list. But in second case we use <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">5]</span></code> in <code class="docutils literal notranslate"><span class="pre">assert_called_with</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestCalledWith</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;__main__.sum&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mocked_sum</span><span class="p">:</span>
-            <span class="n">sum_wrapper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-            <span class="n">mocked_sum</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">sum_wrapper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+            <span class="n">mocked_sum</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;__main__.sum&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mocked_sum</span><span class="p">:</span>
-            <span class="n">sum_wrapper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-            <span class="n">mocked_sum</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>      
+            <span class="n">sum_wrapper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+            <span class="n">mocked_sum</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>      
 
 <span class="n">ans</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">],</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">del</span> <span class="n">TestCalledWith</span>
@@ -895,7 +897,7 @@ FAILED (failures=1)
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;__main__.sum_wrapper&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sw</span><span class="p">:</span>
-    <span class="n">sum_wrapper</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]))</span>
+    <span class="n">sum_wrapper</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
     <span class="n">call_args</span> <span class="o">=</span> <span class="n">sw</span><span class="o">.</span><span class="n">call_args</span>
 
 <span class="n">call_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -917,11 +919,11 @@ FAILED (failures=1)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sum_wrapper</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
-    <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-    <span class="nb">sum</span><span class="p">(</span><span class="n">iterable</span><span class="o">=</span><span class="p">(</span><span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="nb">sum</span><span class="p">(</span><span class="n">iterable</span><span class="o">=</span><span class="p">(</span><span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
 
 <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;__main__.sum&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mocked_sum</span><span class="p">:</span>
-    <span class="n">sum_wrapper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">sum_wrapper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">mocked_sum</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">mocked_sum</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">mocked_sum</span><span class="o">.</span><span class="n">mock_calls</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>

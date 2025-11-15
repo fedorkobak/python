@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -288,8 +288,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/linting/annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/linting/types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/linting/types/generics.html">Generics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../standard_library/linting/tools.html">Tools</a></li>
@@ -578,6 +579,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../langchain.html">LangChain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LLMs.html">LLMs</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="agents/middleware.html">Middleware</a></li>
@@ -797,8 +799,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state">State</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-execution">Parallel execution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-output">Merging output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-edges">Conditional edges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-defition">Alternative defition</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -816,12 +823,62 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">Literal</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">langgraph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">StateGraph</span>
 </pre></div>
 </div>
 </div>
 </div>
+<section id="state">
+<h2>State<a class="headerlink" href="#state" title="Link to this heading">#</a></h2>
+<p>The <strong>state</strong> is the object that moves through the entire graph. It provides the input information to the nodes and passes the information from the current node to the next one.</p>
+<p>The schema of the <code class="docutils literal notranslate"><span class="pre">State</span></code> must be provided when defining of the <code class="docutils literal notranslate"><span class="pre">langgraph.graph.StateGraph</span></code>. Supported ways to define a schema include: <code class="docutils literal notranslate"><span class="pre">typing.TypedDict</span></code>, <code class="docutils literal notranslate"><span class="pre">dataclasses.dataclass</span></code>, or <code class="docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code>.</p>
+<hr class="docutils" />
+<p>Consider a case in which the state is defined as a <code class="docutils literal notranslate"><span class="pre">dataclass</span></code>. The following cell creates a graph that processes a <code class="docutils literal notranslate"><span class="pre">State</span></code> dataclass instance and increments the <code class="docutils literal notranslate"><span class="pre">inp</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">:</span>
+    <span class="n">inp</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_node</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">inp</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">state</span>
+
+<span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;my&quot;</span><span class="p">,</span> <span class="n">my_node</span><span class="p">)</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;my&quot;</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;my&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell invokes the graph for <code class="docutils literal notranslate"><span class="pre">State(inp=4)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">State</span><span class="p">(</span><span class="n">inp</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State(inp=4)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;inp&#39;: 5}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="parallel-execution">
 <h2>Parallel execution<a class="headerlink" href="#parallel-execution" title="Link to this heading">#</a></h2>
 <p>If a node has multiple outgoing edges, the flows defined by those edges will execute in parallel.</p>
@@ -967,6 +1024,100 @@ For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/erro
 </div>
 <p>As a result, the outputs of the different nodes were simply concatenated.</p>
 </section>
+<section id="conditional-edges">
+<h2>Conditional edges<a class="headerlink" href="#conditional-edges" title="Link to this heading">#</a></h2>
+<p>Conditional edges allow you to define a graph that will go one way or another depending on the conditions.</p>
+<p>You can define the conditional node using:</p>
+<ul class="simple">
+<li><p>Adding the node that returns <code class="docutils literal notranslate"><span class="pre">langgraph.types.Command</span></code> with <code class="docutils literal notranslate"><span class="pre">goto</span></code> specifying the name of the next node.</p></li>
+<li><p>Adding the edge with <code class="docutils literal notranslate"><span class="pre">add_conditional_edge</span></code> method of the graph builder.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell defines the conditional node that directs the execution to either the <code class="docutils literal notranslate"><span class="pre">END</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> node, depending on the corresponding value of the <code class="docutils literal notranslate"><span class="pre">state[&quot;goto&quot;]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">goto</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;__end__&quot;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_a</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a node is invoked&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">conditional_node</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Command</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;__end__&quot;</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="n">Command</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">goto</span><span class="o">=</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;goto&quot;</span><span class="p">])</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;conditional&quot;</span><span class="p">,</span> <span class="n">conditional_node</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>
+
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;conditional&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">graph</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cd80c762837779f18d1cd0e3417e9d8d2f2ef3013203b6d536b8a555eb52bf05.png" src="../../_images/cd80c762837779f18d1cd0e3417e9d8d2f2ef3013203b6d536b8a555eb52bf05.png" />
+</div>
+</div>
+<p>The following cell invokes the graph with to be executed with the <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">State</span><span class="p">(</span><span class="n">goto</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a node is invoked
+</pre></div>
+</div>
+</div>
+</div>
+<p>And alternatively routing directly to the <code class="docutils literal notranslate"><span class="pre">__end__</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">State</span><span class="p">(</span><span class="n">goto</span><span class="o">=</span><span class="s2">&quot;__end__&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="alternative-defition">
+<h3>Alternative defition<a class="headerlink" href="#alternative-defition" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">add_conditional_edges</span></code> method of the builder, takes the method that must return the names of the possible subsequent nodes.</p>
+<hr class="docutils" />
+<p>The following code illustrates how to create a graph with conditional edge using the <code class="docutils literal notranslate"><span class="pre">add_conditional_edges</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">goto</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;__end__&quot;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_a</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a node is invoked&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">conditional_edge</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;__end__&quot;</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;goto&quot;</span><span class="p">]</span>
+
+<span class="p">(</span>
+    <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>
+
+    <span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="n">conditional_edge</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4b9f91485ed398e31fe66fc3f2c3ce90e8788666166034e1f210cb2613f49a40.png" src="../../_images/4b9f91485ed398e31fe66fc3f2c3ce90e8788666166034e1f210cb2613f49a40.png" />
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1033,8 +1184,13 @@ For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/erro
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state">State</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-execution">Parallel execution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-output">Merging output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-edges">Conditional edges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-defition">Alternative defition</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

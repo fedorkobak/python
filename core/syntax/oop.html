@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -288,8 +288,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/linting/annotations.html">Annotations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../standard_library/linting/annotations/annotations_cases.html">Annotation cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/linting/annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/linting/types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/linting/types/generics.html">Generics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../standard_library/linting/tools.html">Tools</a></li>
@@ -578,6 +579,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/LLMs.html">LLMs</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
@@ -806,6 +808,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstractions">Abstractions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metaclass">Metaclass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-defition">Class defition</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1045,7 +1051,7 @@ The electric car is charging.
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Object management</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__new__(cls)</span></code></p></td>
+<td><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__new__"><code class="docutils literal notranslate"><span class="pre">__new__(cls)</span></code></a></p></td>
 <td><p>Static method called to create a new instance</p></td>
 </tr>
 <tr class="row-odd"><td><p></p></td>
@@ -1181,7 +1187,7 @@ The electric car is charging.
 <td><p>Will be called each time the object is passed to the <code class="docutils literal notranslate"><span class="pre">next</span></code> build in function.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Customizing class creation</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">classmethod</span> <span class="pre">__init_subclass__(cls)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__init_subclass__(cls)</span></code></p></td>
 <td><p>This method is called when ever the containing class is subclassed.</p></td>
 </tr>
 </tbody>
@@ -1496,6 +1502,129 @@ Check out more about static methods in the <a class="reference external" href="h
 </div>
 </div>
 </section>
+<section id="metaclass">
+<h2>Metaclass<a class="headerlink" href="#metaclass" title="Link to this heading">#</a></h2>
+<p>Metaclass is a next level of abstraction above classes. Every <strong>class is an instance the some metaclass</strong>: by default metaclass is <code class="docutils literal notranslate"><span class="pre">type</span></code>. By specifying a custom metaclass you can change the behaviour related to creation of the class and its instances.</p>
+<p>You can create a metaclass by simply inheriting from the <code class="docutils literal notranslate"><span class="pre">type</span></code>. To define a class - instance of a metaclass, you have to specify it in <code class="docutils literal notranslate"><span class="pre">metaclass</span></code> argument during class defition.</p>
+<p>The Dunder methods of the <code class="docutils literal notranslate"><span class="pre">type</span></code> and, consiquently, of all metaclasses have a slightly different meanings and may accept arguments tha differ from those of regular classes.</p>
+<hr class="docutils" />
+<p>The following cell defines the metaclass <code class="docutils literal notranslate"><span class="pre">Meta</span></code>. Any class that is instance of <code class="docutils literal notranslate"><span class="pre">Meta</span></code> will have different behaviour when created (the metaclass’s <code class="docutils literal notranslate"><span class="pre">__init__</span></code> invoked) and when instances are created (which is actually calling the classes: <code class="docutils literal notranslate"><span class="pre">__call__</span></code> dunder of the metaclass).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Meta</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating new class </span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="n">new_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Meta</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Class </span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2"> new instance </span><span class="si">{</span><span class="n">new_instance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_instance</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell defines <code class="docutils literal notranslate"><span class="pre">A</span></code> as the instance of the <code class="docutils literal notranslate"><span class="pre">Meta</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">Meta</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Creating new class &lt;class &#39;__main__.A&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The message specified in the <code class="docutils literal notranslate"><span class="pre">Meta</span></code> is printed.</p>
+<p>The following cell creates an instance of <code class="docutils literal notranslate"><span class="pre">A</span></code> by calling <code class="docutils literal notranslate"><span class="pre">A()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Class &lt;class &#39;__main__.A&#39;&gt; new instance &lt;__main__.A object at 0x7294505fcb90&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method of <code class="docutils literal notranslate"><span class="pre">Meta</span></code> is invoked.</p>
+<p>In general, <code class="docutils literal notranslate"><span class="pre">A</span></code> is an instance of <code class="docutils literal notranslate"><span class="pre">Meta</span></code>, as implicitly shown in the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>__main__.Meta
+</pre></div>
+</div>
+</div>
+</div>
+<p>In fact, any class is an instance of some metaclass - by default, of the <code class="docutils literal notranslate"><span class="pre">type</span></code> metaclass:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type
+</pre></div>
+</div>
+</div>
+</div>
+<section id="class-defition">
+<h3>Class defition<a class="headerlink" href="#class-defition" title="Link to this heading">#</a></h3>
+<p>Since classes are instances of metaclasses, the syntax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassName</span><span class="p">(</span><span class="n">BaseClassees</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">MetaClass</span><span class="p">):</span>
+    <span class="n">attribute</span> <span class="o">=</span> <span class="n">attribute_value</span>
+</pre></div>
+</div>
+<p>Just creates a new instance of the specified <code class="docutils literal notranslate"><span class="pre">MetaClass</span></code>. It’s actually a sugar for creating an instance of the metaclass implicitly.</p>
+<p>The Python interpreter takes the <code class="docutils literal notranslate"><span class="pre">ClassName</span></code>, <code class="docutils literal notranslate"><span class="pre">BaseClasses</span></code>, and the class body transformed into a dict and calls the metaclass with these arguments.</p>
+<p>Therefore the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type"><code class="docutils literal notranslate"><span class="pre">type</span></code> metaclass</a> have corresponding parameters.</p>
+<hr class="docutils" />
+<p>The following cell uses the basic python syntax to define the <code class="docutils literal notranslate"><span class="pre">MyClass</span></code>. The created object is automatically assigned to the <code class="docutils literal notranslate"><span class="pre">MyClass</span></code> name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeBase</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">(</span><span class="n">SomeBase</span><span class="p">):</span>
+    <span class="n">attribute</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">MyClass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>__main__.MyClass
+</pre></div>
+</div>
+</div>
+</div>
+<p>And an implicit definition of the <code class="docutils literal notranslate"><span class="pre">MyClass</span></code> as an instance of the <code class="docutils literal notranslate"><span class="pre">type</span></code> assigned to the <code class="docutils literal notranslate"><span class="pre">MyClass1</span></code> name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyClass1</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s2">&quot;MyClass&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">SomeBase</span><span class="p">,),</span> <span class="nb">dict</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">MyClass1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>__main__.MyClass
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1573,6 +1702,10 @@ Check out more about static methods in the <a class="reference external" href="h
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstractions">Abstractions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metaclass">Metaclass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-defition">Class defition</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
