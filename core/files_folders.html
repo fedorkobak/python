@@ -1064,7 +1064,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpgxxv3814
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpy90bx135
 In context manager: True
 Out context manger: False
 </pre></div>
@@ -1072,6 +1072,19 @@ Out context manger: False
 </div>
 </div>
 <p>Inside the context manager, the file exists, but it is automatically deleted when the program exits the context manager’s block.</p>
+<p><strong>Note:</strong> The file is deleted immediately after the flow leaves the context:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <div class="toctree-wrapper compound">
 </div>

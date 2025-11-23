@@ -806,7 +806,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-decoration">Method decoration</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-decoration">Class decoration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-decoration">Class decoration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#class-scope-tracking">Class scope tracking</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#several-decorators">Several decorators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining">Combining</a></li>
 </ul>
@@ -837,6 +840,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest.mock</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
@@ -1062,6 +1066,61 @@ method2 bye bye
 </div>
 </div>
 </div>
+<section id="class-scope-tracking">
+<h4>Class scope tracking<a class="headerlink" href="#class-scope-tracking" title="Link to this heading">#</a></h4>
+<p><strong>Note.</strong> Even if you have applied a patch to a class, it tracks the calls to the patched object only within particular tests. In other words, you cannot get the information about globally performed actoins in a particular test method.</p>
+<hr class="docutils" />
+<p>The following example creates a test that patches the <code class="docutils literal notranslate"><span class="pre">fun1</span></code> checks how it was called in the <code class="docutils literal notranslate"><span class="pre">testable</span></code> function.</p>
+<ul class="simple">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">test_1</span></code>, the test relies on calls of <code class="docutils literal notranslate"><span class="pre">testable</span></code> made in either the class body or it’s <code class="docutils literal notranslate"><span class="pre">setUp</span></code> method.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">test_2</span></code>, the test calls <code class="docutils literal notranslate"><span class="pre">testable</span></code> directly.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fun1</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="k">return</span> <span class="n">val</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">testable</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="k">return</span> <span class="n">fun1</span><span class="p">(</span><span class="n">val</span><span class="o">=</span><span class="n">val</span><span class="p">)</span>
+
+<span class="nd">@patch</span><span class="p">(</span><span class="s2">&quot;__main__.fun1&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    
+    <span class="n">testable</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">testable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fun1</span><span class="p">:</span> <span class="n">unittest</span><span class="o">.</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test1:&quot;</span><span class="p">,</span> <span class="n">fun1</span><span class="o">.</span><span class="n">call_args</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fun1</span><span class="p">:</span> <span class="n">unittest</span><span class="o">.</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">):</span>
+        <span class="n">testable</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test2:&quot;</span><span class="p">,</span> <span class="n">fun1</span><span class="o">.</span><span class="n">call_args</span><span class="p">)</span>
+
+<span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">],</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">TestCase</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test1: None
+Test2: call(val=3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output:</p>
+<ul class="simple">
+<li><p>Of the <code class="docutils literal notranslate"><span class="pre">test_1</span></code> shows that class scope calls of the testable are untrackable here.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">test_2</span></code>, the outputs corresponds to the call made from the test method.</p></li>
+</ul>
+</section>
 </section>
 <section id="several-decorators">
 <h3>Several decorators<a class="headerlink" href="#several-decorators" title="Link to this heading">#</a></h3>
@@ -1435,7 +1494,10 @@ handler: hello from mock
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-decoration">Method decoration</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-decoration">Class decoration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-decoration">Class decoration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#class-scope-tracking">Class scope tracking</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#several-decorators">Several decorators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining">Combining</a></li>
 </ul>

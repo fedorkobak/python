@@ -799,7 +799,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-headers">Default headers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#headers">Headers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-headers">Default headers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#form">Form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-data">Raw data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-params">Query params</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reponse">Reponse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -814,25 +828,17 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="requests">
 <h1>Requests<a class="headerlink" href="#requests" title="Link to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">requests</span></code> is a Python library that allows you to send http requests. Read more about this library in the <a class="reference external" href="https://requests.readthedocs.io/en/latest/#">official documentation</a>.</p>
+<p>In the following cell we create container of the <code class="docutils literal notranslate"><span class="pre">httpbin</span></code> which allows to check headers of the requests.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">docker</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
 <span class="n">docker_client</span> <span class="o">=</span> <span class="n">docker</span><span class="o">.</span><span class="n">from_env</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="default-headers">
-<h2>Default headers<a class="headerlink" href="#default-headers" title="Link to this heading">#</a></h2>
-<p>There are some headers that the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library generates itself - even if you’ve specified empty headers, there will be some headers in the request.</p>
-<hr class="docutils" />
-<p>The following example shows that requests with headers specified as empty lead to requests that still have some headers.</p>
-<p>In the following cell we create container of the <code class="docutils literal notranslate"><span class="pre">httpbin</span></code> which allows to check headers of the requests.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">container</span> <span class="o">=</span> <span class="n">docker_client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.rerun_docker</span><span class="w"> </span><span class="kn">import</span> <span class="n">reload_docker_container</span>
+<span class="n">reload_docker_container</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;httpbin&quot;</span><span class="p">,</span>
     <span class="n">image</span><span class="o">=</span><span class="s2">&quot;kennethreitz/httpbin&quot;</span><span class="p">,</span>
     <span class="n">ports</span><span class="o">=</span><span class="p">{</span><span class="mi">80</span><span class="p">:</span> <span class="mi">80</span><span class="p">},</span>
     <span class="n">detach</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -841,7 +847,47 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Container: 93bfb62328a5&gt;
+</pre></div>
 </div>
+</div>
+</div>
+<section id="headers">
+<h2>Headers<a class="headerlink" href="#headers" title="Link to this heading">#</a></h2>
+<p>Pass the headers to your request by specifying the <code class="docutils literal notranslate"><span class="pre">headers</span></code> argument as a <code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">str]</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell shows the headers of a request with <code class="docutils literal notranslate"><span class="pre">headers={&quot;a&quot;:</span> <span class="pre">&quot;hello&quot;}</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s2">&quot;http://localhost:80/headers&quot;</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">}</span>
+<span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;headers&quot;: {
+    &quot;A&quot;: &quot;hello&quot;, 
+    &quot;Accept&quot;: &quot;*/*&quot;, 
+    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;, 
+    &quot;Connection&quot;: &quot;keep-alive&quot;, 
+    &quot;Host&quot;: &quot;localhost&quot;, 
+    &quot;User-Agent&quot;: &quot;python-requests/2.32.5&quot;
+  }
+}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="default-headers">
+<h3>Default headers<a class="headerlink" href="#default-headers" title="Link to this heading">#</a></h3>
+<p>There are some headers that the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library generates itself - even if you’ve specified empty headers, there will be some headers in the request.</p>
+<hr class="docutils" />
+<p>The following example shows that requests with headers specified as empty lead to requests that still have some headers.</p>
 <p>By sending the request to the <code class="docutils literal notranslate"><span class="pre">httpbin</span></code> we created earlier, in the <code class="docutils literal notranslate"><span class="pre">/headers</span></code> path, we can check the headers of the request - they’ll be returned as a response.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -863,7 +909,7 @@ document.write(`
   &quot;headers&quot;: {
     &quot;Accept-Encoding&quot;: &quot;identity&quot;, 
     &quot;Host&quot;: &quot;localhost&quot;, 
-    &quot;User-Agent&quot;: &quot;python-urllib3/1.26.5&quot;
+    &quot;User-Agent&quot;: &quot;python-urllib3/2.5.0&quot;
   }
 }
 </pre></div>
@@ -871,14 +917,290 @@ document.write(`
 </div>
 </div>
 <p>Even though we explicitly specified <code class="docutils literal notranslate"><span class="pre">headers={}</span></code>, it still results in some filled headers.</p>
-<p>To keep the environment clean, we need to stop the docker containers.</p>
+</section>
+</section>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
+<p>Send data using the <code class="docutils literal notranslate"><span class="pre">requests.post</span></code> function, with parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, filelike, <code class="docutils literal notranslate"><span class="pre">dict</span></code> or list of tuples.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">json</span></code>: for any object that can be serialised as json.</p></li>
+</ul>
+<p>How specify the data for the <code class="docutils literal notranslate"><span class="pre">requests.post</span></code> method determines how it will be represented in http.</p>
+<section id="form">
+<h3>Form<a class="headerlink" href="#form" title="Link to this heading">#</a></h3>
+<p>To represent data as a form pass dictionary or list of tuples in the <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter.</p>
+<hr class="docutils" />
+<p>The following cell displays the <code class="docutils literal notranslate"><span class="pre">POST</span></code> request, where <code class="docutils literal notranslate"><span class="pre">data</span></code> passed as dictionary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">container</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/post&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header takes the corresponding value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;application/x-www-form-urlencoded&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>HTTPbin places it in the <code class="docutils literal notranslate"><span class="pre">form</span></code> attribute of the ouput.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span><span class="p">[</span><span class="s2">&quot;form&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: [&#39;20&#39;, &#39;30&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="raw-data">
+<h3>Raw data<a class="headerlink" href="#raw-data" title="Link to this heading">#</a></h3>
+<p>Any other type of input passed to the <code class="docutils literal notranslate"><span class="pre">data</span></code> will result in the sending of data with an uspecified type.</p>
+<hr class="docutils" />
+<p>The following cell specifies the <code class="docutils literal notranslate"><span class="pre">data</span></code> argument as a string. Despite the fact that the string follows the JSON format, it is treated as a raw information by the <code class="docutils literal notranslate"><span class="pre">requests</span></code> anyway.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/post&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="s1">&#39;{&quot;a&quot;: 10}&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header is not provided.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+<p>HTTPbin stores the information in the <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;{&quot;a&quot;: 10}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="json">
+<h3>JSON<a class="headerlink" href="#json" title="Link to this heading">#</a></h3>
+<p>If you pass information through <code class="docutils literal notranslate"><span class="pre">json</span></code> parameter, the request will be set as JSON.</p>
+<hr class="docutils" />
+<p>Consider the case in which as <code class="docutils literal notranslate"><span class="pre">json</span></code> argument provided the dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/post&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell displays the contents of the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header in that case.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;application/json&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="query-params">
+<h2>Query params<a class="headerlink" href="#query-params" title="Link to this heading">#</a></h2>
+<p>With the <code class="docutils literal notranslate"><span class="pre">params</span></code> argument in methods, you can specify specify the query parameters. <code class="docutils literal notranslate"><span class="pre">requests</span></code> automatically add them to the URL.</p>
+<hr class="docutils" />
+<p>The following cell displays the complete URL for a <code class="docutils literal notranslate"><span class="pre">get</span></code> request when the <code class="docutils literal notranslate"><span class="pre">params</span></code> argument specified.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s2">&quot;http://localhost:80/anything&quot;</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;some_value&quot;</span><span class="p">}</span>
+<span class="p">)</span><span class="o">.</span><span class="n">url</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;http://localhost:80/anything?a=10&amp;b=some_value&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reponse">
+<h2>Reponse<a class="headerlink" href="#reponse" title="Link to this heading">#</a></h2>
+<p>The methods that provide requests retun the <code class="docutils literal notranslate"><span class="pre">requests.Response</span></code> instance. The following tale shows the most useful attributes of the <code class="docutils literal notranslate"><span class="pre">requests.Response</span></code> class.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute / Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">status_code</span></code></p></td>
+<td><p>Integer HTTP status code (e.g., 200, 404).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">headers</span></code></p></td>
+<td><p>Response headers as a case-insensitive dict.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>Body decoded to a string using detected encoding.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">content</span></code></p></td>
+<td><p>Raw response body as bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">json()</span></code></p></td>
+<td><p>Parses the body as JSON and returns a Python object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">url</span></code></p></td>
+<td><p>Final request URL (after redirects).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ok</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if status code &lt; 400.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reason</span></code></p></td>
+<td><p>Reason phrase from the server (e.g., “Not Found”).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cookies</span></code></p></td>
+<td><p>Cookies provided by the server.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elapsed</span></code></p></td>
+<td><p>Time taken for the request.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">history</span></code></p></td>
+<td><p>List of intermediate responses (e.g., redirects).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">raise_for_status()</span></code></p></td>
+<td><p>Raises an exception for HTTP status codes ≥ 400.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p>The follwoing cell sends the request and saves the ouput as <code class="docutils literal notranslate"><span class="pre">response</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/anything&quot;</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>requests.models.Response
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell displays the attribute <code class="docutils literal notranslate"><span class="pre">url</span></code> of the response.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="n">url</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;http://localhost:80/anything&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="content">
+<h3>Content<a class="headerlink" href="#content" title="Link to this heading">#</a></h3>
+<p>The response has several attributes that represent the content at different stages of processing:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">raw</span></code>: returns the raw data read from the socket.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iter_content</span></code>: for reading streaming data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">content</span></code>: the pure butes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text</span></code>: content decoded with detected encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">json</span></code>: returns a python dictionary if the response content can be decerialized from JSON.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Examine different components of the response as defined in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/anything&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell displays the <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;{\n  &quot;args&quot;: {}, \n  &quot;data&quot;: &quot;&quot;, \n  &quot;files&quot;: {}, \n  &quot;form&quot;: {}, \n  &quot;headers&quot;: {\n    &quot;Accept&quot;: &quot;*/*&quot;, \n    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;, \n    &quot;Connection&quot;: &quot;keep-alive&quot;, \n    &quot;Host&quot;: &quot;localhost&quot;, \n    &quot;User-Agent&quot;: &quot;python-requests/2.32.5&quot;\n  }, \n  &quot;json&quot;: null, \n  &quot;method&quot;: &quot;GET&quot;, \n  &quot;origin&quot;: &quot;172.17.0.1&quot;, \n  &quot;url&quot;: &quot;http://localhost/anything&quot;\n}\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the <code class="docutils literal notranslate"><span class="pre">text</span></code> ouput the same, but encoded as a <code class="docutils literal notranslate"><span class="pre">str</span></code> data type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;{\n  &quot;args&quot;: {}, \n  &quot;data&quot;: &quot;&quot;, \n  &quot;files&quot;: {}, \n  &quot;form&quot;: {}, \n  &quot;headers&quot;: {\n    &quot;Accept&quot;: &quot;*/*&quot;, \n    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;, \n    &quot;Connection&quot;: &quot;keep-alive&quot;, \n    &quot;Host&quot;: &quot;localhost&quot;, \n    &quot;User-Agent&quot;: &quot;python-requests/2.32.5&quot;\n  }, \n  &quot;json&quot;: null, \n  &quot;method&quot;: &quot;GET&quot;, \n  &quot;origin&quot;: &quot;172.17.0.1&quot;, \n  &quot;url&quot;: &quot;http://localhost/anything&quot;\n}\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">json</span></code> method you can get the body of the response as python dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;args&#39;: {},
+ &#39;data&#39;: &#39;&#39;,
+ &#39;files&#39;: {},
+ &#39;form&#39;: {},
+ &#39;headers&#39;: {&#39;Accept&#39;: &#39;*/*&#39;,
+  &#39;Accept-Encoding&#39;: &#39;gzip, deflate&#39;,
+  &#39;Connection&#39;: &#39;keep-alive&#39;,
+  &#39;Host&#39;: &#39;localhost&#39;,
+  &#39;User-Agent&#39;: &#39;python-requests/2.32.5&#39;},
+ &#39;json&#39;: None,
+ &#39;method&#39;: &#39;GET&#39;,
+ &#39;origin&#39;: &#39;172.17.0.1&#39;,
+ &#39;url&#39;: &#39;http://localhost/anything&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -946,7 +1268,21 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-headers">Default headers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#headers">Headers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-headers">Default headers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#form">Form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-data">Raw data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-params">Query params</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reponse">Reponse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

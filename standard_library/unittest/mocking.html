@@ -816,9 +816,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="mocking">
 <h1>Mocking<a class="headerlink" href="#mocking" title="Link to this heading">#</a></h1>
 <p>Sometimes our programmes depend on external circumstances, but during unit testing we shouldn’t worry about whether they work. And only test our code. So there are ways to change the behaviour of functions called in the programs being tested, to make it convenient for us to do the testing.</p>
+<p>Check more in the <a class="reference external" href="https://docs.python.org/3/library/unittest.mock.html">unittest.mock</a> documentation page.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock</span>
 </pre></div>
 </div>
 </div>
@@ -880,7 +882,17 @@ Hello patch
 </section>
 <section id="call-details">
 <h2>Call details<a class="headerlink" href="#call-details" title="Link to this heading">#</a></h2>
-<p>There are a number of tools that allow you to get details of the call to the mocker object. They are considered in the <a class="reference internal" href="mocking/call_details.html"><span class="std std-doc">corresponding page</span></a>.</p>
+<p>You can call <code class="docutils literal notranslate"><span class="pre">unittests.mock.Mock</span></code> instances, it tracks all calls:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">unittest.mock._Call</span></code> object that describes the call.</p></li>
+<li><p>The last call is stored in the <code class="docutils literal notranslate"><span class="pre">call_args</span></code> attribute of the mock.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">call_count</span></code> attribute keeps the count of calls.</p></li>
+</ul>
+<p>For more check the:</p>
+<ul class="simple">
+<li><p>Description of the <a class="reference external" href="https://docs.python.org/3/library/unittest.mock.html#call">call</a> helper in unittest docs.</p></li>
+<li><p><a class="reference internal" href="mocking/call_details.html"><span class="std std-doc">Corresponding page</span></a>.</p></li>
+</ul>
 <hr class="docutils" />
 <p>The following cell creates mock and few calls for it.</p>
 <div class="cell docutils container">
@@ -892,7 +904,7 @@ Hello patch
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>call(&#39;hello&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Mock name=&#39;mock()&#39; id=&#39;131503525130464&#39;&gt;
 </pre></div>
 </div>
 </div>

@@ -823,32 +823,40 @@ document.write(`
 <h1>Types<a class="headerlink" href="#types" title="Link to this heading">#</a></h1>
 <p>This page discusses different approaches to annotating code structures.</p>
 <p>For more details check the <a class="reference external" href="https://typing.python.org/en/latest/spec/index.html">Specification for the Python type system</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">typeguard</span>
-
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p><strong>Note:</strong> This notebook uses a <a class="reference external" href="https://github.com/fedorkobak/command_kernel">Command Kernel</a> with implemented <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">mypy</span></code> and <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">pyright</span></code> commands. These commands apply the corresponding linter to the file created from the cell content. By default, the python interpreter is applied to the cell content.</p>
 <section id="union">
 <h2>Union<a class="headerlink" href="#union" title="Link to this heading">#</a></h2>
 <p>If a value can take multiple types, you have to annotate it as an enumeration of types with <code class="docutils literal notranslate"><span class="pre">|</span></code> symbol. Using the syntax `typing.Union[&lt;type 1&gt;, &lt;type 2&gt;, …] will have a similar result.</p>
 <hr class="docutils" />
-<p>The following cell shows how <code class="docutils literal notranslate"><span class="pre">typeguard.check_type</span></code> passes the literals <code class="docutils literal notranslate"><span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code> when comparing with the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">|</span> <span class="pre">str</span></code> annotation.</p>
+<p>The following cell shows that to variables annotated as <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">|</span> <span class="pre">str</span></code> you can assign both types.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">union_type</span> <span class="o">=</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span>
-<span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">union_type</span><span class="p">)</span>
-<span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">union_type</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+val:<span class="w"> </span>int<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+val2:<span class="w"> </span>int<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span><span class="err"></span>(B
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, the attempt to assign a float fails.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+val3:<span class="w"> </span>int<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>.3
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpktyodpvp:1: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types in assignment (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;float&quot;</span><span class="err"></span>(B, variable has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int | str&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[assignment]</span><span class="err"></span>(B
+<span class=" -Color -Color-Bold -Color-Bold-Red">Found 1 error in 1 file (checked 1 source file)</span><span class="err"></span>(B
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -857,13 +865,15 @@ document.write(`
 <p>For example, the following cell shows how you can define <code class="docutils literal notranslate"><span class="pre">typing.Union</span></code> with types defined as the elements of the list.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
-<span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="o">*</span><span class="n">types</span><span class="p">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+import<span class="w"> </span>typing
+<span class="nv">types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>int,<span class="w"> </span>str,<span class="w"> </span>float<span class="o">]</span>
+typing.Union<span class="o">[</span>*types<span class="o">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>typing.Union[int, str, float]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span><span class="err"></span>(B
 </pre></div>
 </div>
 </div>
@@ -876,28 +886,16 @@ document.write(`
 <p>The following cell defines the void function and assigns its result to the variable - which is nonsence.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/none_output.py
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+def<span class="w"> </span>fun<span class="o">()</span>:
+<span class="w">    </span>print<span class="o">(</span><span class="s2">&quot;test&quot;</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="o">=</span> <span class="n">fun</span><span class="p">()</span>
+<span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fun<span class="o">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/none_output.py
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/none_output.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Success: no issues found in 1 source file
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span><span class="err"></span>(B
 </pre></div>
 </div>
 </div>
@@ -906,29 +904,20 @@ document.write(`
 <p>In contrast, the following cell creates the same file, but function return is annotated as <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/none_output.py
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+def<span class="w"> </span>fun<span class="o">(</span>val:<span class="w"> </span>int<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>None:
+<span class="w">    </span>print<span class="o">(</span><span class="s2">&quot;test&quot;</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fun<span class="o">(</span><span class="m">3</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/none_output.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpxn3tajvv:4: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;fun&quot;</span><span class="err"></span>(B does not return a value (it only ever returns None)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[func-returns-value]</span><span class="err"></span>(B
+<span class=" -Color -Color-Bold -Color-Bold-Red">Found 1 error in 1 file (checked 1 source file)</span><span class="err"></span>(B
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/none_output.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/none_output.py:4: error: &quot;fun&quot; does not return a value (it only ever returns None)  [func-returns-value]
-Found 1 error in 1 file (checked 1 source file)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -942,31 +931,22 @@ Found 1 error in 1 file (checked 1 source file)
 <p>The following cell creates a function that can return <code class="docutils literal notranslate"><span class="pre">int</span></code> in some cases or just raise the exception.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/none_output.py
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mi">5</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+def<span class="w"> </span>fun<span class="o">(</span>val:<span class="w"> </span>int<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>int<span class="w"> </span><span class="p">|</span><span class="w"> </span>None:
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>val<span class="w"> </span>&lt;<span class="w"> </span><span class="m">0</span>:
+<span class="w">        </span>raise<span class="w"> </span>Exception<span class="o">(</span><span class="s2">&quot;test&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">5</span>
 
-<span class="n">val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+val:<span class="w"> </span><span class="nv">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fun<span class="o">(</span><span class="m">5</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/none_output.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmp07z0no5g:6: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types in assignment (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int | None&quot;</span><span class="err"></span>(B, variable has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[assignment]</span><span class="err"></span>(B
+<span class=" -Color -Color-Bold -Color-Bold-Red">Found 1 error in 1 file (checked 1 source file)</span><span class="err"></span>(B
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/none_output.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/none_output.py:6: error: Incompatible types in assignment (expression has type &quot;int | None&quot;, variable has type &quot;int&quot;)  [assignment]
-Found 1 error in 1 file (checked 1 source file)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -975,32 +955,20 @@ Found 1 error in 1 file (checked 1 source file)
 <p>But if you use <code class="docutils literal notranslate"><span class="pre">typing.NoReturn</span></code> everything works fine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/none_output.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoReturn</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>NoReturn
 
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">NoReturn</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mi">5</span>
+def<span class="w"> </span>fun<span class="o">(</span>val:<span class="w"> </span>int<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>int<span class="w"> </span><span class="p">|</span><span class="w"> </span>NoReturn:
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>val<span class="w"> </span>&lt;<span class="w"> </span><span class="m">0</span>:
+<span class="w">        </span>raise<span class="w"> </span>Exception<span class="o">(</span><span class="s2">&quot;test&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">5</span>
 
-<span class="n">val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+val:<span class="w"> </span><span class="nv">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fun<span class="o">(</span><span class="m">5</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/none_output.py
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>mypy<span class="w"> </span>/tmp/none_output.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Success: no issues found in 1 source file
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span><span class="err"></span>(B
 </pre></div>
 </div>
 </div>
@@ -1013,18 +981,17 @@ Found 1 error in 1 file (checked 1 source file)
 <p>The following cell shows that the annotation <code class="docutils literal notranslate"><span class="pre">tuple[int,</span> <span class="pre">bool,</span> <span class="pre">float,</span> <span class="pre">str]</span></code> does not correspond to the value <code class="docutils literal notranslate"><span class="pre">(10,</span> <span class="pre">True,</span> <span class="pre">3.0)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span>
-        <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-    <span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+val:<span class="w"> </span>tuple<span class="o">[</span>int,<span class="w"> </span>bool,<span class="w"> </span>float,<span class="w"> </span>str<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">10</span>,<span class="w"> </span>True,<span class="w"> </span><span class="m">3</span>.0<span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tuple has wrong number of elements (expected 4, got 3 instead)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpk4li_hxr:1: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types in assignment (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;tuple[int, bool, float]&quot;</span><span class="err"></span>(B, variable has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;tuple[int, bool, float, str]&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[assignment]</span><span class="err"></span>(B
+<span class=" -Color -Color-Bold -Color-Bold-Red">Found 1 error in 1 file (checked 1 source file)</span><span class="err"></span>(B
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1032,15 +999,13 @@ Found 1 error in 1 file (checked 1 source file)
 <p>It expects another <code class="docutils literal notranslate"><span class="pre">str</span></code> value as the last element of the <code class="docutils literal notranslate"><span class="pre">tuple</span></code>. The following cell compares the tuple <code class="docutils literal notranslate"><span class="pre">(10,</span> <span class="pre">True,</span> <span class="pre">3.0,</span> <span class="pre">&quot;hello&quot;)</span></code> with the given annotation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">),</span>
-    <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-<span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+val:<span class="w"> </span>tuple<span class="o">[</span>int,<span class="w"> </span>bool,<span class="w"> </span>float,<span class="w"> </span>str<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="o">(</span><span class="m">10</span>,<span class="w"> </span>True,<span class="w"> </span><span class="m">3</span>.0,<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, True, 3.0, &#39;hello&#39;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span><span class="err"></span>(B
 </pre></div>
 </div>
 </div>
@@ -1049,25 +1014,50 @@ Found 1 error in 1 file (checked 1 source file)
 </section>
 <section id="any-type">
 <h2>Any type<a class="headerlink" href="#any-type" title="Link to this heading">#</a></h2>
-<p>Some times you’ll meet cases where object can take any type. In most cases you can just ignore typing for it. But there are reasons why you should have option to declare that expression can have any type:</p>
+<p>Sometimes, you’ll encounter cases in which an object can take any type. In most cases, you can just ignore the type. However, there are reasons why you should have the option to declare an expression can have any type:</p>
 <ul class="simple">
 <li><p>To show that any type is a deliberate decision.</p></li>
 <li><p>To have an option for cases where a type must be specified, such as the type of keys in a dictionary or the type of a particular element in a tuple.</p></li>
 </ul>
 <hr class="docutils" />
-<p>Consider the example where there are functions that return the key of the item with the maximum value from dict. But keys can be of any type that is acceptable to be keys for dictionaries. So it can be completed with syntax below.</p>
+<p>Consider a function that requires a dict with <code class="docutils literal notranslate"><span class="pre">float</span></code> keys, but doesn’t care about the actual type of the dictionary’s values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">max_key</span><span class="p">(</span><span class="n">inp_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">inp_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">inp_dict</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>Any
+def<span class="w"> </span>max_key<span class="o">(</span>inp_dict:<span class="w"> </span>dict<span class="o">[</span>float<span class="o">])</span>:
+<span class="w">    </span>def<span class="w"> </span>selector<span class="o">(</span>key:<span class="w"> </span>float<span class="o">)</span>:<span class="w"> </span><span class="k">return</span><span class="w"> </span>inp_dict.get<span class="o">(</span>key<span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>max<span class="o">(</span>inp_dict,<span class="w"> </span><span class="nv">key</span><span class="o">=</span>selector<span class="o">)</span>
 
-<span class="n">max_key</span><span class="p">({</span><span class="mi">10</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">})</span>
+max_key<span class="o">({</span><span class="m">10</span>:<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">7</span>:<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="o">})</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpc2htl_zf:2: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;dict&quot;</span><span class="err"></span>(B expects 2 type arguments, but 1 given  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[type-arg]</span><span class="err"></span>(B
+<span class=" -Color -Color-Bold -Color-Bold-Red">Found 1 error in 1 file (checked 1 source file)</span><span class="err"></span>(B
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mypy</span></code> produces ouput that notes that the <code class="docutils literal notranslate"><span class="pre">dict</span></code> type annotation requires two arguments. Therefore, it is supposed to be annotated as <code class="docutils literal notranslate"><span class="pre">Any</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>Any
+def<span class="w"> </span>max_key<span class="o">(</span>inp_dict:<span class="w"> </span>dict<span class="o">[</span>float,<span class="w"> </span>Any<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>Any:
+<span class="w">    </span>def<span class="w"> </span>selector<span class="o">(</span>key:<span class="w"> </span>float<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>Any:<span class="w"> </span><span class="k">return</span><span class="w"> </span>inp_dict.get<span class="o">(</span>key<span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>max<span class="o">(</span>inp_dict,<span class="w"> </span><span class="nv">key</span><span class="o">=</span>selector<span class="o">)</span>
+
+max_key<span class="o">({</span><span class="m">10</span>:<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">7</span>:<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="o">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span><span class="err"></span>(B
 </pre></div>
 </div>
 </div>
@@ -1077,33 +1067,18 @@ Found 1 error in 1 file (checked 1 source file)
 <h2>Sequence<a class="headerlink" href="#sequence" title="Link to this heading">#</a></h2>
 <p>With <code class="docutils literal notranslate"><span class="pre">typing.Sequence</span></code>, you can annotate any subscriptable type and those that have a defined <code class="docutils literal notranslate"><span class="pre">__len__</span></code> dunder.</p>
 <hr class="docutils" />
-<p>The following two cells show the comparison of the <code class="docutils literal notranslate"><span class="pre">list</span></code> and the <code class="docutils literal notranslate"><span class="pre">tuple</span></code> with the <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> annotation.</p>
+<p>The following cell show the comparison of the <code class="docutils literal notranslate"><span class="pre">list</span></code> and the <code class="docutils literal notranslate"><span class="pre">tuple</span></code> with the <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> annotation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-    <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-    <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span>
-<span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+import<span class="w"> </span>typing
+val1:<span class="w"> </span>typing.Sequence<span class="o">[</span>str<span class="w"> </span><span class="p">|</span><span class="w"> </span>bool<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>True,<span class="w"> </span><span class="s2">&quot;hello&quot;</span>,<span class="w"> </span>False<span class="o">)</span>
+val2:<span class="w"> </span>typing.Sequence<span class="o">[</span>str<span class="w"> </span><span class="p">|</span><span class="w"> </span>bool<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>True,<span class="w"> </span><span class="s2">&quot;hello&quot;</span>,<span class="w"> </span>False<span class="o">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, &#39;hello&#39;, False)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-    <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
-    <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[True, &#39;hello&#39;, False]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Success: no issues found in 1 source file</span><span class="err"></span>(B
 </pre></div>
 </div>
 </div>
@@ -1111,18 +1086,18 @@ Found 1 error in 1 file (checked 1 source file)
 <p>Everything works fine. But the following cell shows that the <code class="docutils literal notranslate"><span class="pre">set</span></code> doesn’t refer to the <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span>
-        <span class="p">{</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">},</span>
-        <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span>
-    <span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+import<span class="w"> </span>typing
+val:<span class="w"> </span>typing.Sequence<span class="o">[</span>str<span class="w"> </span><span class="p">|</span><span class="w"> </span>bool<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>True,<span class="w"> </span><span class="s2">&quot;hello&quot;</span>,<span class="w"> </span>False<span class="o">}</span>,
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>set is not a sequence
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpm7pdikhl:2: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types in assignment (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;tuple[set[object]]&quot;</span><span class="err"></span>(B, variable has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;Sequence[str | bool]&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[assignment]</span><span class="err"></span>(B
+<span class=" -Color -Color-Bold -Color-Bold-Red">Found 1 error in 1 file (checked 1 source file)</span><span class="err"></span>(B
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1148,40 +1123,24 @@ Found 1 error in 1 file (checked 1 source file)
 <p>Consider the following exmaple: The cell defines a class whose instances will behave exactly like a dictionary. However, the value udner the “a” key have to be an integer, and the value under the “b” key have to be a string.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mypy</span>
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>TypedDict
 
-<span class="k">class</span><span class="w"> </span><span class="nc">MyDict</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-    <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">b</span><span class="p">:</span> <span class="nb">str</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>There is no issue with this during runtime. The following code creates an instance with a string for “a” and an integer for “b”.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+class<span class="w"> </span>MyDict<span class="o">(</span>TypedDict<span class="o">)</span>:
+<span class="w">    </span>a:<span class="w"> </span>int
+<span class="w">    </span>b:<span class="w"> </span>str
+
+MyDict<span class="o">(</span><span class="nv">a</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span>,<span class="w"> </span><span class="nv">b</span><span class="o">=</span><span class="m">20</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: &#39;hello&#39;, &#39;b&#39;: 20}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpocl3wgaj:7: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;str&quot;</span><span class="err"></span>(B, TypedDict item <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;a&quot;</span><span class="err"></span>(B has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[typeddict-item]</span><span class="err"></span>(B
+/tmp/tmpocl3wgaj:7: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int&quot;</span><span class="err"></span>(B, TypedDict item <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;b&quot;</span><span class="err"></span>(B has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;str&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[typeddict-item]</span><span class="err"></span>(B
+<span class=" -Color -Color-Bold -Color-Bold-Red">Found 2 errors in 1 file (checked 1 source file)</span><span class="err"></span>(B
 </pre></div>
 </div>
-</div>
-</div>
-<p>However, any linting tool will flag this as an error. The following cell applies a <code class="docutils literal notranslate"><span class="pre">typeguard</span></code> to check that the types are correct:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">typeguard</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="n">MyDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">MyDict</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TypeCheckError: value of key &#39;a&#39; of dict is not an instance of int
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1213,12 +1172,12 @@ Found 1 error in 1 file (checked 1 source file)
 <p>The following code defines the <code class="docutils literal notranslate"><span class="pre">Example</span></code> dataclass with <code class="docutils literal notranslate"><span class="pre">x</span></code> attibute to have <code class="docutils literal notranslate"><span class="pre">&quot;positive&quot;</span></code> as metadata.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">get_type_hints</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>dataclasses<span class="w"> </span>import<span class="w"> </span>dataclass
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>Annotated,<span class="w"> </span>get_type_hints
 
-<span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Example</span><span class="p">():</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;positive&quot;</span><span class="p">]</span>
+@dataclass
+class<span class="w"> </span>Example<span class="o">()</span>:
+<span class="w">    </span>x:<span class="w"> </span>Annotated<span class="o">[</span>int,<span class="w"> </span><span class="s2">&quot;positive&quot;</span><span class="o">]</span>
 </pre></div>
 </div>
 </div>
@@ -1226,8 +1185,8 @@ Found 1 error in 1 file (checked 1 source file)
 <p>The following cell shows the output of the <code class="docutils literal notranslate"><span class="pre">typing.get_type_hints</span></code> for the <code class="docutils literal notranslate"><span class="pre">Example</span></code> class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hints</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">include_extras</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">hints</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">hints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>get_type_hints<span class="o">(</span>Example,<span class="w"> </span><span class="nv">include_extras</span><span class="o">=</span>True<span class="o">)</span>
+hints
 </pre></div>
 </div>
 </div>
@@ -1237,10 +1196,10 @@ Found 1 error in 1 file (checked 1 source file)
 </div>
 </div>
 </div>
-<p>And teh way to access exactly metadata.</p>
+<p>And the way to access exactly metadata.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hints</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">__metadata__</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hints<span class="o">[</span><span class="s1">&#39;x&#39;</span><span class="o">]</span>.__metadata__
 </pre></div>
 </div>
 </div>
@@ -1253,10 +1212,10 @@ Found 1 error in 1 file (checked 1 source file)
 <p>Consider how metadata can be used. The <code class="docutils literal notranslate"><span class="pre">process</span></code> function checks whether the <code class="docutils literal notranslate"><span class="pre">x</span></code> attribute of the passed object has been annotated as positive.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">inp</span><span class="p">):</span>
-    <span class="n">hints</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">inp</span><span class="p">),</span> <span class="n">include_extras</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">hints</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">__metadata__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;positive&quot;</span> <span class="ow">and</span> <span class="n">inp</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning&quot;</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>def<span class="w"> </span>process<span class="o">(</span>inp<span class="o">)</span>:
+<span class="w">    </span><span class="nv">hints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>get_type_hints<span class="o">(</span>type<span class="o">(</span>inp<span class="o">)</span>,<span class="w"> </span><span class="nv">include_extras</span><span class="o">=</span>True<span class="o">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>hints<span class="o">[</span><span class="s1">&#39;x&#39;</span><span class="o">]</span>.__metadata__<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;positive&quot;</span><span class="w"> </span>and<span class="w"> </span>inp.x<span class="w"> </span>&lt;<span class="w"> </span><span class="m">0</span>:
+<span class="w">        </span>print<span class="o">(</span><span class="s2">&quot;Warning&quot;</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -1264,7 +1223,7 @@ Found 1 error in 1 file (checked 1 source file)
 <p>Therefore, the warning will be printed for the <code class="docutils literal notranslate"><span class="pre">Example</span></code> instance initialised with a negative <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">process</span><span class="p">(</span><span class="n">Example</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>process<span class="o">(</span>Example<span class="o">(</span><span class="nv">x</span><span class="o">=</span>-2<span class="o">))</span>
 </pre></div>
 </div>
 </div>
@@ -1277,11 +1236,11 @@ Found 1 error in 1 file (checked 1 source file)
 <p>But, if the class where <code class="docutils literal notranslate"><span class="pre">x</span></code> annotated with any other value, everything will be fine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Example2</span><span class="p">():</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;any&quot;</span><span class="p">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>@dataclass
+class<span class="w"> </span>Example2<span class="o">()</span>:
+<span class="w">    </span>x:<span class="w"> </span>Annotated<span class="o">[</span>int,<span class="w"> </span><span class="s2">&quot;any&quot;</span><span class="o">]</span>
 
-<span class="n">process</span><span class="p">(</span><span class="n">Example2</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span>
+process<span class="o">(</span>Example2<span class="o">(</span><span class="nv">x</span><span class="o">=</span>-2<span class="o">))</span>
 </pre></div>
 </div>
 </div>
@@ -1300,16 +1259,16 @@ Found 1 error in 1 file (checked 1 source file)
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "linters_kernel"
         },
         kernelOptions: {
-            name: "python3",
+            name: "linters_kernel",
             path: "./standard_library/linting"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'linters_kernel'</script>
 
                 </article>
               

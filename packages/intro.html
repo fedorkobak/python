@@ -809,6 +809,11 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradio">Gradio</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sdk">AWS SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-schema">JSON Schema</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1372,6 +1377,157 @@ rm -r zip_example_file archive.zip
 </div>
 </div>
 </section>
+<section id="pydantic">
+<h2>Pydantic<a class="headerlink" href="#pydantic" title="Link to this heading">#</a></h2>
+<p>Pydantic is a data validation package for Python. It allows you to specify the data fromat using Python type annotations and validate your data against this model.</p>
+<p>The most important class here is <code class="docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code>. Any class that inherits from it represents a pydantic model.</p>
+<p>Check more details in <a class="reference external" href="https://docs.pydantic.dev/latest/">official web site</a>.</p>
+<hr class="docutils" />
+<p>The following cell defines simple pydantic model. The resulting object must have <code class="docutils literal notranslate"><span class="pre">a:</span> <span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">b:</span> <span class="pre">float</span></code> attributes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pydantic</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A straigforward way to create the object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyModel</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyModel(a=10, b=1.1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>But if incorrect arguments are passed to the model, a <code class="docutils literal notranslate"><span class="pre">ValidationError</span></code> is raised, providing explanations for the error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">MyModel</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pydantic_core._pydantic_core.ValidationError&#39;&gt;
+2 validation errors for MyModel
+a
+  Input should be a valid integer, got a number with a fractional part [type=int_from_float, input_value=1.1, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.11/v/int_from_float
+b
+  Input should be a valid number, unable to parse string as a number [type=float_parsing, input_value=&#39;hello&#39;, input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/float_parsing
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong>. By default Pydantic does not raise the exception for extra attributes. An issue will only occur if specified attribute are missing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyModel</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyModel(a=1, b=1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="json">
+<h3>JSON<a class="headerlink" href="#json" title="Link to this heading">#</a></h3>
+<p>To validate a JSON object against a Pydantic model, use the <code class="docutils literal notranslate"><span class="pre">model_validate_json</span></code> method.</p>
+<p><strong>Note</strong> it takes <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes</span></code> or <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> as input. For dictionaries, use the syntax <code class="docutils literal notranslate"><span class="pre">Model(**dictionary)</span></code>.</p>
+<p>Check more in <a class="reference external" href="https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_validate_json">model_validate_json</a> section of API reference.</p>
+<hr class="docutils" />
+<p>The following cell defines a Pydantic model and its corresponding input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pydantic</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">float</span>
+
+<span class="n">inp</span> <span class="o">=</span> <span class="s1">&#39;{&quot;a&quot;: 10, &quot;b&quot;: 3.14}&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell performs validation with <code class="docutils literal notranslate"><span class="pre">model_validate_json</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyModel</span><span class="o">.</span><span class="n">model_validate_json</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyModel(a=10, b=3.14)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell shows the validation example of a bytes input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bytes_inp</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bytes_inp</span><span class="p">)</span>
+<span class="n">MyModel</span><span class="o">.</span><span class="n">model_validate_json</span><span class="p">(</span><span class="n">bytes_inp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;{&quot;a&quot;: 10, &quot;b&quot;: 3.14}&#39;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyModel(a=10, b=3.14)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="json-schema">
+<h3>JSON Schema<a class="headerlink" href="#json-schema" title="Link to this heading">#</a></h3>
+<p>To get json schema from model use <code class="docutils literal notranslate"><span class="pre">BaseModel.model_json_schema</span></code> method.</p>
+<p>Check more in <a class="reference external" href="https://docs.pydantic.dev/latest/concepts/json_schema/">JSON Schema</a> page.</p>
+<hr class="docutils" />
+<p>The following cell demonstrates the application of the <code class="docutils literal notranslate"><span class="pre">model_json_schema</span></code> method to the pydantic model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pydantic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">float</span>
+
+<span class="n">pprint</span><span class="p">(</span><span class="n">MyModel</span><span class="o">.</span><span class="n">model_json_schema</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;properties&#39;: {&#39;a&#39;: {&#39;title&#39;: &#39;A&#39;, &#39;type&#39;: &#39;integer&#39;},
+                &#39;b&#39;: {&#39;title&#39;: &#39;B&#39;, &#39;type&#39;: &#39;number&#39;}},
+ &#39;required&#39;: [&#39;a&#39;, &#39;b&#39;],
+ &#39;title&#39;: &#39;MyModel&#39;,
+ &#39;type&#39;: &#39;object&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1448,6 +1604,11 @@ rm -r zip_example_file archive.zip
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradio">Gradio</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sdk">AWS SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-schema">JSON Schema</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
