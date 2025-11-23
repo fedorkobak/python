@@ -21,6 +21,9 @@ class LintersKernel(CommandKernel):
         os.close(fd)
         return path
 
+    def no_commands(self, code: str) -> str:
+        return f"python3 {self._temp_file(code)}"
+
     @command("# mypy")
     def mypy(self, code: str) -> str:
         return f"mypy {self._temp_file(code)}"
