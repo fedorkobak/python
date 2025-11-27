@@ -6,3 +6,4 @@ utils.egg-info
 .env
 .databricks
 databricks.yml
+*.ipynb_checkpoints*
