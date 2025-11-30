@@ -360,6 +360,7 @@ parts:
     - file: packages/surprise.ipynb
     - file: packages/socket.ipynb
     - file: packages/requests.ipynb
+    - file: packages/jsonschema.ipynb
     - file: packages/tkinter.ipynb
       sections:
       - file: packages/tkinter/widgets_overview.ipynb
