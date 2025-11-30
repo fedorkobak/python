@@ -574,6 +574,10 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -806,10 +810,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving">Serving</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow-for-genai">MLFlow for genAI</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace">Trace</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gen-ai">Gen AI</a></li>
 </ul>
             </nav>
         </div>
@@ -1406,8 +1407,8 @@ Created version &#39;1&#39; of model &#39;my_registered_model&#39;.
 </div>
 </div>
 </section>
-<section id="mlflow-for-genai">
-<h2>MLFlow for genAI<a class="headerlink" href="#mlflow-for-genai" title="Link to this heading">#</a></h2>
+<section id="gen-ai">
+<h2>Gen AI<a class="headerlink" href="#gen-ai" title="Link to this heading">#</a></h2>
 <p>MLFlow provides tools for logging ML solutions. Learn more on the <a class="reference external" href="https://mlflow.org/docs/3.3.0/genai/">Build with MLFlow GenAI</a>.</p>
 <hr class="docutils" />
 <p>The following cell sets up mlflow and, by using <code class="docutils literal notranslate"><span class="pre">mlflow.langchain.autolog</span></code>, starts tracing for actions performed by <code class="docutils literal notranslate"><span class="pre">langchain</span></code> package.</p>
@@ -1428,7 +1429,6 @@ Created version &#39;1&#39; of model &#39;my_registered_model&#39;.
 <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;sqlite:////tmp/llm_mlflow.db&quot;</span><span class="p">)</span>
 
 <span class="n">mlflow</span><span class="o">.</span><span class="n">langchain</span><span class="o">.</span><span class="n">autolog</span><span class="p">()</span>
-
 <span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.2:1b&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">ans</span> <span class="o">=</span> <span class="n">chat</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Hello how are you?&quot;</span><span class="p">)</span>
 <span class="n">clear_output</span><span class="p">()</span>
@@ -1437,111 +1437,6 @@ Created version &#39;1&#39; of model &#39;my_registered_model&#39;.
 </div>
 </div>
 <p>After this run, you will find the information associated with this run in your mlflow server bounded to <code class="docutils literal notranslate"><span class="pre">/tmp/mlflow.db</span></code>.</p>
-<section id="trace">
-<h3>Trace<a class="headerlink" href="#trace" title="Link to this heading">#</a></h3>
-<p>Each invocation to the LLM based pipeline is called “trace”.</p>
-<p>Trace cosits of:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://mlflow.org/docs/3.3.0/genai/tracing/concepts/trace/#traceinfo-metadata-and-context"><strong>Trace info</strong></a>: general information about the trace primarly used for models ordering and selection.</p></li>
-<li><p><a class="reference external" href="https://mlflow.org/docs/3.3.0/genai/tracing/concepts/trace/#tracedata-container-of-spans"><strong>Trace data</strong></a>: detailed information about the pipline run. Consists of spans.</p></li>
-</ul>
-<hr class="docutils" />
-<p>With <code class="docutils literal notranslate"><span class="pre">mlflow.search_traces</span></code> you can get the traces registered in your mlflows as <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traces</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">search_traces</span><span class="p">()</span>
-<span class="n">traces</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>trace_id</th>
-      <th>trace</th>
-      <th>client_request_id</th>
-      <th>state</th>
-      <th>request_time</th>
-      <th>execution_duration</th>
-      <th>request</th>
-      <th>response</th>
-      <th>trace_metadata</th>
-      <th>tags</th>
-      <th>spans</th>
-      <th>assessments</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>tr-87a30731ef2e4df9fb250931cd09c0f8</td>
-      <td>{"info": {"trace_id": "tr-87a30731ef2e4df9fb25...</td>
-      <td>None</td>
-      <td>OK</td>
-      <td>1763491910772</td>
-      <td>2847</td>
-      <td>[[{'content': 'Hello how are you?', 'additiona...</td>
-      <td>{'generations': [[{'text': "I'm doing well, th...</td>
-      <td>{'mlflow.trace.tokenUsage': '{"input_tokens": ...</td>
-      <td>{'mlflow.trace.spansLocation': 'TRACKING_STORE...</td>
-      <td>[{'trace_id': 'h6MHMe8uTfn7JQkxzQnA+A==', 'spa...</td>
-      <td>[]</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>The following cell loads a specific trace.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace_obj</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">get_trace</span><span class="p">(</span><span class="n">traces</span><span class="p">[</span><span class="s2">&quot;trace_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell shows loads the <code class="docutils literal notranslate"><span class="pre">info</span></code> of the trace.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace_obj</span><span class="o">.</span><span class="n">info</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TraceInfo(trace_id=&#39;tr-87a30731ef2e4df9fb250931cd09c0f8&#39;, trace_location=TraceLocation(type=&lt;TraceLocationType.MLFLOW_EXPERIMENT: &#39;MLFLOW_EXPERIMENT&#39;&gt;, mlflow_experiment=MlflowExperimentLocation(experiment_id=&#39;0&#39;), inference_table=None, uc_schema=None), request_time=1763491910772, state=&lt;TraceState.OK: &#39;OK&#39;&gt;, request_preview=&#39;[[{&quot;content&quot;: &quot;Hello how are you?&quot;, &quot;additional_kwargs&quot;: {}, &quot;response_metadata&quot;: {}, &quot;type&quot;: &quot;human&quot;, &quot;name&quot;: null, &quot;id&quot;: null}]]&#39;, response_preview=&#39;{&quot;generations&quot;: [[{&quot;text&quot;: &quot;I\&#39;m doing well, thank you for asking. Is there anything I can help you with or would you like to talk about something in particular?&quot;, &quot;generation_info&quot;: {&quot;model&quot;: &quot;llama3.2:1b&quot;, &quot;created_at&quot;: &quot;2025-11-18T18:51:53.619066874Z&quot;, &quot;done&quot;: true, &quot;done_reason&quot;: &quot;stop&quot;, &quot;total_duration&quot;: 2844896957, &quot;load_duration&quot;: 83546377, &quot;prompt_eval_count&quot;: 30, &quot;prompt_eval_duration&quot;: 90061957, &quot;eval_count&quot;: 30, &quot;eval_duration&quot;: 2670671350, &quot;logprobs&quot;: null, &quot;model_name&quot;: &quot;llama3.2:1b&quot;, &quot;model_provider&quot;: &quot;ollama&quot;}, &quot;type&quot;: &quot;ChatGeneration&quot;, &quot;message&quot;: {&quot;content&quot;: &quot;I\&#39;m doing well, thank you for asking. Is there anything I can help you with or would you like to talk about something in particular?&quot;, &quot;additional_kwargs&quot;: {}, &quot;response_metadata&quot;: {&quot;model&quot;: &quot;llama3.2:1b&quot;, &quot;created_at&quot;: &quot;2025-11-18T18:51:53.619066874Z&quot;, &quot;done&quot;: true, &quot;done_reason&quot;: &quot;stop&quot;, &quot;total_duration&quot;: 2844896957, &quot;load_duration&quot;: 83546377, &quot;prompt_eval_count&quot;: 30, &quot;prompt_eval_duration&quot;: 90061957, &quot;eval_cou...&#39;, client_request_id=None, execution_duration=2847, trace_metadata={&#39;mlflow.trace.tokenUsage&#39;: &#39;{&quot;input_tokens&quot;: 30, &quot;output_tokens&quot;: 30, &quot;total_tokens&quot;: 60}&#39;, &#39;mlflow.user&#39;: &#39;fedor&#39;, &#39;mlflow.source.name&#39;: &#39;/home/fedor/.virtualenvironments/python/lib/python3.13/site-packages/ipykernel_launcher.py&#39;, &#39;mlflow.source.type&#39;: &#39;LOCAL&#39;, &#39;mlflow.source.git.commit&#39;: &#39;a8128dbd99716c4f840073c0b00efea315c6c05c&#39;, &#39;mlflow.source.git.repoURL&#39;: &#39;git@github.com:fedorkobak/python.git&#39;, &#39;mlflow.source.git.branch&#39;: &#39;main&#39;, &#39;mlflow.trace_schema.version&#39;: &#39;3&#39;, &#39;mlflow.traceInputs&#39;: &#39;[[{&quot;content&quot;: &quot;Hello how are you?&quot;, &quot;additional_kwargs&quot;: {}, &quot;response_metadata&quot;: {}, &quot;type&quot;: &quot;human&quot;, &quot;name&quot;: null, &quot;id&quot;: null}]]&#39;, &#39;mlflow.traceOutputs&#39;: &#39;{&quot;generations&quot;: [[{&quot;text&quot;: &quot;I\&#39;m doing well, thank you for asking. Is there anything I can help you with or would you like to talk about something in particular?&quot;, &quot;generation_info&quot;: {&quot;model&quot;: &quot;llama3.2:1b&quot;, &quot;created_at&quot;: &quot;2025-11-18T18:51:53.61906...&#39;, &#39;mlflow.trace.sizeStats&#39;: &#39;{&quot;total_size_bytes&quot;: 21158, &quot;num_spans&quot;: 1, &quot;max&quot;: 18606, &quot;p25&quot;: 18606, &quot;p50&quot;: 18606, &quot;p75&quot;: 18606}&#39;, &#39;mlflow.trace.sizeBytes&#39;: &#39;21158&#39;}, tags={&#39;mlflow.trace.spansLocation&#39;: &#39;TRACKING_STORE&#39;, &#39;mlflow.artifactLocation&#39;: &#39;/home/fedor/Documents/code/python/ds_ml/mlruns/0/traces/tr-87a30731ef2e4df9fb250931cd09c0f8/artifacts&#39;, &#39;mlflow.traceName&#39;: &#39;ChatOllama&#39;}, assessments=[])
-</pre></div>
-</div>
-</div>
-</div>
-<p>This cell displays the <code class="docutils literal notranslate"><span class="pre">data</span></code> from the trace.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace_obj</span><span class="o">.</span><span class="n">data</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TraceData(spans=[Span(name=&#39;ChatOllama&#39;, trace_id=&#39;tr-87a30731ef2e4df9fb250931cd09c0f8&#39;, span_id=&#39;6ac5a0c62e3edab9&#39;, parent_id=None)])
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1618,10 +1513,7 @@ Created version &#39;1&#39; of model &#39;my_registered_model&#39;.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving">Serving</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow-for-genai">MLFlow for genAI</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace">Trace</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gen-ai">Gen AI</a></li>
 </ul>
   </nav></div>
 

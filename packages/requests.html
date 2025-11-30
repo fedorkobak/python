@@ -574,6 +574,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -811,6 +815,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-params">Query params</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reponse">Reponse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-status">Wrong status</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a></li>
 </ul>
 </li>
@@ -848,7 +853,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Container: 93bfb62328a5&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Container: aaf8b8678de3&gt;
 </pre></div>
 </div>
 </div>
@@ -1130,6 +1135,65 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="wrong-status">
+<h3>Wrong status<a class="headerlink" href="#wrong-status" title="Link to this heading">#</a></h3>
+<p>With the <code class="docutils literal notranslate"><span class="pre">raise_for_status</span></code> function, you can automatically <code class="docutils literal notranslate"><span class="pre">raise</span></code> a special <code class="docutils literal notranslate"><span class="pre">requests.expceptions.HTTPError</span></code> exception for incorrect HTTP codes.</p>
+<hr class="docutils" />
+<p>The following cell correctly assigns <code class="docutils literal notranslate"><span class="pre">response</span></code> with a correct HTTP code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/status/200&quot;</span><span class="p">)</span>
+<span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Response [200]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">raise_for_status</span></code> method of this response does not have any effect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In contrast, consider the response with a 400 status code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/status/400&quot;</span><span class="p">)</span>
+<span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Response [400]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">raise_for_status</span></code> mehtod raises the corresponding exception.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>400 Client Error: BAD REQUEST for url: http://localhost:80/status/400
+&lt;class &#39;requests.exceptions.HTTPError&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="content">
 <h3>Content<a class="headerlink" href="#content" title="Link to this heading">#</a></h3>
 <p>The response has several attributes that represent the content at different stages of processing:</p>
@@ -1280,6 +1344,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-params">Query params</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reponse">Reponse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrong-status">Wrong status</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a></li>
 </ul>
 </li>

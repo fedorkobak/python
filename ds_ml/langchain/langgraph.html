@@ -574,6 +574,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../langchain.html">LangChain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -804,6 +808,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-output">Merging output</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-edges">Conditional edges</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-defition">Alternative defition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interrupt">Interrupt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-execution">Continue execution</a></li>
 </ul>
 </li>
 </ul>
@@ -1118,6 +1127,196 @@ For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/erro
 </div>
 </section>
 </section>
+<section id="memory">
+<h2>Memory<a class="headerlink" href="#memory" title="Link to this heading">#</a></h2>
+<p>You can save the state between the graph infocations. During graph compilation, you must pass a <code class="docutils literal notranslate"><span class="pre">checkpointer</span></code> object. This object will keep the output of the previous invocation bounded to <strong>thread</strong>. The thread is specified by the <code class="docutils literal notranslate"><span class="pre">configurable.thread_id</span></code> field of the <code class="docutils literal notranslate"><span class="pre">configuration</span></code> argument.</p>
+<hr class="docutils" />
+<p>The following cell builds and compiles the graph. Note that the checkpointer passes an <code class="docutils literal notranslate"><span class="pre">InMemorySaver</span></code> instance, which stores the information about the outputs of the last invocation in memory. Each time the graph is invoked, a random number is added to the input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.checkpoint.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">InMemorySaver</span>
+
+<span class="n">in_memory_saver</span> <span class="o">=</span> <span class="n">InMemorySaver</span><span class="p">()</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_a</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>
+
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+
+    <span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">checkpointer</span><span class="o">=</span><span class="n">in_memory_saver</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">graph</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e544e20195e3add3279c76782a04db0aa909fba4ebfba3c22179b763f9b8d527.png" src="../../_images/e544e20195e3add3279c76782a04db0aa909fba4ebfba3c22179b763f9b8d527.png" />
+</div>
+</div>
+<p>Invoking such a graph requires specifying the thread because memory is bounded by the thread.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="n">State</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[]),</span>
+    <span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;thread_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;value&#39;: [9]}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second invocation with the same specified thread contains the output of the previous invocation, plus the new generated number:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="n">State</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[]),</span>
+    <span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;thread_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;value&#39;: [9, 2]}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The invocation in the other thread yelds a new number:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="n">State</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[]),</span>
+    <span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;thread_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;value&#39;: [8]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="interrupt">
+<h2>Interrupt<a class="headerlink" href="#interrupt" title="Link to this heading">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">langgraph.types.interrupt</span></code> to interrupt the execution of the graph. This function stops the graph’s execution and returns the dictionary that containing information associated with interuption under key <code class="docutils literal notranslate"><span class="pre">__interrupt__</span></code>.</p>
+<hr class="docutils" />
+<p>The following cell defines the one-node graph that interrupts during the excution, allowing you to the kind of output produced.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">interrupt</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node_a</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="n">interrupt</span><span class="p">(</span><span class="s2">&quot;Interupted info&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">State</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;__interrupt__&#39;: [Interrupt(value=&#39;Interupted info&#39;, id=&#39;60925f781639672ec3c0fb49ea1639ba&#39;)]}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="continue-execution">
+<h3>Continue execution<a class="headerlink" href="#continue-execution" title="Link to this heading">#</a></h3>
+<p>The main purpose of the <code class="docutils literal notranslate"><span class="pre">interrupt</span></code> is <code class="docutils literal notranslate"><span class="pre">langgraph</span></code> is to build human in the loop applications: in which user can provide additional information to the LLM based application during the application execution.</p>
+<p>To do that you have too:</p>
+<ul class="simple">
+<li><p>Add memory to your graph.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">interrupt</span></code> invocation returns to the graph information provided from the flow outside the graph.</p></li>
+<li><p>To resume the execution, invoke graph again with <code class="docutils literal notranslate"><span class="pre">langgraph.types.Command</span></code> providing additional information via the <code class="docutils literal notranslate"><span class="pre">resume</span></code> argument.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell defines the graph in which a single node calls <code class="docutils literal notranslate"><span class="pre">interupt</span></code> and publishes the result to the <code class="docutils literal notranslate"><span class="pre">State</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.checkpoint.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">InMemorySaver</span> 
+
+<span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">message_from_user</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">node</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">interrupt</span><span class="p">(</span><span class="s2">&quot;Expecting input&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">message_from_user</span><span class="o">=</span><span class="n">ans</span><span class="p">)</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">checkpointer</span><span class="o">=</span><span class="n">InMemorySaver</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">config</span></code> of the graph invocation is important here as it specifies which thread was interrupted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;thread_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+
+<span class="n">ans</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="n">State</span><span class="p">(</span><span class="n">message_from_user</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span>
+<span class="p">)</span>
+<span class="n">ans</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;message_from_user&#39;: None,
+ &#39;__interrupt__&#39;: [Interrupt(value=&#39;Expecting input&#39;, id=&#39;2581629b0859baae999813442c5e719d&#39;)]}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The graph is interrupted. The next cell shows the how to resume the execution and provide the information to the graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="n">Command</span><span class="p">(</span><span class="n">resume</span><span class="o">=</span><span class="s2">&quot;This is input from user&quot;</span><span class="p">),</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;message_from_user&#39;: &#39;This is input from user&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1189,6 +1388,11 @@ For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/erro
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-output">Merging output</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-edges">Conditional edges</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-defition">Alternative defition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interrupt">Interrupt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-execution">Continue execution</a></li>
 </ul>
 </li>
 </ul>

@@ -574,6 +574,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1127,8 +1131,10 @@ Test2: call(val=3)
 <p>You can patch multiple objects by specifying multiple decorators. For each patch, you must provide a mock argument. The rules for determining which parameter belongs to which patch are as follows:</p>
 <ul class="simple">
 <li><p>The parameter corresponding to the method patch comes before the parameter corresponding to the class patch.</p></li>
-<li><p>It might feel counterintuitive that parameters for decorators specified earlier come later than those for more nested parameters—but this makes sense if you consider how decorators work, as each subsequent decorator wraps the previous one.</p></li>
+<li><p>It might feel counterintuitive that parameters for decorators specified earlier come later than those for more nested parameters - but this makes sense if you consider how decorators work, as each subsequent decorator wraps the previous one.</p></li>
 </ul>
+<p>The following diagram schematically shows how the patches match to the input parameters of the test.</p>
+<p><img alt="" src="../../../_images/patch_order.svg" /></p>
 <hr class="docutils" />
 <p>The following example demonstrates how this works. There are three decorators: one applied to the entire class and two applied to specific methods. In each method, arguments are called in a way that allows us to identify the type of decoration. The output shows which argument corresponds to each decorator.</p>
 <div class="cell docutils container">

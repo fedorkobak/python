@@ -574,6 +574,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -799,7 +803,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional">Optional</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-files">Extra files</a></li>
 </ul>
             </nav>
@@ -823,18 +830,20 @@ document.write(`
 <p>The following cell creates <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> which requires <code class="docutils literal notranslate"><span class="pre">python-dotenv==1.0.1</span></code> and installs “package” based on this <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span>/tmp/dependencies<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>/tmp/dependencies
-mkdir<span class="w"> </span>/tmp/dependencies
-<span class="nb">cd</span><span class="w"> </span>/tmp/dependencies
-
-cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; pyproject.toml</span>
-<span class="s">[project]</span>
-<span class="s">name = &quot;toy_package&quot;</span>
-<span class="s">version = &quot;0.0.0&quot;</span>
-<span class="s">dependencies = [&quot;python-dotenv==1.0.1&quot;]</span>
-<span class="s">EOF</span>
-
-mkdir<span class="w"> </span>target
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#init</span>
+<span class="c1">#file pyproject.toml</span>
+<span class="o">[</span>project<span class="o">]</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;toy_package&quot;</span>
+<span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span>
+<span class="nv">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;python-dotenv==1.0.1&quot;</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The installation of the package:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>target
 pip3<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--target<span class="w"> </span>target<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
@@ -853,6 +862,60 @@ pip3<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </s
 </div>
 </div>
 </div>
+<section id="optional">
+<h3>Optional<a class="headerlink" href="#optional" title="Link to this heading">#</a></h3>
+<p>You can specify dependencies that would not be installed by default. To install these, you must explicitly specify the corresponding keyword in the square brackets after the package name.</p>
+<p>To specify optional dependencies in the <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>, use the <code class="docutils literal notranslate"><span class="pre">[project.optional-dependencies]</span></code> table, assigning the list of dependencies to the keyword.</p>
+<hr class="docutils" />
+<p>Consider the common scenario: you are use <code class="docutils literal notranslate"><span class="pre">flake8</span></code> to check your code in the dev environment, but you don’t need this dependency to be installed with the package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#init</span>
+<span class="c1">#file pyproject.toml</span>
+<span class="o">[</span>project<span class="o">]</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;toy_package&quot;</span>
+<span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span>
+
+<span class="o">[</span>project.optional-dependencies<span class="o">]</span>
+<span class="nv">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;flake8&quot;</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Installing the package without specifying any additional specification just produces an empty installation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--target<span class="w"> </span>./result<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
+ls<span class="w"> </span>result
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">toy_package-0.0.0.dist-info</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, if you specify <code class="docutils literal notranslate"><span class="pre">[dev]</span></code> after the package name, all the packages required by <code class="docutils literal notranslate"><span class="pre">flake8</span></code> will be included in installation target.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>.<span class="o">[</span>dev<span class="o">]</span><span class="w"> </span>--target<span class="w"> </span>./result<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
+ls<span class="w"> </span>result
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">bin</span>                     <span class=" -Color -Color-Bold -Color-Bold-Blue">pycodestyle-2.14.0.dist-info</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">flake8</span>                  pycodestyle.py
+<span class=" -Color -Color-Bold -Color-Bold-Blue">flake8-7.3.0.dist-info</span>  <span class=" -Color -Color-Bold -Color-Bold-Blue">pyflakes</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">mccabe-0.7.0.dist-info</span>  <span class=" -Color -Color-Bold -Color-Bold-Blue">pyflakes-3.4.0.dist-info</span>
+mccabe.py               <span class=" -Color -Color-Bold -Color-Bold-Blue">result</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">__pycache__</span>             <span class=" -Color -Color-Bold -Color-Bold-Blue">toy_package-0.0.0.dist-info</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="extra-files">
 <h2>Extra files<a class="headerlink" href="#extra-files" title="Link to this heading">#</a></h2>
@@ -861,19 +924,22 @@ pip3<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </s
 <p>The following cell creates an example that will be used to demonstrate the feature.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span>/tmp/data_files<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>/tmp/data_files
-mkdir<span class="w"> </span>/tmp/data_files
-<span class="nb">cd</span><span class="w"> </span>/tmp/data_files
-mkdir<span class="w"> </span>-p<span class="w"> </span>src/my_files
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#init</span>
+<span class="c1">#file pyproject.toml</span>
+<span class="o">[</span>project<span class="o">]</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;toy_package&quot;</span>
+<span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The “project” files are created in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>src/my_files
 touch<span class="w"> </span>src/my_files/data_file<span class="o">{</span><span class="m">1</span>..5<span class="o">}</span>.txt
 touch<span class="w"> </span>src/my_files/script_file<span class="o">{</span><span class="m">1</span>..5<span class="o">}</span>.py
 tree<span class="w"> </span>src
-
-cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; pyproject.toml</span>
-<span class="s">[project]</span>
-<span class="s">name = &quot;toy_package&quot;</span>
-<span class="s">version = &quot;0.0.0&quot;</span>
-<span class="s">EOF</span>
 </pre></div>
 </div>
 </div>
@@ -891,7 +957,7 @@ cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; pyproject.toml</spa
     ├── script_file4.py
     └── script_file5.py
 
-1 directory, 10 files
+2 directories, 10 files
 </pre></div>
 </div>
 </div>
@@ -900,7 +966,7 @@ cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; pyproject.toml</spa
 <p>The following cell installs the package in the <code class="docutils literal notranslate"><span class="pre">result</span></code> folder and lists its contents:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span>result<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>result
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>result
 mkdir<span class="w"> </span>result
 pip3<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--target<span class="w"> </span>result<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span>
 ls<span class="w"> </span>result/my_files
@@ -915,32 +981,67 @@ script_file1.py  script_file3.py  script_file5.py
 </div>
 </div>
 <p>As the result there are only <code class="docutils literal notranslate"><span class="pre">.py</span></code> files comes with installed package.</p>
+<hr class="docutils" />
 <p>The following cell shows options to correct the configuration saving <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files in distibution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; pyproject.toml</span>
-<span class="s">[project]</span>
-<span class="s">name = &quot;toy_package&quot;</span>
-<span class="s">version = &quot;0.0.0&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#init</span>
+<span class="c1">#file pyproject.toml</span>
+<span class="o">[</span>project<span class="o">]</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;toy_package&quot;</span>
+<span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span>
 
-<span class="s">[tool.setuptools]</span>
-<span class="s">include-package-data = true</span>
+<span class="o">[</span>tool.setuptools<span class="o">]</span>
+include-package-data<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
 
-<span class="s">[tool.setuptools.packages.find]</span>
-<span class="s">where = [&quot;src&quot;]</span>
-<span class="s">EOF</span>
-
-cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; MANIFEST.in</span>
-<span class="s">include src/my_files/*.txt</span>
-<span class="s">EOF</span>
+<span class="o">[</span>tool.setuptools.packages.find<span class="o">]</span>
+<span class="nv">where</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;src&quot;</span><span class="o">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Only after installing the package with the new configuration do we get all the files needed in the distribution.</p>
+<p>You have to specify the additional packages that the build must include in the <code class="docutils literal notranslate"><span class="pre">MANIFEST.in</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span>result<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>result<span class="w"> </span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#file MANIFEST.in</span>
+include<span class="w"> </span>src/my_files/*.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>The project structure is created in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>src/my_files
+touch<span class="w"> </span>src/my_files/data_file<span class="o">{</span><span class="m">1</span>..5<span class="o">}</span>.txt
+touch<span class="w"> </span>src/my_files/script_file<span class="o">{</span><span class="m">1</span>..5<span class="o">}</span>.py
+tree<span class="w"> </span>src
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">src</span>
+└── <span class=" -Color -Color-Bold -Color-Bold-Blue">my_files</span>
+    ├── data_file1.txt
+    ├── data_file2.txt
+    ├── data_file3.txt
+    ├── data_file4.txt
+    ├── data_file5.txt
+    ├── script_file1.py
+    ├── script_file2.py
+    ├── script_file3.py
+    ├── script_file4.py
+    └── script_file5.py
+
+2 directories, 10 files
+</pre></div>
+</div>
+</div>
+</div>
+<p>The installation in the <code class="docutils literal notranslate"><span class="pre">result</span></code> folder now includes the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>result
 mkdir<span class="w"> </span>result
 pip3<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--target<span class="w"> </span>result<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
 ls<span class="w"> </span>result/my_files
@@ -967,16 +1068,16 @@ data_file3.txt  <span class=" -Color -Color-Bold -Color-Bold-Blue">__pycache__</
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "bash"
+            mode: "tempdir"
         },
         kernelOptions: {
-            name: "bash",
+            name: "tempdir",
             path: "./core/packages"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'bash'</script>
+    <script>kernelName = 'tempdir'</script>
 
                 </article>
               
@@ -1022,7 +1123,10 @@ data_file3.txt  <span class=" -Color -Color-Bold -Color-Bold-Blue">__pycache__</
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional">Optional</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-files">Extra files</a></li>
 </ul>
   </nav></div>

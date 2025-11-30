@@ -574,6 +574,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/flavours.html">Flavours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1045,15 +1049,70 @@ document.write(`
 <section id="tempfile">
 <h2>Tempfile<a class="headerlink" href="#tempfile" title="Link to this heading">#</a></h2>
 <p>With the <code class="docutils literal notranslate"><span class="pre">tempfile</span></code> library, you can create file-like objects that won’t leave any traces on the system.</p>
+<p>There are classes that implement different types of temp objects in the file system:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tempfile.TemporaryFile</span></code> the file-like object that would be deleted as soon as possible.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tempfile.NamedTemporaryFile</span></code> the file-like object that garantees the  existence of a real named file in the file system.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tempfile.SpooledTemporaryFile</span></code> the file-like object keeps data in memory and, under certain circumstances, writes data to the disk.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tempfile.TemporaryDirectory</span></code> creates a temporary directory. The folder is immediately removed from the file system as soon as corresponding object is desctoroyed.</p></li>
+</ul>
 <p>For more check <a class="reference external" href="https://docs.python.org/3/library/tempfile.html">official documentation</a>.</p>
 <hr class="docutils" />
-<p>The following cell shows the most popular way to work with <code class="docutils literal notranslate"><span class="pre">tempfile</span></code> - by using it as a context manager.</p>
+<p>The main feature of all these classes is that they delete associated with instance files/folders as soon as the instance is destroyed or the context is exited. Consider few examples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
-
-<span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">tf</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell creates a temporary directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span>
+<span class="n">name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpbzqikg6l&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The corresponding path is present in the system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, it disappears as soon as the object is destroyed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">temp_dir</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consider the same example, but with context created using the <code class="docutils literal notranslate"><span class="pre">tempfile.NamedTemporaryFile</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">tf</span><span class="p">:</span>
     <span class="n">tf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
     <span class="n">file_name</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">name</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
@@ -1064,27 +1123,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpy90bx135
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpfpinr1yl
 In context manager: True
 Out context manger: False
 </pre></div>
 </div>
 </div>
 </div>
-<p>Inside the context manager, the file exists, but it is automatically deleted when the program exits the context manager’s block.</p>
-<p><strong>Note:</strong> The file is deleted immediately after the flow leaves the context:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
-</pre></div>
-</div>
-</div>
-</div>
+<p>The temporary file is deleted when the flow leaves the context.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
