@@ -361,6 +361,7 @@ parts:
     - file: packages/socket.ipynb
     - file: packages/requests.ipynb
     - file: packages/jsonschema.ipynb
+    - file: packages/pydantic.ipynb
     - file: packages/tkinter.ipynb
       sections:
       - file: packages/tkinter/widgets_overview.ipynb
