@@ -1,0 +1,11 @@
+{
+    "argv":[
+        "python3",
+        "-m", 
+        "src.http_kernel",
+        "-f",
+        "{connection_file}"
+    ],
+    "display_name":"IPython HTTP",
+    "language": "python3"
+}

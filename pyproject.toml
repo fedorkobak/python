@@ -11,3 +11,4 @@ packages = ["src"]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "src/linters_kernel/data_kernelspec" = "share/jupyter/kernels/linters_kernel"
+"src/http_kernel/data_kernelspec" = "share/jupyter/kernels/http_kernel"
