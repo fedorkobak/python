@@ -79,9 +79,9 @@ parts:
       - file: standard_library/unittest/check_error.ipynb
       - file: standard_library/unittest/mocking.ipynb
         sections:
-        - file: standard_library/unittest/mocking/call_details.ipynb
-        - file: standard_library/unittest/mocking/syntax.ipynb
+        - file: standard_library/unittest/mocking/mock_object.ipynb
         - file: standard_library/unittest/mocking/patch.ipynb
+        - file: standard_library/unittest/mocking/call_details.ipynb
         - file: standard_library/unittest/mocking/raising_errors.ipynb
     - file: standard_library/logging.ipynb
       sections:
