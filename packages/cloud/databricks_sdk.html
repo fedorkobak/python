@@ -1,0 +1,1415 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Databricks SDK &#8212; Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/cloud/databricks_sdk';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Feature engineering" href="databricks_sdk/feature_engineering.html" />
+    <link rel="prev" title="AWS SDK" href="aws_sdk.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../core/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../core/syntax.html">Syntax</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/operators.html">Operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/operators/order.html">Order</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/keywords.html">Keywords</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/keywords/in.html">Is in array (in)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/keywords/yield.html">yield</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/functions/parameters.html">Parameters</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/oop.html">OOP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/variables.html">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/interface.html">Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/class_method.html">Class method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/special_methods.html">Special methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/exceptions/try_except.html">Try/except</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/syntax/decorators.html">Decorators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../core/datatypes.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/datatypes/basic.html">Basic</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/datatypes/basic/str.html">str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/datatypes/basic/list.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/datatypes/basic/dict.html">dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/datatypes/basic/set.html">set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/datatypes/datetime.html">Datetime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../core/imports.html">Imports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../core/imports/sys_path.html">sys.path list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/imports/from_package_import_all.html"><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">&lt;package&gt;</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/imports/find_module.html">Find module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/imports/importlib.html">Importlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/imports/relative_import.html">Relative import</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../core/files_folders.html">Files &amp; folders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../core/files_folders/pathlib.html">Pathlib</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../core/constructs.html">Constructs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../core/constructs/iterator.html">Iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/constructs/data_classes.html">Data class</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../core/cli_arguments.html">Cli arguments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../core/cli_arguments/argparse.html">Argparse</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../core/packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/packages/pip.html">PIP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/packages/pip/install_uninstall.html">Install &amp; uninstall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/packages/pyproject_toml.html">Pyproject.toml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/packages/hatch.html">Hatch</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../core/interpreter.html">Interpreter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../core/interpreter/build.html">Build</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/collections.html">collections</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/unittest/run_tests.html">Run tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/unittest/run_before_after.html">Run code before/after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/unittest/check_error.html">Check error (assertRaises)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/unittest/mocking.html">Mocking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/unittest/mocking/mock_object.html">Mock object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/unittest/mocking/patch.html">Patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/unittest/mocking/call_details.html">Call details</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/logging.html">Logging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/logging/loggers.html">Loggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/logging/handlers.html">Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/logging/filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/logging/configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/logging/exception_information.html">Exceptions information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/logging/logging_to_file.html">Logging to file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/logging/logger_handler_level.html">Logger/Handler level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/logging/root_logger.html">Root logger</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/linting/annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/linting/types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/linting/types/generics.html">Generics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/linting/tools.html">Tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/re/match_search.html">Match/Search</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../standard_library/concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standard_library/concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standard_library/concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/tracemalloc.html">Tracemalloc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/hashlib.html">Hashlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/zipfile.html">Zipfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standard_library/socket.html">Socket</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pandas/data_types.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pandas/data_types/datetime.html">Date &amp; time</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../pandas/data_types/columns_by_types.html">Columns by types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/creating_loading.html">Creating &amp; loading</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pandas/data_transformations.html">Data transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../pandas/data_transformations/groupby.html">Groupby</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/data_transformations/groupby/groupby_parameters.html"><code class="docutils literal notranslate"><span class="pre">groupby</span></code> parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/data_transformations/groupby/usage_options.html">Usage options</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/data_selecting.html">Data selecting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/data_visualisation.html">Data visualisation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/styles.html">Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/display_options.html">Display options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pandas/inline_columns_add.html">Inline column add (assign)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../sklearn/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sklearn/data_transform/pack_object.html">Pack object</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sklearn/data_transform/pack_object/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sklearn/data_transform/pack_object/columns_transformer.html">Columns transformer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/features_names_out.html">Features names out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/encoders.html">Encoders</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sklearn/data_transform/developing_transformer/features_names_out.html">Feature names out</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/frozen_steps.html">Frozen steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/data_transform/estimator_to_transformer.html">Estimator to transformer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sklearn/grid_search_cv.html">Grid search CV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sklearn/saving_models.html">Saving models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../sklearn/nearest_neighbors.html">Nearest neighbors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn/nearest_neighbors/metric.html">Metric</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Torch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../torch/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/tensor.html">Tensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../torch/tensor/creating_methods.html">Creating methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/tensor/creating_methods/random_distributions.html">Random distributions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../torch/tensor/dimentionality.html">Dimentionality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/tensor/dimentionality/reshape_like.html">Reshape like</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/tensor/dimentionality/transpose_permute.html">Transpose/permute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/tensor/dimentionality/add_dimention.html">Add dimention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/tensor/dimentionality/squeeze.html">Squeeze</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/tensor/concatenation_splitting.html">Concatenation/splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/tensor/indexing.html">Indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/tensor/broadcasting.html">Broadcasting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../torch/loss_functions.html">Loss functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../torch/gradient.html">Gradient</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/layers.html">Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/layers/linear.html">Linear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/layers/dropout.html">Dropout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/layers/normalisation_layers.html">Normalisation layers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../torch/layers/recurrent_layers.html">Recurrent layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/layers/recurrent_layers/forward_input.html">Forward input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/layers/recurrent_layers/layers_number.html">Layers number</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/layers/flatten_unflatten.html">Flatten/unflatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/layers/transformers.html">Transformers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/managing_network.html">Managing network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/managing_network/sequential.html">Sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/managing_network/saving_model.html">Saving model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../torch/devices.html">Devices</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/data_primitives.html">Data primitives</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/data_primitives/data_set.html">Data set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/vision.html">Vision</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/vision/basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/vision/augmentations.html">Augmentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/vision/datasets.html">Datasets</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../torch/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/logistic_regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/multiclass_task.html">Multiclass task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/texts_classification.html">Text classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/mnist.html">MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/symbols_classification.html">Symbols classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/resnet_finetuning.html">Resnet finetuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/cnn_classification.html">CNN classification</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../torch/examples/unet.html">Unet</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/examples/unet/oxford_pet.html">Oxford pet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../torch/examples/unet/voc_segmentation.html">Voc segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/gan.html">GAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch/examples/conditional_gan.html">Conditional GAN</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FastAPI</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../fastapi/intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fastapi/run_application.html">Run application</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fastapi/requests.html">Requests</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fastapi/requests/request_object.html">Request object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fastapi/requests/pydantic_model.html">Pydantic model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fastapi/responses.html">Responses</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fastapi/responses/json.html">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fastapi/responses/exceptions.html">Exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fastapi/logging.html">Logging</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fastapi/documentation.html">Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fastapi/documentation/parameters.html">Parameters</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fastapi/cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fastapi/cors.html">CORS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../visualisation/matplotlib.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/matplotlib/table_in_matplotlib.html">matplotlib tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/matplotlib/gif_creation.html">Gif creation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation/seaborn.html">Seaborn</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../visualisation/plotly.html">Plotly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/plotly/hovers.html">Hovers</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/plotly/dragmode.html">Dragmode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/plotly/color_from_scheme.html">Color from scheme</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../visualisation/dash.html">Dash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/dash/callbacks.html">Callbacks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/dash/components.html">Components</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/dash/select_clear_all.html">Select/Clear All</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/dash/multipage_applications.html">Multipage applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visualisation/dash/empty_figure.html">Empty figure</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../sql/psycopg.html">Psycopg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sql/clickhouse.html">Clickhouse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sql/sqlite.html">sqlite</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../sql/sqlalchemy.html">SQLAlchemy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../sql/sqlalchemy/metadata.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sql/sqlalchemy/create_table.html">Create table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sql/sqlalchemy/query.html">Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sql/sqlalchemy/add_record.html">Add record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sql/sqlalchemy/relations.html">Relations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DS/ML</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ds_ml/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/numpy/create_array.html">Create array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/numpy/operations.html">Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/numpy/norm.html">Norm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/numpy/array_splitting.html">Array splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/numpy/apply_along_axis.html">Apply along axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/numpy/set_printoptions.html">Print options</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/jupyter/ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/jupyter/ipython/syntax.html">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/jupyter/ipython/reloading_modules.html">Reload modules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/jupyter/client.html">Client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/hugging_face/hub.html">Hub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/hugging_face/tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/hugging_face/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/hugging_face/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/airflow/run_airflow.html">Run airflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/airflow/tutorial_dag.html">Tutorial DAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/airflow/tasks.html">Tasks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/geopy/distances.html">Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/geopy/request.html">Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/ranx.html">Ranx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/ranx/entry_queries_documents.html">Queries documents entry</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/tracking/experiment.html">Experiment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/flavours.html">Flavours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/LLMs.html">LLMs</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/tools.html">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/langchain/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/langsmith.html">LangSmith</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/spark/data_sources.html">Data sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/spark/transformations.html">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/spark/groupby.html">Group by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/spark/ml.html">ML</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ds_ml/optuna.html">Optuna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ds_ml/xgboost.html">XGBoost</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../excel_export.html">To excel import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jinja.html">Jinja</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docker_sdk.html">Docker SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docker_sdk/containers.html">Containers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../apscheduler.html">APScheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../selenium.html">Selenium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tqdm.html">TQDM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../redis.html">Redis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../redis/redis_client.html">Redis client</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../requests.html">Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jsonschema.html">jsonschema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pydantic.html">Pydantic</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tkinter/widgets_overview.html">Widgets overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tkinter/widgets_overview/scrolling.html">Scrolling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tkinter/widgets_overview/treeview.html">Treeview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tkinter/widgets_overview/list_box.html">Listbox</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../tkinter/pack.html">Pack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tkinter/change_elements_position.html">Change elements position</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../cloud.html">Cloud</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Databricks SDK</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/fedorkobak/knowledge" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/packages/cloud/databricks_sdk.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Databricks SDK</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace-client">Workspace client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vscode">VSCode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-session">Spark session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving">Serving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobs-api">Jobs API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dbutils">dbutils</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jobs">Jobs</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="databricks-sdk">
+<h1>Databricks SDK<a class="headerlink" href="#databricks-sdk" title="Link to this heading">#</a></h1>
+<p>This page considers details on working with databricks SDK. Check the <a class="reference external" href="https://databricks-sdk-py.readthedocs.io/en/latest/">Databricks SDK for Python</a> for official reference.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="workspace-client">
+<h2>Workspace client<a class="headerlink" href="#workspace-client" title="Link to this heading">#</a></h2>
+<p>The most popular way to communicate with databricks workspace is through a <code class="docutils literal notranslate"><span class="pre">databricks.sdk.WorkspaceClient</span></code>. To create it, you must set up Databricks authentification:</p>
+<ul class="simple">
+<li><p>Through setting <code class="docutils literal notranslate"><span class="pre">~/.databrickscfg</span></code> file. It may look like this:</p></li>
+<li><p>Through defining environment variables. The most popular are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">DATABRICKS_HOST</span></code>: set your databricks host.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DATABRICKS_TOKEN</span></code>: set your access token.</p></li>
+</ul>
+</li>
+</ul>
+<p>The default <code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code> file may look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<span class="n">host</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">////</span><span class="n">dbc</span><span class="o">-&lt;</span><span class="n">some</span> <span class="n">unique</span> <span class="k">for</span> <span class="n">workspace</span><span class="o">&gt;.</span><span class="n">cloud</span><span class="o">.</span><span class="n">databricks</span><span class="o">.</span><span class="n">com</span>
+<span class="n">token</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">here</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">token</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The profile name <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code> is important. You can specify a different name, but this will be used by default.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">host</span></code> you can copy from the browser url line (just host, without path).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">token</span></code> you can get through databricks UI: settings-&gt;developer-&gt;Access tokens-&gt;Manage.</p></li>
+</ul>
+<p><strong>Note.</strong> If you have problems with authentication, check the environment variables. Some tools, such as the VSCode Databricks extension, may define some default values starting with <code class="docutils literal notranslate"><span class="pre">DATABRICKS_...</span></code>. Also, check the <code class="docutils literal notranslate"><span class="pre">~/.ipython/profile_default/startup</span></code> if there are some startup scripts that can invisibly change the behavior of the IPython.</p>
+<hr class="docutils" />
+<p>If everything cofigured correctly, the following cell shold be runned without any issues:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vscode">
+<h2>VSCode<a class="headerlink" href="#vscode" title="Link to this heading">#</a></h2>
+<p>Some examples that you can only be run using the Databricks extension for VSCode. Its configuration can be extremely tricky.</p>
+<p>For now (oct 2025) it requires:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">python3.11</span></code>: or any other version which supporst <a class="reference external" href="https://docs.python.org/3/library/distutils.html"><code class="docutils literal notranslate"><span class="pre">distutils</span></code></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">readline</span></code> module can only be added to the Python distribution if it is built with the <code class="docutils literal notranslate"><span class="pre">realine</span></code> package installed on the system.</p></li>
+<li><p>It specifies its own <code class="docutils literal notranslate"><span class="pre">spark</span></code> object, which cannot be created if the regular <code class="docutils literal notranslate"><span class="pre">pyspark</span></code> distribution is installed on the system. Use a special virtual environment.</p></li>
+</ul>
+<p><strong>Note</strong> The extension adds an initialization file to the <code class="docutils literal notranslate"><span class="pre">ipython</span></code> (<code class="docutils literal notranslate"><span class="pre">/home/user/.ipython/profile_default/startup</span></code>), so your <code class="docutils literal notranslate"><span class="pre">ipython</span></code> can change it behavior. To beat this you can follow:</p>
+<ul class="simple">
+<li><p>Create IPython profile: <code class="docutils literal notranslate"><span class="pre">ipython</span> <span class="pre">profile</span> <span class="pre">create</span> <span class="pre">databricks</span></code>.</p></li>
+<li><p>Copy the startup file created by the extension. It is usually named something like <code class="docutils literal notranslate"><span class="pre">00-databricks-init-....py</span></code>. By default, IPython stores its profiles in the <code class="docutils literal notranslate"><span class="pre">~/.ipython</span></code> folder.</p></li>
+<li><p>Create a separate kernel specification that runs <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">ipykernel_launcher</span></code> with the <code class="docutils literal notranslate"><span class="pre">--profile=databricks</span></code> variable. Kernels are usually stored in the <code class="docutils literal notranslate"><span class="pre">share/jupyter/kernels</span></code> catalog of the python virtual environment.</p></li>
+</ul>
+<hr class="docutils" />
+<p>If the setup is correct, you will have access to the <code class="docutils literal notranslate"><span class="pre">spark</span></code> and <code class="docutils literal notranslate"><span class="pre">dbutils</span></code> objects from the notebook without direct assignment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyspark.sql.connect.session.SparkSession at 0x73f9de975a50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbutils</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;databricks.sdk.dbutils.RemoteDbUtils at 0x73f9dc5b51d0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="spark-session">
+<h2>Spark session<a class="headerlink" href="#spark-session" title="Link to this heading">#</a></h2>
+<p>You can get a databricks session that will have access to your databricks workspace by using <code class="docutils literal notranslate"><span class="pre">databricks.connect.DatabricksSession.builder.remote().getOrCreate</span></code> method.</p>
+<ul class="simple">
+<li><p>You cannnot create crate a <code class="docutils literal notranslate"><span class="pre">DatabricksSession</span></code> if you have a regular <code class="docutils literal notranslate"><span class="pre">pyspark</span></code> installed on your system. You must run this code from a different Python environment.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell creates a Spark session that attched to the Databricks environment runned in the “serverless” mode.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">databricks.connect</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabricksSession</span>
+<span class="n">spark</span> <span class="o">=</span> <span class="n">DatabricksSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">serverless</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell displays the list of the tables that are available in my Databricks workspace.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SHOW TABLES&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+--------------------+-----------+
+|database|           tableName|isTemporary|
++--------+--------------------+-----------+
+| default|  telco_churn_bronze|      false|
+| default|telco_churn_features|      false|
++--------+--------------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="feature-engineering">
+<h2>Feature engineering<a class="headerlink" href="#feature-engineering" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">databricks.feature_engineering</span></code> module allows to manipulate feature storage in databricks.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">databricks.feature_engineering.FeatureEngineeringClient</span></code> object provides methods:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">create_feature_table(...)</span></code></p></td>
+<td><p>Creates a feature table in Unity Catalog, defining its primary keys, schema, timestamp column, and metadata.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">create_training_set(...)</span></code></p></td>
+<td><p>Joins features (via <code class="docutils literal notranslate"><span class="pre">FeatureLookup</span></code> or <code class="docutils literal notranslate"><span class="pre">FeatureSpec</span></code>) to a DataFrame to form a training set with metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">log_model(...)</span></code></p></td>
+<td><p>Logs an MLflow model together with feature metadata so the required features can be fetched automatically at inference.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">score_batch(...)</span></code></p></td>
+<td><p>Runs batch inference: given a model URI and a DataFrame, automatically fetches missing features, joins them, and returns predictions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">create_feature_spec(...)</span></code></p></td>
+<td><p>Defines a feature spec (collection of <code class="docutils literal notranslate"><span class="pre">FeatureLookup</span></code>/<code class="docutils literal notranslate"><span class="pre">FeatureFunction</span></code>) for use in training sets or feature serving.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">create_feature_serving_endpoint(...)</span></code></p></td>
+<td><p>Creates an endpoint for real-time / online feature serving.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_feature_serving_endpoint(...)</span></code> / <code class="docutils literal notranslate"><span class="pre">delete_feature_serving_endpoint(...)</span></code></p></td>
+<td><p>Manage (retrieve or delete) feature serving endpoints.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">publish_table(...)</span></code></p></td>
+<td><p>Publishes an offline feature table to an online store for low-latency feature access.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">read_table(...)</span></code></p></td>
+<td><p>Reads the contents of a feature table into a Spark DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">write_table(...)</span></code></p></td>
+<td><p>Inserts or upserts data into a feature table; supports streaming DataFrames.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_feature_table_tag(...)</span></code> / <code class="docutils literal notranslate"><span class="pre">delete_feature_table_tag(...)</span></code></p></td>
+<td><p>Manage tags (set or delete) on feature tables for governance and organization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">drop_online_table(...)</span></code></p></td>
+<td><p>Removes a published feature table from an online store.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more details and examples check the <a class="reference internal" href="databricks_sdk/feature_engineering.html"><span class="std std-doc">Feature engineering</span></a> page.</p>
+</section>
+<section id="serving">
+<h2>Serving<a class="headerlink" href="#serving" title="Link to this heading">#</a></h2>
+<p>Databricks offers many possibilities of posibilities for serving machine, learning models as well as served models. You can access many functions can be accessed through the Python SDK. The following talbe lists some of them:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Possibility</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Python SDK Context / Method Category</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Create Endpoint</strong></p></td>
+<td class="text-left"><p>Programmatically create a new model serving endpoint, including configuration for custom models, Foundation Model APIs, or external models.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.create()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Get/List Endpoints</strong></p></td>
+<td class="text-left"><p>Retrieve the status, configuration, and metadata for a specific serving endpoint or list all serving endpoints in the workspace.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.get()</span></code>, <code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.list()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Update Endpoint Configuration</strong></p></td>
+<td class="text-left"><p>Modify an existing serving endpoint’s configuration, such as changing the served model version, adjusting traffic split, or changing the workload size.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.update_config()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Delete Endpoint</strong></p></td>
+<td class="text-left"><p>Remove a serving endpoint.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.delete()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Query Endpoint (Scoring)</strong></p></td>
+<td class="text-left"><p>Send real-time inference requests to a deployed model serving endpoint, often using an OpenAI-compatible client configured via the SDK for LLMs, or standard methods for custom models.</p></td>
+<td class="text-left"><p>Handled via the Databricks-configured OpenAI client or other scoring methods (e.g., <code class="docutils literal notranslate"><span class="pre">mlflow.deployments.get_deploy_client()</span></code> in some contexts).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Manage Provisioned Throughput (PT) Endpoints</strong></p></td>
+<td class="text-left"><p>Create and manage endpoints specifically configured for Foundation Models with guaranteed performance (Provisioned Throughput).</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.create_pt_endpoint()</span></code> (and related PT methods)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Retrieve Build Logs</strong></p></td>
+<td class="text-left"><p>Get the build logs for a served model on a serving endpoint, useful for debugging deployment issues.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w.serving_endpoints.get_served_model_build_logs()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Configure AI Gateway</strong></p></td>
+<td class="text-left"><p>Set configurations related to AI Gateway features like fallbacks, guardrails, inference tables, and usage tracking for the serving endpoint.</p></td>
+<td class="text-left"><p>Used within the <code class="docutils literal notranslate"><span class="pre">ai_gateway</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">create()</span></code>/<code class="docutils literal notranslate"><span class="pre">update_config()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Configure Rate Limits</strong></p></td>
+<td class="text-left"><p>Apply rate limits to the serving endpoint (though documentation suggests using AI Gateway for newer rate limit management).</p></td>
+<td class="text-left"><p>Used within the <code class="docutils literal notranslate"><span class="pre">rate_limits</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">create()</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Route Optimization</strong></p></td>
+<td class="text-left"><p>Enable configuration for route optimization on the serving endpoint for low-latency workloads.</p></td>
+<td class="text-left"><p>Used within the <code class="docutils literal notranslate"><span class="pre">route_optimized</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">create()</span></code>/<code class="docutils literal notranslate"><span class="pre">update_config()</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check more in the <a class="reference internal" href="databricks_sdk/serving.html"><span class="std std-doc">Serving</span></a> page.</p>
+</section>
+<section id="workspace">
+<h2>Workspace<a class="headerlink" href="#workspace" title="Link to this heading">#</a></h2>
+<p>Manage your workspace. You can access this API through <code class="docutils literal notranslate"><span class="pre">WorkSpaceClient().workspace</span></code>. The following table lists the methods and their descriptions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">delete(path:</span> <span class="pre">str,</span> <span class="pre">recursive:</span> <span class="pre">Optional[bool])</span></code></p></td>
+<td><p>Deletes an object or directory (optionally recursively).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">download(path:</span> <span class="pre">str,</span> <span class="pre">format:</span> <span class="pre">ExportFormat)</span></code></p></td>
+<td><p>Downloads a notebook or file from the workspace.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">export(path:</span> <span class="pre">str,</span> <span class="pre">format:</span> <span class="pre">Optional[ExportFormat])</span></code></p></td>
+<td><p>Exports an object or directory (e.g. notebook or folder).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_permission_levels(workspace_object_type:</span> <span class="pre">str,</span> <span class="pre">workspace_object_id:</span> <span class="pre">str)</span></code></p></td>
+<td><p>Gets the permission levels a user can have on an object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_permissions(workspace_object_type:</span> <span class="pre">str,</span> <span class="pre">workspace_object_id:</span> <span class="pre">str)</span></code></p></td>
+<td><p>Gets the current permissions on a workspace object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_status(path:</span> <span class="pre">str)</span></code></p></td>
+<td><p>Gets the status (metadata / existence) of an object or directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">import_(path:</span> <span class="pre">str,</span> <span class="pre">content:</span> <span class="pre">Optional[str],</span> <span class="pre">format:</span> <span class="pre">Optional[ImportFormat],</span> <span class="pre">language:</span> <span class="pre">Optional[Language],</span> <span class="pre">overwrite:</span> <span class="pre">Optional[bool])</span></code></p></td>
+<td><p>Imports an object (notebook / file) or directory into the workspace.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">list(path:</span> <span class="pre">str,</span> <span class="pre">notebooks_modified_after:</span> <span class="pre">int,</span> <span class="pre">recursive:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False)</span></code></p></td>
+<td><p>Lists workspace objects under a path (optionally recursive).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mkdirs(path:</span> <span class="pre">str)</span></code></p></td>
+<td><p>Creates a directory (and any necessary parent dirs).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_permissions(workspace_object_type:</span> <span class="pre">str,</span> <span class="pre">workspace_object_id:</span> <span class="pre">str,</span> <span class="pre">access_control_list:</span> <span class="pre">Optional[List[WorkspaceObjectAccessControlRequest]])</span></code></p></td>
+<td><p>Sets permissions on an object (replacing existing ones).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">update_permissions(workspace_object_type:</span> <span class="pre">str,</span> <span class="pre">workspace_object_id:</span> <span class="pre">str,</span> <span class="pre">access_control_list:</span> <span class="pre">Optional[List[WorkspaceObjectAccessControlRequest]])</span></code></p></td>
+<td><p>Updates permissions on an object (modifies existing ones).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">upload(path:</span> <span class="pre">str,</span> <span class="pre">content:</span> <span class="pre">bytes,</span> <span class="pre">format:</span> <span class="pre">ImportFormat,</span> <span class="pre">language:</span> <span class="pre">Language,</span> <span class="pre">overwrite:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False)</span></code></p></td>
+<td><p>Uploads a notebook / file or directory content to the workspace.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p>The following cell demonstrates how to create the file can be created in your Databricks API.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">databricks.sdk.service</span><span class="w"> </span><span class="kn">import</span> <span class="n">workspace</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+
+<span class="n">notebook_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/Workspace/Users/</span><span class="si">{</span><span class="n">w</span><span class="o">.</span><span class="n">current_user</span><span class="o">.</span><span class="n">me</span><span class="p">()</span><span class="o">.</span><span class="n">user_name</span><span class="si">}</span><span class="s2">/knowledge/some_file&quot;</span>
+
+<span class="n">w</span><span class="o">.</span><span class="n">workspace</span><span class="o">.</span><span class="n">import_</span><span class="p">(</span>
+    <span class="n">content</span><span class="o">=</span><span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">((</span><span class="s2">&quot;CREATE LIVE TABLE dlt_sample AS SELECT 1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
+    <span class="nb">format</span><span class="o">=</span><span class="n">workspace</span><span class="o">.</span><span class="n">ImportFormat</span><span class="o">.</span><span class="n">SOURCE</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="n">workspace</span><span class="o">.</span><span class="n">Language</span><span class="o">.</span><span class="n">SQL</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">notebook_path</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="jobs-api">
+<h2>Jobs API<a class="headerlink" href="#jobs-api" title="Link to this heading">#</a></h2>
+<p>The Databricks SDK contains a set of wrappers for managing Databricks jobs. Check <a class="reference external" href="https://databricks-sdk-py.readthedocs.io/en/latest/workspace/jobs/jobs.html">w.jobs</a> page of the official documentation.</p>
+<hr class="docutils" />
+<p>The following cell uses the <code class="docutils literal notranslate"><span class="pre">w.jobs.create</span></code> to create a job.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WorkspaceClient</span><span class="p">()</span>
+<span class="n">w</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;knowledge_job&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CreateResponse(job_id=714431377314811)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can access jobs using the <code class="docutils literal notranslate"><span class="pre">w.jobs.list</span></code> method. It returns a generator containing all available jobs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_jobs</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="n">my_jobs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object JobsExt.list at 0x7ae387747220&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next cell shows the properties of the created job.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_job</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">my_jobs</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">my_job</span><span class="o">.</span><span class="n">job_id</span><span class="p">,</span> <span class="n">my_job</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(714431377314811, &#39;knowledge_job&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell deletes the job.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">job_id</span><span class="o">=</span><span class="n">my_job</span><span class="o">.</span><span class="n">job_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The are no more jobs in the databricks now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">list</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dbutils">
+<h2>dbutils<a class="headerlink" href="#dbutils" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">dbutils</span></code> is an object that is pre-initialized in Databricks notebooks. You should only run it in a configured Databricks environment. The following table lists the main modules of dbutils, and their description:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>credentials</p></td>
+<td><p>Utilities for interacting with credentials within notebooks</p></td>
+</tr>
+<tr class="row-odd"><td><p>data</p></td>
+<td><p>Utilities for understanding and interacting with datasets (EXPERIMENTAL)</p></td>
+</tr>
+<tr class="row-even"><td><p>fs</p></td>
+<td><p>Utilities for accessing the Databricks file system (DBFS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>jobs</p></td>
+<td><p>Utilities for leveraging job features</p></td>
+</tr>
+<tr class="row-even"><td><p>library</p></td>
+<td><p>Deprecated. Utilities for managing session-scoped libraries</p></td>
+</tr>
+<tr class="row-odd"><td><p>meta</p></td>
+<td><p>Utilities to hook into the compiler (EXPERIMENTAL)</p></td>
+</tr>
+<tr class="row-even"><td><p>notebook</p></td>
+<td><p>Utilities for managing the control flow of notebooks (EXPERIMENTAL)</p></td>
+</tr>
+<tr class="row-odd"><td><p>preview</p></td>
+<td><p>Utilities in preview</p></td>
+</tr>
+<tr class="row-even"><td><p>secrets</p></td>
+<td><p>Utilities for leveraging secrets within notebooks</p></td>
+</tr>
+<tr class="row-odd"><td><p>widgets</p></td>
+<td><p>Utilities for parameterizing notebooks</p></td>
+</tr>
+<tr class="row-even"><td><p>api</p></td>
+<td><p>Utilities for managing application builds</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check more in <a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/databricks-utils">Databricks Utilities (<code class="docutils literal notranslate"><span class="pre">dbutils</span></code>) reference</a> page.</p>
+<section id="jobs">
+<h3>Jobs<a class="headerlink" href="#jobs" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">dbutils.jobs</span></code> module allows you to manipulate the behavour of Dataricks jobs. To throw messages between jobs use:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dbutils.jobs.taskValues.set</span></code> allows to set message that would be picked up by the some other script.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dbutils.jobs.taskValues.set</span></code> to pick up the message generated by the other job.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell sets the “hello” message under the “test” key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbutils</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">taskValues</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell picks up the <code class="docutils literal notranslate"><span class="pre">test</span></code> message leaved by task <code class="docutils literal notranslate"><span class="pre">some_task</span></code>. For debuging purposes <code class="docutils literal notranslate"><span class="pre">debugValue</span></code> is set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbutils</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">taskValues</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">taskKey</span><span class="o">=</span><span class="s2">&quot;some_task&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">debugValue</span><span class="o">=</span><span class="s2">&quot;not found&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;not found&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the code is not running in the job environment, the <code class="docutils literal notranslate"><span class="pre">debugValue</span></code> is returned.</p>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./packages/cloud"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aws_sdk.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">AWS SDK</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="databricks_sdk/feature_engineering.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Feature engineering</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace-client">Workspace client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vscode">VSCode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-session">Spark session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serving">Serving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobs-api">Jobs API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dbutils">dbutils</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jobs">Jobs</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fedor Kobak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

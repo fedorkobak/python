@@ -1,0 +1,1617 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Layers &#8212; Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'torch/layers';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linear" href="layers/linear.html" />
+    <link rel="prev" title="Gradient" href="gradient.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Python - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/syntax.html">Syntax</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/operators.html">Operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/operators/order.html">Order</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/keywords.html">Keywords</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/keywords/in.html">Is in array (in)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/keywords/yield.html">yield</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/functions/parameters.html">Parameters</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/oop.html">OOP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/variables.html">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/interface.html">Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/class_method.html">Class method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_methods.html">Special methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/exceptions/try_except.html">Try/except</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/syntax/decorators.html">Decorators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/datatypes.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/datatypes/basic.html">Basic</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/str.html">str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/list.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/dict.html">dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/set.html">set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/datatypes/datetime.html">Datetime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/imports.html">Imports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/sys_path.html">sys.path list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/from_package_import_all.html"><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">&lt;package&gt;</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/find_module.html">Find module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/importlib.html">Importlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/relative_import.html">Relative import</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/files_folders.html">Files &amp; folders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/files_folders/pathlib.html">Pathlib</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/constructs.html">Constructs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/constructs/iterator.html">Iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/constructs/data_classes.html">Data class</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/cli_arguments.html">Cli arguments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/cli_arguments/argparse.html">Argparse</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/packages/pip.html">PIP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/packages/pip/install_uninstall.html">Install &amp; uninstall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/packages/pyproject_toml.html">Pyproject.toml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/packages/hatch.html">Hatch</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/interpreter.html">Interpreter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/interpreter/build.html">Build</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/collections.html">collections</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/run_tests.html">Run tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/run_before_after.html">Run code before/after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/unittest/check_error.html">Check error (assertRaises)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/unittest/mocking.html">Mocking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/unittest/mocking/mock_object.html">Mock object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/unittest/mocking/patch.html">Patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/unittest/mocking/call_details.html">Call details</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/logging.html">Logging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/loggers.html">Loggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/handlers.html">Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/exception_information.html">Exceptions information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/logging_to_file.html">Logging to file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/logger_handler_level.html">Logger/Handler level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/logging/root_logger.html">Root logger</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/linting/annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/linting/types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/linting/types/generics.html">Generics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/linting/tools.html">Tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/re/match_search.html">Match/Search</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../standard_library/concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../standard_library/concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../standard_library/concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../standard_library/concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/tracemalloc.html">Tracemalloc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/hashlib.html">Hashlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/zipfile.html">Zipfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standard_library/socket.html">Socket</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pandas/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/data_types.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/data_types/datetime.html">Date &amp; time</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../pandas/data_types/columns_by_types.html">Columns by types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/creating_loading.html">Creating &amp; loading</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/data_transformations.html">Data transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pandas/data_transformations/groupby.html">Groupby</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/data_transformations/groupby/groupby_parameters.html"><code class="docutils literal notranslate"><span class="pre">groupby</span></code> parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/data_transformations/groupby/usage_options.html">Usage options</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/data_selecting.html">Data selecting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/data_visualisation.html">Data visualisation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../pandas/styles.html">Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/display_options.html">Display options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/inline_columns_add.html">Inline column add (assign)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pack_object.html">Pack object</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/columns_transformer.html">Columns transformer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/features_names_out.html">Features names out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/encoders.html">Encoders</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/developing_transformer/features_names_out.html">Feature names out</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/frozen_steps.html">Frozen steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/estimator_to_transformer.html">Estimator to transformer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/grid_search_cv.html">Grid search CV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/saving_models.html">Saving models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/nearest_neighbors.html">Nearest neighbors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/nearest_neighbors/metric.html">Metric</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Torch</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tensor.html">Tensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tensor/creating_methods.html">Creating methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensor/creating_methods/random_distributions.html">Random distributions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tensor/dimentionality.html">Dimentionality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensor/dimentionality/reshape_like.html">Reshape like</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensor/dimentionality/transpose_permute.html">Transpose/permute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensor/dimentionality/add_dimention.html">Add dimention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensor/dimentionality/squeeze.html">Squeeze</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="tensor/concatenation_splitting.html">Concatenation/splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tensor/indexing.html">Indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tensor/broadcasting.html">Broadcasting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="loss_functions.html">Loss functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gradient.html">Gradient</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Layers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="layers/linear.html">Linear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers/dropout.html">Dropout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers/normalisation_layers.html">Normalisation layers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="layers/recurrent_layers.html">Recurrent layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="layers/recurrent_layers/forward_input.html">Forward input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers/recurrent_layers/layers_number.html">Layers number</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="layers/flatten_unflatten.html">Flatten/unflatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers/transformers.html">Transformers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="managing_network.html">Managing network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="managing_network/sequential.html">Sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managing_network/saving_model.html">Saving model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="devices.html">Devices</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_primitives.html">Data primitives</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_primitives/data_set.html">Data set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="vision.html">Vision</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="vision/basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vision/augmentations.html">Augmentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vision/datasets.html">Datasets</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/logistic_regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiclass_task.html">Multiclass task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/texts_classification.html">Text classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/mnist.html">MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/symbols_classification.html">Symbols classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/resnet_finetuning.html">Resnet finetuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/cnn_classification.html">CNN classification</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="examples/unet.html">Unet</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/unet/oxford_pet.html">Oxford pet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/unet/voc_segmentation.html">Voc segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/gan.html">GAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/conditional_gan.html">Conditional GAN</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FastAPI</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/run_application.html">Run application</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/requests.html">Requests</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/requests/request_object.html">Request object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/requests/pydantic_model.html">Pydantic model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/responses.html">Responses</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/responses/json.html">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/responses/exceptions.html">Exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/logging.html">Logging</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/documentation.html">Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/documentation/parameters.html">Parameters</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/cors.html">CORS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/matplotlib.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/matplotlib/table_in_matplotlib.html">matplotlib tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/matplotlib/gif_creation.html">Gif creation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualisation/seaborn.html">Seaborn</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/plotly.html">Plotly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/hovers.html">Hovers</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/dragmode.html">Dragmode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/color_from_scheme.html">Color from scheme</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/dash.html">Dash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/callbacks.html">Callbacks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/components.html">Components</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/select_clear_all.html">Select/Clear All</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/multipage_applications.html">Multipage applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/empty_figure.html">Empty figure</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sql/psycopg.html">Psycopg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sql/clickhouse.html">Clickhouse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sql/sqlite.html">sqlite</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sql/sqlalchemy.html">SQLAlchemy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/metadata.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/create_table.html">Create table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/query.html">Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/add_record.html">Add record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/relations.html">Relations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DS/ML</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/create_array.html">Create array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/operations.html">Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/norm.html">Norm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/array_splitting.html">Array splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/apply_along_axis.html">Apply along axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/set_printoptions.html">Print options</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/jupyter/ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/jupyter/ipython/syntax.html">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/jupyter/ipython/reloading_modules.html">Reload modules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/jupyter/client.html">Client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/hugging_face/hub.html">Hub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/hugging_face/tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/hugging_face/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/hugging_face/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/airflow/run_airflow.html">Run airflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/airflow/tutorial_dag.html">Tutorial DAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/airflow/tasks.html">Tasks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/geopy/distances.html">Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/geopy/request.html">Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/ranx.html">Ranx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/ranx/entry_queries_documents.html">Queries documents entry</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/tracking/experiment.html">Experiment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/flavours.html">Flavours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/LLMs.html">LLMs</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/tools.html">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/langchain/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/data_sources.html">Data sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/transformations.html">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/groupby.html">Group by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/ml.html">ML</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../packages/intro.html">Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/excel_export.html">To excel import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/jinja.html">Jinja</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/docker_sdk.html">Docker SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/docker_sdk/containers.html">Containers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/apscheduler.html">APScheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/selenium.html">Selenium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/tqdm.html">TQDM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/redis.html">Redis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/redis/redis_client.html">Redis client</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/requests.html">Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/jsonschema.html">jsonschema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/pydantic.html">Pydantic</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/tkinter/widgets_overview.html">Widgets overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/scrolling.html">Scrolling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/treeview.html">Treeview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/list_box.html">Listbox</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/pack.html">Pack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/change_elements_position.html">Change elements position</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/cloud.html">Cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/fedorkobak/knowledge" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/torch/layers.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Layers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear">Linear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout">Dropout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization-layers">Normalization layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional">Convolutional</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-convolution">Inverse convolution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling">Pooling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-layers">Recurrent layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers">Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flatten-unflaten">Flatten/unflaten</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="layers">
+<h1>Layers<a class="headerlink" href="#layers" title="Link to this heading">#</a></h1>
+<p>Layer in torch is some transformation with some inputs and some outputs. Check official documentation page for <a class="reference external" href="https://docs.pytorch.org/docs/stable/nn.html#transformer-layers"><code class="docutils literal notranslate"><span class="pre">torch.nn</span></code></a> module - it lists most of layers available in torch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">prod</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To perform a layer transformation on the tensor <code class="docutils literal notranslate"><span class="pre">X</span></code>, simply use the syntax <code class="docutils literal notranslate"><span class="pre">layer(X)</span></code>.</p>
+<section id="linear">
+<h2>Linear<a class="headerlink" href="#linear" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code> layer performs the following operation:</p>
+<div class="math notranslate nohighlight">
+\[X_{n \times l} \cdot \left(\omega_{k \times l}\right)^T + b_k\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(l\)</span>: number of inputs</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>: number of outputs</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: number of input samples</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_{n \times l}\)</span>: input tensor</p></li>
+<li><p><span class="math notranslate nohighlight">\(\omega_{k \times l}\)</span>: weight matrix of the layer</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_k\)</span>: bias vector of the layer</p></li>
+</ul>
+<p>Find out more:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html">Corresponding page</a> in the official documentation.</p></li>
+<li><p><a class="reference internal" href="layers/linear.html"><span class="std std-doc">Special page</span></a> on this website.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell defines a linear layer and the appropriate input for it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">in_features</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">out_features</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+    <span class="n">in_features</span> <span class="o">=</span> <span class="n">in_features</span><span class="p">,</span> 
+    <span class="n">out_features</span> <span class="o">=</span> <span class="n">out_features</span>
+<span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span> <span class="p">,</span><span class="n">in_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell applies the Torch layer to the input data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">linear</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-0.1886, -0.7310, -0.0978],
+        [-0.3230, -0.8067,  0.0371],
+        [-0.3204, -0.9425,  0.0208],
+        [-0.2285, -0.7381, -0.0097],
+        [-0.3597, -0.7659, -0.1116],
+        [-0.2014, -0.8315, -0.2646],
+        [-0.2403, -0.7090,  0.0276],
+        [-0.3010, -0.9064, -0.3029],
+        [-0.1405, -0.6946, -0.1152],
+        [-0.3152, -0.5994,  0.0664]], grad_fn=&lt;AddmmBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the same result using algebraic operations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="nd">@linear</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">linear</span><span class="o">.</span><span class="n">bias</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-0.1886, -0.7310, -0.0978],
+        [-0.3230, -0.8067,  0.0371],
+        [-0.3204, -0.9425,  0.0208],
+        [-0.2285, -0.7381, -0.0097],
+        [-0.3597, -0.7659, -0.1116],
+        [-0.2014, -0.8315, -0.2646],
+        [-0.2403, -0.7090,  0.0276],
+        [-0.3010, -0.9064, -0.3029],
+        [-0.1405, -0.6946, -0.1152],
+        [-0.3152, -0.5994,  0.0664]], grad_fn=&lt;AddBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dropout">
+<h2>Dropout<a class="headerlink" href="#dropout" title="Link to this heading">#</a></h2>
+<p>A dropout layer randomly sets some components of the input tensor to zero with a given probability <span class="math notranslate nohighlight">\(p\)</span>. During training, the remaining non-zero components are scaled by a factor of <span class="math notranslate nohighlight">\( \frac{1}{1-p}\)</span> to prevent signal attenuation. Formally, if we start with a tensor <span class="math notranslate nohighlight">\(x_i\)</span>, where <span class="math notranslate nohighlight">\(i \in \mathbb{N}^k\)</span> represents the indices of the <span class="math notranslate nohighlight">\(k\)</span>-dimensional tensor, the output after applying dropout is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+x'_i = x_i \cdot p_i \cdot \frac{1}{1-p},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_i\)</span> is sampled from a Bernoulli distribution with parameter <span class="math notranslate nohighlight">\(p\)</span>, i.e., <span class="math notranslate nohighlight">\(p_i \sim \text{Bernoulli}(p)\)</span>.</p>
+<p>Find out more in the <a class="reference internal" href="layers/dropout.html"><span class="std std-doc">specific page</span></a>.</p>
+<hr class="docutils" />
+<p>This example demonstrates the transformation of a tensor after passing through a dropout layer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">dropout_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original tensor:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dropout result:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dropout_layer</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original tensor:
+tensor([[1., 2., 3.],
+        [4., 5., 6.],
+        [7., 8., 9.]], dtype=torch.float64)
+
+Dropout result:
+tensor([[ 1.4286,  2.8571,  0.0000],
+        [ 5.7143,  0.0000,  8.5714],
+        [10.0000,  0.0000, 12.8571]], dtype=torch.float64)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normalization-layers">
+<h2>Normalization layers<a class="headerlink" href="#normalization-layers" title="Link to this heading">#</a></h2>
+<p>Set whose main purpose is to normalize input data.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Normlization type</p></th>
+<th class="head"><p>Layers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Batch normalization</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.BatchNorm1d</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.BatchNorm2d</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.BatchNorm3d</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Layer normalization</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.LayerNorm</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Instance normalization</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.InstanceNorm1d</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.InstanceNorm2d</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.InstanceNorm3d</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Find out more in <a class="reference internal" href="layers/normalisation_layers.html"><span class="std std-doc">specific page</span></a>.</p>
+<hr class="docutils" />
+<p>As an example, consider the batch normalization layer. The input data is generated in the following cell:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">example</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.,  1.,  2.,  3.,  4.],
+        [ 5.,  6.,  7.,  8.,  9.],
+        [10., 11., 12., 13., 14.],
+        [15., 16., 17., 18., 19.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This cell applies batch normalization to the tensor under consideration:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="mi">5</span><span class="p">)(</span><span class="n">example</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-1.3416, -1.3416, -1.3416, -1.3416, -1.3416],
+        [-0.4472, -0.4472, -0.4472, -0.4472, -0.4472],
+        [ 0.4472,  0.4472,  0.4472,  0.4472,  0.4472],
+        [ 1.3416,  1.3416,  1.3416,  1.3416,  1.3416]],
+       grad_fn=&lt;NativeBatchNormBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thus, we obtained a matrix where the input is normalized by columns.</p>
+</section>
+<section id="convolutional">
+<h2>Convolutional<a class="headerlink" href="#convolutional" title="Link to this heading">#</a></h2>
+<p>Convolutional layers are implemented in Torch using the classes <code class="docutils literal notranslate"><span class="pre">torch.nn.Conv1d</span></code>, <code class="docutils literal notranslate"><span class="pre">torch.nn.Conv2d</span></code> and <code class="docutils literal notranslate"><span class="pre">torch.nn.Conv3d</span></code>.</p>
+<hr class="docutils" />
+<p>Consider the example of an <code class="docutils literal notranslate"><span class="pre">nn.Conv1d</span></code> layer. Suppose we want to perform convolutions with a two-dimensional kernel on a one-channel sequence, producing a single-channel output. The following cell defines and prints the parameters of the <code class="docutils literal notranslate"><span class="pre">Conv1d</span></code> layer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">out_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">show_conv</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+            <span class="n">prod</span><span class="p">(</span><span class="n">show_conv</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">reshape_as</span><span class="p">(</span><span class="n">show_conv</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="p">)</span>
+    <span class="n">show_conv</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">show_conv</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bias&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">show_conv</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Weight
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parameter containing:
+tensor([[[1., 2.]]], requires_grad=True)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bias
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parameter containing:
+tensor([0.], requires_grad=True)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is an example of data that can be processed using the layer declared above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples_count</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">channels_count</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sequesnce_lenth</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+        <span class="n">samples_count</span> <span class="o">*</span> <span class="n">channels_count</span> <span class="o">*</span> <span class="n">sequesnce_lenth</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">samples_count</span><span class="p">,</span> <span class="n">channels_count</span><span class="p">,</span> <span class="n">sequesnce_lenth</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 0.,  1.,  2.,  3.,  4.]],
+
+        [[ 5.,  6.,  7.,  8.,  9.]],
+
+        [[10., 11., 12., 13., 14.]],
+
+        [[15., 16., 17., 18., 19.]],
+
+        [[20., 21., 22., 23., 24.]]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are 5 samples from a series of 5 elements, each with one input channel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_conv</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 2.,  5.,  8., 11.]],
+
+        [[17., 20., 23., 26.]],
+
+        [[32., 35., 38., 41.]],
+
+        [[47., 50., 53., 56.]],
+
+        [[62., 65., 68., 71.]]], grad_fn=&lt;ConvolutionBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check if the computation for some element matches our expectation:</p>
+<div class="math notranslate nohighlight">
+\[x'_{2,3} = x_{2,3}w_{1} + x_{2,4}w_{2} + b = 7 \times 1 + 8 \times 2 + 0 = 23\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_{ij}\)</span>: <span class="math notranslate nohighlight">\(j\)</span>-th element of the sequence of the <span class="math notranslate nohighlight">\(i\)</span>-th sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x'_{ij}\)</span>: <span class="math notranslate nohighlight">\(j\)</span>-th element of the output of the <span class="math notranslate nohighlight">\(i\)</span>-th sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span>: <span class="math notranslate nohighlight">\(i\)</span>-th weight of the layer under consideration.</p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span>: bias of the layer under consideration.</p></li>
+</ul>
+</section>
+<section id="inverse-convolution">
+<h2>Inverse convolution<a class="headerlink" href="#inverse-convolution" title="Link to this heading">#</a></h2>
+<p>Inverse convolution allows upsampling of an image and passing it through learnable parameters.</p>
+<p>We’ll describe the idea visually:</p>
+<p>Suppose we have an input tensor <code class="docutils literal notranslate"><span class="pre">input</span></code> and a kernel <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+<p><img alt="input" src="../_images/inv_conv_input.png" /></p>
+<p>The kernel is multiplied by each pixel of the input, and the result affects the corresponding part of the output.</p>
+<p><img alt="output" src="../_images/inv_conv_output.png" /></p>
+<p>In torch, inverse convolution is implemented with the classes <code class="docutils literal notranslate"><span class="pre">torch.nn.ConvTranspose1d</span></code>, <code class="docutils literal notranslate"><span class="pre">torch.nn.ConvTranspose2d</span></code>, and <code class="docutils literal notranslate"><span class="pre">torch.nn.ConvTranspose3d</span></code>.</p>
+<hr class="docutils" />
+<p>The following example reproduces the scenario shown in the picture. The next cell defines the input exactly as in the example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
+    <span class="p">[[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]],</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span>
+<span class="p">)</span>
+<span class="nb">input</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[2., 4.],
+         [0., 1.]]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next cell creates a <code class="docutils literal notranslate"><span class="pre">torch.nn.ConvTranspose2d</span></code> layer and initializes it in the same way as the kernel from the example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conv_traspose</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose2d</span><span class="p">(</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">out_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">bias</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="n">kernel</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">conv_traspose</span><span class="o">.</span><span class="n">parameters</span><span class="p">()))</span>
+<span class="n">kernel</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reshape_as</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">conv_traspose</span><span class="o">.</span><span class="n">parameters</span><span class="p">()))</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[[3., 1.],
+          [1., 5.]]]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The last cell shows the result of applying the layer to the input data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conv_traspose</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 6., 14.,  4.],
+         [ 2., 17., 21.],
+         [ 0.,  1.,  5.]]], grad_fn=&lt;SqueezeBackward1&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s totaly same as showed in the example.</p>
+</section>
+<section id="pooling">
+<h2>Pooling<a class="headerlink" href="#pooling" title="Link to this heading">#</a></h2>
+<p>Pooling layers aggregate different subsets of an array according to a specified function.</p>
+<p>Pooling layers are counted below:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Agregation</p></th>
+<th class="head"><p>Layers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Maximum</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.MaxPool1d</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.MaxPool2d</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.MaxPool3d</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Average</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.AvgPool1d</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.AvgPool2d</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torch.nn.AvgPool3d</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p>The following cell demonstrates the application of <code class="docutils literal notranslate"><span class="pre">torch.nn.MaxPooling</span></code> on a vector. Pooling is primarily designed for convolutional networks, so it is applied along the channels, which is the outermost dimension of the input. Therefore, an extra dimension is added to the input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Input&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MaxPool1d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)(</span><span class="nb">input</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Input
+tensor([[0., 1., 2., 3., 4., 5., 6., 7., 8., 9.]], dtype=torch.float16)
+Output
+tensor([[2., 5., 8.]], dtype=torch.float16)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the values were computed as follows:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_1' = \max(w_1, w_2, w_3) = 2\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_2' = \max(w_3, w_4, w_5) = 5\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_3' = \max(w_6, w_7, w_8) = 8\)</span>.</p></li>
+</ul>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w'_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th element of the output.</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th element of the input.</p></li>
+</ul>
+<p><strong>Note</strong> that the last element was skipped because it couldn’t form a complete kernel.</p>
+</section>
+<section id="recurrent-layers">
+<h2>Recurrent layers<a class="headerlink" href="#recurrent-layers" title="Link to this heading">#</a></h2>
+<p>Recent layer realized in Torch with the <code class="docutils literal notranslate"><span class="pre">torch.nn.RNN</span></code> class. Find out more in the <a class="reference internal" href="#layers/recurent_layers.ipynb"><span class="xref myst">special page</span></a>.</p>
+<hr class="docutils" />
+<p>Latest layer implemented in Torch with the <code class="docutils literal notranslate"><span class="pre">torch.nn.RNN</span></code> class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, such input can be processed with <code class="docutils literal notranslate"><span class="pre">input_size=3</span></code> and an arbitrary dimensionality of the hidden state - for example, 4.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rnn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">RNN</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In practice, obtaining all intermediate hidden states of the input sequence is convenient for training the model. An instance of <code class="docutils literal notranslate"><span class="pre">torch.nn.RNN</span></code> returns both all hidden states and the final state. The corresponding dimensions are printed in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">,</span> <span class="n">h_n</span> <span class="o">=</span> <span class="n">rnn</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h_n</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([10, 5, 4])
+torch.Size([1, 5, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Actually, the second output of the layer’s forward pass is the same as the last element in the sequence of intermediate hidden states:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">h_n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[True, True, True, True],
+         [True, True, True, True],
+         [True, True, True, True],
+         [True, True, True, True],
+         [True, True, True, True]]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="transformers">
+<h2>Transformers<a class="headerlink" href="#transformers" title="Link to this heading">#</a></h2>
+<p>The transformer architecture is represented in Torch by the following classes:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nn.Transformer</span></code></p></td>
+<td><p>A transformer model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nn.TransformerEncoder</span></code></p></td>
+<td><p>TransformerEncoder is a stack of N encoder layers.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nn.TransformerDecoder</span></code></p></td>
+<td><p>TransformerDecoder is a stack of N decoder layers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nn.TransformerEncoderLayer</span></code></p></td>
+<td><p>TransformerEncoderLayer is made up of self-attn and feedforward network.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nn.TransformerDecoderLayer</span></code></p></td>
+<td><p>TransformerDecoderLayer is made up of self-attn, multi-head-attn and feedforward network.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Idea behind such architecture of the torch is following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.TransformerEncoderLayer</span></code> and <code class="docutils literal notranslate"><span class="pre">nn.TransformerDecoderLayer</span></code> are just one classical transformer encoder and decoder layers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.TransformerEncoder</span></code> and <code class="docutils literal notranslate"><span class="pre">nn.TransformerDecoder</span></code>,are sequences of layers like <code class="docutils literal notranslate"><span class="pre">nn.TransformerEncoderLayer</span></code> and the <code class="docutils literal notranslate"><span class="pre">nn.TransformerDecoderLayer</span></code>. However, you can use other options, including custom solutions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.Transformer</span></code> is a complete encoder-decoder architecture composed of <code class="docutils literal notranslate"><span class="pre">nn.TransformerEncoder</span></code> and <code class="docutils literal notranslate"><span class="pre">nn.TransformerDecoder</span></code>.</p></li>
+</ul>
+<p>Find out more in the <a class="reference internal" href="layers/transformers.html"><span class="std std-doc">transformers</span></a> page.</p>
+</section>
+<section id="activation-functions">
+<h2>Activation functions<a class="headerlink" href="#activation-functions" title="Link to this heading">#</a></h2>
+<p>Activation functions essentially apply a specific function to each element of the input tensor. Everything is quite simple. The only interesting aspect here is the <code class="docutils literal notranslate"><span class="pre">inplace</span></code> parameter of the layer. It determines whether the layer should modify the input tensor in place or return a transformed tensor as a new one.</p>
+<hr class="docutils" />
+<p>As an example, consider <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> with different options for this parameter. The following cell creates the activations we’ll use and the tensor to which we’ll apply the activations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_activation</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+<span class="n">inplace_activation</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">input</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.9608,  0.7092, -0.0559],
+        [ 0.8391, -1.7846, -2.2366],
+        [ 1.2297,  0.1288,  0.1447]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>After applying the activation with <code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>, the <code class="docutils literal notranslate"><span class="pre">input</span></code> tensor still retains its original generated values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_activation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="nb">input</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.9608,  0.7092, -0.0559],
+        [ 0.8391, -1.7846, -2.2366],
+        [ 1.2297,  0.1288,  0.1447]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, <code class="docutils literal notranslate"><span class="pre">inplace_activation</span></code> modified the input tensor according to the <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> transformation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inplace_activation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="nb">input</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.9608, 0.7092, 0.0000],
+        [0.8391, 0.0000, 0.0000],
+        [1.2297, 0.1288, 0.1447]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="flatten-unflaten">
+<h2>Flatten/unflaten<a class="headerlink" href="#flatten-unflaten" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">torch.nn.Flatten</span></code> layer merges some dimensions into a single dimension. Conversely, <code class="docutils literal notranslate"><span class="pre">torch.nn.Unflatten</span></code> reshapes a specified axis with the specified dimensionality. Check more in the <a class="reference internal" href="layers/flatten_unflatten.html"><span class="std std-doc">specific page</span></a>.</p>
+<hr class="docutils" />
+<p>The following example creates array that we’ll use as example. You can consider it as 3 three dimentional samples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">input</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([3, 3, 3, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now lets apply the default <code class="docutils literal notranslate"><span class="pre">torch.nn.Flatten</span></code> to the array from the previous cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()(</span><span class="nb">input</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([3, 27])
+</pre></div>
+</div>
+</div>
+</div>
+<p>It seems intuitive to get the same array but with one-dimensional observations.</p>
+<p>Now we can revert everything with <code class="docutils literal notranslate"><span class="pre">torch.nn.Unflatten</span></code> — we specify the second dimensionality to be unflattened and transform it back into 3-dimensional tensors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Unflatten</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">unflattened_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([3, 3, 3, 3])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./torch"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="gradient.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Gradient</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="layers/linear.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linear</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear">Linear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout">Dropout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization-layers">Normalization layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional">Convolutional</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-convolution">Inverse convolution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling">Pooling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-layers">Recurrent layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers">Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flatten-unflaten">Flatten/unflaten</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fedor Kobak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

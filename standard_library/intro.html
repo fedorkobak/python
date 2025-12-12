@@ -1,0 +1,1310 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Intro &#8212; Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'standard_library/intro';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="collections" href="collections.html" />
+    <link rel="prev" title="Build" href="../core/interpreter/build.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Python - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../core/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/syntax.html">Syntax</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/operators.html">Operators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/operators/order.html">Order</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/keywords.html">Keywords</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/keywords/in.html">Is in array (in)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/keywords/yield.html">yield</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/callable.html">Callable</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/functions/parameters.html">Parameters</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/oop.html">OOP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/variables.html">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/interface.html">Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/class_method.html">Class method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_methods.html">Special methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/exceptions/try_except.html">Try/except</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/syntax/decorators.html">Decorators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/datatypes.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/datatypes/basic.html">Basic</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/str.html">str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/list.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/dict.html">dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/datatypes/basic/set.html">set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/datatypes/datetime.html">Datetime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/imports.html">Imports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/sys_path.html">sys.path list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/from_package_import_all.html"><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">&lt;package&gt;</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/find_module.html">Find module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/importlib.html">Importlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/imports/relative_import.html">Relative import</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/files_folders.html">Files &amp; folders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/files_folders/pathlib.html">Pathlib</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/constructs.html">Constructs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/constructs/iterator.html">Iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/constructs/data_classes.html">Data class</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/cli_arguments.html">Cli arguments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/cli_arguments/argparse.html">Argparse</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/packages.html">Packages</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/packages/pip.html">PIP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/packages/pip/install_uninstall.html">Install &amp; uninstall</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/packages/pyproject_toml.html">Pyproject.toml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/packages/hatch.html">Hatch</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/interpreter.html">Interpreter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/interpreter/build.html">Build</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Standard library</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collections.html">collections</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="unittest.html">Unittest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="unittest/run_tests.html">Run tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unittest/run_before_after.html">Run code before/after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unittest/check_error.html">Check error (assertRaises)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="unittest/mocking.html">Mocking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="unittest/mocking/mock_object.html">Mock object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unittest/mocking/patch.html">Patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unittest/mocking/call_details.html">Call details</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="logging.html">Logging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging/loggers.html">Loggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging/handlers.html">Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging/filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging/configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging/exception_information.html">Exceptions information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging/logging_to_file.html">Logging to file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging/logger_handler_level.html">Logger/Handler level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging/root_logger.html">Root logger</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="linting.html">Linting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="linting/annotations.html">Annotations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="linting/types.html">Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="linting/types/generics.html">Generics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="linting/tools.html">Tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="re.html">re</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="re/match_search.html">Match/Search</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="concurrency.html">Concurrency</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="concurrency/multiprocessing.html">Multiprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="concurrency/multiprocessing/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="concurrency/multiprocessing/start_methods.html">Start methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="concurrency/threading.html">Threading</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="tracemalloc.html">Tracemalloc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hashlib.html">Hashlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zipfile.html">Zipfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="socket.html">Socket</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pandas/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/data_types.html">Data types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/data_types/datetime.html">Date &amp; time</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../pandas/data_types/columns_by_types.html">Columns by types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/creating_loading.html">Creating &amp; loading</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/data_transformations.html">Data transformations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pandas/data_transformations/groupby.html">Groupby</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/data_transformations/groupby/groupby_parameters.html"><code class="docutils literal notranslate"><span class="pre">groupby</span></code> parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/data_transformations/groupby/usage_options.html">Usage options</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/data_selecting.html">Data selecting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/data_visualisation.html">Data visualisation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../pandas/styles.html">Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/display_options.html">Display options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pandas/inline_columns_add.html">Inline column add (assign)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Scikit-learn</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/data_transform.html">Data transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/pack_object.html">Pack object</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/pack_object/columns_transformer.html">Columns transformer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/features_names_out.html">Features names out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/encoders.html">Encoders</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sklearn/data_transform/developing_transformer.html">Developing transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sklearn/data_transform/developing_transformer/features_names_out.html">Feature names out</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/frozen_steps.html">Frozen steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/data_transform/estimator_to_transformer.html">Estimator to transformer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/grid_search_cv.html">Grid search CV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sklearn/saving_models.html">Saving models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sklearn/nearest_neighbors.html">Nearest neighbors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn/nearest_neighbors/metric.html">Metric</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Torch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../torch/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/tensor.html">Tensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../torch/tensor/creating_methods.html">Creating methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/creating_methods/random_distributions.html">Random distributions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../torch/tensor/dimentionality.html">Dimentionality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/dimentionality/reshape_like.html">Reshape like</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/dimentionality/transpose_permute.html">Transpose/permute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/dimentionality/add_dimention.html">Add dimention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/tensor/dimentionality/squeeze.html">Squeeze</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/tensor/concatenation_splitting.html">Concatenation/splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/tensor/indexing.html">Indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/tensor/broadcasting.html">Broadcasting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../torch/loss_functions.html">Loss functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torch/gradient.html">Gradient</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/layers.html">Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/linear.html">Linear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/dropout.html">Dropout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/normalisation_layers.html">Normalisation layers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../torch/layers/recurrent_layers.html">Recurrent layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../torch/layers/recurrent_layers/forward_input.html">Forward input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/layers/recurrent_layers/layers_number.html">Layers number</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/flatten_unflatten.html">Flatten/unflatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/layers/transformers.html">Transformers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/managing_network.html">Managing network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/managing_network/sequential.html">Sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/managing_network/saving_model.html">Saving model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../torch/devices.html">Devices</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/data_primitives.html">Data primitives</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/data_primitives/data_set.html">Data set</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/vision.html">Vision</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/vision/basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/vision/augmentations.html">Augmentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/vision/datasets.html">Datasets</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../torch/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/logistic_regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/multiclass_task.html">Multiclass task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/texts_classification.html">Text classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/mnist.html">MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/symbols_classification.html">Symbols classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/resnet_finetuning.html">Resnet finetuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/cnn_classification.html">CNN classification</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../torch/examples/unet.html">Unet</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../torch/examples/unet/oxford_pet.html">Oxford pet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../torch/examples/unet/voc_segmentation.html">Voc segmentation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/gan.html">GAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch/examples/conditional_gan.html">Conditional GAN</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FastAPI</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/run_application.html">Run application</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/requests.html">Requests</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/requests/request_object.html">Request object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/requests/pydantic_model.html">Pydantic model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/responses.html">Responses</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/responses/json.html">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/responses/exceptions.html">Exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/logging.html">Logging</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fastapi/documentation.html">Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fastapi/documentation/parameters.html">Parameters</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fastapi/cors.html">CORS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/matplotlib.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/matplotlib/table_in_matplotlib.html">matplotlib tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/matplotlib/gif_creation.html">Gif creation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualisation/seaborn.html">Seaborn</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/plotly.html">Plotly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/hovers.html">Hovers</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/dragmode.html">Dragmode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/plotly/color_from_scheme.html">Color from scheme</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../visualisation/dash.html">Dash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/callbacks.html">Callbacks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/components.html">Components</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/select_clear_all.html">Select/Clear All</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/multipage_applications.html">Multipage applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualisation/dash/empty_figure.html">Empty figure</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sql/psycopg.html">Psycopg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sql/clickhouse.html">Clickhouse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sql/sqlite.html">sqlite</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sql/sqlalchemy.html">SQLAlchemy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/metadata.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/create_table.html">Create table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/query.html">Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/add_record.html">Add record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql/sqlalchemy/relations.html">Relations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DS/ML</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/intro.html">Intro</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/numpy.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/create_array.html">Create array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/operations.html">Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/norm.html">Norm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/array_splitting.html">Array splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/apply_along_axis.html">Apply along axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/numpy/set_printoptions.html">Print options</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/jupyter.html">Jupyter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/jupyter/ipython.html">IPython</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/jupyter/ipython/syntax.html">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/jupyter/ipython/reloading_modules.html">Reload modules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/jupyter/kernel.html">Kernel</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/jupyter/kernel/run_from_jupyter.html">Run from jupyter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/jupyter/client.html">Client</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/jupyter/traitlets.html">Traitlets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/jupyter/traitlets/application.html">Application</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/hugging_face.html">Hugging Face</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/hugging_face/hub.html">Hub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/hugging_face/tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/hugging_face/transformers.html">Transformers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/hugging_face/transformers/pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/hugging_face/transformers/tokenizer.html">Tokenizer</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/airflow/run_airflow.html">Run airflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/airflow/tutorial_dag.html">Tutorial DAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/airflow/tasks.html">Tasks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/geopy/distances.html">Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/geopy/request.html">Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/ranx.html">Ranx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/ranx/entry_queries_documents.html">Queries documents entry</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/mlflow.html">MLflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/configuration.html">Configuration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/tracking.html">Tracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/tracking/runs.html">Runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/tracking/experiment.html">Experiment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/flavours.html">Flavours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langchain.html">LangChain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/texts_processing.html">Texts transforming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/LLMs.html">LLMs</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/tools.html">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/langchain/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/data_sources.html">Data sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/transformations.html">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/groupby.html">Group by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/spark/ml.html">ML</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../packages/intro.html">Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/excel_export.html">To excel import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/jinja.html">Jinja</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/docker_sdk.html">Docker SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/docker_sdk/containers.html">Containers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/apscheduler.html">APScheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/selenium.html">Selenium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/tqdm.html">TQDM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/redis.html">Redis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/redis/redis_client.html">Redis client</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/requests.html">Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/jsonschema.html">jsonschema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/pydantic.html">Pydantic</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/tkinter/widgets_overview.html">Widgets overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/scrolling.html">Scrolling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/treeview.html">Treeview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/tkinter/widgets_overview/list_box.html">Listbox</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/pack.html">Pack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/tkinter/change_elements_position.html">Change elements position</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/cloud.html">Cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/cloud/aws_sdk.html">AWS SDK</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../packages/cloud/databricks_sdk.html">Databricks SDK</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../packages/cloud/databricks_sdk/feature_engineering.html">Feature engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../packages/cloud/databricks_sdk/serving.html">Serving</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/fedorkobak/knowledge" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/standard_library/intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Intro</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functools">Functools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial">Partial</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itertools">Itertools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#textwrap">Textwrap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracemalloc">Tracemalloc</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="intro">
+<h1>Intro<a class="headerlink" href="#intro" title="Link to this heading">#</a></h1>
+<p>There is a set of packages that are preinstalled with the Python build or so common that they are used in almost any Python project, either directly or indirectly. We will call these packages the standard library, and they are considered in this section.</p>
+<p>Check <a class="reference external" href="https://docs.python.org/3/library/index.html">The Python Standard Library</a> for the official reference.</p>
+<section id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Logging</span></code> is a built-in Python library for organizing logs. Its purpose is to create different <code class="docutils literal notranslate"><span class="pre">Logger</span></code> objects, each of which can be used in a specific part of the program, allowing you to maintain control over your program’s output.</p>
+<p>For more details check <a class="reference internal" href="logging.html"><span class="std std-doc">corresponding page</span></a>.</p>
+<hr class="docutils" />
+<p>The following example demonstrates how to create a logger, <code class="docutils literal notranslate"><span class="pre">show_logger</span></code>, and attach different handlers to it. Handlers define the destination of the output, and each handler has a unique formatter—an object that defines the format of the records produced by the corresponding handler.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">show_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;show logger&quot;</span><span class="p">)</span>
+
+<span class="n">handler1</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">handler1</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+<span class="n">handler2</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(message)s</span><span class="s1">|</span><span class="si">%(asctime)s</span><span class="s1">|</span><span class="si">%(levelname)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">handler2</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+<span class="n">show_logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler1</span><span class="p">)</span>
+<span class="n">show_logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler2</span><span class="p">)</span>
+
+<span class="n">show_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;This is my message&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-08-30 11:58:58,516 - CRITICAL - This is my message
+This is my message|2024-08-30 11:58:58,516|CRITICAL
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the end, we receive messages formatted according to the logger’s settings.</p>
+</section>
+<section id="functools">
+<h2>Functools<a class="headerlink" href="#functools" title="Link to this heading">#</a></h2>
+<p>Functools is a module in Python that provides functions that return other functions that have specific properties.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cache(user_function)</span></code> <em>(3.9+)</em></p></td>
+<td><p>Decorator that caches results indefinitely (like <code class="docutils literal notranslate"><span class="pre">lru_cache</span></code> with <code class="docutils literal notranslate"><span class="pre">maxsize=None</span></code>).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;cache</span></code> on <code class="docutils literal notranslate"><span class="pre">fib(n)</span></code> stores computed results.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cached_property(func)</span></code></p></td>
+<td><p>Turns a method into a read-only property whose value is computed once and cached.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;cached_property</span> <span class="pre">def</span> <span class="pre">area(self):</span> <span class="pre">return</span> <span class="pre">self.w*self.h</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmp_to_key(func)</span></code></p></td>
+<td><p>Converts an old-style cmp function to a key function for sorting.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sorted(items,</span> <span class="pre">key=cmp_to_key(my_cmp))</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lru_cache(maxsize=128,</span> <span class="pre">typed=False)</span></code></p></td>
+<td><p>Memoizes function results with an LRU eviction policy.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;lru_cache(maxsize=None)</span></code> caches without limit.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">partial(func,</span> <span class="pre">/,</span> <span class="pre">*args,</span> <span class="pre">**keywords)</span></code></p></td>
+<td><p>Fixes some args of a function and returns a new callable.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">partial(pow,</span> <span class="pre">exp=2)(3)</span> <span class="pre">→</span> <span class="pre">9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">partialmethod(func,</span> <span class="pre">/,</span> <span class="pre">*args,</span> <span class="pre">**keywords)</span></code></p></td>
+<td><p>Like <code class="docutils literal notranslate"><span class="pre">partial</span></code>, but for methods in classes.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">partialmethod(setattr,</span> <span class="pre">name='x')</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reduce(function,</span> <span class="pre">iterable[,</span> <span class="pre">initializer])</span></code></p></td>
+<td><p>Cumulatively applies a function to items, reducing to one value.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reduce(add,</span> <span class="pre">[1,2,3],</span> <span class="pre">0)</span> <span class="pre">→</span> <span class="pre">6</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">singledispatch(func)</span></code></p></td>
+<td><p>Creates a single-dispatch generic function.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;singledispatch</span> <span class="pre">def</span> <span class="pre">func(x):</span> <span class="pre">...</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">singledispatchmethod(func)</span></code></p></td>
+<td><p>Like <code class="docutils literal notranslate"><span class="pre">singledispatch</span></code>, but for methods.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;singledispatchmethod</span> <span class="pre">def</span> <span class="pre">m(self,</span> <span class="pre">arg):</span> <span class="pre">...</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">total_ordering(cls)</span></code></p></td>
+<td><p>Fills in missing rich comparison methods given <code class="docutils literal notranslate"><span class="pre">__eq__</span></code> and one ordering method.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;total_ordering</span></code> on a class with <code class="docutils literal notranslate"><span class="pre">__eq__</span></code> and <code class="docutils literal notranslate"><span class="pre">__lt__</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">update_wrapper(wrapper,</span> <span class="pre">wrapped,</span> <span class="pre">...)</span></code></p></td>
+<td><p>Updates a wrapper function to look like the wrapped function.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">update_wrapper(wrapper,</span> <span class="pre">original_func)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wraps(wrapped,</span> <span class="pre">...)</span></code></p></td>
+<td><p>Decorator that applies <code class="docutils literal notranslate"><span class="pre">update_wrapper</span></code> to a wrapper function.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;wraps(func)</span> <span class="pre">def</span> <span class="pre">wrapper(*a,</span> <span class="pre">**k):</span> <span class="pre">...</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check <a class="reference external" href="https://docs.python.org/3/library/functools.html">corresponding documentation</a>.</p>
+<section id="partial">
+<h3>Partial<a class="headerlink" href="#partial" title="Link to this heading">#</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code> you can create a function that wraps another function in order to define default values for the arguments of the wrapped function. This is really useful when you need to pass the same set of arguments many times for example in unit tests.</p>
+<hr class="docutils" />
+<p>The following cell defines a function with three parameters and demostrates how to call it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">some_fun</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">some_fun</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 2, 3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now created <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> function, which is the same as <code class="docutils literal notranslate"><span class="pre">some_fun</span></code> but uses <code class="docutils literal notranslate"><span class="pre">a=3</span></code> and <code class="docutils literal notranslate"><span class="pre">b=10</span></code> as default values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">some_fun</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> call with <code class="docutils literal notranslate"><span class="pre">b</span></code> set to “hello”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3, hello, 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Obviously it is just like <code class="docutils literal notranslate"><span class="pre">some_fun(3,</span> <span class="pre">&quot;hello&quot;,</span> <span class="pre">10)</span></code>.</p>
+<p><strong>Note:</strong> It is possible to redefine values specified in <code class="docutils literal notranslate"><span class="pre">parital</span></code>. The following code calls <code class="docutils literal notranslate"><span class="pre">default_some_fun</span></code> with new value for <code class="docutils literal notranslate"><span class="pre">a</span></code> parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">default_some_fun</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>three, hello, 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, instead of <code class="docutils literal notranslate"><span class="pre">3</span></code> specified by partical, we get <code class="docutils literal notranslate"><span class="pre">three</span></code> specified in the call to the result.</p>
+<p><strong>Note:</strong> With <code class="docutils literal notranslate"><span class="pre">partial</span></code> you can redefine any callable you like not only functions, for example you can specify a class that will always have the same argument of the <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. The following cell creates a special object that will behave just like a <code class="docutils literal notranslate"><span class="pre">dict</span></code> but will have a default <code class="docutils literal notranslate"><span class="pre">hello:</span> <span class="pre">10</span></code> key-value pair.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">hello</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">value</span><span class="p">(),</span> <span class="n">value</span><span class="p">(</span><span class="n">new</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>({&#39;hello&#39;: 10}, {&#39;hello&#39;: 10, &#39;new&#39;: 3})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="itertools">
+<h2>Itertools<a class="headerlink" href="#itertools" title="Link to this heading">#</a></h2>
+<p>Functions that create iterators for effecient looping. The following table shows some of the most widely used functions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">count(start=0,</span> <span class="pre">step=1)</span></code></p></td>
+<td><p>Infinite count starting at <code class="docutils literal notranslate"><span class="pre">start</span></code>, incremented by <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">count(10,</span> <span class="pre">2)</span> <span class="pre">→</span> <span class="pre">10,</span> <span class="pre">12,</span> <span class="pre">14,</span> <span class="pre">…</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cycle(iterable)</span></code></p></td>
+<td><p>Repeats elements of the iterable indefinitely.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cycle('AB')</span> <span class="pre">→</span> <span class="pre">A,</span> <span class="pre">B,</span> <span class="pre">A,</span> <span class="pre">B,</span> <span class="pre">…</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">repeat(object,</span> <span class="pre">times=None)</span></code></p></td>
+<td><p>Repeats the object, optionally <code class="docutils literal notranslate"><span class="pre">times</span></code> times.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">repeat(5,</span> <span class="pre">3)</span> <span class="pre">→</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">accumulate(iterable,</span> <span class="pre">func=add)</span></code></p></td>
+<td><p>Running totals or accumulated results with a binary func.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">accumulate([1,2,3])</span> <span class="pre">→</span> <span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">6</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chain(*iterables)</span></code></p></td>
+<td><p>Concatenates iterables.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chain('AB',</span> <span class="pre">'CD')</span> <span class="pre">→</span> <span class="pre">A,</span> <span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">D</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chain.from_iterable(iterables)</span></code></p></td>
+<td><p>Flattens iterable of iterables.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chain.from_iterable(['AB',</span> <span class="pre">'CD'])</span> <span class="pre">→</span> <span class="pre">A,</span> <span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">D</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">compress(data,</span> <span class="pre">selectors)</span></code></p></td>
+<td><p>Filters data by selectors.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">compress('ABC',</span> <span class="pre">[1,0,1])</span> <span class="pre">→</span> <span class="pre">A,</span> <span class="pre">C</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dropwhile(predicate,</span> <span class="pre">iterable)</span></code></p></td>
+<td><p>Skips while predicate is true, returns rest.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dropwhile(x&lt;5,</span> <span class="pre">range(10))</span> <span class="pre">→</span> <span class="pre">5…9</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">filterfalse(predicate,</span> <span class="pre">iterable)</span></code></p></td>
+<td><p>Returns items where predicate is false.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">filterfalse(is_even,</span> <span class="pre">[1,2,3])</span> <span class="pre">→</span> <span class="pre">1,</span> <span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">groupby(iterable,</span> <span class="pre">key=None)</span></code></p></td>
+<td><p>Groups consecutive equal elements.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">groupby('AAAB')</span> <span class="pre">→</span> <span class="pre">('A',</span> <span class="pre">['A','A','A']),</span> <span class="pre">('B',['B'])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">islice(iterable,</span> <span class="pre">start,</span> <span class="pre">stop,</span> <span class="pre">step=1)</span></code></p></td>
+<td><p>Iterator slice.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">islice(range(10),</span> <span class="pre">2,</span> <span class="pre">8,</span> <span class="pre">2)</span> <span class="pre">→</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">6</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pairwise(iterable)</span></code></p></td>
+<td><p>Consecutive overlapping pairs.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pairwise([1,2,3])</span> <span class="pre">→</span> <span class="pre">(1,2),</span> <span class="pre">(2,3)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starmap(func,</span> <span class="pre">iterable)</span></code></p></td>
+<td><p>Maps func with arguments unpacked from tuples.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">starmap(pow,</span> <span class="pre">[(2,3),</span> <span class="pre">(3,2)])</span> <span class="pre">→</span> <span class="pre">8,</span> <span class="pre">9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">takewhile(predicate,</span> <span class="pre">iterable)</span></code></p></td>
+<td><p>Takes while predicate is true.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">takewhile(x&lt;5,</span> <span class="pre">range(10))</span> <span class="pre">→</span> <span class="pre">0…4</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tee(iterable,</span> <span class="pre">n=2)</span></code></p></td>
+<td><p>Returns n independent iterators.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tee([1,2],</span> <span class="pre">2)</span> <span class="pre">→</span> <span class="pre">two</span> <span class="pre">iters</span> <span class="pre">of</span> <span class="pre">1,2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">zip_longest(*iterables,</span> <span class="pre">fillvalue=None)</span></code></p></td>
+<td><p>Zips to the longest iterable, filling missing values.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zip_longest('AB',</span> <span class="pre">'C',</span> <span class="pre">fillvalue='-')</span> <span class="pre">→</span> <span class="pre">(A,C),</span> <span class="pre">(B,-)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">product(*iterables,</span> <span class="pre">repeat=1)</span></code></p></td>
+<td><p>Cartesian product.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">product([1,2],</span> <span class="pre">repeat=2)</span> <span class="pre">→</span> <span class="pre">(1,1),(1,2),(2,1),(2,2)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">permutations(iterable,</span> <span class="pre">r=None)</span></code></p></td>
+<td><p>r-length permutations.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">permutations('AB')</span> <span class="pre">→</span> <span class="pre">('A','B'),</span> <span class="pre">('B','A')</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">combinations(iterable,</span> <span class="pre">r)</span></code></p></td>
+<td><p>r-length combinations, no repeats.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">combinations('ABC',</span> <span class="pre">2)</span> <span class="pre">→</span> <span class="pre">('A','B'),</span> <span class="pre">('A','C'),</span> <span class="pre">('B','C')</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement(iterable,</span> <span class="pre">r)</span></code></p></td>
+<td><p>r-length combinations, with repeats.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement('AB',</span> <span class="pre">2)</span> <span class="pre">→</span> <span class="pre">('A','A'),</span> <span class="pre">('A','B'),</span> <span class="pre">('B','B')</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Check more details in the <a class="reference external" href="https://docs.python.org/3/library/itertools.html">itertools</a> page of official documentation.</p>
+</section>
+<section id="textwrap">
+<h2>Textwrap<a class="headerlink" href="#textwrap" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">textwrap</span></code> package is for text formatting. It contains the following functions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Key Parameters (examples)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wrap()</span></code></p></td>
+<td><p>Wraps a single paragraph into a list of lines.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">width=70</span></code>, <code class="docutils literal notranslate"><span class="pre">expand_tabs</span></code>, <code class="docutils literal notranslate"><span class="pre">replace_whitespace</span></code>, <code class="docutils literal notranslate"><span class="pre">drop_whitespace</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fill()</span></code></p></td>
+<td><p>Wraps text and returns it as a single string with newlines.</p></td>
+<td><p>Same as <code class="docutils literal notranslate"><span class="pre">wrap()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shorten()</span></code></p></td>
+<td><p>Truncates text to fit within a given width, ending with placeholder.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">placeholder=&quot;...&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dedent()</span></code></p></td>
+<td><p>Removes common leading whitespace from every line.</p></td>
+<td><p><em>(no extra parameters)</em></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">indent()</span></code></p></td>
+<td><p>Adds a prefix to selected lines of text.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate</span></code> (function deciding which lines get prefix)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">TextWrapper</span></code> class is used for more efficient processing.</p>
+<p>For more details, check <a class="reference external" href="https://docs.python.org/3/library/textwrap.html">textwrap</a> page of the official documentation.</p>
+</section>
+<section id="tracemalloc">
+<h2>Tracemalloc<a class="headerlink" href="#tracemalloc" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">tracemalloc</span></code> package allows you to monitor memory in python. For more information, check <a class="reference external" href="https://docs.python.org/3/library/tracemalloc.html"><code class="docutils literal notranslate"><span class="pre">tracemalloc</span></code> - Trace memory allocations</a> page of official documentation.</p>
+<p>Check more detainls in the <a class="reference internal" href="tracemalloc.html"><span class="std std-doc">Tracemalloc</span></a> page.</p>
+<hr class="docutils" />
+<p>To eliminate calls associated with the jupyter notebook, separate script supposed to be reated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/my_file.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">tracemalloc</span>
+
+<span class="c1"># Start monitoring</span>
+<span class="n">tracemalloc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Taking information from the calls up to the present moment</span>
+<span class="n">snapshot</span> <span class="o">=</span> <span class="n">tracemalloc</span><span class="o">.</span><span class="n">take_snapshot</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">snapshot</span><span class="o">.</span><span class="n">statistics</span><span class="p">(</span><span class="s1">&#39;lineno&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/my_file.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The script’s run is in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>/tmp/my_file.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">snapshot.statistisc('lineno')</span></code> returns a list of different memory allocations. In the example under consideration, there is just one line that corresponds to the  <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">=</span> <span class="pre">10</span></code> call.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./standard_library"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../core/interpreter/build.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Build</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="collections.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">collections</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging">Logging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functools">Functools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial">Partial</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itertools">Itertools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#textwrap">Textwrap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracemalloc">Tracemalloc</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fedor Kobak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
