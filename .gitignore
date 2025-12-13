@@ -7,3 +7,4 @@ utils.egg-info
 .databricks
 databricks.yml
 *.ipynb_checkpoints*
+.virtual_documents
