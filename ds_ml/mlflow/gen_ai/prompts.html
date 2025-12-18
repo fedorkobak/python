@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -810,7 +810,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alias">Alias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format">Format</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-output">Structured output</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-serving">Registering/serving</a></li>
 </ul>
             </nav>
         </div>
@@ -825,6 +824,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="promts">
 <h1>Promts<a class="headerlink" href="#promts" title="Link to this heading">#</a></h1>
 <p>MLflow has its own prompts registry for storing and versioning prompts and associated metadata.</p>
+<p>For more check the <a class="reference external" href="https://mlflow.org/docs/3.3.1/genai/prompt-registry/">Prompt Registry</a> section of the official documentation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
@@ -985,89 +985,6 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="registering-serving">
-<h2>Registering/serving<a class="headerlink" href="#registering-serving" title="Link to this heading">#</a></h2>
-<p>MLFlow provieds tools for registering and serving LLM-based applications that use a workflow similar to classical ML models.</p>
-<p>You must inherit inherit <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc.ResponsesAgent</span></code> object and implement the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method. The <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc.ResponseAgent</span></code> is just an extension of the <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code> flavour specific for LLM-based applications.</p>
-<hr class="docutils" />
-<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">SimpleResponsesAgent</span></code>, which simply returns a predifined message.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.entities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpanType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.pyfunc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResponsesAgent</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.types.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResponsesAgentRequest</span><span class="p">,</span> <span class="n">ResponsesAgentResponse</span>
-
-
-<span class="k">class</span><span class="w"> </span><span class="nc">SimpleResponsesAgent</span><span class="p">(</span><span class="n">ResponsesAgent</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">ResponsesAgentRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResponsesAgentResponse</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">ResponsesAgentResponse</span><span class="p">(</span>
-            <span class="n">output</span><span class="o">=</span><span class="p">[</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">create_text_output_item</span><span class="p">(</span>
-                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;The result of 4 * 3 in Python is 12.&quot;</span><span class="p">,</span>
-                    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;msg_1&quot;</span><span class="p">,</span>
-                <span class="p">)</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell registers the regular models in the model registry.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_responses_agent</span> <span class="o">=</span> <span class="n">SimpleResponsesAgent</span><span class="p">()</span>
-<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
-    <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
-        <span class="n">python_model</span><span class="o">=</span><span class="n">simple_responses_agent</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;agent&quot;</span><span class="p">,</span>
-        <span class="n">registered_model_name</span><span class="o">=</span><span class="s2">&quot;agent&quot;</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025/11/27 14:12:00 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
-2025/11/27 14:12:00 INFO mlflow.store.db.utils: Updating database tables
-2025-11-27 14:12:00 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-2025-11-27 14:12:00 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-2025-11-27 14:12:00 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-2025-11-27 14:12:00 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-2025/11/27 14:12:00 INFO mlflow.pyfunc: Predicting on input example to validate output
-2025/11/27 14:12:03 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
-2025/11/27 14:12:03 INFO mlflow.store.db.utils: Updating database tables
-2025-11-27 14:12:03 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-2025-11-27 14:12:03 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-Registered model &#39;agent&#39; already exists. Creating a new version of this model...
-Created version &#39;4&#39; of model &#39;agent&#39;.
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell loads just registered model. And executes it’s <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;models:/agent@latest&quot;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;what is 4*3 in python&quot;</span><span class="p">}],</span>
-        <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;conversation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;456&quot;</span><span class="p">},</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;object&#39;: &#39;response&#39;,
- &#39;output&#39;: [{&#39;type&#39;: &#39;message&#39;,
-   &#39;id&#39;: &#39;msg_1&#39;,
-   &#39;content&#39;: [{&#39;text&#39;: &#39;The result of 4 * 3 in Python is 12.&#39;,
-     &#39;type&#39;: &#39;output_text&#39;}],
-   &#39;role&#39;: &#39;assistant&#39;}]}
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1137,7 +1054,6 @@ Created version &#39;4&#39; of model &#39;agent&#39;.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alias">Alias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format">Format</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-output">Structured output</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-serving">Registering/serving</a></li>
 </ul>
   </nav></div>
 

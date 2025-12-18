@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -815,6 +815,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itertools">Itertools</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#textwrap">Textwrap</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracemalloc">Tracemalloc</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextvars">Contextvars</a></li>
 </ul>
             </nav>
         </div>
@@ -1179,6 +1180,108 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">snapshot.statistisc('lineno')</span></code> returns a list of different memory allocations. In the example under consideration, there is just one line that corresponds to the  <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">=</span> <span class="pre">10</span></code> call.</p>
 </section>
+<section id="contextvars">
+<h2>Contextvars<a class="headerlink" href="#contextvars" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">contextvars</span></code> package enables you to create a variable that is shared with in a <strong>logical context</strong>. It is usefull if you want to create a variable that will be shared between calls inside a single asyncio thread, but exclusive for this thread.</p>
+<p>Check more in the <a class="reference external" href="https://docs.python.org/3/library/contextvars.html">corresponding section</a> of the official documentation.</p>
+<hr class="docutils" />
+<p>The following cell creates both the <code class="docutils literal notranslate"><span class="pre">contextvars.ContextVar</span></code> and a function that loads this value and prints it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">contextvars</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextVar</span>
+
+<span class="n">context_value</span> <span class="o">=</span> <span class="n">ContextVar</span><span class="p">(</span><span class="s2">&quot;val&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;some_value&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">inner_function</span><span class="p">():</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">context_value</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell illustrates the call within the global context.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inner_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>some_value
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell defines the wrapper <code class="docutils literal notranslate"><span class="pre">outer_function</span></code>, which sets the value for the <code class="docutils literal notranslate"><span class="pre">context_value</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">outer_function</span><span class="p">():</span>
+    <span class="n">context_value</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;from outher&quot;</span><span class="p">)</span>
+    <span class="n">inner_function</span><span class="p">()</span>
+
+
+<span class="n">outer_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>from outher
+</pre></div>
+</div>
+</div>
+</div>
+<p>The value defined by the <code class="docutils literal notranslate"><span class="pre">outer_function</span></code> is printed.</p>
+<p>However, the values outside the function is change as well, since they are in the same logical context.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inner_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>from outher
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consider the asynchronous version of the wrapper function. Asyncio thread creates its own logical context, meaning the value will be exclusive to this thread.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">outer_function</span><span class="p">():</span>
+    <span class="n">context_value</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;async outer function&quot;</span><span class="p">)</span>
+    <span class="n">inner_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling of the function prints the value determined by the async wrapper.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">outer_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>async outer function
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, in the main thread, the <code class="docutils literal notranslate"><span class="pre">inner_function</span></code> saves the properties that were previously setHowever, in the main thread, the <code class="docutils literal notranslate"><span class="pre">inner_function</span></code> saves the properties that were previously set..</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inner_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>from outher
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1253,6 +1356,7 @@ This is my message|2024-08-30 11:58:58,516|CRITICAL
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itertools">Itertools</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#textwrap">Textwrap</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tracemalloc">Tracemalloc</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextvars">Contextvars</a></li>
 </ul>
   </nav></div>
 

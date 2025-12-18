@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -812,6 +812,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-methods">Start methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-parameters">CLI parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-stdout">Hide stdout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shared-memory">Shared memory</a></li>
 </ul>
             </nav>
         </div>
@@ -852,13 +853,14 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">process_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="n">st_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">/</span> <span class="mi">25</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">/</span> <span class="mi">25</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">en_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">process_name</span><span class="si">}</span><span class="s2"> is finished </span><span class="si">{</span><span class="n">en_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">st_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
+
 <span class="n">iter_count</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">8</span>
 <span class="n">p1</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">iter_count</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">))</span>
-<span class="n">p2</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">iter_count</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;second&quot;</span><span class="p">))</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">iter_count</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;second&quot;</span><span class="p">))</span>
 
 <span class="n">p1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="n">p2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -891,6 +893,8 @@ Processes were joined
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pool</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">gen_random</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
     <span class="n">my_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)]</span>
     <span class="k">return</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">my_array</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">my_array</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_array</span><span class="p">))</span>
@@ -1098,9 +1102,11 @@ Sys arg child [&#39;/tmp/some_code.py&#39;, &#39;--this_argument&#39;, &#39;10&#
 
 <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">inp</span><span class="p">():</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;this is my argv&quot;</span><span class="p">]</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">inp</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -1129,6 +1135,7 @@ Sys arg child [&#39;/tmp/some_code.py&#39;, &#39;--this_argument&#39;, &#39;10&#
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">raw_out</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is stdout from child process&quot;</span><span class="p">)</span>
 
+
 <span class="n">process</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">raw_out</span><span class="p">)</span>
 <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is stdout from parent process&quot;</span><span class="p">)</span>
@@ -1150,9 +1157,11 @@ This is stdout from parent process
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">hidden_out</span><span class="p">():</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This will not be shown&quot;</span><span class="p">)</span>
+
 
 <span class="n">process</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">hidden_out</span><span class="p">)</span>
 <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -1168,6 +1177,56 @@ This is stdout from parent process
 </div>
 </div>
 <p>The result is that only the outputs from the parent process are present.</p>
+</section>
+<section id="shared-memory">
+<h2>Shared memory<a class="headerlink" href="#shared-memory" title="Link to this heading">#</a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">multiprocessing.Value</span></code> and <code class="docutils literal notranslate"><span class="pre">multiprocessing.Array</span></code> you can share memory between processes.</p>
+<p>You are supposed to pass an instance to the process target; this would then be shared between the processes.</p>
+<p>Check more in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#sharing-state-between-processes">Sharing state between processes</a> section of the official documentation.</p>
+<hr class="docutils" />
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">multiprocessing.Value</span></code> of “i” (integer) dtype initializing it with 0 value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Value</span>
+
+<span class="n">value</span> <span class="o">=</span> <span class="n">Value</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">value</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell begins the process that resets the <code class="docutils literal notranslate"><span class="pre">value.value</span></code> with 10.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">target</span><span class="p">(</span><span class="n">shared_value</span><span class="p">:</span> <span class="n">Value</span><span class="p">):</span>
+    <span class="n">shared_value</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+
+
+<span class="n">process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">value</span><span class="p">,))</span>
+<span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">process</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The corresponding change appears in the main thread.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1242,6 +1301,7 @@ This is stdout from parent process
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-methods">Start methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-parameters">CLI parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-stdout">Hide stdout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shared-memory">Shared memory</a></li>
 </ul>
   </nav></div>
 

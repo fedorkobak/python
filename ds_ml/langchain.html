@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -811,6 +811,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#texts-transforming">Texts transforming</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core">Core</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms">LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runnable">Runnable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langgraph">LangGraph</a></li>
 </ul>
@@ -1175,6 +1176,56 @@ removing t
 </div>
 </div>
 </section>
+<section id="runnable">
+<h2>Runnable<a class="headerlink" href="#runnable" title="Link to this heading">#</a></h2>
+<p>The runnable in <code class="docutils literal notranslate"><span class="pre">langchain</span></code> is an interface that provides:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">invoke</span></code>, <code class="docutils literal notranslate"><span class="pre">stream</span></code> and <code class="docutils literal notranslate"><span class="pre">batch</span></code> methods to prived the data to the runnable.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">|</span></code> operator allowing to join <code class="docutils literal notranslate"><span class="pre">Runnables</span></code>, allowing multistep pipelines to be created.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Consider the example of using the <code class="docutils literal notranslate"><span class="pre">langchain</span></code> runnable.</p>
+<p>The following cell defines the runnabel composed from the prompt and chat model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="s2">&quot;What is the capital of </span><span class="si">{country}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.2&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">runnable</span> <span class="o">=</span> <span class="p">(</span><span class="n">prompt_template</span> <span class="o">|</span> <span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can call the <code class="docutils literal notranslate"><span class="pre">invoke</span></code> method of the result object as it runnable as well. It expects input like first chain. The following cell substitutes the “France” value for <code class="docutils literal notranslate"><span class="pre">country</span></code> in prompt template.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">runnable</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;France&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The capital of France is Paris.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same call but with <code class="docutils literal notranslate"><span class="pre">GB</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">runnable</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;GB&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The capital of Great Britain (GB) is London.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="agents">
 <h2>Agents<a class="headerlink" href="#agents" title="Link to this heading">#</a></h2>
 <p>Agents combine language models and tools to create the systems that can reason about tasks and decide which tools to use, and iteratively work around solution.</p>
@@ -1394,6 +1445,7 @@ I&#39;ll make sure to be more accurate in my responses moving forward.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#texts-transforming">Texts transforming</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core">Core</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms">LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runnable">Runnable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langgraph">LangGraph</a></li>
 </ul>

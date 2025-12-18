@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -808,6 +808,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate">validate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-validation">Schema validation</a></li>
 </ul>
             </nav>
         </div>
@@ -844,13 +845,6 @@ document.write(`
 </ul>
 <hr class="docutils" />
 <p>Consider the <code class="docutils literal notranslate"><span class="pre">const</span></code> keyword, which was only implemented only in Draft6 of the JSON schema.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jsonschema</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>The schema requires instante to be exactly <code class="docutils literal notranslate"><span class="pre">11</span></code>, but 10 is passed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -888,6 +882,58 @@ Failed validating &#39;const&#39; in schema:
 
 On instance:
     10
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="schema-validation">
+<h2>Schema validation<a class="headerlink" href="#schema-validation" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">jsonschema.validate</span></code> function validates that the schema is JSON-compatible, but not the pure validators.</p>
+<p><strong>Note</strong>: However, it’s better to keep your schema JSON-compatible anyway.</p>
+<hr class="docutils" />
+<p>For example, consider an attempt to pass a schema that containing a <code class="docutils literal notranslate"><span class="pre">set</span></code> in it’s definition, which makes it JSON-uncompatible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The attempt to use this schema results in a corresponding error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">jsonschema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1, 2, 3} is not of type &#39;array&#39;
+
+Failed validating &#39;type&#39; in metaschema[&#39;allOf&#39;][1][&#39;properties&#39;][&#39;items&#39;][&#39;$dynamicRef&#39;][&#39;allOf&#39;][3][&#39;properties&#39;][&#39;enum&#39;]:
+    {&#39;type&#39;: &#39;array&#39;, &#39;items&#39;: True}
+
+On schema[&#39;items&#39;][&#39;enum&#39;]:
+    {1, 2, 3}
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, if you use the validator directly, everything will work fine fine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}}</span>
+<span class="p">}</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">jsonschema</span><span class="o">.</span><span class="n">Draft202012Validator</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+<span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -960,6 +1006,7 @@ On instance:
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate">validate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-validation">Schema validation</a></li>
 </ul>
   </nav></div>
 
