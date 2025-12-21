@@ -331,6 +331,7 @@ parts:
         - file: ds_ml/langchain/agents/middleware.ipynb
       - file: ds_ml/langchain/langgraph.ipynb
         sections:
+          - file: ds_ml/langchain/langgraph/state.ipynb
           - file: ds_ml/langchain/langgraph/reducing.ipynb
           - file: ds_ml/langchain/langgraph/conditional_edges.ipynb
       - file: ds_ml/langchain/langsmith.ipynb
