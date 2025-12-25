@@ -333,6 +333,7 @@ parts:
         sections:
           - file: ds_ml/langchain/langgraph/state.ipynb
           - file: ds_ml/langchain/langgraph/reducing.ipynb
+          - file: ds_ml/langchain/langgraph/composition.ipynb
           - file: ds_ml/langchain/langgraph/conditional_edges.ipynb
       - file: ds_ml/langchain/langsmith.ipynb
     - file: ds_ml/spark.ipynb
