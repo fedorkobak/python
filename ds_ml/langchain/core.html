@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -589,7 +589,11 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="langgraph/state.html">State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langgraph/reducing.html">Reducing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langgraph/composition.html">Composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="langgraph/conditional_edges.html">Conditional edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langgraph/streaming.html">Streaming</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="langsmith.html">LangSmith</a></li>
@@ -809,6 +813,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messages">Messages</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretty-print">Pretty print</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trimming">Trimming</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
@@ -831,6 +836,22 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="core">
 <h1>Core<a class="headerlink" href="#core" title="Link to this heading">#</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">langchain_core</span></code> package provides tools that are used through the entire LangChain ecosystem. This section considers some of them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">langchain_core</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HumanMessage</span><span class="p">,</span>
+    <span class="n">SystemMessage</span><span class="p">,</span>
+    <span class="n">AIMessage</span><span class="p">,</span>
+    <span class="n">ToolMessage</span><span class="p">,</span>
+    <span class="n">BaseMessage</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="messages">
 <h2>Messages<a class="headerlink" href="#messages" title="Link to this heading">#</a></h2>
 <p>There are several classes that represent different aspects of prompting with LangChain.</p>
@@ -866,15 +887,7 @@ document.write(`
 <p>All LangChain messages are children of the <code class="docutils literal notranslate"><span class="pre">langchain_core.messages.BaseMessage</span></code> class. The  follwing cell shows the relationship:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">HumanMessage</span><span class="p">,</span>
-    <span class="n">SystemMessage</span><span class="p">,</span>
-    <span class="n">AIMessage</span><span class="p">,</span>
-    <span class="n">ToolMessage</span><span class="p">,</span>
-    <span class="n">BaseMessage</span>
-<span class="p">)</span>
-
-<span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
     <span class="nb">issubclass</span><span class="p">(</span><span class="n">HumanMessage</span><span class="p">,</span> <span class="n">BaseMessage</span><span class="p">),</span>
     <span class="nb">issubclass</span><span class="p">(</span><span class="n">SystemMessage</span><span class="p">,</span> <span class="n">BaseMessage</span><span class="p">),</span>
     <span class="nb">issubclass</span><span class="p">(</span><span class="n">AIMessage</span><span class="p">,</span> <span class="n">BaseMessage</span><span class="p">),</span>
@@ -912,8 +925,7 @@ What is the weather in SF
 <p>However, its true potential is in using the pretty print for the lists of messages from different sources.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
-<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">human_message</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">human_message</span><span class="p">]</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1&quot;</span><span class="p">,</span> <span class="n">num_predict</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">messages</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
@@ -928,6 +940,31 @@ What is the weather in SF
 ==================================<span class=" -Color -Color-Bold"> Ai Message </span>==================================
 
 However, I&#39;m a large language model, I don&#39;t have real-time access to current weather conditions
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="trimming">
+<h3>Trimming<a class="headerlink" href="#trimming" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">langchain_core.messages.trim_messages</span></code> allows you to trim the chat history according to the token logic. This leaves only the messages that corespond to the specified number of tokens.</p>
+<hr class="docutils" />
+<p>The following cell defines some messages and trims them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">langchain_core</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">trim_messages</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="s2">&quot;Hello! What is the capital of France&quot;</span><span class="p">),</span>
+        <span class="n">AIMessage</span><span class="p">(</span><span class="s2">&quot;This is too hard question for me!&quot;</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">token_counter</span><span class="o">=</span><span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1&quot;</span><span class="p">,</span> <span class="n">num_predict</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[AIMessage(content=&#39;This is too hard question for me!&#39;, additional_kwargs={}, response_metadata={})]
 </pre></div>
 </div>
 </div>
@@ -1341,6 +1378,7 @@ I need to make sure there are no typos. The RAM is an integer, so 8 without quot
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#messages">Messages</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretty-print">Pretty print</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trimming">Trimming</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
