@@ -1,6 +1,6 @@
-# python
+# Python
 
-Contains materials related to the Python programming language. There is github pages site based on this repo - check [it out](https://fedorkobak.github.io/python/intro.html).
+This is a part of personal knowledge base related to the python programming language. Check more details on project on the [main site](https://fedorkobak.github.io/knowledge/intro.html).
 
 Build site with command:
 
