@@ -324,6 +324,8 @@ parts:
       sections:
       - file: ds_ml/langchain/texts_processing.ipynb
       - file: ds_ml/langchain/core.ipynb
+        sections:
+          - file: ds_ml/langchain/core/messages.ipynb
       - file: ds_ml/langchain/LLMs.ipynb
       - file: ds_ml/langchain/agents.ipynb
         sections:
