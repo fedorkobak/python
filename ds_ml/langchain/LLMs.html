@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Agents" href="agents.html" />
-    <link rel="prev" title="Core" href="core.html" />
+    <link rel="prev" title="Messages" href="core/messages.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -143,7 +143,7 @@
     
   
 
-<a class="navbar-brand logo" href="../../intro.html">
+<a class="navbar-brand logo" href="../../README.html">
   
   
   
@@ -175,7 +175,7 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
+                <a class="reference internal" href="../../README.html">
                     Python
                 </a>
             </li>
@@ -581,7 +581,10 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../langchain.html">LangChain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="texts_processing.html">Texts transforming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="core/messages.html">Messages</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">LLMs</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="agents/tools.html">Tools</a></li>
@@ -594,6 +597,7 @@
 <li class="toctree-l3"><a class="reference internal" href="langgraph/composition.html">Composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="langgraph/conditional_edges.html">Conditional edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="langsmith.html">LangSmith</a></li>
@@ -812,7 +816,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invoke">Invoke</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-ouput">Structured ouput</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-ouput">Structured ouput</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-mismatch">Format mismatch</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens">Tokens</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#num-predict">Num predict</a></li>
 </ul>
             </nav>
         </div>
@@ -829,7 +838,10 @@ document.write(`
 <p>This page considers LangChain interfaces for LLMs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;HF_HUB_DISABLE_PROGRESS_BARS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -848,7 +860,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;Hello! How can I assist you today?&#39;, additional_kwargs={}, response_metadata={&#39;model&#39;: &#39;llama3.1&#39;, &#39;created_at&#39;: &#39;2025-12-02T11:01:41.276856893Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 2137074106, &#39;load_duration&#39;: 156799771, &#39;prompt_eval_count&#39;: 12, &#39;prompt_eval_duration&#39;: 712669661, &#39;eval_count&#39;: 10, &#39;eval_duration&#39;: 1258515574, &#39;model_name&#39;: &#39;llama3.1&#39;, &#39;model_provider&#39;: &#39;ollama&#39;}, id=&#39;lc_run--4d37563e-bae5-4187-bbe2-7e7ccae56dea-0&#39;, usage_metadata={&#39;input_tokens&#39;: 12, &#39;output_tokens&#39;: 10, &#39;total_tokens&#39;: 22})
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;Hello! How can I assist you today?&#39;, additional_kwargs={}, response_metadata={&#39;model&#39;: &#39;llama3.1&#39;, &#39;created_at&#39;: &#39;2026-01-06T14:39:17.313641499Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 23004167206, &#39;load_duration&#39;: 22818871591, &#39;prompt_eval_count&#39;: 12, &#39;prompt_eval_duration&#39;: 27074996, &#39;eval_count&#39;: 10, &#39;eval_duration&#39;: 141396789, &#39;model_name&#39;: &#39;llama3.1&#39;, &#39;model_provider&#39;: &#39;ollama&#39;}, id=&#39;lc_run--fe6d8bde-d9c8-4e4c-a7f2-df3839f539a6-0&#39;, usage_metadata={&#39;input_tokens&#39;: 12, &#39;output_tokens&#39;: 10, &#39;total_tokens&#39;: 22})
 </pre></div>
 </div>
 </div>
@@ -865,11 +877,13 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OutputSchema</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 
-<span class="n">structured_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">with_structured_output</span><span class="p">(</span><span class="n">MyModel</span><span class="p">)</span>
+
+<span class="n">structured_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">with_structured_output</span><span class="p">(</span><span class="n">OutputSchema</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">structured_model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
     <span class="s2">&quot;Extract data: &#39;User llm_lover with id 777 tries to acess the database.&#39;&quot;</span>
 <span class="p">)</span>
@@ -878,24 +892,173 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyModel(id=&#39;777&#39;, name=&#39;llm_lover&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OutputSchema(id=&#39;777&#39;, name=&#39;llm_lover&#39;)
 </pre></div>
 </div>
 </div>
 </div>
+<section id="format-mismatch">
+<h3>Format mismatch<a class="headerlink" href="#format-mismatch" title="Link to this heading">#</a></h3>
+<p>In some cases, the format specified by the schema can not be sutisfied. In such cases, the model returns the value it has generated without any errors. However, the errors will be published in the validation state if they are provided. For example, it would be in the case the format were specified with the Pydantic model.</p>
+<hr class="docutils" />
+<p>Consider an example in which the moodel cannot satisfy the output format due to not enough number of output tokens. The following cell creates a model that can generate only 3 output tokens.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">AIMessage</span>
-<span class="n">model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1&quot;</span><span class="p">,</span>
+    <span class="n">num_predict</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consider the example where the model is restricted to return just <code class="docutils literal notranslate"><span class="pre">&quot;this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">long</span> <span class="pre">literal&quot;</span></code> - 3 tokens is unsufficient for this kind of output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">structured_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">with_structured_output</span><span class="p">({</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;const&quot;</span><span class="p">:</span> <span class="s2">&quot;this is a long literal&quot;</span>
+<span class="p">})</span>
+
+<span class="n">structured_model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Print anything you can&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;Hello! It looks like you might have accidentally typed &quot;helloq&quot; instead of &quot;hello&quot;. Is there something I can help you with today?&#39;, additional_kwargs={}, response_metadata={&#39;model&#39;: &#39;llama3.1&#39;, &#39;created_at&#39;: &#39;2025-12-02T10:40:06.669223683Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 4541564343, &#39;load_duration&#39;: 151402683, &#39;prompt_eval_count&#39;: 12, &#39;prompt_eval_duration&#39;: 163564374, &#39;eval_count&#39;: 30, &#39;eval_duration&#39;: 4199649693, &#39;model_name&#39;: &#39;llama3.1&#39;, &#39;model_provider&#39;: &#39;ollama&#39;}, id=&#39;lc_run--ca2af690-bf99-40d7-b952-0de359a374bc-0&#39;, usage_metadata={&#39;input_tokens&#39;: 12, &#39;output_tokens&#39;: 30, &#39;total_tokens&#39;: 42})
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;this is&#39;
 </pre></div>
 </div>
 </div>
 </div>
+<p>The model has just returned an incomplete literal, as specified in the format.</p>
+<p>But consider a really close case where the long literal is wrapped by the pydantic model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OutputScema</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">val</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;this is a long output&quot;</span><span class="p">]</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">with_structured_output</span><span class="p">(</span><span class="n">OutputScema</span><span class="p">)</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Print anything you can&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;langchain_core.exceptions.OutputParserException&#39;&gt;
+Failed to parse OutputScema from completion {}. Got: 1 validation error for OutputScema
+val
+  Field required [type=missing, input_value={}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case the <code class="docutils literal notranslate"><span class="pre">OutputParserException</span></code> occurs.</p>
+</section>
+</section>
+<section id="tokens">
+<h2>Tokens<a class="headerlink" href="#tokens" title="Link to this heading">#</a></h2>
+<p>There is a set of methods in the <code class="docutils literal notranslate"><span class="pre">langchain_core.language_models.base.BaseLanguageModel</span></code> that allows to <strong>estimate</strong> the number of tokens that a piece of text will take:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_token_ids</span></code>: returns the indeces of tokens.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_num_tokens</span></code>: returns the number of tokens for given text.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_num_tokens_from_messages</span></code>: returns the number of tokens for given list of messages.</p></li>
+</ul>
+<p><strong>Note.</strong> The methods use a special default tokeniser, so the particular model will actually use different tokenizer.</p>
+<hr class="docutils" />
+<p>The following cell defines two models wrapped with ollama.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deepseek</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;deepseek-r1:1.5b&quot;</span><span class="p">)</span>
+<span class="n">llama</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3&quot;</span><span class="p">)</span>
+
+<span class="n">test_text</span> <span class="o">=</span> <span class="s2">&quot;This is some tricky text: olala&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output of the <code class="docutils literal notranslate"><span class="pre">get_tokens_ids</span></code> method for different models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">deepseek</span><span class="o">.</span><span class="n">get_token_ids</span><span class="p">(</span><span class="n">test_text</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">llama</span><span class="o">.</span><span class="n">get_token_ids</span><span class="p">(</span><span class="n">test_text</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1212, 318, 617, 17198, 2420, 25, 25776, 6081]
+[1212, 318, 617, 17198, 2420, 25, 25776, 6081]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The outputs are the same because the default tokenizer was used, despite the models use different tokenizers.</p>
+<p>The following cell show the output of the <code class="docutils literal notranslate"><span class="pre">get_num_tokens</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deepseek</span><span class="o">.</span><span class="n">get_num_tokens</span><span class="p">(</span><span class="n">test_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the application of the <code class="docutils literal notranslate"><span class="pre">get_num_tokens_from_messages</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">messages</span>
+
+<span class="n">deepseek</span><span class="o">.</span><span class="n">get_num_tokens_from_messages</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">messages</span><span class="o">.</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">test_text</span><span class="p">)]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output is higher because the number includes the service tokens that wrap the messages.</p>
+</section>
+<section id="num-predict">
+<h2>Num predict<a class="headerlink" href="#num-predict" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">num_predict</span></code> parameter sets how much tokens the output of the model can have.</p>
+<hr class="docutils" />
+<p>The following cell initialises the chat model object with <code class="docutils literal notranslate"><span class="pre">num_predcit=5</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1&quot;</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">num_predict</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;How to find a true Love?&quot;</span><span class="p">)</span>
+
+<span class="n">ans</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">ans</span><span class="o">.</span><span class="n">usage_metadata</span><span class="p">[</span><span class="s2">&quot;output_tokens&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Finding true love can be&#39;, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As the result the output of the model contains exactly 5 tokens, and looks like model wasn’t able to finish the answer.</p>
 </section>
 </section>
 
@@ -930,12 +1093,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="core.html"
+       href="core/messages.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Core</p>
+        <p class="prev-next-title">Messages</p>
       </div>
     </a>
     <a class="right-next"
@@ -964,7 +1127,12 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invoke">Invoke</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-ouput">Structured ouput</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-ouput">Structured ouput</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-mismatch">Format mismatch</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens">Tokens</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#num-predict">Num predict</a></li>
 </ul>
   </nav></div>
 
