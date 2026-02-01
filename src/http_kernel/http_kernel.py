@@ -81,6 +81,7 @@ class HttpKernel(IPythonKernel):
 
         if not self.log_queue.empty():
             msg = self.log_queue.get()
+            logger.debug("Got messages from server \n: %s", msg)
             self.send_response(
                 self.iopub_socket,
                 'stream',
