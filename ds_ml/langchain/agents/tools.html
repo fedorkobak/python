@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -586,6 +586,7 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../LLMs.html">LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runnable.html">Runnable</a></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../agents.html">Agents</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="middleware.html">Middleware</a></li>
@@ -597,6 +598,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../langgraph/composition.html">Composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langgraph/conditional_edges.html">Conditional edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langgraph/memory.html">Memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
@@ -818,6 +820,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining">Defining</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formats">Formats</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#params-description">Params description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binding-tools">Binding tools</a></li>
 </ul>
             </nav>
         </div>
@@ -836,6 +839,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1017,7 +1021,7 @@ document.write(`
 
 
 <span class="nd">@tool</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">tool</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_tool</span><span class="p">(</span>
     <span class="n">val</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;Description of the parameter&quot;</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1026,7 +1030,7 @@ document.write(`
     <span class="k">return</span> <span class="mi">10</span>
 
 
-<span class="n">tooled_model</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">([</span><span class="n">tool</span><span class="p">])</span>
+<span class="n">tooled_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">([</span><span class="n">my_tool</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1040,12 +1044,86 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;type&#39;: &#39;function&#39;,
-  &#39;function&#39;: {&#39;name&#39;: &#39;tool&#39;,
+  &#39;function&#39;: {&#39;name&#39;: &#39;my_tool&#39;,
    &#39;description&#39;: &#39;Description of the tool.&#39;,
    &#39;parameters&#39;: {&#39;properties&#39;: {&#39;val&#39;: {&#39;description&#39;: &#39;Description of the parameter&#39;,
       &#39;type&#39;: &#39;integer&#39;}},
     &#39;required&#39;: [&#39;val&#39;],
     &#39;type&#39;: &#39;object&#39;}}}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="binding-tools">
+<h2>Binding tools<a class="headerlink" href="#binding-tools" title="Link to this heading">#</a></h2>
+<p>Tools are usually provided to the model via a special attribute in the body. The provider allocates the tools them according to the rules the model was trained to. Langchain certainly hides the details of API interaction under unified interface. You must call the model’s <code class="docutils literal notranslate"><span class="pre">bind_tools</span></code> method and provide the necessary tool information there.</p>
+<hr class="docutils" />
+<p>The following cell provides the information about the tools to the model, using different approaches:</p>
+<ul class="simple">
+<li><p>Passing the function decorated with the <code class="docutils literal notranslate"><span class="pre">tool</span></code>.</p></li>
+<li><p>And raw declaration of the tool using corresponding format.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">from_function</span><span class="p">():</span>
+    <span class="s2">&quot;Dummy tool&quot;</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="n">tooled_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">([</span>
+    <span class="n">from_function</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;from_json&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Another dummy&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, both tools will presented in the OpenAI’s API format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tooled_model</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tools&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;type&#39;: &#39;function&#39;,
+  &#39;function&#39;: {&#39;name&#39;: &#39;from_function&#39;,
+   &#39;description&#39;: &#39;Dummy tool&#39;,
+   &#39;parameters&#39;: {&#39;properties&#39;: {}, &#39;type&#39;: &#39;object&#39;}}},
+ {&#39;type&#39;: &#39;function&#39;,
+  &#39;function&#39;: {&#39;name&#39;: &#39;from_json&#39;,
+   &#39;description&#39;: &#39;Another dummy&#39;,
+   &#39;parameters&#39;: {&#39;properties&#39;: {}, &#39;type&#39;: &#39;object&#39;}}}]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell triggers the model to call both tools to demonstrate their validity from the model’s perspecitive.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">tooled_model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Call all the tools available to you&quot;</span><span class="p">)</span>
+<span class="n">ans</span><span class="o">.</span><span class="n">tool_calls</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;name&#39;: &#39;from_function&#39;,
+  &#39;args&#39;: {},
+  &#39;id&#39;: &#39;a9aa29d8-dd37-424b-9d50-82471b8b2ec3&#39;,
+  &#39;type&#39;: &#39;tool_call&#39;},
+ {&#39;name&#39;: &#39;from_json&#39;,
+  &#39;args&#39;: {},
+  &#39;id&#39;: &#39;cfc235b6-0bc5-4b1d-821e-c0a8bab758e0&#39;,
+  &#39;type&#39;: &#39;tool_call&#39;}]
 </pre></div>
 </div>
 </div>
@@ -1120,6 +1198,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining">Defining</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formats">Formats</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#params-description">Params description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binding-tools">Binding tools</a></li>
 </ul>
   </nav></div>
 

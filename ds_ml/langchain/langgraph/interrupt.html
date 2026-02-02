@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="LangSmith" href="../langsmith.html" />
-    <link rel="prev" title="Streaming" href="streaming.html" />
+    <link rel="prev" title="Memory" href="memory.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -586,6 +586,7 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../LLMs.html">LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runnable.html">Runnable</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../agents/middleware.html">Middleware</a></li>
@@ -597,6 +598,7 @@
 <li class="toctree-l3"><a class="reference internal" href="composition.html">Composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conditional_edges.html">Conditional edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="streaming.html">Streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Memory</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Interrupt</a></li>
 </ul>
 </details></li>
@@ -819,6 +821,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-after">Before/after</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-node">Next node</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-execution">Continue execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-state">Update state</a></li>
 </ul>
             </nav>
         </div>
@@ -1131,6 +1134,65 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="update-state">
+<h2>Update state<a class="headerlink" href="#update-state" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method of the graph allows you to set the new state of an interrupted graph, which is useful in situations involving interactions.</p>
+<hr class="docutils" />
+<p>The following cell defines the graph with interruption.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">node</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">interrupt</span><span class="p">(</span><span class="s2">&quot;Expecting input&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">message_from_user</span><span class="o">=</span><span class="n">ans</span><span class="p">)</span>
+
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">StateGraph</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">checkpointer</span><span class="o">=</span><span class="n">MemorySaver</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Invoking the graph results in the relevant interruption.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;configurable&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;thread_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">meesage_from_user</span><span class="o">=</span><span class="s2">&quot;Message 1&quot;</span><span class="p">),</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;meesage_from_user&#39;: &#39;Message 1&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell demonstrates the use of the <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method and the continuation of the graph, which returns graph’s updated state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span>
+    <span class="n">values</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;message_from_user&quot;</span><span class="p">:</span> <span class="s2">&quot;Updated message&quot;</span><span class="p">},</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span>
+<span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;message_from_user&#39;: &#39;Updated message&#39;,
+ &#39;__interrupt__&#39;: [Interrupt(value=&#39;Expecting input&#39;, id=&#39;b92971c4e381a1d476450fc87cc71733&#39;)]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1164,12 +1226,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="streaming.html"
+       href="memory.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Streaming</p>
+        <p class="prev-next-title">Memory</p>
       </div>
     </a>
     <a class="right-next"
@@ -1201,6 +1263,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-after">Before/after</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-node">Next node</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue-execution">Continue execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-state">Update state</a></li>
 </ul>
   </nav></div>
 

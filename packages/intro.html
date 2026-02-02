@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -586,6 +586,7 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/LLMs.html">LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/runnable.html">Runnable</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
@@ -597,6 +598,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/composition.html">Composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/memory.html">Memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
@@ -1462,7 +1464,11 @@ b
 <section id="jsonschema">
 <h2>jsonschema<a class="headerlink" href="#jsonschema" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">jsonschema</span></code> package is an implementation of the JSON-schema for python programming language.</p>
-<p>Check more in the <a class="reference external" href="https://python-jsonschema.readthedocs.io/en/stable/validate/#">jsonschema</a> documentation.</p>
+<p>Check more in:</p>
+<ul class="simple">
+<li><p>Official <a class="reference external" href="https://python-jsonschema.readthedocs.io/en/stable/validate/#">jsonschema</a> documentation.</p></li>
+<li><p>Special <a class="reference internal" href="jsonschema.html"><span class="std std-doc">jsonshcema</span></a> page.</p></li>
+</ul>
 <hr class="docutils" />
 <p>Using the <code class="docutils literal notranslate"><span class="pre">jsonschema.validate</span></code> function you can specify the object to be validated using the <code class="docutils literal notranslate"><span class="pre">instance</span></code> argument and the schema with <code class="docutils literal notranslate"><span class="pre">schema</span></code> argument. The following cell shows the validation of an integer instance.</p>
 <div class="cell docutils container">

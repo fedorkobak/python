@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -586,6 +586,7 @@
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../langchain/LLMs.html">LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../langchain/runnable.html">Runnable</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../langchain/agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/agents/middleware.html">Middleware</a></li>
@@ -597,6 +598,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../langchain/langgraph/composition.html">Composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/langgraph/memory.html">Memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
@@ -844,10 +846,8 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.tracking</span><span class="w"> </span><span class="kn">import</span> <span class="n">MlflowClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">clear_output</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">langchain</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
 
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
@@ -996,18 +996,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025/11/26 15:08:42 INFO mlflow.tracking.fluent: Experiment with name &#39;custom_tracing&#39; does not exist. Creating a new experiment.
-</pre></div>
-</div>
-</div>
 </div>
 <p>The following cell uses context manager syntax to create the span.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">()</span> <span class="k">as</span> <span class="n">span</span><span class="p">:</span>
     <span class="n">span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="s2">&quot;Input request&quot;</span><span class="p">)</span>
-    <span class="n">span</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;new_value&quot;</span>
+    <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;new_value&quot;</span><span class="p">)</span>
     <span class="n">span</span><span class="o">.</span><span class="n">set_outputs</span><span class="p">(</span><span class="s2">&quot;Span outputs&quot;</span><span class="p">)</span>
 <span class="n">clear_output</span><span class="p">()</span>
 </pre></div>
@@ -1020,6 +1015,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@mlflow</span><span class="o">.</span><span class="n">trace</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">some_tracing</span><span class="p">(</span><span class="n">inp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;extra information&gt;</span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">&lt;the data&gt;&quot;</span>
+
 
 <span class="n">some_tracing</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
 <span class="n">clear_output</span><span class="p">()</span>
@@ -1058,6 +1054,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.entities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpanType</span>
 
+
 <span class="nd">@mlflow</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_span&quot;</span><span class="p">,</span>
     <span class="n">span_type</span><span class="o">=</span><span class="n">SpanType</span><span class="o">.</span><span class="n">LLM</span><span class="p">,</span>
@@ -1066,9 +1063,11 @@ document.write(`
 <span class="k">def</span><span class="w"> </span><span class="nf">llm_span</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="s2">&quot;some value&quot;</span>
 
+
 <span class="nd">@mlflow</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">span_type</span><span class="o">=</span><span class="n">SpanType</span><span class="o">.</span><span class="n">RERANKER</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">reranker_span</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="s2">&quot;output of rerunker span&quot;</span>
+
 
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span><span class="n">span_type</span><span class="o">=</span><span class="s2">&quot;custom span&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_cool_span&quot;</span><span class="p">):</span>
     <span class="n">llm_span</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">)</span>
@@ -1112,12 +1111,15 @@ document.write(`
     <span class="p">}</span>
 <span class="p">]</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">predict_fn</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AIMessage</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">chat</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+
 
 <span class="nd">@scorer</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">some_check</span><span class="p">(</span><span class="n">outputs</span><span class="p">:</span> <span class="n">AIMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">content</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span>
+
 
 <span class="n">mlflow</span><span class="o">.</span><span class="n">genai</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">,</span>
@@ -1145,6 +1147,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">AIMessage</span>
 
+
 <span class="nd">@mlflow</span><span class="o">.</span><span class="n">genai</span><span class="o">.</span><span class="n">scorer</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">exp_out</span><span class="p">(</span>
     <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
@@ -1160,11 +1163,13 @@ document.write(`
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">True</span>
 
+
 <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s2">&quot;evaluation_test&quot;</span><span class="p">)</span>
+
 
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;This trace&quot;</span><span class="p">):</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">genai</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">[</span>
             <span class="p">{</span>
                 <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;inp&quot;</span><span class="p">:</span> <span class="s2">&quot;inputs value&quot;</span><span class="p">},</span>
                 <span class="s2">&quot;expectations&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;exp&quot;</span><span class="p">:</span> <span class="s2">&quot;expectations value&quot;</span><span class="p">}</span>

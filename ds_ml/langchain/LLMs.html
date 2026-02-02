@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Agents" href="agents.html" />
+    <link rel="next" title="Runnable" href="runnable.html" />
     <link rel="prev" title="Messages" href="core/messages.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -586,6 +586,7 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runnable.html">Runnable</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="agents.html">Agents</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="agents/tools.html">Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="agents/middleware.html">Middleware</a></li>
@@ -597,6 +598,7 @@
 <li class="toctree-l3"><a class="reference internal" href="langgraph/composition.html">Composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="langgraph/conditional_edges.html">Conditional edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langgraph/memory.html">Memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
@@ -815,13 +817,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invoke">Invoke</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-ouput">Structured ouput</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-mismatch">Format mismatch</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens">Tokens</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#num-predict">Num predict</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llmresult">LLMResult</a></li>
 </ul>
             </nav>
         </div>
@@ -847,25 +849,6 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="invoke">
-<h2>Invoke<a class="headerlink" href="#invoke" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">invoke</span></code> method triggers the request to LLM.</p>
-<p>In most cases, it returns an <code class="docutils literal notranslate"><span class="pre">AIMessage</span></code>, but in some special cases, it can return some special output. For example, structured output langchain object return <code class="docutils literal notranslate"><span class="pre">dict</span></code> or <code class="docutils literal notranslate"><span class="pre">Pydantic.BaseModel</span></code>.</p>
-<hr class="docutils" />
-<p>The following cell shows the kind of object <code class="docutils literal notranslate"><span class="pre">langchain_core.language_models.BaseChatModel</span></code> heir returns.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;Hello! How can I assist you today?&#39;, additional_kwargs={}, response_metadata={&#39;model&#39;: &#39;llama3.1&#39;, &#39;created_at&#39;: &#39;2026-01-06T14:39:17.313641499Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 23004167206, &#39;load_duration&#39;: 22818871591, &#39;prompt_eval_count&#39;: 12, &#39;prompt_eval_duration&#39;: 27074996, &#39;eval_count&#39;: 10, &#39;eval_duration&#39;: 141396789, &#39;model_name&#39;: &#39;llama3.1&#39;, &#39;model_provider&#39;: &#39;ollama&#39;}, id=&#39;lc_run--fe6d8bde-d9c8-4e4c-a7f2-df3839f539a6-0&#39;, usage_metadata={&#39;input_tokens&#39;: 12, &#39;output_tokens&#39;: 10, &#39;total_tokens&#39;: 22})
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="structured-ouput">
 <h2>Structured ouput<a class="headerlink" href="#structured-ouput" title="Link to this heading">#</a></h2>
 <p>Some providers support the structured output. The model will return the data in the specified format.</p>
@@ -1060,6 +1043,52 @@ For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/erro
 </div>
 <p>As the result the output of the model contains exactly 5 tokens, and looks like model wasn’t able to finish the answer.</p>
 </section>
+<section id="llmresult">
+<h2>LLMResult<a class="headerlink" href="#llmresult" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">LLMResult</span></code> is an abstraction of LangChain, which is ususally hidden under the hood. However, you sometimes need to interact with it, for example, to modify invocation calls.</p>
+<hr class="docutils" />
+<p>You can obtain an <code class="docutils literal notranslate"><span class="pre">LLMResult</span></code> from the LLM by using the <code class="docutils literal notranslate"><span class="pre">generate</span></code> method.</p>
+<p>The following cell invokes the corresponding method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span>
+<span class="n">llm_result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span><span class="p">[[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span><span class="p">)]])</span>
+<span class="n">llm_result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LLMResult(generations=[[ChatGeneration(text=&#39;Hello! How can I assist you today?&#39;, generation_info={&#39;model&#39;: &#39;llama3.1&#39;, &#39;created_at&#39;: &#39;2026-01-19T19:56:24.281124679Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 2962383221, &#39;load_duration&#39;: 96997024, &#39;prompt_eval_count&#39;: 11, &#39;prompt_eval_duration&#39;: 352428668, &#39;eval_count&#39;: 10, &#39;eval_duration&#39;: 2512357167, &#39;logprobs&#39;: None, &#39;model_name&#39;: &#39;llama3.1&#39;, &#39;model_provider&#39;: &#39;ollama&#39;}, message=AIMessage(content=&#39;Hello! How can I assist you today?&#39;, additional_kwargs={}, response_metadata={&#39;model&#39;: &#39;llama3.1&#39;, &#39;created_at&#39;: &#39;2026-01-19T19:56:24.281124679Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 2962383221, &#39;load_duration&#39;: 96997024, &#39;prompt_eval_count&#39;: 11, &#39;prompt_eval_duration&#39;: 352428668, &#39;eval_count&#39;: 10, &#39;eval_duration&#39;: 2512357167, &#39;logprobs&#39;: None, &#39;model_name&#39;: &#39;llama3.1&#39;, &#39;model_provider&#39;: &#39;ollama&#39;}, id=&#39;lc_run--019bd7d4-6bc4-7b30-91c5-0343016c42de-0&#39;, usage_metadata={&#39;input_tokens&#39;: 11, &#39;output_tokens&#39;: 10, &#39;total_tokens&#39;: 21}))]], llm_output={}, run=[RunInfo(run_id=UUID(&#39;019bd7d4-6bc4-7b30-91c5-0343016c42de&#39;))], type=&#39;LLMResult&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">llm_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>langchain_core.outputs.llm_result.LLMResult
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">generations</span></code> attribute contains the generated information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm_result</span><span class="o">.</span><span class="n">generations</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatGeneration(text=&#39;Hello! How can I assist you today?&#39;, generation_info={&#39;model&#39;: &#39;llama3.1&#39;, &#39;created_at&#39;: &#39;2026-01-19T19:56:24.281124679Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 2962383221, &#39;load_duration&#39;: 96997024, &#39;prompt_eval_count&#39;: 11, &#39;prompt_eval_duration&#39;: 352428668, &#39;eval_count&#39;: 10, &#39;eval_duration&#39;: 2512357167, &#39;logprobs&#39;: None, &#39;model_name&#39;: &#39;llama3.1&#39;, &#39;model_provider&#39;: &#39;ollama&#39;}, message=AIMessage(content=&#39;Hello! How can I assist you today?&#39;, additional_kwargs={}, response_metadata={&#39;model&#39;: &#39;llama3.1&#39;, &#39;created_at&#39;: &#39;2026-01-19T19:56:24.281124679Z&#39;, &#39;done&#39;: True, &#39;done_reason&#39;: &#39;stop&#39;, &#39;total_duration&#39;: 2962383221, &#39;load_duration&#39;: 96997024, &#39;prompt_eval_count&#39;: 11, &#39;prompt_eval_duration&#39;: 352428668, &#39;eval_count&#39;: 10, &#39;eval_duration&#39;: 2512357167, &#39;logprobs&#39;: None, &#39;model_name&#39;: &#39;llama3.1&#39;, &#39;model_provider&#39;: &#39;ollama&#39;}, id=&#39;lc_run--019bd7d4-6bc4-7b30-91c5-0343016c42de-0&#39;, usage_metadata={&#39;input_tokens&#39;: 11, &#39;output_tokens&#39;: 10, &#39;total_tokens&#39;: 21}))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1102,11 +1131,11 @@ For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/erro
       </div>
     </a>
     <a class="right-next"
-       href="agents.html"
+       href="runnable.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Agents</p>
+        <p class="prev-next-title">Runnable</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1126,13 +1155,13 @@ For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/erro
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invoke">Invoke</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-ouput">Structured ouput</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-mismatch">Format mismatch</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens">Tokens</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#num-predict">Num predict</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llmresult">LLMResult</a></li>
 </ul>
   </nav></div>
 
