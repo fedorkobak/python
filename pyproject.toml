@@ -6,7 +6,8 @@ build-backend = "hatchling.build"
 name = "src"
 version = "0.0.0"
 dependencies = [
-    "jupyter-book"
+    "jupyter-book",
+    "docker"
 ]
 
 [tool.hatch.build.targets.wheel]
