@@ -388,3 +388,4 @@ parts:
         sections:
         - file: packages/cloud/databricks_sdk/feature_engineering.ipynb
         - file: packages/cloud/databricks_sdk/serving.ipynb
+    - file: packages/urllib3.ipynb
