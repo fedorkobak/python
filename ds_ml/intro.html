@@ -594,17 +594,17 @@
 <li class="toctree-l3"><a class="reference internal" href="langchain/agents/middleware.html">Middleware</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="langchain/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="langchain/langgraph/state.html">State</a></li>
-<li class="toctree-l3"><a class="reference internal" href="langchain/langgraph/reducing.html">Reducing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="langchain/langgraph/composition.html">Composition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="langchain/langgraph/streaming.html">Streaming</a></li>
-<li class="toctree-l3"><a class="reference internal" href="langchain/langgraph/memory.html">Memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="langchain/langgraph/interrupt.html">Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="langgraph/state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langgraph/reducing.html">Reducing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langgraph/composition.html">Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langgraph/conditional_edges.html">Conditional edges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langgraph/memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -656,6 +656,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/urllib3.html">urllib3</a></li>
 </ul>
 
     </div>
@@ -823,6 +824,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark">Spark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-transformer">Sentence transformer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langgraph">LangGraph</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-sdk">MCP SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow">MLFlow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a></li>
@@ -1034,6 +1036,84 @@ document.write(`
 </table>
 </div>
 <p>Check more in <a class="reference internal" href="langchain.html"><span class="std std-doc">Lang Chain</span></a> package.</p>
+</section>
+<section id="langgraph">
+<h2>LangGraph<a class="headerlink" href="#langgraph" title="Link to this heading">#</a></h2>
+<p>The LangGraph is a low-level orchestration framework and runtime for building, and deploying long-running, stateful agents.</p>
+<p>The graph is consits of:</p>
+<ul class="simple">
+<li><p><strong>Nodes</strong>: Python functions that transform data.</p></li>
+<li><p><strong>Edges</strong>: Control flow of the graph.</p></li>
+</ul>
+<p>The <strong>State</strong> is the information that passes through the nodes according to the rules specified by the edges.</p>
+<p>For more information check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.langchain.com/oss/python/langgraph/overview#langgraph-ecosystem">LangGraph Overview</a> for learning the ideas behind the LangGraph.</p></li>
+<li><p><a class="reference internal" href="langgraph.html"><span class="std std-doc">LangGraph</span></a> page for more examples.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Consider the process of creating a simple graph.</p>
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">State</span></code> class, which describes the format of the data. The <code class="docutils literal notranslate"><span class="pre">initial_state</span></code> instance that defines the state that must be processed by the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">List</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">n_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+
+<span class="n">initial_state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">n_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell defines the node that prints the input state and returns the new one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">node_a</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;n_list&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">n_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;returns&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next cell shows the definition of the new graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">StateGraph</span>
+
+<span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">State</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">graph</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e544e20195e3add3279c76782a04db0aa909fba4ebfba3c22179b763f9b8d527.png" src="../_images/e544e20195e3add3279c76782a04db0aa909fba4ebfba3c22179b763f9b8d527.png" />
+</div>
+</div>
+<p>You can pass information through the compiled state graph by invoking it and passing data there.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;value&#39;]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;n_list&#39;: [&#39;returns&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="mcp-sdk">
 <h2>MCP SDK<a class="headerlink" href="#mcp-sdk" title="Link to this heading">#</a></h2>
@@ -1299,6 +1379,7 @@ x = 2
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark">Spark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-transformer">Sentence transformer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain">LangChain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langgraph">LangGraph</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-sdk">MCP SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow">MLFlow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a></li>

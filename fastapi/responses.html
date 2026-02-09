@@ -592,17 +592,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/langchain/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/state.html">State</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/reducing.html">Reducing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/composition.html">Composition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/streaming.html">Streaming</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/memory.html">Memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/interrupt.html">Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/reducing.html">Reducing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/composition.html">Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/conditional_edges.html">Conditional edges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,6 +654,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/urllib3.html">urllib3</a></li>
 </ul>
 
     </div>
@@ -825,6 +826,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic-models">Pydantic models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-validation">Input validation</a></li>
 </ul>
             </nav>
         </div>
@@ -843,27 +845,29 @@ document.write(`
 <p>Container for the examples in this page. Check <a class="reference internal" href="run_application.html"><span class="std std-doc">run application</span></a> for more details about image that is used for this container.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.rerun_docker</span><span class="w"> </span><span class="kn">import</span> <span class="n">reload_docker_container</span>
 
-<span class="o">!</span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-itd<span class="err">\</span>
-    <span class="o">--</span><span class="n">name</span> <span class="n">test_container</span>\
-    <span class="o">-</span><span class="n">v</span> <span class="o">./</span><span class="n">responses_files</span><span class="o">/</span><span class="n">app</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="o">/</span><span class="n">app</span><span class="o">.</span><span class="n">py</span>\
-    <span class="o">-</span><span class="n">p</span> <span class="mi">8000</span><span class="p">:</span><span class="mi">8000</span> \
-    <span class="n">fastapi_experiment</span> \
-    <span class="n">uvicorn</span> <span class="o">--</span><span class="n">host</span> <span class="mf">0.0.0.0</span> <span class="o">--</span><span class="n">reload</span> <span class="n">app</span><span class="p">:</span><span class="n">app</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>792aeb9776357a9802acc420ab93f47e9a74292314444831b93469b504506a85
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Note</strong> Don’t forget to stop the container.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>docker<span class="w"> </span>stop<span class="w"> </span>test_container<span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null
+<span class="n">local_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;./responses_files/app.py&quot;</span><span class="p">)</span>
+
+<span class="n">ans</span> <span class="o">=</span> <span class="n">reload_docker_container</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;test_container&quot;</span><span class="p">,</span>
+    <span class="n">image</span><span class="o">=</span><span class="s2">&quot;fastapi_experiment&quot;</span><span class="p">,</span>
+    <span class="n">command</span><span class="o">=</span><span class="s2">&quot;uvicorn --host 0.0.0.0 --reload app:app&quot;</span><span class="p">,</span>
+    <span class="n">detach</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">stdin_open</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">tty</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">ports</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;8000/tcp&#39;</span><span class="p">:</span> <span class="mi">8000</span><span class="p">},</span>
+    <span class="n">volumes</span><span class="o">=</span><span class="p">{</span>
+        <span class="n">local_path</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;bind&#39;</span><span class="p">:</span> <span class="s1">&#39;/app.py&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;rw&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1024,7 +1028,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>date Tue, 20 Aug 2024 12:52:32 GMT
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>date Mon, 02 Feb 2026 12:30:38 GMT
 server uvicorn
 content-length 40
 content-type application/json
@@ -1123,6 +1127,55 @@ Content b&#39;{&quot;detail&quot;:&quot;Custom not found&quot;}&#39;
 </div>
 </div>
 </section>
+<section id="input-validation">
+<h2>Input validation<a class="headerlink" href="#input-validation" title="Link to this heading">#</a></h2>
+<p>If the input is invalid, FastAPI returns a 422 response with details describing the incident.</p>
+<hr class="docutils" />
+<p>The following cell defines the application that requires the <code class="docutils literal notranslate"><span class="pre">a</span></code> query parameter to be an integer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> responses_files/app.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPException</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_dict</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s2">&quot;Custom not found&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting responses_files/app.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the application encounters a value that cannot be interpreted as the integer, the output is displayed in the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000?a=&#39;hello&#39;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>422
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;detail&#39;: [{&#39;type&#39;: &#39;int_parsing&#39;,
+   &#39;loc&#39;: [&#39;query&#39;, &#39;a&#39;],
+   &#39;msg&#39;: &#39;Input should be a valid integer, unable to parse string as an integer&#39;,
+   &#39;input&#39;: &quot;&#39;hello&#39;&quot;,
+   &#39;url&#39;: &#39;https://errors.pydantic.dev/2.12/v/int_parsing&#39;}]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1199,6 +1252,7 @@ Content b&#39;{&quot;detail&quot;:&quot;Custom not found&quot;}&#39;
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic-models">Pydantic models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-validation">Input validation</a></li>
 </ul>
   </nav></div>
 

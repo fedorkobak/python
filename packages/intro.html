@@ -592,17 +592,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/langchain/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/state.html">State</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/reducing.html">Reducing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/composition.html">Composition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/streaming.html">Streaming</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/memory.html">Memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/interrupt.html">Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/reducing.html">Reducing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/composition.html">Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/conditional_edges.html">Conditional edges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,6 +654,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="urllib3.html">urllib3</a></li>
 </ul>
 
     </div>
@@ -829,6 +830,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sdk">AWS SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonschema">jsonschema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#urllib3">urllib3</a></li>
 </ul>
             </nav>
         </div>
@@ -1092,8 +1094,11 @@ rm -r zip_example_file archive.zip
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">apscheduler.schedulers.background</span><span class="w"> </span><span class="kn">import</span> <span class="n">BackgroundScheduler</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">periodic_task</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+
 
 <span class="n">scheduler</span> <span class="o">=</span> <span class="n">BackgroundScheduler</span><span class="p">()</span>
 <span class="n">scheduler</span><span class="o">.</span><span class="n">add_job</span><span class="p">(</span><span class="n">periodic_task</span><span class="p">,</span> <span class="s2">&quot;interval&quot;</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -1288,8 +1293,10 @@ rm -r zip_example_file archive.zip
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gradio</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gr</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span>
+
 
 <span class="n">demo</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="n">greet</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
 <span class="n">demo</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1403,6 +1410,7 @@ rm -r zip_example_file archive.zip
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pydantic</span>
 
+
 <span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">b</span><span class="p">:</span> <span class="nb">float</span>
@@ -1504,6 +1512,32 @@ On instance:
 </div>
 </div>
 </section>
+<section id="urllib3">
+<h2>urllib3<a class="headerlink" href="#urllib3" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">urllib3</span></code> is a package for implementing network communication.</p>
+<p>For more information:</p>
+<ul class="simple">
+<li><p>Check the official <a class="reference external" href="https://urllib3.readthedocs.io/en/stable/index.html">website</a>.</p></li>
+<li><p>Chekc <a class="reference internal" href="urllib3.html"><span class="std std-doc">special page</span></a>.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell shows how to make a request to the <code class="docutils literal notranslate"><span class="pre">http://google.com</span></code> using <code class="docutils literal notranslate"><span class="pre">urllib3</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib3</span>
+<span class="n">pool_manager</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">PoolManager</span><span class="p">()</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">pool_manager</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;http://google.com&quot;</span><span class="p">)</span>
+<span class="n">resp</span><span class="o">.</span><span class="n">status</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1582,6 +1616,7 @@ On instance:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sdk">AWS SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonschema">jsonschema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#urllib3">urllib3</a></li>
 </ul>
   </nav></div>
 

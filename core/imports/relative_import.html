@@ -592,17 +592,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/langchain/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/langgraph/state.html">State</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/langgraph/reducing.html">Reducing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/langgraph/composition.html">Composition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/langgraph/streaming.html">Streaming</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/langgraph/memory.html">Memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/langchain/langgraph/interrupt.html">Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langgraph/state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langgraph/reducing.html">Reducing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langgraph/composition.html">Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langgraph/conditional_edges.html">Conditional edges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langgraph/memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ds_ml/langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ds_ml/spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,6 +654,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/urllib3.html">urllib3</a></li>
 </ul>
 
     </div>
@@ -817,7 +818,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-module"><code class="docutils literal notranslate"><span class="pre">__main__</span></code> module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolving">Resolving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-module">Importing module</a></li>
 </ul>
             </nav>
         </div>
@@ -831,92 +833,142 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="relative-import">
 <h1>Relative import<a class="headerlink" href="#relative-import" title="Link to this heading">#</a></h1>
-<p>This page discusses the implementation details of the relative imports in python.</p>
-<section id="main-module">
-<h2><code class="docutils literal notranslate"><span class="pre">__main__</span></code> module<a class="headerlink" href="#main-module" title="Link to this heading">#</a></h2>
-<p>A common issue related to relative imports in Python occurs when attempting to execute a Python file that contains relative imports.</p>
-<p>Check out <a class="reference external" href="https://stackoverflow.com/questions/16981921/relative-imports-in-python-3">this</a> stackoverflow discussion of what actually happens.</p>
-<p>Python uses the module’s <code class="docutils literal notranslate"><span class="pre">__name__</span></code> attribute of the module when loading imports into the module. If the import occurs in the <code class="docutils literal notranslate"><span class="pre">__main__</span></code> module, correct path to the module cannot be built, resulting in an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>. Running the module with the <code class="docutils literal notranslate"><span class="pre">-m</span></code> flag processes the path of the <code class="docutils literal notranslate"><span class="pre">python</span></code> interpreter a bit differently.</p>
+<p>This page discusses the implementation details of relative imports in Python, as well as the most common issues associated with their use.</p>
+<section id="resolving">
+<h2>Resolving<a class="headerlink" href="#resolving" title="Link to this heading">#</a></h2>
+<p>Python resolves the relative imports using the <code class="docutils literal notranslate"><span class="pre">__package__</span></code> attribute of the importing module. If the <code class="docutils literal notranslate"><span class="pre">__package__</span></code> attribute is set to <code class="docutils literal notranslate"><span class="pre">None</span></code> or an empty string (<code class="docutils literal notranslate"><span class="pre">''</span></code>), an <code class="docutils literal notranslate"><span class="pre">ImportError:</span> <span class="pre">attempted</span> <span class="pre">relative</span> <span class="pre">import</span> <span class="pre">with</span> <span class="pre">no</span> <span class="pre">known</span> <span class="pre">parent</span> <span class="pre">package</span></code> is raised.</p>
 <hr class="docutils" />
-<p>A few following cells create a simple project structure that uses relative imports.</p>
+<p>The following cells creates folder with python code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-rm -rf /tmp/relative_import
-mkdir -p /tmp/relative_import/package
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#init</span>
+mkdir<span class="w"> </span>package
 </pre></div>
 </div>
 </div>
 </div>
+<p>The module supposed to be imported:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/relative_import/package/module1.py
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module1&quot;</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#file package/import_me.py</span>
+print<span class="o">(</span><span class="s2">&quot;I was imported&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The importing module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#file package/load.py</span>
+print<span class="o">(</span><span class="s2">&quot;package:&quot;</span>,<span class="w"> </span>__package__<span class="o">)</span>
+from<span class="w"> </span>.<span class="w"> </span>import<span class="w"> </span>import_me
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the module is run as a script, it will have the <code class="docutils literal notranslate"><span class="pre">__package__</span> <span class="pre">=</span> <span class="pre">None</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>package/load.py
+<span class="nb">true</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/relative_import/package/module1.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>package: None
+Traceback (most recent call last):
+  File <span class=" -Color -Color-Magenta">&quot;/tmp/tmprh915u9z/package/load.py&quot;</span>, line <span class=" -Color -Color-Magenta">2</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
+    from . import import_me
+<span class=" -Color -Color-Bold -Color-Bold-Magenta">ImportError</span>: <span class=" -Color -Color-Magenta">attempted relative import with no known parent package</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Python is unable to resolve the relative import.</p>
+<p>The following cell runs imports the file as a python module, resulting in <code class="docutils literal notranslate"><span class="pre">__package__=package</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>package.load
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>package: package
+I was imported
+</pre></div>
+</div>
+</div>
+</div>
+<p>The relative importing goes fine.</p>
+</section>
+<section id="importing-module">
+<h2>Importing module<a class="headerlink" href="#importing-module" title="Link to this heading">#</a></h2>
+<p>A typical source of confusion is when a module cannot use relative imports when run as a Python script, but everything works fine when it is imported by another Python module runned as scirpt.</p>
+<p>The most likely reason is that the <code class="docutils literal notranslate"><span class="pre">__package__</span></code> attribute is set by the <code class="docutils literal notranslate"><span class="pre">import</span></code> machinery of the entry point script.</p>
+<p>Check out <a class="reference external" href="https://stackoverflow.com/questions/16981921/relative-imports-in-python-3">this</a> stackoverflow discussion of what actually happens.</p>
+<hr class="docutils" />
+<p>The following cells create the folder with python source files that utilise the relative import mechanism.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#init</span>
+mkdir<span class="w"> </span>package
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/relative_import/package/intro_module.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">module1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /tmp/relative_import/package/intro_module.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#file package/import_me.py</span>
+print<span class="o">(</span><span class="s2">&quot;I was imported&quot;</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The following cell attempts to run <code class="docutils literal notranslate"><span class="pre">intro_module</span></code> as the main programm’s main module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">cd</span><span class="w"> </span>/tmp/relative_import/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>package/intro_module.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
-  File &quot;/tmp/relative_import/package/intro_module.py&quot;, line 1, in &lt;module&gt;
-    from . import module1
-ImportError: attempted relative import with no known parent package
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#file package/load.py</span>
+print<span class="o">(</span><span class="s2">&quot;package:&quot;</span>,<span class="w"> </span>__package__<span class="o">)</span>
+from<span class="w"> </span>.<span class="w"> </span>import<span class="w"> </span>import_me
 </pre></div>
 </div>
 </div>
 </div>
-<p>The result is the <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>, which makes it clear that the error occurs due to relative import. The following cell runs <code class="docutils literal notranslate"><span class="pre">package.intro_module</span></code> with the <code class="docutils literal notranslate"><span class="pre">-m</span></code> flag. As a result, the programm executes without any problems.</p>
+<p>As expected, the pure call to the file using relative import fails.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">cd</span><span class="w"> </span>/tmp/relative_import/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>package.intro_module
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>package/load.py
+<span class="nb">true</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>package: None
+Traceback (most recent call last):
+  File <span class=" -Color -Color-Magenta">&quot;/tmp/tmp__8ia4y7/package/load.py&quot;</span>, line <span class=" -Color -Color-Magenta">2</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
+    from . import import_me
+<span class=" -Color -Color-Bold -Color-Bold-Magenta">ImportError</span>: <span class=" -Color -Color-Magenta">attempted relative import with no known parent package</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Note:</strong> This won’t work if the module you want to run doesn’t have a parent package. The following cell demonstrates an attempt to run the <code class="docutils literal notranslate"><span class="pre">intro_module</span></code> from the <code class="docutils literal notranslate"><span class="pre">package</span></code> folder.</p>
+<p>However, if you create and run the other entry point file that explicitly specifies the <code class="docutils literal notranslate"><span class="pre">package</span></code>, there are no issues.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">cd</span><span class="w"> </span>/tmp/relative_import/package/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>intro_module
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#file load.py</span>
+from<span class="w"> </span>package<span class="w"> </span>import<span class="w"> </span>load
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>load.py
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
-  File &quot;&lt;frozen runpy&gt;&quot;, line 198, in _run_module_as_main
-  File &quot;&lt;frozen runpy&gt;&quot;, line 88, in _run_code
-  File &quot;/tmp/relative_import/package/intro_module.py&quot;, line 1, in &lt;module&gt;
-    from . import module1
-ImportError: attempted relative import with no known parent package
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>package: package
+I was imported
 </pre></div>
 </div>
 </div>
@@ -933,16 +985,16 @@ ImportError: attempted relative import with no known parent package
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "tempdir"
         },
         kernelOptions: {
-            name: "python3",
+            name: "tempdir",
             path: "./core/imports"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'tempdir'</script>
 
                 </article>
               
@@ -988,7 +1040,8 @@ ImportError: attempted relative import with no known parent package
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-module"><code class="docutils literal notranslate"><span class="pre">__main__</span></code> module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolving">Resolving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-module">Importing module</a></li>
 </ul>
   </nav></div>
 

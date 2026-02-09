@@ -592,17 +592,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/agents/middleware.html">Middleware</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/langchain/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/state.html">State</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/reducing.html">Reducing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/composition.html">Composition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/conditional_edges.html">Conditional edges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/streaming.html">Streaming</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/memory.html">Memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ds_ml/langchain/langgraph/interrupt.html">Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/langgraph.html">LangGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/reducing.html">Reducing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/composition.html">Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/conditional_edges.html">Conditional edges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/streaming.html">Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds_ml/langgraph/interrupt.html">Interrupt</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ds_ml/spark.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,6 +654,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="urllib3.html">urllib3</a></li>
 </ul>
 
     </div>
@@ -833,8 +834,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adapter">Adapter</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-adapter">HTTP Adapter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retries">Retries</a></li>
 </ul>
 </li>
 </ul>
@@ -1262,6 +1265,52 @@ Connection: keep-alive
 </div>
 </section>
 </section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">requests</span></code> package defines a set of exceptions that would be raised in different cases.</p>
+<p>Check the full list of exceptions in the <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#exceptions">Exceptions</a> section of the API reference.</p>
+<p>What matters here is that exceptions typically (through not always) include the request that led to the exception and may also include the response.</p>
+<hr class="docutils" />
+<p>The following cell raises and saves the <code class="docutils literal notranslate"><span class="pre">HTTPException</span></code> as a variable .</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/status/500&quot;</span><span class="p">)</span>
+<span class="n">exception</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">ans</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">exception</span> <span class="o">=</span> <span class="n">e</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell displays the content of the <code class="docutils literal notranslate"><span class="pre">request</span></code> attribute of the exception.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exception</span><span class="o">.</span><span class="n">request</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;PreparedRequest [GET]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the <code class="docutils literal notranslate"><span class="pre">response</span></code> attribute of the exception.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exception</span><span class="o">.</span><span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Response [500]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="adapter">
 <h2>Adapter<a class="headerlink" href="#adapter" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">requests</span></code> package has a modular structure. To implement the interaciton principles for a specific network protocol, you must implement an adapter that inherits from the <code class="docutils literal notranslate"><span class="pre">requests.adapters.BaseAdapter</span></code> class, which handles requests and prepares responses.</p>
@@ -1321,6 +1370,38 @@ User-Agent: python-urllib3/2.5.0
 </div>
 </div>
 </div>
+</section>
+<section id="retries">
+<h3>Retries<a class="headerlink" href="#retries" title="Link to this heading">#</a></h3>
+<p>Retries in <code class="docutils literal notranslate"><span class="pre">requests</span></code> can be implemented through an adapter. You must mount the adapter with the specified <code class="docutils literal notranslate"><span class="pre">rax_retries=urllib3.util.Retry</span></code> parameter.</p>
+<p><strong>Note.</strong> wrong status codes raise if the adapter with retries is attached to the session.</p>
+<hr class="docutils" />
+<p>The following cell creates a session with retries and attemts to request an endpoint that returns a 500 error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urllib3.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Retry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.adapters</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPAdapter</span>
+
+<span class="n">adapter</span> <span class="o">=</span> <span class="n">HTTPAdapter</span><span class="p">(</span>
+    <span class="n">max_retries</span><span class="o">=</span><span class="n">Retry</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">status_forcelist</span><span class="o">=</span><span class="p">[</span><span class="mi">500</span><span class="p">])</span>
+<span class="p">)</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s2">&quot;http://&quot;</span><span class="p">,</span> <span class="n">adapter</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:80/status/500&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HTTPConnectionPool(host=&#39;localhost&#39;, port=80): Max retries exceeded with url: /status/500 (Caused by ResponseError(&#39;too many 500 error responses&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is a corresponding error associated with exceedign retry limit.</p>
 </section>
 </section>
 </section>
@@ -1405,8 +1486,10 @@ User-Agent: python-urllib3/2.5.0
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adapter">Adapter</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-adapter">HTTP Adapter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retries">Retries</a></li>
 </ul>
 </li>
 </ul>
