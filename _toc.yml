@@ -27,6 +27,10 @@ parts:
         - file: core/syntax/oop/class_method.ipynb
         - file: core/syntax/oop/special_methods.ipynb
         - file: core/syntax/oop/special_attributes.ipynb
+      - file: core/syntax/specials.ipynb
+        sections:
+          - file: core/syntax/specials/methods.ipynb
+          - file: core/syntax/specials/attributes.ipynb
       - file: core/syntax/exceptions.ipynb
         sections:
         - file: core/syntax/exceptions/try_except.ipynb
