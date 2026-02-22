@@ -373,7 +373,6 @@ parts:
       - file: packages/redis/redis_client.ipynb
     - file: packages/surprise.ipynb
     - file: packages/socket.ipynb
-    - file: packages/requests.ipynb
     - file: packages/jsonschema.ipynb
     - file: packages/pydantic.ipynb
     - file: packages/tkinter.ipynb
@@ -392,4 +391,7 @@ parts:
         sections:
         - file: packages/cloud/databricks_sdk/feature_engineering.ipynb
         - file: packages/cloud/databricks_sdk/serving.ipynb
-    - file: packages/urllib3.ipynb
+    - file: packages/web.ipynb
+      sections:
+      - file: packages/web/requests.ipynb
+      - file: packages/web/urllib3.ipynb
