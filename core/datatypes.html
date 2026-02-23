@@ -204,8 +204,11 @@
 <li class="toctree-l3"><a class="reference internal" href="syntax/oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="syntax/oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="syntax/oop/class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="syntax/oop/special_methods.html">Special methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="syntax/specials.html">Specials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="syntax/specials/methods.html">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="syntax/specials/attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -633,7 +636,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../packages/redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages/requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages/jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages/pydantic.html">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -656,7 +658,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages/urllib3.html">urllib3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../packages/web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -828,6 +834,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime">Datetime</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subtypes">Subtypes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterator-types">Iterator Types</a></li>
 </ul>
             </nav>
         </div>
@@ -1171,12 +1178,72 @@ Is list subclass of int - False
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">issubclasses</span><span class="p">)</span>
 <span class="p">])</span>
 
+
 <span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;table&gt;</span><span class="si">{</span><span class="n">header</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">content</span><span class="si">}</span><span class="s2">&lt;/table&gt;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table><tr><th></th><th>bool</th><th>int</th><th>float</th><th>complex</th><th>numbers.Number</th><th>list</th><th>bytearray</th><th>tuple</th><th>bytes</th><th>set</th><th>frozenset</th><th>dict</th><th>collections.abc.MutableSequence</th><th>collections.abc.Sequence</th><th>collections.abc.Set</th><th>collections.abc.Mapping</th></tr><tr><td>bool</td><td style='background:gray;text-align:center'>-</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>int</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>float</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>complex</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>numbers.Number</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>list</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>bytearray</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>tuple</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>bytes</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>set</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>frozenset</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>dict</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:green;text-align:center'>✓</td></tr><tr><td>collections.abc.MutableSequence</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:green;text-align:center'>✓</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>collections.abc.Sequence</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>collections.abc.Set</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td><td style='background:red ;text-align:center'>x</td></tr><tr><td>collections.abc.Mapping</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:red ;text-align:center'>x</td><td style='background:gray;text-align:center'>-</td></tr></table></div></div>
+</div>
+</section>
+<section id="iterator-types">
+<h2>Iterator Types<a class="headerlink" href="#iterator-types" title="Link to this heading">#</a></h2>
+<p>The iterator type is a type that allows iteration.</p>
+<p>There are two concepts under iterations in python:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/glossary.html#term-iterable">Iterable</a>: an object over which you can iterate. Iterable have to implement <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> or <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> methods.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/glossary.html#term-iterator">Iterator</a>: an object that points to the specific object in a range of objects. Iterator have to have <code class="docutils literal notranslate"><span class="pre">__next__</span></code> dunder method.</p></li>
+</ul>
+<p>Check more in:</p>
+<ul class="simple">
+<li><p>The official <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#iterator-types">Iterator Types</a> description.</p></li>
+<li><p>The <a class="reference internal" href="#datatypes/iterator_types.ipynb"><span class="xref myst">Iterator Types</span></a> page.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell implements the class that will have the specified during creation number of iterations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">IterationExample</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_iterations</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">=</span> <span class="n">max_iterations</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;__iter__ is called&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;__next__ is called&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stop iteration is raised&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now apply the <code class="docutils literal notranslate"><span class="pre">for</span></code> cycle to the instance of that class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">IterationExample</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>__iter__ is called
+__next__ is called
+__next__ is called
+__next__ is called
+__next__ is called
+Stop iteration is raised
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <div class="toctree-wrapper compound">
@@ -1255,6 +1322,7 @@ Is list subclass of int - False
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime">Datetime</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subtypes">Subtypes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterator-types">Iterator Types</a></li>
 </ul>
   </nav></div>
 

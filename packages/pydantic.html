@@ -202,8 +202,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_methods.html">Special methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/specials.html">Specials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/specials/methods.html">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/specials/attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -631,7 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,7 +656,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="urllib3.html">urllib3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -821,6 +827,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json-schema">JSON Schema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-adapter">Type Adapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alias">Alias</a></li>
 </ul>
             </nav>
         </div>
@@ -854,6 +861,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">b</span><span class="p">:</span> <span class="nb">float</span>
+
 
 <span class="n">inp</span> <span class="o">=</span> <span class="s1">&#39;{&quot;a&quot;: 10, &quot;b&quot;: 3.14}&#39;</span>
 </pre></div>
@@ -902,9 +910,11 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
 
+
 <span class="k">class</span><span class="w"> </span><span class="nc">MyModel</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">b</span><span class="p">:</span> <span class="nb">float</span>
+
 
 <span class="n">pprint</span><span class="p">(</span><span class="n">MyModel</span><span class="o">.</span><span class="n">model_json_schema</span><span class="p">())</span>
 </pre></div>
@@ -935,6 +945,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">value</span><span class="p">:</span> <span class="nb">int</span>
+
 
 <span class="n">type_adapter</span> <span class="o">=</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">TypeAdapter</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span>
 </pre></div>
@@ -993,6 +1004,77 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;value&#39;: 10}, {&#39;value&#39;: 11}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="alias">
+<h2>Alias<a class="headerlink" href="#alias" title="Link to this heading">#</a></h2>
+<p>In the pydantic model, you can specify the aliases for attributes. An alias is an alternative name/path for an attribute in the data structure that the model is designed to consume.</p>
+<p>The most usefull features are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pydantic.AliasChoices</span></code>: allows to specify several possible aliaces for the same attribute.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pydantic.AliasPath</span></code>: should be used if the value of the attribute is under nested structure.</p></li>
+</ul>
+<p>Check more in the <a class="reference external" href="https://docs.pydantic.dev/latest/concepts/alias/">Alias</a> page of the official documentation.</p>
+<hr class="docutils" />
+<p>The following cell defines the pydantic model that have attributes with different aliaces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">some_attribute</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;SomeAttribute&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">choices_alias</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="n">pydantic</span><span class="o">.</span><span class="n">AliasChoices</span><span class="p">(</span><span class="s2">&quot;option1&quot;</span><span class="p">,</span> <span class="s2">&quot;option2&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">path_alias</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="n">pydantic</span><span class="o">.</span><span class="n">AliasPath</span><span class="p">(</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span> <span class="s2">&quot;nested&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Default alias, allows to consume the attribute with arbitrary name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="o">.</span><span class="n">model_validate</span><span class="p">({</span><span class="s2">&quot;SomeAttribute&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model(some_attribute=10, choices_alias=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pydantic.AliasChoices</span></code> enables different input attributes to be consumed as the same model attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="o">.</span><span class="n">model_validate</span><span class="p">({</span><span class="s2">&quot;option1&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}),</span> <span class="n">Model</span><span class="o">.</span><span class="n">model_validate</span><span class="p">({</span><span class="s2">&quot;option2&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Model(some_attribute=None, choices_alias=3, path_alias=None),
+ Model(some_attribute=None, choices_alias=10, path_alias=None))
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pydantic.AliasPath</span></code> allows to consume nested attributes to be consumed by a flat Pydantic model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="o">.</span><span class="n">model_validate</span><span class="p">({</span><span class="s2">&quot;outer&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nested&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model(some_attribute=None, choices_alias=None, path_alias=5)
 </pre></div>
 </div>
 </div>
@@ -1067,6 +1149,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json-schema">JSON Schema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-adapter">Type Adapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alias">Alias</a></li>
 </ul>
   </nav></div>
 

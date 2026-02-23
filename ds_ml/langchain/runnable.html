@@ -202,8 +202,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/special_methods.html">Special methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/specials.html">Specials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/specials/methods.html">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/specials/attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -631,7 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../packages/redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/pydantic.html">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,7 +656,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/urllib3.html">urllib3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -835,6 +841,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="runnable">
 <h1>Runnable<a class="headerlink" href="#runnable" title="Link to this heading">#</a></h1>
 <p>A Runnable is a LangChain concept representing an object with <code class="docutils literal notranslate"><span class="pre">invoke</span></code>, <code class="docutils literal notranslate"><span class="pre">stream</span></code> and <code class="docutils literal notranslate"><span class="pre">batch</span></code> methods. Runnables can sometimes can be combined.</p>
+<p>The base object for runnables in langchain is <code class="docutils literal notranslate"><span class="pre">langchain_core.runnables.base.Runnable</span></code>.</p>
+<p>Check the <a class="reference external" href="https://reference.langchain.com/python/langchain_core/runnables/">Runnable</a> api reference.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>

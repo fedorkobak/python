@@ -202,8 +202,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/special_methods.html">Special methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/specials.html">Specials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/specials/methods.html">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/syntax/specials/attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -631,7 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../packages/redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/pydantic.html">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,7 +656,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/urllib3.html">urllib3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -823,6 +829,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-spans">Customizing spans</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span">Span</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mesages">Mesages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested">Nested</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-scorer">Custom scorer</a></li>
 </ul>
@@ -847,11 +858,11 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">clear_output</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
 
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;alembic&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;mlflow&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
 
 <span class="o">!</span>rm<span class="w"> </span>-f<span class="w"> </span>/tmp/llm_mlflow.db
 <span class="n">mlflow</span><span class="o">.</span><span class="n">set_registry_uri</span><span class="p">(</span><span class="s2">&quot;sqlite:////tmp/llm_mlflow.db&quot;</span><span class="p">)</span>
@@ -875,7 +886,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">langchain</span><span class="o">.</span><span class="n">autolog</span><span class="p">()</span>
 <span class="n">ans</span> <span class="o">=</span> <span class="n">chat</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Hello how are you?&quot;</span><span class="p">)</span>
-<span class="n">clear_output</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1005,7 +1015,6 @@ document.write(`
     <span class="n">span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="s2">&quot;Input request&quot;</span><span class="p">)</span>
     <span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;new_value&quot;</span><span class="p">)</span>
     <span class="n">span</span><span class="o">.</span><span class="n">set_outputs</span><span class="p">(</span><span class="s2">&quot;Span outputs&quot;</span><span class="p">)</span>
-<span class="n">clear_output</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1019,7 +1028,11 @@ document.write(`
 
 
 <span class="n">some_tracing</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
-<span class="n">clear_output</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;&lt;extra information&gt;hello&lt;the data&gt;&#39;
 </pre></div>
 </div>
 </div>
@@ -1049,6 +1062,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">span_type</span></code>: specified as value from predefined <code class="docutils literal notranslate"><span class="pre">mlflow.entities.SpanType</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">attrributes</span></code>: key-value pairs.</p></li>
 </ul>
+<p>Read more in <a class="reference external" href="https://mlflow.org/docs/latest/genai/concepts/span/">Spans</a> page.</p>
 <hr class="docutils" />
 <p>The following cell creates the span as the context, and invokes there some functions that are decorated as spans. Each span have different setup.</p>
 <div class="cell docutils container">
@@ -1077,6 +1091,73 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="span">
+<h2>Span<a class="headerlink" href="#span" title="Link to this heading">#</a></h2>
+<p>Span is a building box for the trace. Each span shows one step of the trace. In context of LLM-based solutions typically, it is typically accociated with a signle message passed to model or returned by the model.</p>
+<p>Check official description in the <a class="reference external" href="https://mlflow.org/docs/latest/genai/concepts/span/">Spans</a> mlflow page.</p>
+<hr class="docutils" />
+<p>The following cell creates the span and specifies the input and output information for the span.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.entities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpanType</span>
+
+<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_span&quot;</span><span class="p">,</span>
+    <span class="n">span_type</span><span class="o">=</span><span class="n">SpanType</span><span class="o">.</span><span class="n">LLM</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">span</span><span class="p">:</span>
+    <span class="n">span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="s2">&quot;The input&quot;</span><span class="p">)</span>
+    <span class="n">span</span><span class="o">.</span><span class="n">set_outputs</span><span class="p">(</span><span class="s2">&quot;The output&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="mesages">
+<h3>Mesages<a class="headerlink" href="#mesages" title="Link to this heading">#</a></h3>
+<p>The typical output of the LLM-based systems is a sequence of messages. MLFlow uses a special UI representation if the data has been prepared in a format compatible with OpenAI.</p>
+<hr class="docutils" />
+<p>The following cell illustrates the correct format for publishing the sequence in the mlflow span.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_span&quot;</span><span class="p">,</span>
+    <span class="n">span_type</span><span class="o">=</span><span class="n">SpanType</span><span class="o">.</span><span class="n">LLM</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">span</span><span class="p">:</span>
+    <span class="n">span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">([</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;System prompt&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello how are you&quot;</span><span class="p">},</span>
+    <span class="p">])</span>
+    <span class="n">span</span><span class="o">.</span><span class="n">set_outputs</span><span class="p">([</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer of the model&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;The tool call&quot;</span><span class="p">}</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now check the UI of the MLFlow server. Each message will be presented according to its type.</p>
+</section>
+<section id="nested">
+<h3>Nested<a class="headerlink" href="#nested" title="Link to this heading">#</a></h3>
+<p>Some spans can be nested within other spans.</p>
+<hr class="docutils" />
+<p>The following code shows how an <code class="docutils literal notranslate"><span class="pre">inner_span</span></code> can be placed inside an <code class="docutils literal notranslate"><span class="pre">outer_span</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outer_span&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">outer_span</span><span class="p">:</span>
+    <span class="n">outer_span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="s2">&quot;data of outer span&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;innder_span&quot;</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">inner_span</span><span class="p">:</span>
+        <span class="n">inner_span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="s2">&quot;data of inner span&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Only the outer span would be represented in the list of traces. Go to the <em>Details &amp; Timeline</em> section of the outer span find more about the inner span.</p>
 </section>
 </section>
 <section id="evaluation">
@@ -1127,7 +1208,6 @@ document.write(`
     <span class="n">predict_fn</span><span class="o">=</span><span class="n">predict_fn</span><span class="p">,</span>
     <span class="n">scorers</span><span class="o">=</span><span class="p">[</span><span class="n">some_check</span><span class="p">]</span>
 <span class="p">)</span>
-<span class="n">clear_output</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1228,7 +1308,6 @@ open the <span class=" -Color -Color-Bold">Traces</span> tab in the Run page in 
     <span class="n">template</span><span class="o">=</span><span class="s2">&quot;This is my prompt&quot;</span><span class="p">,</span>
     <span class="n">commit_message</span><span class="o">=</span><span class="s2">&quot;Initial prompt&quot;</span>
 <span class="p">)</span>
-<span class="n">clear_output</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1293,11 +1372,14 @@ open the <span class=" -Color -Color-Bold">Traces</span> tab in the Run page in 
 <h2>Registering/serving<a class="headerlink" href="#registering-serving" title="Link to this heading">#</a></h2>
 <p>MLFlow provieds tools for registering and serving LLM-based applications that use a workflow similar to classical ML models.</p>
 <p>You must inherit inherit <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc.ResponsesAgent</span></code> object and implement the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method. The <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc.ResponseAgent</span></code> is just an extension of the <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code> flavour specific for LLM-based applications.</p>
+<p>Check official description in the <a class="reference external" href="https://mlflow.org/docs/latest/genai/serving/responses-agent/">ResponsesAgent for Model Serving</a> page.</p>
 <hr class="docutils" />
 <p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">SimpleResponsesAgent</span></code>, which simply returns a predifined message.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.entities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpanType</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/some_code.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.entities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpanType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.pyfunc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResponsesAgent</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mlflow.types.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResponsesAgentRequest</span><span class="p">,</span> <span class="n">ResponsesAgentResponse</span>
 
@@ -1312,6 +1394,13 @@ open the <span class=" -Color -Color-Bold">Traces</span> tab in the Run page in 
                 <span class="p">)</span>
             <span class="p">]</span>
         <span class="p">)</span>
+
+<span class="n">set_model</span><span class="p">(</span><span class="n">SimpleResponsesAgent</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/some_code.py
 </pre></div>
 </div>
 </div>
@@ -1319,10 +1408,9 @@ open the <span class=" -Color -Color-Bold">Traces</span> tab in the Run page in 
 <p>The following cell registers the regular models in the model registry.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_responses_agent</span> <span class="o">=</span> <span class="n">SimpleResponsesAgent</span><span class="p">()</span>
-<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
-        <span class="n">python_model</span><span class="o">=</span><span class="n">simple_responses_agent</span><span class="p">,</span>
+        <span class="n">python_model</span><span class="o">=</span><span class="s2">&quot;/tmp/some_code.py&quot;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;agent&quot;</span><span class="p">,</span>
         <span class="n">registered_model_name</span><span class="o">=</span><span class="s2">&quot;agent&quot;</span>
     <span class="p">)</span>
@@ -1330,19 +1418,8 @@ open the <span class=" -Color -Color-Bold">Traces</span> tab in the Run page in 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025/11/27 14:12:00 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
-2025/11/27 14:12:00 INFO mlflow.store.db.utils: Updating database tables
-2025-11-27 14:12:00 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-2025-11-27 14:12:00 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-2025-11-27 14:12:00 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-2025-11-27 14:12:00 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-2025/11/27 14:12:00 INFO mlflow.pyfunc: Predicting on input example to validate output
-2025/11/27 14:12:03 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
-2025/11/27 14:12:03 INFO mlflow.store.db.utils: Updating database tables
-2025-11-27 14:12:03 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-2025-11-27 14:12:03 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-Registered model &#39;agent&#39; already exists. Creating a new version of this model...
-Created version &#39;4&#39; of model &#39;agent&#39;.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Registered model &#39;agent&#39; already exists. Creating a new version of this model...
+Created version &#39;2&#39; of model &#39;agent&#39;.
 </pre></div>
 </div>
 </div>
@@ -1443,6 +1520,11 @@ Created version &#39;4&#39; of model &#39;agent&#39;.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trace">Trace</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-tracing">Custom tracing</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-spans">Customizing spans</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span">Span</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mesages">Mesages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested">Nested</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">

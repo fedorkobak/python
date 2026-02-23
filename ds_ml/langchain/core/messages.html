@@ -202,8 +202,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../core/syntax/oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../core/syntax/oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../core/syntax/oop/class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../core/syntax/oop/special_methods.html">Special methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../core/syntax/specials.html">Specials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../core/syntax/specials/methods.html">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../core/syntax/specials/attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -631,7 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/pydantic.html">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,7 +656,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/urllib3.html">urllib3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../packages/web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../packages/web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -825,6 +831,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-format">OpenAI format</a></li>
 </ul>
             </nav>
         </div>
@@ -1072,6 +1079,37 @@ However, I&#39;m a large language model, I don&#39;t have real-time access to cu
 <p><strong>Note</strong> the <code class="docutils literal notranslate"><span class="pre">content</span></code> is the <code class="docutils literal notranslate"><span class="pre">str</span></code> instance descpite the fact that <code class="docutils literal notranslate"><span class="pre">my_tool</span></code> returned data as the <code class="docutils literal notranslate"><span class="pre">list[str]</span></code>.</p>
 </section>
 </section>
+<section id="openai-format">
+<h2>OpenAI format<a class="headerlink" href="#openai-format" title="Link to this heading">#</a></h2>
+<p>Many tools associated with LLMs accept a sequence of messages in the OpenAI format. To convert LangChain messages to this format, use the <code class="docutils literal notranslate"><span class="pre">langchain_community.adapters.openai.convert_message_to_dict</span></code> function.</p>
+<hr class="docutils" />
+<p>The following cell converts some LangChain message objects into the dictionary format expected by OpenAI-compatible tools.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.adapters.openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_message_to_dict</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">HumanMessage</span><span class="p">(</span><span class="s2">&quot;Human message&quot;</span><span class="p">),</span>
+    <span class="n">SystemMessage</span><span class="p">(</span><span class="s2">&quot;System message&quot;</span><span class="p">),</span>
+    <span class="n">AIMessage</span><span class="p">(</span><span class="s2">&quot;AIMessage&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="p">[</span>
+    <span class="n">convert_message_to_dict</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;role&#39;: &#39;user&#39;, &#39;content&#39;: &#39;Human message&#39;},
+ {&#39;role&#39;: &#39;system&#39;, &#39;content&#39;: &#39;System message&#39;},
+ {&#39;role&#39;: &#39;assistant&#39;, &#39;content&#39;: &#39;AIMessage&#39;}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1145,6 +1183,7 @@ However, I&#39;m a large language model, I don&#39;t have real-time access to cu
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-format">OpenAI format</a></li>
 </ul>
   </nav></div>
 

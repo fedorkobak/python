@@ -202,8 +202,11 @@
 <li class="toctree-l3"><a class="reference internal" href="oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="oop/class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="oop/special_methods.html">Special methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="specials.html">Specials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="specials/methods.html">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specials/attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -631,7 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../packages/redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/pydantic.html">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,7 +656,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/urllib3.html">urllib3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../packages/web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -822,8 +828,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-attributes">Private attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-methods">Special methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes">Special attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstractions">Abstractions</a></li>
@@ -966,6 +970,7 @@ document.write(`
     <span class="k">def</span><span class="w"> </span><span class="nf">__private_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Private method from MyClass&quot;</span><span class="p">)</span>
 
+
 <span class="n">my_class</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
 <span class="n">my_class</span><span class="o">.</span><span class="n">_MyClass__private_method</span><span class="p">()</span>
 </pre></div>
@@ -984,6 +989,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MySubClass</span><span class="p">(</span><span class="n">MyClass</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">__private_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Private method from MySubClass&quot;</span><span class="p">)</span>
+
 
 <span class="n">my_sub_class</span> <span class="o">=</span> <span class="n">MySubClass</span><span class="p">()</span>
 <span class="n">my_sub_class</span><span class="o">.</span><span class="n">_MyClass__private_method</span><span class="p">()</span>
@@ -1011,10 +1017,12 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">make</span> <span class="o">=</span> <span class="n">make</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
-        
+
+
     <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The car has started.&quot;</span><span class="p">)</span>
-        
+
+
     <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The car has stopped.&quot;</span><span class="p">)</span>
 
@@ -1023,7 +1031,8 @@ document.write(`
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">battery_capacity</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">battery_capacity</span> <span class="o">=</span> <span class="n">battery_capacity</span>
-        
+
+
     <span class="k">def</span><span class="w"> </span><span class="nf">charge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The electric car is charging.&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1051,318 +1060,6 @@ The electric car is charging.
 </div>
 </div>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">my_electric_car</span></code> is an object of the <code class="docutils literal notranslate"><span class="pre">ElectricCar</span></code> class, which inherits attributes and methods from the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class. It also has its own specific attributes and methods.</p>
-</section>
-<section id="special-methods">
-<h2>Special methods<a class="headerlink" href="#special-methods" title="Link to this heading">#</a></h2>
-<p>In classes, a set of methods with reserved names can be implemented. These methods are called when specific events occur with the class or its instances. Names of all this methods follows such pattern <code class="docutils literal notranslate"><span class="pre">__&lt;name&gt;__</span></code>, for example <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> and so on.</p>
-<p>Find out more in the:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#specialnames">Specific page of the official documentation</a>.</p></li>
-<li><p>Some description in experimental approach in the <a class="reference internal" href="oop/special_methods.html"><span class="std std-doc">corresponding page of this site</span></a>.</p></li>
-</ul>
-<p>The following table shows some special methods and their descriptions.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p><strong>Group</strong></p></th>
-<th class="head"><p><strong>Method</strong></p></th>
-<th class="head"><p><strong>Description</strong></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Object management</strong></p></td>
-<td><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__new__"><code class="docutils literal notranslate"><span class="pre">__new__(cls)</span></code></a></p></td>
-<td><p>Static method called to create a new instance</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__init__(self)</span></code></p></td>
-<td><p>Called immediately after instance creation</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__del__(self)</span></code></p></td>
-<td><p>Called when the instance is about to be destroyed - the correct abstract way to name it is “finalizer”</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Type Conversion</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__str__(self)</span></code></p></td>
-<td><p>Defines how an object should be converted into a string datatype.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__bool__(self)</span></code></p></td>
-<td><p>Defines how an object should be converted into a boolean datatype.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__int__(self)</span></code></p></td>
-<td><p>Defines how an object should be converted into an integer datatype.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__float__(self)</span></code></p></td>
-<td><p>Defines how an object should be converted into a float datatype.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__complex__(self)</span></code></p></td>
-<td><p>Defines how an object should be converted into a complex datatype.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Arithmetic operators</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__eq__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Compares two objects for equality (<code class="docutils literal notranslate"><span class="pre">==</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__lt__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Compares if the object is less than another (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__le__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Compares if the object is less than or equal to another (<code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__gt__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Compares if the object is greater than another (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__ge__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Compares if the object is greater than or equal to another (<code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__add__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines addition for objects (<code class="docutils literal notranslate"><span class="pre">+</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__sub__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines subtraction for objects (<code class="docutils literal notranslate"><span class="pre">-</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__mul__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines multiplication for objects (<code class="docutils literal notranslate"><span class="pre">*</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__truediv__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines division for objects (<code class="docutils literal notranslate"><span class="pre">/</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__floordiv__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines floor division for objects (<code class="docutils literal notranslate"><span class="pre">//</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__mod__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines modulo operation for objects (<code class="docutils literal notranslate"><span class="pre">%</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__pow__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines power operation for objects (<code class="docutils literal notranslate"><span class="pre">**</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__and__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines bitwise AND operation (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__or__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines bitwise OR operation (`</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__xor__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines bitwise XOR operation (<code class="docutils literal notranslate"><span class="pre">^</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__iadd__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines in-place addition (<code class="docutils literal notranslate"><span class="pre">+=</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__isub__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines in-place subtraction (<code class="docutils literal notranslate"><span class="pre">-=</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__imul__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines in-place multiplication (<code class="docutils literal notranslate"><span class="pre">*=</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__idiv__(self,</span> <span class="pre">other)</span></code></p></td>
-<td><p>Defines in-place division (<code class="docutils literal notranslate"><span class="pre">/=</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__neg__(self)</span></code></p></td>
-<td><p>Defines unary negation (<code class="docutils literal notranslate"><span class="pre">-</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__abs__(self)</span></code></p></td>
-<td><p>Returns the absolute value of the object (<code class="docutils literal notranslate"><span class="pre">abs()</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Indexing operator (<code class="docutils literal notranslate"><span class="pre">[]</span></code>)</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__setitem__(self,</span> <span class="pre">key,</span> <span class="pre">value)</span></code></p></td>
-<td><p>To try assigning a value to the index.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__getitem__(self,</span> <span class="pre">key)</span></code></p></td>
-<td><p>To try to access value under the index.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__delitem__(self,</span> <span class="pre">key)</span></code></p></td>
-<td><p>To try to delete value under the index</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Iteration protocol</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__iter__(self)</span></code></p></td>
-<td><p>Will be called each time you need iterate over object.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__next__(self)</span></code></p></td>
-<td><p>Will be called each time the object is passed to the <code class="docutils literal notranslate"><span class="pre">next</span></code> build in function.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Customizing class creation</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__init_subclass__(cls)</span></code></p></td>
-<td><p>This method is called when ever the containing class is subclassed.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr class="docutils" />
-<p>As an example, consider a class that has the <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> method defined. This method determines the behavior of the instances of the class when the <code class="docutils literal notranslate"><span class="pre">[]</span></code> operator is applied to them.</p>
-<p>Here is how it works — it converts the literal <code class="docutils literal notranslate"><span class="pre">3</span></code> to the type of the input and applies <code class="docutils literal notranslate"><span class="pre">+</span></code> to the input and the transformed literal <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestClass</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">item</span> <span class="o">+</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell shows the behavior of the instance when <code class="docutils literal notranslate"><span class="pre">9</span></code> is passed to the <code class="docutils literal notranslate"><span class="pre">[]</span></code> operator.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TestClass</span><span class="p">()[</span><span class="mi">6</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
-</pre></div>
-</div>
-</div>
-</div>
-<p>You can pass string literals as well.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TestClass</span><span class="p">()[</span><span class="s2">&quot;hello&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello3&#39;
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="special-attributes">
-<h2>Special attributes<a class="headerlink" href="#special-attributes" title="Link to this heading">#</a></h2>
-<p>Actually, almost every instance in the Python environment has its own special attributes, but they come from different abstractions of the language:</p>
-<ul class="simple">
-<li><p><strong>Type attributes</strong>: Attributes of the type itself. The <code class="docutils literal notranslate"><span class="pre">type</span></code> class, like <code class="docutils literal notranslate"><span class="pre">int</span></code>, holds these attributes.</p></li>
-<li><p><strong>Function attributes</strong>, <strong>Method attributes</strong>: Their purpose is clear from their names.</p></li>
-<li><p><strong>Instance attributes</strong>: Attributes that appear in an instance during its creation.</p></li>
-</ul>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Category</p></th>
-<th class="head"><p>Attribute</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Type Attributes</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__name__</span></code></p></td>
-<td><p>Name of the class.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__module__</span></code></p></td>
-<td><p>Module where the class is defined.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__dict__</span></code></p></td>
-<td><p>Dictionary containing the class’s attributes and methods.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__bases__</span></code></p></td>
-<td><p>Tuple of base classes (superclasses).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__mro__</span></code></p></td>
-<td><p>Method Resolution Order (tuple of base classes in order).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__subclasses__()</span></code></p></td>
-<td><p>Returns a list of known subclasses.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__doc__</span></code></p></td>
-<td><p>Docstring of the class (or <code class="docutils literal notranslate"><span class="pre">None</span></code> if not defined).</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__annotations__</span></code></p></td>
-<td><p>Dictionary of variable type annotations.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__qualname__</span></code></p></td>
-<td><p>Fully qualified class name (e.g., <code class="docutils literal notranslate"><span class="pre">Outer.Inner</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Function Attributes</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__code__</span></code></p></td>
-<td><p>Code object representing the function’s compiled bytecode.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__defaults__</span></code></p></td>
-<td><p>Tuple of default values for function parameters.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__kwdefaults__</span></code></p></td>
-<td><p>Dictionary of default values for keyword-only arguments.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__globals__</span></code></p></td>
-<td><p>Reference to the global namespace where the function is defined.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__closure__</span></code></p></td>
-<td><p>Tuple of cell objects containing variables used in closures.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__annotations__</span></code></p></td>
-<td><p>Dictionary of function parameter and return type annotations.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Method Attributes</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__func__</span></code></p></td>
-<td><p>Reference to the underlying function of a method.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__self__</span></code></p></td>
-<td><p>Instance to which a bound method is attached.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__doc__</span></code></p></td>
-<td><p>Docstring of the method.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__annotations__</span></code></p></td>
-<td><p>Dictionary of method parameter and return type annotations.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Instance Attributes</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__dict__</span></code></p></td>
-<td><p>Dictionary containing instance attributes.</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__class__</span></code></p></td>
-<td><p>Reference to the class of the instance.</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__slots__</span></code></p></td>
-<td><p>Tuple defining allowed instance attributes (if used).</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">__weakref__</span></code></p></td>
-<td><p>List of weak references to the object (if applicable).</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Check more specific description at the <a class="reference internal" href="oop/special_attributes.html"><span class="std std-doc">corresponding page</span></a>.</p>
 </section>
 <section id="class-method">
 <h2>Class method<a class="headerlink" href="#class-method" title="Link to this heading">#</a></h2>
@@ -1486,6 +1183,7 @@ Check out more about static methods in the <a class="reference external" href="h
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
+
 <span class="k">class</span><span class="w"> </span><span class="nc">AbstractClass</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">abstract_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1497,8 +1195,10 @@ Check out more about static methods in the <a class="reference external" href="h
 <p>The following code shows that you can’t create an instance of the <code class="docutils literal notranslate"><span class="pre">AbstractClass</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span> <span class="n">AbstractClass</span><span class="p">()</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">AbstractClass</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1514,6 +1214,7 @@ Check out more about static methods in the <a class="reference external" href="h
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Ancestor</span><span class="p">(</span><span class="n">AbstractClass</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">abstract_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Implemented abstract method.&quot;</span><span class="p">)</span>
+
 
 <span class="n">ancestor</span> <span class="o">=</span> <span class="n">Ancestor</span><span class="p">()</span>
 </pre></div>
@@ -1615,8 +1316,10 @@ Check out more about static methods in the <a class="reference external" href="h
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeBase</span><span class="p">:</span>
     <span class="k">pass</span>
 
+
 <span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">(</span><span class="n">SomeBase</span><span class="p">):</span>
     <span class="n">attribute</span> <span class="o">=</span> <span class="mi">10</span>
+
 
 <span class="n">MyClass</span>
 </pre></div>
@@ -1716,8 +1419,6 @@ Check out more about static methods in the <a class="reference external" href="h
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-attributes">Private attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-methods">Special methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes">Special attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-method">Class method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method">Static method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstractions">Abstractions</a></li>

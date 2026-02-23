@@ -202,8 +202,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_methods.html">Special methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/specials.html">Specials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/specials/methods.html">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/specials/attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -631,7 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pydantic.html">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,7 +656,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="urllib3.html">urllib3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -830,7 +836,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sdk">AWS SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonschema">jsonschema</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#urllib3">urllib3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web">Web</a></li>
 </ul>
             </nav>
         </div>
@@ -967,7 +973,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;my bar&quot;</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;my bar&quot;</span><span class="p">):</span>
+    <span class="k">pass</span>
 </pre></div>
 </div>
 </div>
@@ -1512,31 +1519,164 @@ On instance:
 </div>
 </div>
 </section>
-<section id="urllib3">
-<h2>urllib3<a class="headerlink" href="#urllib3" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">urllib3</span></code> is a package for implementing network communication.</p>
-<p>For more information:</p>
-<ul class="simple">
-<li><p>Check the official <a class="reference external" href="https://urllib3.readthedocs.io/en/stable/index.html">website</a>.</p></li>
-<li><p>Chekc <a class="reference internal" href="urllib3.html"><span class="std std-doc">special page</span></a>.</p></li>
-</ul>
-<hr class="docutils" />
-<p>The following cell shows how to make a request to the <code class="docutils literal notranslate"><span class="pre">http://google.com</span></code> using <code class="docutils literal notranslate"><span class="pre">urllib3</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib3</span>
-<span class="n">pool_manager</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">PoolManager</span><span class="p">()</span>
-<span class="n">resp</span> <span class="o">=</span> <span class="n">pool_manager</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;http://google.com&quot;</span><span class="p">)</span>
-<span class="n">resp</span><span class="o">.</span><span class="n">status</span>
-</pre></div>
+<section id="web">
+<h2>Web<a class="headerlink" href="#web" title="Link to this heading">#</a></h2>
+<p>There are packages that implement the web interactions in Python. The following table mentions some of them:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Sync / Async</p></th>
+<th class="head"><p>Main Use Case</p></th>
+<th class="head"><p>Key Features</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">requests</span></code></p></td>
+<td><p>HTTP client</p></td>
+<td><p>Sync</p></td>
+<td><p>Simple HTTP requests</p></td>
+<td><p>Clean API, session support, auth, cookies</p></td>
+<td><p>De-facto standard for sync HTTP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">httpx</span></code></p></td>
+<td><p>HTTP client</p></td>
+<td><p>Sync + Async</p></td>
+<td><p>Modern HTTP client</p></td>
+<td><p>HTTP/2, async support, similar API to <code class="docutils literal notranslate"><span class="pre">requests</span></code></p></td>
+<td><p>Good replacement for <code class="docutils literal notranslate"><span class="pre">requests</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">aiohttp</span></code></p></td>
+<td><p>HTTP client &amp; server</p></td>
+<td><p>Async</p></td>
+<td><p>Async HTTP calls &amp; web servers</p></td>
+<td><p>WebSocket support, streaming</p></td>
+<td><p>Lower-level than <code class="docutils literal notranslate"><span class="pre">httpx</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">urllib3</span></code></p></td>
+<td><p>HTTP client (low-level)</p></td>
+<td><p>Sync</p></td>
+<td><p>Core HTTP transport layer</p></td>
+<td><p>Connection pooling, retries</p></td>
+<td><p>Used internally by <code class="docutils literal notranslate"><span class="pre">requests</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">http.client</span></code></p></td>
+<td><p>Stdlib HTTP</p></td>
+<td><p>Sync</p></td>
+<td><p>Built-in HTTP client</p></td>
+<td><p>No dependencies</p></td>
+<td><p>Very low-level</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fastapi</span></code></p></td>
+<td><p>Web framework</p></td>
+<td><p>Async</p></td>
+<td><p>Building APIs</p></td>
+<td><p>OpenAPI, Pydantic validation</p></td>
+<td><p>High performance (ASGI)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">flask</span></code></p></td>
+<td><p>Web framework</p></td>
+<td><p>Sync</p></td>
+<td><p>Simple web apps &amp; APIs</p></td>
+<td><p>Lightweight, WSGI-based</p></td>
+<td><p>Large ecosystem</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">django</span></code></p></td>
+<td><p>Web framework</p></td>
+<td><p>Sync (+ async support)</p></td>
+<td><p>Full-stack web apps</p></td>
+<td><p>ORM, auth, admin</p></td>
+<td><p>Heavy but powerful</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlette</span></code></p></td>
+<td><p>ASGI framework</p></td>
+<td><p>Async</p></td>
+<td><p>Lightweight async web apps</p></td>
+<td><p>ASGI toolkit</p></td>
+<td><p>Base of FastAPI</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beautifulsoup4</span></code></p></td>
+<td><p>HTML parser</p></td>
+<td><p>Sync</p></td>
+<td><p>Web scraping</p></td>
+<td><p>Easy DOM navigation</p></td>
+<td><p>Often used with <code class="docutils literal notranslate"><span class="pre">requests</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lxml</span></code></p></td>
+<td><p>XML/HTML parser</p></td>
+<td><p>Sync</p></td>
+<td><p>Fast parsing</p></td>
+<td><p>XPath support</p></td>
+<td><p>High performance</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scrapy</span></code></p></td>
+<td><p>Scraping framework</p></td>
+<td><p>Async</p></td>
+<td><p>Large-scale scraping</p></td>
+<td><p>Crawling engine, pipelines</p></td>
+<td><p>Production scraping</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">selenium</span></code></p></td>
+<td><p>Browser automation</p></td>
+<td><p>Sync</p></td>
+<td><p>Browser-driven scraping/testing</p></td>
+<td><p>Controls real browsers</p></td>
+<td><p>Handles JS-heavy sites</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">playwright</span></code></p></td>
+<td><p>Browser automation</p></td>
+<td><p>Sync + Async</p></td>
+<td><p>Modern browser automation</p></td>
+<td><p>Fast, reliable, headless</p></td>
+<td><p>More modern than Selenium</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">websockets</span></code></p></td>
+<td><p>WebSocket client/server</p></td>
+<td><p>Async</p></td>
+<td><p>Real-time communication</p></td>
+<td><p>Simple API</p></td>
+<td><p>Pure async</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">socketio</span></code></p></td>
+<td><p>WebSocket framework</p></td>
+<td><p>Sync + Async</p></td>
+<td><p>Realtime apps</p></td>
+<td><p>Rooms, events</p></td>
+<td><p>Higher-level abstraction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">authlib</span></code></p></td>
+<td><p>OAuth client/server</p></td>
+<td><p>Sync + Async</p></td>
+<td><p>OAuth1/OAuth2/OpenID</p></td>
+<td><p>Token management</p></td>
+<td><p>Good for API integrations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">boto3</span></code></p></td>
+<td><p>AWS SDK</p></td>
+<td><p>Sync</p></td>
+<td><p>AWS API interaction</p></td>
+<td><p>Service clients</p></td>
+<td><p>Web API under the hood</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zeep</span></code></p></td>
+<td><p>SOAP client</p></td>
+<td><p>Sync</p></td>
+<td><p>SOAP web services</p></td>
+<td><p>WSDL support</p></td>
+<td><p>Enterprise integrations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">grpcio</span></code></p></td>
+<td><p>gRPC client/server</p></td>
+<td><p>Sync + Async</p></td>
+<td><p>High-performance RPC</p></td>
+<td><p>Protocol buffers</p></td>
+<td><p>Not HTTP REST</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200
-</pre></div>
-</div>
-</div>
-</div>
+<p>Check more details in the <a class="reference internal" href="web.html"><span class="std std-doc">corresponding page</span></a>.</p>
 </section>
 </section>
 
@@ -1616,7 +1756,7 @@ On instance:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aws-sdk">AWS SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonschema">jsonschema</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#urllib3">urllib3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web">Web</a></li>
 </ul>
   </nav></div>
 

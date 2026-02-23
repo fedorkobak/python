@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Special attributes &#8212; Python</title>
+    <title>Methods &#8212; Python</title>
   
   
   
@@ -57,12 +57,12 @@
     <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'core/syntax/oop/special_attributes';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'core/syntax/specials/methods';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Exceptions" href="../exceptions.html" />
-    <link rel="prev" title="Special methods" href="special_methods.html" />
+    <link rel="next" title="Attributes" href="attributes.html" />
+    <link rel="prev" title="Specials" href="../specials.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -197,13 +197,16 @@
 <li class="toctree-l3"><a class="reference internal" href="../functions/parameters.html">Parameters</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="../oop.html">OOP</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="variables.html">Variables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="interface.html">Interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="special_methods.html">Special methods</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Special attributes</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../oop.html">OOP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oop/variables.html">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oop/inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oop/interface.html">Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oop/class_method.html">Class method</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../specials.html">Specials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -631,7 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/pydantic.html">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../packages/tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -654,7 +656,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/urllib3.html">urllib3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../packages/web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../packages/web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -724,7 +730,7 @@
       
       
       
-      <li><a href="../../../_sources/core/syntax/oop/special_attributes.ipynb" target="_blank"
+      <li><a href="../../../_sources/core/syntax/specials/methods.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -808,7 +814,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Special attributes</h1>
+    <h1>Methods</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -818,8 +824,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-attributes">Type attributes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-attributes">Instance attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-protocol">Iteration protocol</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-creation">Instance creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switch-number-system">Switch number system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-subclass">Init subclass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subclass-kwargs">Subclass kwargs</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -831,85 +843,388 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="special-attributes">
-<h1>Special attributes<a class="headerlink" href="#special-attributes" title="Link to this heading">#</a></h1>
-<p>This is an attribute of the class that usually has a purpose associated with the ideas behind the programming language. In fact, every object in python has some special methods but they can come from different sources. This page looks at special attributes from different sources.</p>
-<section id="type-attributes">
-<h2>Type attributes<a class="headerlink" href="#type-attributes" title="Link to this heading">#</a></h2>
-<p>Class can be thought of as defined your own instance of the <code class="docutils literal notranslate"><span class="pre">type</span></code>, so each instance of <code class="docutils literal notranslate"><span class="pre">type</span></code> contains a set of default attributes. The complete list is described in the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#special-attributes">corresponding section of the documentation</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="methods">
+<h1>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h1>
+<p>A class can hold methods that define its behavior in common cases in Python. These methods usually start and end with double underscores (<code class="docutils literal notranslate"><span class="pre">__&lt;name&gt;__</span></code>).</p>
+<section id="indexing">
+<h2>Indexing<a class="headerlink" href="#indexing" title="Link to this heading">#</a></h2>
+<p>There are three methods that organise how the class would behave when the indexing operator <code class="docutils literal notranslate"><span class="pre">[]</span></code> is applied to the instance: <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>, <code class="docutils literal notranslate"><span class="pre">__setitem__</span></code>, <code class="docutils literal notranslate"><span class="pre">__delitem__</span></code>. Their names clearly describe the idea behind them.</p>
 <hr class="docutils" />
-<p>As an example we’ll take <code class="docutils literal notranslate"><span class="pre">int</span></code> type. But any class in particular custom class will follow the same rules.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">__name__</span></code> attribute retains the name of the type. The following code shows the case where you gave another reference to your class, but <code class="docutils literal notranslate"><span class="pre">__name__</span></code> attribute still keeps information about original name of the object.</p>
+<p>The next cell shows the implementation of the class that shows the appropriate information for each of the methods.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wow</span> <span class="o">=</span> <span class="nb">int</span>
-<span class="n">wow</span><span class="o">.</span><span class="vm">__name__</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Test</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set item called with </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;getitem is called with </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;dummy item&quot;</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;delitem is called with </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here is the creation of the instance and all the manipulations that trigger the methods that we are now focusing on.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
+
+<span class="n">test</span><span class="p">[</span><span class="mi">40</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s2">&quot;wow&quot;</span><span class="p">])</span>
+<span class="k">del</span> <span class="n">test</span><span class="p">[</span><span class="mf">3.14</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;int&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set item called with 40 - 4
+getitem is called with wow
+dummy item
+delitem is called with 3.14
 </pre></div>
 </div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">__mro__</span></code> attribute contains information about inheritance order of the class.</p>
+<p><strong>Note:</strong> if you want to handle slices in your objects just write code to handle python <code class="docutils literal notranslate"><span class="pre">slice</span></code> object. The following code passes <code class="docutils literal notranslate"><span class="pre">3:</span></code> to the indexing operator.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="o">.</span><span class="vm">__mro__</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="p">()[</span><span class="mi">3</span><span class="p">:]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(int, object)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>getitem is called with slice(3, None, None)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;dummy item&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result there is the <code class="docutils literal notranslate"><span class="pre">slice</span></code> object passed to the corresponding method.</p>
+</section>
+<section id="iteration-protocol">
+<h2>Iteration protocol<a class="headerlink" href="#iteration-protocol" title="Link to this heading">#</a></h2>
+<p>You can implement the iteration protocol in the class by using <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> and <code class="docutils literal notranslate"><span class="pre">__next__</span></code> methods.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__iter__</span></code>: defines the object as iterable and should return an iterator. It would be called if to object applied: <code class="docutils literal notranslate"><span class="pre">iter</span></code> function, <code class="docutils literal notranslate"><span class="pre">for</span>&#160; <span class="pre">in</span> <span class="pre">&lt;object&gt;</span></code> operator and any kind of function that utilises the iteration protocol.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__next__</span></code>: defines the object as an iterator, would be called each time the next iteration is invoked.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell implements the class that will have the specified during creation number of iterations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">IterationExample</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_iterations</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">=</span> <span class="n">max_iterations</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;__iter__ is called&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;__next__ is called&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stop iteration is raised&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now apply the <code class="docutils literal notranslate"><span class="pre">for</span></code> cycle to the instance of that class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">IterationExample</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>__iter__ is called
+__next__ is called
+__next__ is called
+__next__ is called
+__next__ is called
+Stop iteration is raised
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong> <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> that retuns objects that do’t implement <code class="docutils literal notranslate"><span class="pre">__next__</span></code> make no sence, as python checks this detail.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fail</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+
+<span class="nb">iter</span><span class="p">(</span><span class="n">Fail</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">50</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>         <span class="k">return</span> <span class="bp">self</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="nb">iter</span><span class="p">(</span><span class="n">Fail</span><span class="p">())</span>
+
+<span class="ne">TypeError</span>: iter() returned non-iterator of type &#39;Fail&#39;
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="instance-attributes">
-<h2>Instance attributes<a class="headerlink" href="#instance-attributes" title="Link to this heading">#</a></h2>
-<p>There is a list of attributes of which each defined instance checks both read-only and writable attributes on the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#special-read-only-attributes">relevant internet page</a>.</p>
+<section id="instance-creation">
+<h2>Instance creation<a class="headerlink" href="#instance-creation" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">__new__</span></code> class method is invoked when an instance is created. The return value of <code class="docutils literal notranslate"><span class="pre">__new__</span></code> is what will be returned when the class is called to create a new instance. To implement standard Python behavior, it should return the result of <code class="docutils literal notranslate"><span class="pre">object.__new__(cls)</span></code>.</p>
+<p>Check the official description in the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__new__">corresponding section</a>.</p>
 <hr class="docutils" />
-<p>The following cell defines class and object we’ll use as the example.</p>
+<p>The following cell defines a class whose <code class="docutils literal notranslate"><span class="pre">__new__</span></code> and <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method indicate that they have been invoked.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">:</span>
-    <span class="n">val</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">wow</span><span class="p">:</span> <span class="nb">float</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeClass</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new invoked:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">cls</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
 
-<span class="n">my_object</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;init invoked:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">__dict__</span></code> holds all attributes of the object as keys and corresponding values.</p>
+<p>The instance creation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_object</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
-<span class="n">my_object</span><span class="o">.</span><span class="vm">__dict__</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SomeClass</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: &#39;test&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>new invoked: &lt;class &#39;type&#39;&gt;
+init invoked: &lt;class &#39;__main__.SomeClass&#39;&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.SomeClass at 0x791358ce06e0&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">__class__</span></code> attribute holds the name of the class from which the instance was created.</p>
+<p>In fact, for <code class="docutils literal notranslate"><span class="pre">SomeClass</span></code> the syntax <code class="docutils literal notranslate"><span class="pre">super().__new__(cls)</span></code> is equivalent to the syntax <code class="docutils literal notranslate"><span class="pre">object.__new__(SomeClass)</span></code>. That’s why tricks like the following works:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_object</span><span class="o">.</span><span class="vm">__class__</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">SomeClass</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>__main__.MyClass
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.SomeClass at 0x791359721e50&gt;
 </pre></div>
 </div>
 </div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">object.__new__</span></code> creates the instance of the passed class.</p>
+<hr class="docutils" />
+<p>The <code class="docutils literal notranslate"><span class="pre">__new__</span></code> determines the output a class invocation. The following cell defines a class that cannot be created using the regular syntax:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StrClass</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>An attempt to create an instance returns the <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code> string, as specified in the <code class="docutils literal notranslate"><span class="pre">__new__</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">StrClass</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But you can still can directly call the <code class="docutils literal notranslate"><span class="pre">object.__new__</span></code> to create an instance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">StrClass</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.StrClass at 0x791358ce0980&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="switch-number-system">
+<h2>Switch number system<a class="headerlink" href="#switch-number-system" title="Link to this heading">#</a></h2>
+<p>There is a special <code class="docutils literal notranslate"><span class="pre">__index__</span></code> special method that determines the behaviour of the object if programm tries to apply <code class="docutils literal notranslate"><span class="pre">bin</span></code>, <code class="docutils literal notranslate"><span class="pre">oct</span></code> or <code class="docutils literal notranslate"><span class="pre">hex</span></code> fucntions to it. <code class="docutils literal notranslate"><span class="pre">__index__</span></code> just have to return regular python integer and converting of that number to the corresponding number system will be the result.</p>
+<hr class="docutils" />
+<p>The following cell defines the class that returns from the index number specified in the constructor of the object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NSTest</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">my_number</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">my_number</span> <span class="o">=</span> <span class="n">my_number</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__index__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">my_number</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code shows the result for different number systems and input numbers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bin</span><span class="p">(</span><span class="n">NSTest</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;0b11&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">oct</span><span class="p">(</span><span class="n">NSTest</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;0o12&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">hex</span><span class="p">(</span><span class="n">NSTest</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;0xc&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="init-subclass">
+<h2>Init subclass<a class="headerlink" href="#init-subclass" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init_subclass__(cls)"><code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code></a> will be called each time a new class subclassing the class containing is created.</p>
+<hr class="docutils" />
+<p>The following cell creates a class that implements the <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code> method so that the name of the created class is printed out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The class </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> is created.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next code subclasses the <code class="docutils literal notranslate"><span class="pre">B</span></code> class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The class B is created.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The corresponding message appearsl.</p>
+<p>The second step child <code class="docutils literal notranslate"><span class="pre">C</span></code> works the same way as the <code class="docutils literal notranslate"><span class="pre">B</span></code> class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The class C is created.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="subclass-kwargs">
+<h3>Subclass kwargs<a class="headerlink" href="#subclass-kwargs" title="Link to this heading">#</a></h3>
+<p>If you define the keyword arguments in the <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code> method, they must be passed in the child class’s definition.</p>
+<hr class="docutils" />
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">Base</span></code> class, which <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code> requires <code class="docutils literal notranslate"><span class="pre">some_value</span></code> key word argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="n">some_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Got some value </span><span class="si">{</span><span class="n">some_value</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Got some value Hello from Child!
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the attempt to subclass the <code class="docutils literal notranslate"><span class="pre">Base</span></code> fails.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">pass</span>
+
+<span class="ne">TypeError</span>: Base.__init_subclass__() missing 1 required positional argument: &#39;some_value&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But if pass the <code class="docutils literal notranslate"><span class="pre">some_value</span></code>, everything goes well, and <code class="docutils literal notranslate"><span class="pre">some_value</span></code> will be used as defined in the <code class="docutils literal notranslate"><span class="pre">__init_subclass__</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">,</span> <span class="n">some_value</span><span class="o">=</span><span class="s2">&quot;Hello form Child&quot;</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Got some value Hello form Child!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -926,7 +1241,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./core/syntax/oop"
+            path: "./core/syntax/specials"
         },
         predefinedOutput: true
     }
@@ -944,20 +1259,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="special_methods.html"
+       href="../specials.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Special methods</p>
+        <p class="prev-next-title">Specials</p>
       </div>
     </a>
     <a class="right-next"
-       href="../exceptions.html"
+       href="attributes.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exceptions</p>
+        <p class="prev-next-title">Attributes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -977,8 +1292,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-attributes">Type attributes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-attributes">Instance attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-protocol">Iteration protocol</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-creation">Instance creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switch-number-system">Switch number system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-subclass">Init subclass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subclass-kwargs">Subclass kwargs</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>urllib3 &#8212; Python</title>
+    <title>Web &#8212; Python</title>
   
   
   
@@ -57,10 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/urllib3';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'packages/web';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Requests" href="web/requests.html" />
     <link rel="prev" title="Serving" href="cloud/databricks_sdk/serving.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -201,8 +202,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/inheritance.html">Inheritance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/interface.html">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/class_method.html">Class method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_methods.html">Special methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/syntax/oop/special_attributes.html">Special attributes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/specials.html">Specials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/specials/methods.html">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/syntax/specials/attributes.html">Attributes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../core/syntax/exceptions.html">Exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -630,7 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="redis/redis_client.html">Redis client</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="requests.html">Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jsonschema.html">jsonschema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pydantic.html">Pydantic</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="tkinter.html">Tkinter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -653,7 +656,11 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">urllib3</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Web</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="web/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/urllib3.html">urllib3</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -723,7 +730,7 @@
       
       
       
-      <li><a href="../_sources/packages/urllib3.ipynb" target="_blank"
+      <li><a href="../_sources/packages/web.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -807,7 +814,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>urllib3</h1>
+    <h1>Web</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -817,13 +824,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parseurl">ParseURL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retries">Retries</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-retry">Is retry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requests">Requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#urllib3">urllib3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authlib">Authlib</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removed-session">Removed session</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requests-integration">Requests integration</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep">Sleep</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection">Connection</a></li>
 </ul>
             </nav>
         </div>
@@ -835,217 +842,45 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="urllib3">
-<h1>urllib3<a class="headerlink" href="#urllib3" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="web">
+<h1>Web<a class="headerlink" href="#web" title="Link to this heading">#</a></h1>
+<p>This page explores the concepts behind various Python packages related to the web.</p>
+<section id="requests">
+<h2>Requests<a class="headerlink" href="#requests" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://requests.readthedocs.io/en/latest/">Requests</a> package provides a more convenient interfaces for <code class="docutils literal notranslate"><span class="pre">urllib3</span></code>. This package hides a lot of ConnectionPool management inside it, which makes it easier to understand, but reduces the flexibility.</p>
+<p>Check more detailed explanation in the <a class="reference internal" href="web/requests.html"><span class="std std-doc">Requests</span></a> page.</p>
+<hr class="docutils" />
+<p>The following cell shows how to make a GET request to <a class="reference external" href="http://google.com">google.com</a> in just two lines of code, including the import.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://google.com&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Response [200]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="urllib3">
+<h2>urllib3<a class="headerlink" href="#urllib3" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">urllib3</span></code> is a package for implementing network communication.</p>
-<p>Check more in the official <a class="reference external" href="https://urllib3.readthedocs.io/en/stable/index.html">website</a>.</p>
+<p>For more information:</p>
+<ul class="simple">
+<li><p>Check the official <a class="reference external" href="https://urllib3.readthedocs.io/en/stable/index.html">website</a>.</p></li>
+<li><p>Chekc <a class="reference internal" href="web/urllib3.html"><span class="std std-doc">special page</span></a>.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell shows how to make a request to the <code class="docutils literal notranslate"><span class="pre">http://google.com</span></code> using <code class="docutils literal notranslate"><span class="pre">urllib3</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib3</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="parseurl">
-<h2>ParseURL<a class="headerlink" href="#parseurl" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">ulrlib3.util.url.parse_url</span></code> takes the urls as a string and returns a special <code class="docutils literal notranslate"><span class="pre">urllib3.util.url.URL</span></code> instance containing the elements of the URL as a separate attributes.</p>
-<hr class="docutils" />
-<p>The following cell shows the usage of the url.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urllib3.util.url</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_url</span>
-<span class="n">parse_url</span><span class="p">(</span><span class="s2">&quot;http://google.com/the/path/of/the/url?qury=param&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Url(scheme=&#39;http&#39;, auth=None, host=&#39;google.com&#39;, port=None, path=&#39;/the/path/of/the/url&#39;, query=&#39;qury=param&#39;, fragment=None)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="retries">
-<h2>Retries<a class="headerlink" href="#retries" title="Link to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html#urllib3.util.Retry"><code class="docutils literal notranslate"><span class="pre">urllib3.util.Retry</span></code></a> implements object that allows to specify the retry policy.</p>
-<p>In general, you need to pass this object to the <code class="docutils literal notranslate"><span class="pre">urllib3</span></code> interfaces, that could fail. If they will try to complete the operation with retries according to the rules specified in the <code class="docutils literal notranslate"><span class="pre">urllib3.util.Retry</span></code>.</p>
-<hr class="docutils" />
-<p>The following cell shows how the <code class="docutils literal notranslate"><span class="pre">urllib3.util.Retry</span></code> generally works. Each call to <code class="docutils literal notranslate"><span class="pre">increment</span></code> method decreases <code class="docutils literal notranslate"><span class="pre">total</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Retry</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">retry</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retry(total=1, connect=None, read=None, redirect=None, status=None)
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell shows output of the <code class="docutils literal notranslate"><span class="pre">increment</span></code> method:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span><span class="o">.</span><span class="n">increment</span><span class="p">()</span>
-<span class="n">retry</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retry(total=0, connect=None, read=None, redirect=None, status=None)
-</pre></div>
-</div>
-</div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">total</span></code> attribute decreased. The next call raises a special <code class="docutils literal notranslate"><span class="pre">MaxRetries</span></code> exception.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">retry</span><span class="o">.</span><span class="n">increment</span><span class="p">()</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None: Max retries exceeded with url: None (Caused by ResponseError(&#39;too many error responses&#39;))
-</pre></div>
-</div>
-</div>
-</div>
-<section id="is-retry">
-<h3>Is retry<a class="headerlink" href="#is-retry" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">is_retry</span></code> method of the <code class="docutils literal notranslate"><span class="pre">urllib3</span></code> allows to check wheather the output requires retry.</p>
-<hr class="docutils" />
-<p>The following cell builds <code class="docutils literal notranslate"><span class="pre">Retry</span></code> instance that requires 500 status code to retry the requiest.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Retry</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">status_forcelist</span><span class="o">=</span><span class="p">[</span><span class="mi">500</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">is_retry</span></code> call with <code class="docutils literal notranslate"><span class="pre">status_code=200</span></code> returns <code class="docutils literal notranslate"><span class="pre">False</span></code> which means that this status code doesn’t require a retry.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span><span class="o">.</span><span class="n">is_retry</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell shows the alternative <code class="docutils literal notranslate"><span class="pre">is_retry</span></code> call, indicating that retry is supposed to be repeated.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span><span class="o">.</span><span class="n">is_retry</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="sleep">
-<h2>Sleep<a class="headerlink" href="#sleep" title="Link to this heading">#</a></h2>
-<p>There are methods for organising the time interval between retries:</p>
-<ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">sleep</span></code> method stops the flow according to the retry rules.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">get_backoff_time</span></code> method returns the time for which flow have to be stopped.</p></li>
-</ul>
-<hr class="docutils" />
-<p>The following cell creates the <code class="docutils literal notranslate"><span class="pre">retry</span></code> object and invokes <code class="docutils literal notranslate"><span class="pre">sleep</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Retry</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">backoff_factor</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">backoff_max</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="o">%</span><span class="k">time</span> retry.sleep()
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10 μs, sys: 1 μs, total: 11 μs
-Wall time: 12.6 μs
-</pre></div>
-</div>
-</div>
-</div>
-<p>The programme wasn’t stopped because it doesn’t make sence to create an interval when there is no <code class="docutils literal notranslate"><span class="pre">increment</span></code> calls (no requests was made according to <code class="docutils literal notranslate"><span class="pre">urllib3</span></code> design).</p>
-<p>The output of <code class="docutils literal notranslate"><span class="pre">get_backoff_time</span></code> method have the corresponding output:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span><span class="o">.</span><span class="n">get_backoff_time</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-</pre></div>
-</div>
-</div>
-</div>
-<p>There is also no delay after the first increment - there is no delay between initial request and first retry.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span><span class="o">.</span><span class="n">increment</span><span class="p">()</span>
-<span class="o">%</span><span class="k">time</span> retry.sleep()
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 11 μs, sys: 0 ns, total: 11 μs
-Wall time: 14.8 μs
-</pre></div>
-</div>
-</div>
-</div>
-<p>However, there is some delay between retries.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span><span class="o">.</span><span class="n">increment</span><span class="p">()</span>
-<span class="o">%</span><span class="k">time</span> retry.sleep()
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.31 ms, sys: 32 μs, total: 1.34 ms
-Wall time: 3 s
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retry</span><span class="o">.</span><span class="n">get_backoff_time</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="connection">
-<h2>Connection<a class="headerlink" href="#connection" title="Link to this heading">#</a></h2>
-<p>There is a special object that implements connection <code class="docutils literal notranslate"><span class="pre">urllib3.connection.HTTPConnection</span></code>.</p>
-<hr class="docutils" />
-<p>The following cell shows the usage flow of the <code class="docutils literal notranslate"><span class="pre">urllib3.connection.HTTPConnection</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s2">&quot;www.google.com&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
-<span class="n">response</span><span class="o">.</span><span class="n">status</span>
+<span class="n">pool_manager</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">PoolManager</span><span class="p">()</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">pool_manager</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;http://google.com&quot;</span><span class="p">)</span>
+<span class="n">resp</span><span class="o">.</span><span class="n">status</span>
 </pre></div>
 </div>
 </div>
@@ -1056,6 +891,157 @@ Wall time: 3 s
 </div>
 </div>
 </section>
+<section id="authlib">
+<h2>Authlib<a class="headerlink" href="#authlib" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://docs.authlib.org/en/stable/index.html">Authlib</a> is the package that implement OAuth and OpenID protocols in python.</p>
+<hr class="docutils" />
+<p>The following cell show how to obtain the Bearer token with OAuth2.</p>
+<p><strong>Note.</strong> You must run the keycloak, which plays the role of OAuth2 provider.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">authlib.integrations.requests_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">OAuth2Session</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;admin-cli&quot;</span><span class="p">)</span>
+<span class="n">token</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span>
+    <span class="s2">&quot;http://localhost:8080/realms/master/protocol/openid-connect/token&quot;</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="n">grant_type</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">token</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;access_token&#39;: &#39;eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrTnA4VkMtYjB5RXh1N2VWQ21MTjNjdW5rWXVSTXExZFpkeUJQaU9WOWs4In0.eyJleHAiOjE3NzE3NzAzNDUsImlhdCI6MTc3MTc3MDI4NSwianRpIjoib25sdHJvOjUwNWZlNGFhLTg2ZjQtZjZjMi03MGEwLTJjZWFjNmEwYTJjNSIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9yZWFsbXMvbWFzdGVyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYWRtaW4tY2xpIiwic2lkIjoiZjZiZjExMzQtZTA0Yy1kOTliLWE3YjUtYjk5ZGQxNDhmOGZkIiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIn0.ANicSYy3B6hoycEL1olJmsJ1h4UMCsus0X_lHtOs7sZb_EhMfRf5R_R03SD7Uwz8tT0Qp1Tww4dS58kyOb6b--QJz2WxS24t6yjUMJbH4NpQW-YzVsXwX_44VUBTHlNzKKeJDE_Wp-9UV7pXWMrGCtwzQxKrFf-QT3ULFHeYpFco71Xm3wer7n9H5LDYI2JEbUvToVKygPyuqg-MX14Xy4QkzUEcj6VZO6-R0-gWzMKAflj5EvTpb-NTl_ze-yzF6SXkhQaCTtZAYw4FW1qzvWVcvT2xB2kkqHStHUy1C5uU26wOgh9ekqyQYqFjph598HQvlUhCFYLkuZsEA8NNoA&#39;,
+ &#39;expires_in&#39;: 60,
+ &#39;refresh_expires_in&#39;: 1800,
+ &#39;refresh_token&#39;: &#39;eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJmODBlNDZjZS1iZTY3LTRmOTItOTMyMi1mZmE5MjJiYjViYjgifQ.eyJleHAiOjE3NzE3NzIwODUsImlhdCI6MTc3MTc3MDI4NSwianRpIjoiZjVkODI3NjAtMzBkYS01MmM2LWEwNDEtZDVmYTA0YmU5YmI5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL21hc3RlciIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiJmNmJmMTEzNC1lMDRjLWQ5OWItYTdiNS1iOTlkZDE0OGY4ZmQiLCJzY29wZSI6IndlYi1vcmlnaW5zIGVtYWlsIHByb2ZpbGUgcm9sZXMgYWNyIGJhc2ljIn0.wQ5cFFc2E72JcHLZIzx1wtqss0oM-E29m5FXo7l1o6wWHRHmMdQgWKai7sHtm9tycddrarZ7KmuN_a--9az8aA&#39;,
+ &#39;token_type&#39;: &#39;Bearer&#39;,
+ &#39;not-before-policy&#39;: 0,
+ &#39;session_state&#39;: &#39;f6bf1134-e04c-d99b-a7b5-b99dd148f8fd&#39;,
+ &#39;scope&#39;: &#39;email profile&#39;,
+ &#39;expires_at&#39;: 1771770346}
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong> The token here is not just a dictionary, it is a special <code class="docutils literal notranslate"><span class="pre">authlib</span></code> object that represents the token.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>authlib.oauth2.rfc6749.wrappers.OAuth2Token
+</pre></div>
+</div>
+</div>
+</div>
+<section id="removed-session">
+<h3>Removed session<a class="headerlink" href="#removed-session" title="Link to this heading">#</a></h3>
+<p>Consider what happens when a session is removed and the application attempts to refresh the token. Typicallyk, OAuth returns the 400 error.</p>
+<hr class="docutils" />
+<p>The following cell requests the token that creates a new Keycloak sesion.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">authlib.integrations.requests_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">OAuth2Session</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;admin-cli&quot;</span><span class="p">)</span>
+<span class="n">token</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span>
+    <span class="s2">&quot;http://localhost:8080/realms/master/protocol/openid-connect/token&quot;</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="n">grant_type</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The text code removes the session, emitating that session was accidentally dropped.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">access_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]</span>
+<span class="n">session_state</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="s2">&quot;session_state&quot;</span><span class="p">]</span>
+
+<span class="o">!</span>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w">  </span><span class="err">\</span>
+     <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Authorization: Bearer $access_token&quot;</span> \
+     <span class="s2">&quot;http://localhost:8080/admin/realms/master/sessions/$session_state&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Requesting a token refresh results in <code class="docutils literal notranslate"><span class="pre">OAuthError</span></code> with the relevant description.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span>
+        <span class="s2">&quot;http://localhost:8080/realms/master/protocol/openid-connect/token&quot;</span><span class="p">,</span>
+        <span class="n">grant_type</span><span class="o">=</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">,</span>
+        <span class="n">refresh_token</span><span class="o">=</span><span class="n">token</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;authlib.integrations.base_client.errors.OAuthError&#39;&gt;
+invalid_grant: Session not active
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="requests-integration">
+<h3>Requests integration<a class="headerlink" href="#requests-integration" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">authlib</span></code> provides the <code class="docutils literal notranslate"><span class="pre">authlib.integrations.requests_client.OAuth2Session</span></code> class - the custom <code class="docutils literal notranslate"><span class="pre">requests.Session</span></code> to which the authentication logic is included.</p>
+<hr class="docutils" />
+<p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">mro</span></code> of <code class="docutils literal notranslate"><span class="pre">authlib.integrations.requests_client</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">authlib.integrations.requests_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">OAuth2Session</span>
+<span class="n">OAuth2Session</span><span class="o">.</span><span class="vm">__mro__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(authlib.integrations.requests_client.oauth2_session.OAuth2Session,
+ authlib.oauth2.client.OAuth2Client,
+ requests.sessions.Session,
+ requests.sessions.SessionRedirectMixin,
+ object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The list of ancestors includes <code class="docutils literal notranslate"><span class="pre">requests.sessions.Session</span></code>.</p>
+<p>This allows to use the <code class="docutils literal notranslate"><span class="pre">OAuth2Session</span></code> instance as a regular instance of <code class="docutils literal notranslate"><span class="pre">requests.sessions.Session</span></code> and not to care about the injecting the authentication information to the header.</p>
+<p>The following code uses the <code class="docutils literal notranslate"><span class="pre">get</span></code> method of the <code class="docutils literal notranslate"><span class="pre">OAuth2Session</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;admin-cli&quot;</span><span class="p">,</span> <span class="n">leeway</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span>
+    <span class="s2">&quot;http://localhost:8080/realms/master/protocol/openid-connect/token&quot;</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="n">grant_type</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:8080/admin/realms/master/users/count&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, &#39;1&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1097,6 +1083,15 @@ Wall time: 3 s
         <p class="prev-next-title">Serving</p>
       </div>
     </a>
+    <a class="right-next"
+       href="web/requests.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Requests</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1113,13 +1108,13 @@ Wall time: 3 s
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parseurl">ParseURL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retries">Retries</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-retry">Is retry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requests">Requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#urllib3">urllib3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authlib">Authlib</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removed-session">Removed session</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requests-integration">Requests integration</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep">Sleep</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection">Connection</a></li>
 </ul>
   </nav></div>
 
