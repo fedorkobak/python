@@ -395,3 +395,4 @@ parts:
       sections:
       - file: packages/web/requests.ipynb
       - file: packages/web/urllib3.ipynb
+      - file: packages/web/authlib.ipynb
