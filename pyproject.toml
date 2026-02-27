@@ -8,6 +8,8 @@ version = "0.0.0"
 dependencies = [
     "jupyter-book",
     "docker",
+    "mypy",
+    "pyright",
     "command_kernel @ git+https://github.com/fedorkobak/command_kernel.git"
 ]
 
