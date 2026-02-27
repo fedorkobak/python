@@ -7,8 +7,12 @@ name = "src"
 version = "0.0.0"
 dependencies = [
     "jupyter-book",
-    "docker"
+    "docker",
+    "command_kernel @ git+https://github.com/fedorkobak/command_kernel.git"
 ]
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
