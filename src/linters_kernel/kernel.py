@@ -2,6 +2,10 @@ import os
 from tempfile import mkstemp
 from command_kernel import CommandKernel, command
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class LintersKernel(CommandKernel):
     """
@@ -22,12 +26,15 @@ class LintersKernel(CommandKernel):
         return path
 
     def no_commands(self, code: str) -> str:
+        logger.info("no commands is invoked")
         return f"python3 {self._temp_file(code)}"
 
-    @command("# mypy")
+    @command("#mypy")
     def mypy(self, code: str) -> str:
+        logger.info("mypy is invoked")
         return f"mypy {self._temp_file(code)}"
 
-    @command("# pyright")
+    @command("#pyright")
     def pyright(self, code: str) -> str:
+        logger.info("pyright is invoked")
         return f"pyright {self._temp_file(code)}"
