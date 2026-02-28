@@ -10,7 +10,7 @@ dependencies = [
     "docker",
     "mypy",
     "pyright",
-    "command_kernel @ git+https://github.com/fedorkobak/command_kernel.git"
+    "command_kernel @ https://github.com/fedorkobak/command_kernel/archive/refs/tags/0.0.0.tar.gz"
 ]
 
 [tool.hatch.metadata]
