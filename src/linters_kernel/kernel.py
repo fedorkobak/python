@@ -11,6 +11,7 @@ class LintersKernel(CommandKernel):
     """
     Kernel that apples a linter to the given code.
     """
+    command_symbol = "#"
 
     def _temp_file(self, code: str) -> str:
         """
@@ -29,12 +30,12 @@ class LintersKernel(CommandKernel):
         logger.info("no commands is invoked")
         return f"python3 {self._temp_file(code)}"
 
-    @command("#mypy")
+    @command("mypy")
     def mypy(self, code: str) -> str:
         logger.info("mypy is invoked")
         return f"mypy {self._temp_file(code)}"
 
-    @command("#pyright")
+    @command("pyright")
     def pyright(self, code: str) -> str:
         logger.info("pyright is invoked")
         return f"pyright {self._temp_file(code)}"
