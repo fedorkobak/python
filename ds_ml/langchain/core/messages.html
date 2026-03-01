@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -659,6 +659,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/web/requests.html">Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/web/urllib3.html">urllib3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../packages/web/authlib.html">Authlib</a></li>
+
+
+
 </ul>
 </details></li>
 </ul>
@@ -848,7 +852,7 @@ document.write(`
 <p>The native way for LangChain to process messages is to keep them in the special abstractions that define different types of messages. Much of the functionality of LangChain and LangGraph is designed to consume and produce these messages abstractions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">langchain</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">langchain_core</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">HumanMessage</span><span class="p">,</span>
     <span class="n">SystemMessage</span><span class="p">,</span>
@@ -988,6 +992,7 @@ However, I&#39;m a large language model, I don&#39;t have real-time access to cu
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span>
 
 
+
 <span class="n">ai_message</span> <span class="o">=</span> <span class="n">AIMessage</span><span class="p">(</span>
     <span class="n">content</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="n">tool_calls</span><span class="o">=</span><span class="p">[</span>
@@ -1010,33 +1015,35 @@ However, I&#39;m a large language model, I don&#39;t have real-time access to cu
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The dummy tool.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The tool call&quot;</span><span class="p">)</span>
     <span class="k">pass</span>
 
 
-<span class="n">graph</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">langgraph</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">StateGraph</span><span class="p">(</span><span class="n">MessagesState</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="n">langgraph</span><span class="o">.</span><span class="n">prebuilt</span><span class="o">.</span><span class="n">ToolNode</span><span class="p">([</span><span class="n">my_tool</span><span class="p">]))</span>
-    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;__start__&quot;</span><span class="p">,</span> <span class="s2">&quot;tool&quot;</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="s2">&quot;__end__&quot;</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">tool_node</span> <span class="o">=</span> <span class="n">langgraph</span><span class="o">.</span><span class="n">prebuilt</span><span class="o">.</span><span class="n">ToolNode</span><span class="p">([</span><span class="n">my_tool</span><span class="p">])</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">tool_node</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">ai_message</span><span class="p">],</span>
+    <span class="n">config</span><span class="o">=</span><span class="p">{},</span>
+    <span class="n">runtime</span><span class="o">=</span><span class="n">langgraph</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">Runtime</span><span class="p">()</span>
 <span class="p">)</span>
-
-<span class="n">out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
-    <span class="n">MessagesState</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span><span class="p">[</span><span class="n">ai_message</span><span class="p">])</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell displays the <code class="docutils literal notranslate"><span class="pre">ToolMessage</span></code> that is the result of the tool node invocation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ToolMessage(content=&#39;null&#39;, name=&#39;my_tool&#39;, id=&#39;a881dd41-9d83-4af0-bb67-650a2b2abcf5&#39;, tool_call_id=&#39;miracle&#39;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The tool call
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong> due to the highly specific design of the <code class="docutils literal notranslate"><span class="pre">ToolNode</span></code>, you must explicitly specify the <code class="docutils literal notranslate"><span class="pre">context</span></code> and <code class="docutils literal notranslate"><span class="pre">runtime</span></code>.</p>
+<p>The following cell displays the <code class="docutils literal notranslate"><span class="pre">ToolMessage</span></code> that is the result of the tool node invocation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ToolMessage(content=&#39;null&#39;, name=&#39;my_tool&#39;, tool_call_id=&#39;miracle&#39;)
 </pre></div>
 </div>
 </div>
@@ -1057,16 +1064,16 @@ However, I&#39;m a large language model, I don&#39;t have real-time access to cu
     <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;The&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">]</span>
 
 
-<span class="n">graph</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">langgraph</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">StateGraph</span><span class="p">(</span><span class="n">MessagesState</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="n">langgraph</span><span class="o">.</span><span class="n">prebuilt</span><span class="o">.</span><span class="n">ToolNode</span><span class="p">([</span><span class="n">my_tool</span><span class="p">]))</span>
-    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;__start__&quot;</span><span class="p">,</span> <span class="s2">&quot;tool&quot;</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="s2">&quot;__end__&quot;</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">out</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">langgraph</span><span class="o">.</span><span class="n">prebuilt</span><span class="o">.</span><span class="n">ToolNode</span><span class="p">([</span><span class="n">my_tool</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ai_message</span><span class="p">]},</span>
+        <span class="n">config</span><span class="o">=</span><span class="p">{},</span>
+        <span class="n">runtime</span><span class="o">=</span><span class="n">langgraph</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">Runtime</span><span class="p">()</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 
-<span class="n">out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">MessagesState</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span><span class="p">[</span><span class="n">ai_message</span><span class="p">]))</span>
-<span class="n">out</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
+<span class="n">out</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
 </pre></div>
 </div>
 </div>

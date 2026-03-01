@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -659,6 +659,10 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Web</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="web/requests.html">Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web/urllib3.html">urllib3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/authlib.html">Authlib</a></li>
+
+
+
 </ul>
 </details></li>
 </ul>
@@ -826,11 +830,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requests">Requests</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#urllib3">urllib3</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authlib">Authlib</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removed-session">Removed session</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requests-integration">Requests integration</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authlib">Authlib</a></li>
 </ul>
             </nav>
         </div>
@@ -894,6 +894,7 @@ document.write(`
 <section id="authlib">
 <h2>Authlib<a class="headerlink" href="#authlib" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://docs.authlib.org/en/stable/index.html">Authlib</a> is the package that implement OAuth and OpenID protocols in python.</p>
+<p>Check more on the <a class="reference internal" href="web/authlib.html"><span class="std std-doc">Authlib</span></a> page.</p>
 <hr class="docutils" />
 <p>The following cell show how to obtain the Bearer token with OAuth2.</p>
 <p><strong>Note.</strong> You must run the keycloak, which plays the role of OAuth2 provider.</p>
@@ -938,107 +939,6 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="removed-session">
-<h3>Removed session<a class="headerlink" href="#removed-session" title="Link to this heading">#</a></h3>
-<p>Consider what happens when a session is removed and the application attempts to refresh the token. Typicallyk, OAuth returns the 400 error.</p>
-<hr class="docutils" />
-<p>The following cell requests the token that creates a new Keycloak sesion.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">authlib.integrations.requests_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">OAuth2Session</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;admin-cli&quot;</span><span class="p">)</span>
-<span class="n">token</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span>
-    <span class="s2">&quot;http://localhost:8080/realms/master/protocol/openid-connect/token&quot;</span><span class="p">,</span>
-    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-    <span class="n">grant_type</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The text code removes the session, emitating that session was accidentally dropped.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">access_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]</span>
-<span class="n">session_state</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="s2">&quot;session_state&quot;</span><span class="p">]</span>
-
-<span class="o">!</span>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w">  </span><span class="err">\</span>
-     <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Authorization: Bearer $access_token&quot;</span> \
-     <span class="s2">&quot;http://localhost:8080/admin/realms/master/sessions/$session_state&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Requesting a token refresh results in <code class="docutils literal notranslate"><span class="pre">OAuthError</span></code> with the relevant description.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span>
-        <span class="s2">&quot;http://localhost:8080/realms/master/protocol/openid-connect/token&quot;</span><span class="p">,</span>
-        <span class="n">grant_type</span><span class="o">=</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">,</span>
-        <span class="n">refresh_token</span><span class="o">=</span><span class="n">token</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]</span>
-    <span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;authlib.integrations.base_client.errors.OAuthError&#39;&gt;
-invalid_grant: Session not active
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="requests-integration">
-<h3>Requests integration<a class="headerlink" href="#requests-integration" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">authlib</span></code> provides the <code class="docutils literal notranslate"><span class="pre">authlib.integrations.requests_client.OAuth2Session</span></code> class - the custom <code class="docutils literal notranslate"><span class="pre">requests.Session</span></code> to which the authentication logic is included.</p>
-<hr class="docutils" />
-<p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">mro</span></code> of <code class="docutils literal notranslate"><span class="pre">authlib.integrations.requests_client</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">authlib.integrations.requests_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">OAuth2Session</span>
-<span class="n">OAuth2Session</span><span class="o">.</span><span class="vm">__mro__</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(authlib.integrations.requests_client.oauth2_session.OAuth2Session,
- authlib.oauth2.client.OAuth2Client,
- requests.sessions.Session,
- requests.sessions.SessionRedirectMixin,
- object)
-</pre></div>
-</div>
-</div>
-</div>
-<p>The list of ancestors includes <code class="docutils literal notranslate"><span class="pre">requests.sessions.Session</span></code>.</p>
-<p>This allows to use the <code class="docutils literal notranslate"><span class="pre">OAuth2Session</span></code> instance as a regular instance of <code class="docutils literal notranslate"><span class="pre">requests.sessions.Session</span></code> and not to care about the injecting the authentication information to the header.</p>
-<p>The following code uses the <code class="docutils literal notranslate"><span class="pre">get</span></code> method of the <code class="docutils literal notranslate"><span class="pre">OAuth2Session</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;admin-cli&quot;</span><span class="p">,</span> <span class="n">leeway</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">client</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span>
-    <span class="s2">&quot;http://localhost:8080/realms/master/protocol/openid-connect/token&quot;</span><span class="p">,</span>
-    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-    <span class="n">grant_type</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:8080/admin/realms/master/users/count&quot;</span><span class="p">)</span>
-<span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, &#39;1&#39;)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1110,11 +1010,7 @@ invalid_grant: Session not active
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requests">Requests</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#urllib3">urllib3</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authlib">Authlib</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removed-session">Removed session</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requests-integration">Requests integration</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authlib">Authlib</a></li>
 </ul>
   </nav></div>
 

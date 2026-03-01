@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -659,6 +659,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/web/requests.html">Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../packages/web/urllib3.html">urllib3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../packages/web/authlib.html">Authlib</a></li>
+
+
+
 </ul>
 </details></li>
 </ul>
@@ -825,7 +829,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametrization">Parametrization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametrization">Parametrization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-subset">Types subset</a></li>
 </ul>
             </nav>
@@ -849,9 +856,9 @@ document.write(`
 <p>The following cell declares a list of names with annotations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-<span class="n">tup</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-<span class="n">dct</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lst:<span class="w"> </span>list<span class="o">[</span>int<span class="o">]</span>
+tup:<span class="w"> </span>tuple<span class="o">[</span>int,<span class="w"> </span>float,<span class="w"> </span>str<span class="o">]</span>
+dct:<span class="w"> </span>dict<span class="o">[</span>str,<span class="w"> </span>int<span class="o">]</span>
 </pre></div>
 </div>
 </div>
@@ -867,14 +874,14 @@ document.write(`
 <p>The following code snippets will have the same meaning for linters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>val:<span class="w"> </span>list<span class="o">[</span>int<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">3</span><span class="o">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>list<span class="o">[</span>int<span class="o">]([</span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">3</span><span class="o">])</span>
 </pre></div>
 </div>
 </div>
@@ -888,54 +895,88 @@ document.write(`
 <p>The following cell defines a <code class="docutils literal notranslate"><span class="pre">generic_function</span></code> that is annotates to return the type it receives. If you passing <code class="docutils literal notranslate"><span class="pre">int</span></code> the linter will expect to get <code class="docutils literal notranslate"><span class="pre">int</span></code> as output, passing <code class="docutils literal notranslate"><span class="pre">str</span></code> the linter will expect to get <code class="docutils literal notranslate"><span class="pre">str</span></code> as output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/generic_parametrization.py
-<span class="k">def</span><span class="w"> </span><span class="nf">generic_function</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">l</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">l</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pyright</span>
+def<span class="w"> </span>generic_function<span class="o">[</span>T<span class="o">](</span>l:<span class="w"> </span>T<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>T:
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>l
 
-<span class="n">int_out</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">generic_function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">str_out</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">generic_function</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+int_out:<span class="w"> </span><span class="nv">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>generic_function<span class="o">(</span><span class="m">10</span><span class="o">)</span>
+str_out:<span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>generic_function<span class="o">(</span><span class="s2">&quot;value&quot;</span><span class="o">)</span>
 
-<span class="n">var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">generic_function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+var:<span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>generic_function<span class="o">(</span><span class="m">10</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/generic_parametrization.py
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpwtxodlz7
+  /tmp/tmpwtxodlz7:<span class=" -Color -Color-Yellow">7</span>:<span class=" -Color -Color-Yellow">12</span> - <span class=" -Color -Color-Red">error</span>: Type &quot;int&quot; is not assignable to declared type &quot;str&quot;
+    &quot;int&quot; is not assignable to &quot;str&quot; (reportAssignmentType)
+1 error, 0 warnings, 0 informations
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">T</span></code> is simply a reference to the type that will be determined during the function call.</p>
-<p>The following cell runs the <code class="docutils literal notranslate"><span class="pre">pyright</span></code> for the script.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pyright<span class="w"> </span>/tmp/generic_parametrization.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/generic_parametrization.py
-  /tmp/generic_parametrization.py:<span class=" -Color -Color-Yellow">8</span>:<span class=" -Color -Color-Yellow">12</span> - <span class=" -Color -Color-Red">error</span>: Type &quot;int&quot; is not assignable to declared type &quot;str&quot;
-    &quot;int&quot; is not assignable to &quot;str&quot; (reportAssignmentType)
-1 error, 0 warnings, 0 informations
-</pre></div>
-</div>
-</div>
-</div>
 <p>The linter only points only to the line that tries to assign the value returned  by the <code class="docutils literal notranslate"><span class="pre">generic_function(10)</span></code> to a string-annotated variable.</p>
 <p>The following cell defines the same function but by using the <code class="docutils literal notranslate"><span class="pre">typing.TypeVar</span></code> factory for creating a type variable.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>TypeVar
 
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">generic_function</span><span class="p">(</span><span class="n">l</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">l</span>
+<span class="nv">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>TypeVar<span class="o">(</span><span class="s1">&#39;T&#39;</span><span class="o">)</span>
+def<span class="w"> </span>generic_function<span class="o">(</span>l:<span class="w"> </span>T<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>T:
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>l
 </pre></div>
 </div>
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">TypeVar</span></code> function is used to create a reference to the <em>“future”</em> type.</p>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h3>
+<p>There are generic classes. You can specify a variable that describes the type that would be used by a class.</p>
+<hr class="docutils" />
+<p>The following cell defines the generic class.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">t1_processing</span></code> only processes the type that corresponds to the <code class="docutils literal notranslate"><span class="pre">T1</span></code> parameter.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">t2_processing</span></code> only processes the type that corresponds to the <code class="docutils literal notranslate"><span class="pre">T2</span></code> parameter.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pyright</span>
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>Generic,<span class="w"> </span>TypeVar
+
+class<span class="w"> </span>GenericExample<span class="o">[</span>T1,<span class="w"> </span>T2<span class="o">]</span>:
+<span class="w">    </span>def<span class="w"> </span>t1_processing<span class="o">(</span>self,<span class="w"> </span>val:<span class="w"> </span>T1<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>T1:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>val
+
+<span class="w">    </span>def<span class="w"> </span>t2_processing<span class="o">(</span>self,<span class="w"> </span>val:<span class="w"> </span>T2<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>T2:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>val
+
+
+<span class="nv">ge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>GenericExample<span class="o">[</span>int,<span class="w"> </span>str<span class="o">]()</span>
+
+ge.t1_processing<span class="o">(</span><span class="m">10</span><span class="o">)</span>
+ge.t2_processing<span class="o">(</span><span class="s2">&quot;string&quot;</span><span class="o">)</span>
+ge.t2_processing<span class="o">(</span><span class="m">20</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmp836slrb0
+  /tmp/tmp836slrb0:<span class=" -Color -Color-Yellow">15</span>:<span class=" -Color -Color-Yellow">18</span> - <span class=" -Color -Color-Red">error</span>: Argument of type &quot;Literal[20]&quot; cannot be assigned to parameter &quot;val&quot; of type &quot;str&quot; in function &quot;t2_processing&quot;
+    &quot;Literal[20]&quot; is not assignable to &quot;str&quot; (reportArgumentType)
+1 error, 0 warnings, 0 informations
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ge</span></code> instance is dified with <code class="docutils literal notranslate"><span class="pre">T1=int</span></code> and <code class="docutils literal notranslate"><span class="pre">T2=str</span></code>. Everything goes fine when the corresponding types are passed to the <code class="docutils literal notranslate"><span class="pre">t1_processing</span></code> and <code class="docutils literal notranslate"><span class="pre">t2_processing</span></code>. However, attempting to pass an integer to the <code class="docutils literal notranslate"><span class="pre">t2_processing</span></code> method fails.</p>
+</section>
 </section>
 <section id="types-subset">
 <h2>Types subset<a class="headerlink" href="#types-subset" title="Link to this heading">#</a></h2>
@@ -948,38 +989,28 @@ document.write(`
 <p>The following example shows how to define <code class="docutils literal notranslate"><span class="pre">T</span></code> to accept only subtypes of <code class="docutils literal notranslate"><span class="pre">float</span></code> and how to apply the function to <code class="docutils literal notranslate"><span class="pre">int</span></code> ans <code class="docutils literal notranslate"><span class="pre">str</span></code> objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/generic_parametrization.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pyright</span>
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>TypeVar
 
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="nv">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>TypeVar<span class="o">(</span><span class="s2">&quot;T&quot;</span>,<span class="w"> </span><span class="nv">bound</span><span class="o">=</span>float<span class="o">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">generic_function</span><span class="p">(</span><span class="n">l</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">l</span>
+def<span class="w"> </span>generic_function<span class="o">(</span>l:<span class="w"> </span>T<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>T:
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>l
 
-<span class="n">int_out</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">generic_function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">str_out</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">generic_function</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+int_out:<span class="w"> </span><span class="nv">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>generic_function<span class="o">(</span><span class="m">10</span><span class="o">)</span>
+str_out:<span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>generic_function<span class="o">(</span><span class="s2">&quot;value&quot;</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/generic_parametrization.py
-</pre></div>
-</div>
-</div>
-</div>
-<p>Application of the linter:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pyright<span class="w"> </span>/tmp/generic_parametrization.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/generic_parametrization.py
-  /tmp/generic_parametrization.py:<span class=" -Color -Color-Yellow">9</span>:<span class=" -Color -Color-Yellow">33</span> - <span class=" -Color -Color-Red">error</span>: Argument of type &quot;Literal[&#39;value&#39;]&quot; cannot be assigned to parameter &quot;l&quot; of type &quot;T@generic_function&quot; in function &quot;generic_function&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpyn8gs2ha
+  /tmp/tmpyn8gs2ha:<span class=" -Color -Color-Yellow">9</span>:<span class=" -Color -Color-Yellow">33</span> - <span class=" -Color -Color-Red">error</span>: Argument of type &quot;Literal[&#39;value&#39;]&quot; cannot be assigned to parameter &quot;l&quot; of type &quot;T@generic_function&quot; in function &quot;generic_function&quot;
     Type &quot;Literal[&#39;value&#39;]&quot; is not assignable to type &quot;float&quot;
       &quot;Literal[&#39;value&#39;]&quot; is not assignable to &quot;float&quot; (reportArgumentType)
 1 error, 0 warnings, 0 informations
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -997,16 +1028,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "linters_kernel"
         },
         kernelOptions: {
-            name: "python3",
+            name: "linters_kernel",
             path: "./standard_library/linting/types"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'linters_kernel'</script>
 
                 </article>
               
@@ -1053,7 +1084,10 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametrization">Parametrization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametrization">Parametrization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-subset">Types subset</a></li>
 </ul>
   </nav></div>

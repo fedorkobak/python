@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -659,6 +659,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../packages/web.html">Web</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../packages/web/requests.html">Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../packages/web/urllib3.html">urllib3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packages/web/authlib.html">Authlib</a></li>
+
+
+
 </ul>
 </details></li>
 </ul>
@@ -824,6 +828,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collections">Collections</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterator">Iterator</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-class">Data class</a></li>
 </ul>
@@ -840,6 +845,53 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="constructs">
 <h1>Constructs<a class="headerlink" href="#constructs" title="Link to this heading">#</a></h1>
 <p>This page focuses on terms that are implemented to python and allows you to explore its syntax.</p>
+<section id="collections">
+<h2>Collections<a class="headerlink" href="#collections" title="Link to this heading">#</a></h2>
+<p>Collection is the interface that implements: <code class="docutils literal notranslate"><span class="pre">__iter__</span></code>, <code class="docutils literal notranslate"><span class="pre">__sized__</span></code> and <code class="docutils literal notranslate"><span class="pre">__contains__</span></code>.</p>
+<p>This UML diagram that describes the methods determining the collection interface and popular ancestors:</p>
+<img src="constructs_files/python_collections.svg" width="30%" height="30%"><hr class="docutils" />
+<p>You import all those interfaces from <code class="docutils literal notranslate"><span class="pre">collections.abs</span></code> module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Iterable</span><span class="p">,</span>
+    <span class="n">Sized</span><span class="p">,</span>
+    <span class="n">Container</span><span class="p">,</span>
+    <span class="n">Reversible</span><span class="p">,</span>
+    <span class="n">Collection</span><span class="p">,</span>
+    <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">Mapping</span><span class="p">,</span>
+    <span class="n">Set</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You don’t need to explicitly specify that class realises this interfaces; it’s enought to define all the required methods. The next cell shows how to define the custom collection.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyCollection</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="nb">issubclass</span><span class="p">(</span><span class="n">MyCollection</span><span class="p">,</span> <span class="n">Collection</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="iterator">
 <h2>Iterator<a class="headerlink" href="#iterator" title="Link to this heading">#</a></h2>
 <p>An iterator is an object that implements the iterator protocol.</p>
@@ -854,7 +906,7 @@ document.write(`
 <p>The <code class="docutils literal notranslate"><span class="pre">iter</span></code> function can be applied to the list, showing that the <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> dunder is implemented for <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">lst_iterator</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
 <span class="n">lst_iterator</span>
 </pre></div>
@@ -870,7 +922,7 @@ document.write(`
 <p>The following cell shows that the <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code> has an <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> dunder as well. However, the dunder returns the object itself.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst_iterator</span> <span class="ow">is</span> <span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lst_iterator</span> <span class="ow">is</span> <span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -883,7 +935,7 @@ document.write(`
 <p>The <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code> has a <code class="docutils literal notranslate"><span class="pre">__next__</span></code> dunder. For each call, it returns the corresponding element of the <code class="docutils literal notranslate"><span class="pre">list</span></code> from which the <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code> comes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__next__</span><span class="p">(),</span> <span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__next__</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__next__</span><span class="p">(),</span> <span class="n">lst_iterator</span><span class="o">.</span><span class="fm">__next__</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -896,7 +948,7 @@ document.write(`
 <p>When there are no longer any corresponding elements - the <code class="docutils literal notranslate"><span class="pre">StopIteration</span></code> error will be raised.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">lst_iterator</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">lst_iterator</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -930,7 +982,7 @@ document.write(`
 <p>To define a dataclass, you have to use the <code class="docutils literal notranslate"><span class="pre">dataclasses.dataclass</span></code> decorator. The following cell defines one that we’ll use:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SomeData</span><span class="p">:</span>
@@ -943,7 +995,7 @@ document.write(`
 <p>Any instance of such a class can be transformed into a string in the format <code class="docutils literal notranslate"><span class="pre">&lt;ClassName&gt;(&lt;attr1&gt;=&lt;val1&gt;,</span> <span class="pre">...)</span></code>. The following cell shows this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -956,7 +1008,7 @@ document.write(`
 <p>You can compare dataclasses out of the box, and if their attributes have the same values, you will find that the instances are equal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">SomeData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;wow&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">SomeData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;oh my gosh&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1037,6 +1089,7 @@ False
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collections">Collections</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterator">Iterator</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-class">Data class</a></li>
 </ul>
