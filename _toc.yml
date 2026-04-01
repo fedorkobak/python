@@ -323,6 +323,7 @@ parts:
       - file: ds_ml/mlflow/serving.ipynb
       - file: ds_ml/mlflow/gen_ai.ipynb
         sections:
+          - file: ds_ml/mlflow/gen_ai/span.ipynb
           - file: ds_ml/mlflow/gen_ai/prompts.ipynb
     - file: ds_ml/langchain.ipynb
       sections:
