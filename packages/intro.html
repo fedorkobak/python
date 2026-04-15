@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -1414,7 +1415,11 @@ rm -r zip_example_file archive.zip
 <h2>Pydantic<a class="headerlink" href="#pydantic" title="Link to this heading">#</a></h2>
 <p>Pydantic is a data validation package for Python. It allows you to specify the data fromat using Python type annotations and validate your data against this model.</p>
 <p>The most important class here is <code class="docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code>. Any class that inherits from it represents a pydantic model.</p>
-<p>Check more details in <a class="reference external" href="https://docs.pydantic.dev/latest/">official web site</a>.</p>
+<p>Check more details in :</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.pydantic.dev/latest/">Official documentation</a>.</p></li>
+<li><p><a class="reference internal" href="pydantic.html"><span class="std std-doc">Corresponding page</span></a>.</p></li>
+</ul>
 <hr class="docutils" />
 <p>The following cell defines simple pydantic model. The resulting object must have <code class="docutils literal notranslate"><span class="pre">a:</span> <span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">b:</span> <span class="pre">float</span></code> attributes.</p>
 <div class="cell docutils container">

@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Promts" href="gen_ai/prompts.html" />
+    <link rel="next" title="Span" href="gen_ai/span.html" />
     <link rel="prev" title="Serving" href="serving.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="serving.html">Serving</a></li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Gen AI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -833,16 +834,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-spans">Customizing spans</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span">Span</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mesages">Mesages</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested">Nested</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span">Span</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-scorer">Custom scorer</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schema">Schema</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-serving">Registering/serving</a></li>
 </ul>
             </nav>
@@ -1100,7 +1101,11 @@ document.write(`
 <section id="span">
 <h2>Span<a class="headerlink" href="#span" title="Link to this heading">#</a></h2>
 <p>Span is a building box for the trace. Each span shows one step of the trace. In context of LLM-based solutions typically, it is typically accociated with a signle message passed to model or returned by the model.</p>
-<p>Check official description in the <a class="reference external" href="https://mlflow.org/docs/latest/genai/concepts/span/">Spans</a> mlflow page.</p>
+<p>Check more in the:</p>
+<ul class="simple">
+<li><p>Official description in the <a class="reference external" href="https://mlflow.org/docs/latest/genai/concepts/span/">Spans</a> mlflow page.</p></li>
+<li><p>Special <a class="reference internal" href="gen_ai/span.html"><span class="std std-doc">Span</span></a> page.</p></li>
+</ul>
 <hr class="docutils" />
 <p>The following cell creates the span and specifies the input and output information for the span.</p>
 <div class="cell docutils container">
@@ -1117,52 +1122,6 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="mesages">
-<h3>Mesages<a class="headerlink" href="#mesages" title="Link to this heading">#</a></h3>
-<p>The typical output of the LLM-based systems is a sequence of messages. MLFlow uses a special UI representation if the data has been prepared in a format compatible with OpenAI.</p>
-<hr class="docutils" />
-<p>The following cell illustrates the correct format for publishing the sequence in the mlflow span.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_span&quot;</span><span class="p">,</span>
-    <span class="n">span_type</span><span class="o">=</span><span class="n">SpanType</span><span class="o">.</span><span class="n">LLM</span>
-<span class="p">)</span> <span class="k">as</span> <span class="n">span</span><span class="p">:</span>
-    <span class="n">span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">([</span>
-        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;System prompt&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello how are you&quot;</span><span class="p">},</span>
-    <span class="p">])</span>
-    <span class="n">span</span><span class="o">.</span><span class="n">set_outputs</span><span class="p">([</span>
-        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer of the model&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;The tool call&quot;</span><span class="p">}</span>
-    <span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now check the UI of the MLFlow server. Each message will be presented according to its type.</p>
-</section>
-<section id="nested">
-<h3>Nested<a class="headerlink" href="#nested" title="Link to this heading">#</a></h3>
-<p>Some spans can be nested within other spans.</p>
-<hr class="docutils" />
-<p>The following code shows how an <code class="docutils literal notranslate"><span class="pre">inner_span</span></code> can be placed inside an <code class="docutils literal notranslate"><span class="pre">outer_span</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outer_span&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="k">as</span> <span class="n">outer_span</span><span class="p">:</span>
-    <span class="n">outer_span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="s2">&quot;data of outer span&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_span</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;innder_span&quot;</span>
-    <span class="p">)</span> <span class="k">as</span> <span class="n">inner_span</span><span class="p">:</span>
-        <span class="n">inner_span</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="s2">&quot;data of inner span&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Only the outer span would be represented in the list of traces. Go to the <em>Details &amp; Timeline</em> section of the outer span find more about the inner span.</p>
-</section>
 </section>
 <section id="evaluation">
 <h2>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
@@ -1188,7 +1147,9 @@ document.write(`
         <span class="s2">&quot;expectations&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;expected_response&quot;</span><span class="p">:</span> <span class="s2">&quot;Unicorn&quot;</span><span class="p">}</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Who was the first person to build an airplane?&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Who was the first person to build an airplane?&quot;</span>
+        <span class="p">},</span>
         <span class="s2">&quot;expectations&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;expected_response&quot;</span><span class="p">:</span> <span class="s2">&quot;Wright Brothers&quot;</span><span class="p">}</span>
     <span class="p">},</span>
     <span class="p">{</span>
@@ -1372,6 +1333,86 @@ open the <span class=" -Color -Color-Bold">Traces</span> tab in the Run page in 
 </div>
 </div>
 </section>
+<section id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h2>
+<p>You can keep the the dataset for your system evalutionwith the experiment in mlflow.</p>
+<p>Check more:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://mlflow.org/docs/latest/genai/datasets/">Building MLflow evaluation datasets</a></p></li>
+<li><p><a class="reference external" href="https://mlflow.org/docs/latest/genai/datasets/sdk-guide/#retrieving-datasets">Evaluation Dataset SDK Reference</a>.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell creates the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">genai</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;example_dataset&quot;</span><span class="p">,</span>
+    <span class="n">experiment_id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The returned object represents an MLFlow dataset. The following cell shows how to add records to the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">merge_records</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;hello how are you&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;expectations&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;im fine and you&quot;</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Wha is the capital of France&quot;</span><span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlflow.genai.datasets.evaluation_dataset.EvaluationDataset at 0x7d02874bbc50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note.</strong> The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> fields is required.</p>
+<section id="schema">
+<h3>Schema<a class="headerlink" href="#schema" title="Link to this heading">#</a></h3>
+<p>You can add any attributes you want to each sample in the evaluation dataset. However, there are some special attributes that impart specific properties to the record.</p>
+<p>The important ones are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input:</span> <span class="pre">dict[str,</span> <span class="pre">str]</span></code>: <strong>required attribute</strong>. Hash from is used to identify the sample. Displayed in UI. Used by evaluation mechanism.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expectations:</span> <span class="pre">dict[str,</span> <span class="pre">Any]</span></code>: expected outputs. Displayed in UI. Used by evaluation mechanism.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags:</span> <span class="pre">dict[str,</span> <span class="pre">Any]</span></code>: add tags to records, which allows to filter specific items.</p></li>
+</ul>
+<p>Check more in <a class="reference external" href="https://mlflow.org/docs/latest/genai/datasets/sdk-guide/#evaluation-dataset-schema">Evaluation dataset schema</a> section.</p>
+<hr class="docutils" />
+<p>The following cell adds a sample with specific values to the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">genai</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;schema_example&quot;</span><span class="p">,</span>
+    <span class="n">experiment_id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
+<span class="p">)</span>
+
+<span class="n">dataset</span><span class="o">.</span><span class="n">merge_records</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;hello how are you&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;expectations&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;im fine and you&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;my_type&quot;</span><span class="p">,</span> <span class="s2">&quot;gruop&quot;</span><span class="p">:</span> <span class="s2">&quot;my_group&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;some_other_attribute&quot;</span><span class="p">:</span> <span class="mf">16.20</span>
+    <span class="p">},</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlflow.genai.datasets.evaluation_dataset.EvaluationDataset at 0x7d0287ff7230&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="registering-serving">
 <h2>Registering/serving<a class="headerlink" href="#registering-serving" title="Link to this heading">#</a></h2>
 <p>MLFlow provieds tools for registering and serving LLM-based applications that use a workflow similar to classical ML models.</p>
@@ -1497,11 +1538,11 @@ Created version &#39;2&#39; of model &#39;agent&#39;.
       </div>
     </a>
     <a class="right-next"
-       href="gen_ai/prompts.html"
+       href="gen_ai/span.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Promts</p>
+        <p class="prev-next-title">Span</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1526,16 +1567,16 @@ Created version &#39;2&#39; of model &#39;agent&#39;.
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-spans">Customizing spans</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span">Span</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mesages">Mesages</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested">Nested</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span">Span</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-scorer">Custom scorer</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts">Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schema">Schema</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-serving">Registering/serving</a></li>
 </ul>
   </nav></div>

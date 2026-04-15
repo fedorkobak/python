@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mlflow/serving.html">Serving</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../mlflow/gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../mlflow/gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -833,6 +834,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-recognized-options">Not recognized options</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log">Log</a></li>
 </ul>
             </nav>
         </div>
@@ -858,7 +860,7 @@ document.write(`
 <span class="c1"># such a way that they take arguments that are common to the environment. The</span>
 <span class="c1"># following code removes all additional arguments so that the outputs are not</span>
 <span class="c1"># affected by arguments specified for the jupyter run.</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">arg</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">arg</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">)]</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">arg</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">arg</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -871,8 +873,10 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">traitlets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Unicode</span>
+
+
 <span class="k">class</span><span class="w"> </span><span class="nc">CustomApplication</span><span class="p">(</span><span class="n">Application</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s2">&quot;some&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;application started&quot;</span><span class="p">)</span>
 </pre></div>
@@ -884,6 +888,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">application</span> <span class="o">=</span> <span class="n">CustomApplication</span><span class="p">()</span>
 <span class="n">application</span><span class="o">.</span><span class="n">launch_instance</span><span class="p">()</span>
+<span class="n">Application</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 </div>
 </div>
@@ -1037,6 +1042,115 @@ document.write(`
 </div>
 </section>
 </section>
+<section id="log">
+<h2>Log<a class="headerlink" href="#log" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Application.log</span></code> object is a logging mechanism.</p>
+<p>This object literaly is the <code class="docutils literal notranslate"><span class="pre">logging.logger</span></code> instance. To print messages, use the following methods: <code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code> and <code class="docutils literal notranslate"><span class="pre">critical</span></code> methods.</p>
+<hr class="docutils" />
+<p>The following cell initializes the <code class="docutils literal notranslate"><span class="pre">Application</span></code> instance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Application</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logging.Logger
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong> that the loggers have a typical <code class="docutils literal notranslate"><span class="pre">level</span></code> attribute, but there is also a <code class="docutils literal notranslate"><span class="pre">log_level</span></code> attribute for the entire application.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">level</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 30
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell invokes varios logger methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;debug log&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;warning log&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Application] WARNING | warning log
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the debug message wasn’t displayed - the global logging configuration for the application didn’t allow it.</p>
+<p>The following cell updates the <code class="docutils literal notranslate"><span class="pre">log_level</span></code> configuration and tries to print the debug method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;debug log&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Application] debug log
+</pre></div>
+</div>
+</div>
+</div>
+<p>To use <code class="docutils literal notranslate"><span class="pre">IPykernel</span></code> practically, it is important to be able to configure the <code class="docutils literal notranslate"><span class="pre">log</span></code> through the CLI. The following cell implements a script that uses application logger. The subsequent cells show the outputs with different configurations of CLI arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /tmp/val.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">traitlets.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Application</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Application</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;debug log&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;warning log&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /tmp/val.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>/tmp/val.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Application] WARNING | warning log
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python3<span class="w"> </span>/tmp/val.py<span class="w"> </span>--Application.log_level<span class="w"> </span>DEBUG
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Application] debug log
+[Application] WARNING | warning log
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1108,6 +1222,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-recognized-options">Not recognized options</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log">Log</a></li>
 </ul>
   </nav></div>
 

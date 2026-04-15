@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds_ml/mlflow/serving.html">Serving</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -828,6 +829,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterable">Iterable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json-schema">JSON Schema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-adapter">Type Adapter</a></li>
@@ -853,6 +855,35 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="iterable">
+<h2>Iterable<a class="headerlink" href="#iterable" title="Link to this heading">#</a></h2>
+<p>You can iterate over the pydatic schema. The iterator returns an attribute/value pair with each iteration.</p>
+<hr class="docutils" />
+<p>The following cell creates a simple pydantic model and then iterates over its instance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">in_stock</span><span class="p">:</span> <span class="nb">bool</span>
+
+
+<span class="n">item</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mechanical Keyboard&quot;</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="mf">120.50</span><span class="p">,</span> <span class="n">in_stock</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key: </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key: name, Value: Mechanical Keyboard
+Key: price, Value: 120.5
+Key: in_stock, Value: True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="json">
 <h2>JSON<a class="headerlink" href="#json" title="Link to this heading">#</a></h2>
 <p>To validate a JSON object against a Pydantic model, use the <code class="docutils literal notranslate"><span class="pre">model_validate_json</span></code> method.</p>
@@ -1150,6 +1181,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterable">Iterable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json-schema">JSON Schema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-adapter">Type Adapter</a></li>

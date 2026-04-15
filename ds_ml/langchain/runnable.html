@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/serving.html">Serving</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mlflow/gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mlflow/gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -831,6 +832,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invoke">Invoke</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stream">Stream</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">Callbacks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runnable-lambda">Runnable lambda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runnable-sequence">Runnable sequence</a></li>
 </ul>
             </nav>
         </div>
@@ -850,6 +853,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">langchain_core.runnables</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">runnables</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">langchain_ollama</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOllama</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3.1&quot;</span><span class="p">)</span>
 </pre></div>
@@ -989,6 +993,67 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="runnable-lambda">
+<h2>Runnable lambda<a class="headerlink" href="#runnable-lambda" title="Link to this heading">#</a></h2>
+<p>Runnable lambda allows you to transform a callable into a runnable.</p>
+<p>For more details check the <a class="reference external" href="https://reference.langchain.com/python/langchain-core/runnables/base/RunnableLambda">corresponding page</a> of the langchain reference.</p>
+<hr class="docutils" />
+<p>The following cell shows how to build an instance of the <code class="docutils literal notranslate"><span class="pre">RunnableLambda</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multiplier</span> <span class="o">=</span> <span class="n">runnables</span><span class="o">.</span><span class="n">RunnableLambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;attribute&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; world&quot;</span><span class="p">)</span>
+<span class="n">multiplier</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;attribute&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello world&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="runnable-sequence">
+<h2>Runnable sequence<a class="headerlink" href="#runnable-sequence" title="Link to this heading">#</a></h2>
+<p>You can combine several runnables into a sequence, in which they will be executed one after another.</p>
+<p>Check more in the <a class="reference external" href="https://reference.langchain.com/python/langchain-core/runnables/base/RunnableSequence">RunnableSequence</a> page of the official documentation.</p>
+<hr class="docutils" />
+<p>The following cell joins few runnables into a sequence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l1</span> <span class="o">=</span> <span class="n">runnables</span><span class="o">.</span><span class="n">RunnableLambda</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;attribute&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;attribute&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">)}</span>
+<span class="p">)</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="n">runnables</span><span class="o">.</span><span class="n">RunnableLambda</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;attribute&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;attribute&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)}</span>
+<span class="p">)</span>
+
+<span class="n">sequence</span> <span class="o">=</span> <span class="n">l1</span> <span class="o">|</span> <span class="n">l2</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>langchain_core.runnables.base.RunnableSequence
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result object is <code class="docutils literal notranslate"><span class="pre">RunnableSequence</span></code>.</p>
+<p>Invoking of the sequence will apply the runnables one by one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequence</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;attribute&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;attribute&#39;: &#39;---++hello+++--&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1058,6 +1123,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invoke">Invoke</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stream">Stream</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">Callbacks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runnable-lambda">Runnable lambda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runnable-sequence">Runnable sequence</a></li>
 </ul>
   </nav></div>
 

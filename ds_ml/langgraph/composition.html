@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mlflow/serving.html">Serving</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mlflow/gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mlflow/gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -836,6 +837,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph">Subgraph</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-schemas">Multiple schemas</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output">Input/output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-node">Class node</a></li>
 </ul>
             </nav>
         </div>
@@ -1241,6 +1243,49 @@ Subgraph invoked
 </div>
 </div>
 </section>
+<section id="class-node">
+<h2>Class node<a class="headerlink" href="#class-node" title="Link to this heading">#</a></h2>
+<p>You can define a node as an instance of a callable class. This approach is convenient for complex nodes.</p>
+<hr class="docutils" />
+<p>The following cell shows the <code class="docutils literal notranslate"><span class="pre">Node</span></code> class, an instance of which can be added to the graph as a node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attribute</span> <span class="o">=</span> <span class="n">attribute</span>
+
+    <span class="c1"># Define config and runtime as kwargs as linter will complain</span>
+    <span class="c1"># about extra arguments</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">runtime</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;config:&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;runtime&quot;</span><span class="p">,</span> <span class="n">runtime</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;attribute_value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
+
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">StateGraph</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;node&quot;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;Hello world&quot;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;__start__&quot;</span><span class="p">,</span> <span class="s2">&quot;node&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;node&quot;</span><span class="p">,</span> <span class="s2">&quot;__end__&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">({},</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;context&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>config: {&#39;langgraph_step&#39;: 1, &#39;langgraph_node&#39;: &#39;node&#39;, &#39;langgraph_triggers&#39;: (&#39;branch:to:node&#39;,), &#39;langgraph_path&#39;: (&#39;__pregel_pull&#39;, &#39;node&#39;), &#39;langgraph_checkpoint_ns&#39;: &#39;node:e89a498b-cb92-e6b2-fb46-3157685a1224&#39;}
+
+runtime Runtime(context=&#39;context&#39;, store=None, stream_writer=&lt;function Pregel.stream.&lt;locals&gt;.stream_writer at 0x72a7873f6ac0&gt;, previous=None)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;attribute_value&#39;: &#39;Hello world&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generally it works as a regular node.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1315,6 +1360,7 @@ Subgraph invoked
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph">Subgraph</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-schemas">Multiple schemas</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output">Input/output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-node">Class node</a></li>
 </ul>
   </nav></div>
 

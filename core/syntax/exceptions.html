@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/serving.html">Serving</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -932,7 +933,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
+    <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
 <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First code to handle exception&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
@@ -956,7 +957,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">try_functions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="mi">8</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span>
+    <span class="k">lambda</span><span class="p">:</span> <span class="mi">8</span> <span class="o">/</span> <span class="mi">0</span><span class="p">,</span>
     <span class="k">lambda</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span> <span class="o">+</span> <span class="mi">4</span>
 <span class="p">]</span>
 
@@ -1006,8 +1007,10 @@ error type: can only concatenate str (not &quot;int&quot;) to str
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="k">try</span><span class="p">:</span> <span class="mi">9</span><span class="o">/</span><span class="mi">0</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exception</span><span class="p">()</span> <span class="ow">is</span> <span class="n">e</span><span class="p">)</span> 
+<span class="k">try</span><span class="p">:</span>
+    <span class="mi">9</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exception</span><span class="p">()</span> <span class="ow">is</span> <span class="n">e</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1020,13 +1023,15 @@ error type: can only concatenate str (not &quot;int&quot;) to str
 <p><code class="docutils literal notranslate"><span class="pre">sys.exc_info</span></code> is an old fashioned function that returns a tuple with different compoments of the exception.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span> <span class="o">+</span> <span class="mi">10</span>
-<span class="k">except</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="s2">&quot;10&quot;</span> <span class="o">+</span> <span class="mi">10</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;class &#39;TypeError&#39;&gt;, TypeError(&#39;can only concatenate str (not &quot;int&quot;) to str&#39;), &lt;traceback object at 0x799ef7ff6200&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;class &#39;TypeError&#39;&gt;, TypeError(&#39;can only concatenate str (not &quot;int&quot;) to str&#39;), &lt;traceback object at 0x7d2c68275440&gt;)
 </pre></div>
 </div>
 </div>
@@ -1041,9 +1046,9 @@ error type: can only concatenate str (not &quot;int&quot;) to str
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="mi">10</span><span class="o">/</span><span class="mi">0</span>
+    <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="n">e</span> 
+    <span class="n">val</span> <span class="o">=</span> <span class="n">e</span>
 </pre></div>
 </div>
 </div>

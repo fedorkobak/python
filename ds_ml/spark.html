@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow/serving.html">Serving</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mlflow/gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlflow/gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -832,11 +833,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session">Session</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdd">RDD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dag">DAG</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">Dataframe</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources">Data sources</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#columns">Columns</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by">Group by</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#window-functions">Window functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml">ML</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-pipelines">Declarative Pipelines</a></li>
 </ul>
@@ -859,18 +865,19 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
 
 <span class="n">spark_session</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s1">&#39;Temp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">sparkContext</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: Using incubator modules: jdk.incubator.vector
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j2-defaults.properties
-25/09/23 11:20:27 WARN Utils: Your hostname, user-ThinkPad-E16-Gen-2, resolves to a loopback address: 127.0.1.1; using 10.202.22.210 instead (on interface enp0s31f6)
-25/09/23 11:20:27 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+26/03/31 17:07:48 WARN Utils: Your hostname, user-ThinkPad-E16-Gen-2, resolves to a loopback address: 127.0.1.1; using 10.204.20.198 instead (on interface enp0s31f6)
+26/03/31 17:07:48 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j2-defaults.properties
 Setting default log level to &quot;WARN&quot;.
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-25/09/23 11:20:28 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/03/31 17:07:48 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 </pre></div>
 </div>
 </div>
@@ -955,6 +962,112 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="rdd">
+<h2>RDD<a class="headerlink" href="#rdd" title="Link to this heading">#</a></h2>
+<p><strong>R</strong>esilient <strong>D</strong>istributed <strong>D</strong>ataset is an abstraction in spark that represents an array of data that can be processed in a distributed cluster.</p>
+<p>Check the <a class="reference external" href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.RDD.html">pyspark RDD reference</a>.</p>
+<hr class="docutils" />
+<p>The following cell demonstrates how to represent a Python list as an RDD.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyspark.core.rdd.RDD
+</pre></div>
+</div>
+</div>
+</div>
+<p>Some methods define the actions that have to be performed on data. The following cell creates an RDD, which multiplies each element by 10.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_x_10</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">data_x_10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyspark.core.rdd.PipelinedRDD
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can apply transformations to the input data using the <code class="docutils literal notranslate"><span class="pre">collect</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_x_10</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[10, 20, 30, 40]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="dag">
+<h3>DAG<a class="headerlink" href="#dag" title="Link to this heading">#</a></h3>
+<p><strong>D</strong>irect <strong>A</strong>cyclic <strong>G</strong>raph describes a set of transformation you want apply to your Dataset.</p>
+<ul class="simple">
+<li><p>It’s <strong>direct</strong> because the previous transformation points to the next one.</p></li>
+<li><p><strong>Acyclic</strong> means that the graph does not allows loops.</p></li>
+</ul>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">toDebugString</span></code> method of the RDD to obtain the information about the DAG for a particular RDD.</p>
+<hr class="docutils" />
+<p>The following code builds some RDD and shows the description of it’s DAG.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">]</span>
+
+<span class="n">rdd</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">mapped_rdd</span> <span class="o">=</span> <span class="n">rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">counts_rdd</span> <span class="o">=</span> <span class="n">mapped_rdd</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">counts_rdd</span><span class="o">.</span><span class="n">toDebugString</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(18) PythonRDD[25] at RDD at PythonRDD.scala:58 []
+ |   MapPartitionsRDD[24] at mapPartitions at PythonRDD.scala:170 []
+ |   ShuffledRDD[23] at partitionBy at NativeMethodAccessorImpl.java:0 []
+ +-(18) PairwiseRDD[22] at reduceByKey at /tmp/ipykernel_177926/3878476722.py:6 []
+    |   PythonRDD[21] at reduceByKey at /tmp/ipykernel_177926/3878476722.py:6 []
+    |   ParallelCollectionRDD[20] at readRDDFromFile at PythonRDD.scala:299 []
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;spark&quot;</span><span class="p">,</span> <span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;spark&quot;</span><span class="p">,</span> <span class="s2">&quot;rdd&quot;</span><span class="p">,</span> <span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;spark&quot;</span><span class="p">]</span>
+<span class="n">rdd</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+
+<span class="n">mapped</span> <span class="o">=</span> <span class="n">rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">word</span><span class="p">:</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">counts</span> <span class="o">=</span> <span class="n">mapped</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># 4. THE ACTION</span>
+<span class="c1"># Bring it back to Python to see the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mapped</span><span class="o">.</span><span class="n">collect</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">collect</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;spark&#39;, 1), (&#39;python&#39;, 1), (&#39;spark&#39;, 1), (&#39;rdd&#39;, 1), (&#39;python&#39;, 1), (&#39;spark&#39;, 1)]
+[(&#39;spark&#39;, 3), (&#39;python&#39;, 2), (&#39;rdd&#39;, 1)]
 </pre></div>
 </div>
 </div>
@@ -1389,6 +1502,49 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 </div>
 </section>
+<section id="window-functions">
+<h2>Window functions<a class="headerlink" href="#window-functions" title="Link to this heading">#</a></h2>
+<p>To implement the window function in PySpark, use the following parttern: attach the <code class="docutils literal notranslate"><span class="pre">WindowSpec</span></code> object to the function and use it in the <code class="docutils literal notranslate"><span class="pre">withColumn</span></code> method of the DataFrame.</p>
+<hr class="docutils" />
+<p>The following cell defines a pyspark DataFrame and computes the sum of <code class="docutils literal notranslate"><span class="pre">value</span></code> partitioned by <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">window</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
+<span class="n">new_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">test_df</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;colum2&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">window</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">new_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-----+-----+------+
+|group|value|colum2|
++-----+-----+------+
+|    a|    3|     5|
+|    a|    2|     5|
+|    c|    4|    11|
+|    c|    7|    11|
++-----+-----+------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="ml">
 <h2>ML<a class="headerlink" href="#ml" title="Link to this heading">#</a></h2>
 <p>There is a <code class="docutils literal notranslate"><span class="pre">pyspark.ml</span></code> package that contains a set of tools that implements a typical ml transformations. The following table provides an overwiew of its capabilities:</p>
@@ -1791,11 +1947,16 @@ See also &#39;https://spark.apache.org/docs/latest/sql-migration-guide.html#ddl-
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session">Session</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdd">RDD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dag">DAG</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">Dataframe</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources">Data sources</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#columns">Columns</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by">Group by</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#window-functions">Window functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml">ML</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarative-pipelines">Declarative Pipelines</a></li>
 </ul>

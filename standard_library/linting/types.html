@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -577,6 +577,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ds_ml/mlflow/serving.html">Serving</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai.html">Gen AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai/span.html">Span</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ds_ml/mlflow/gen_ai/prompts.html">Promts</a></li>
 </ul>
 </details></li>
@@ -837,6 +838,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typed-dictionaries">Typed dictionaries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generics">Generics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotated">Annotated</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocol">Protocol</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callable">Callable</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1164,8 +1169,8 @@ MyDict<span class="o">(</span><span class="nv">a</span><span class="o">=</span><
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpocl3wgaj:7: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;str&quot;</span><span class="err"></span>(B, TypedDict item <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;a&quot;</span><span class="err"></span>(B has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[typeddict-item]</span><span class="err"></span>(B
-/tmp/tmpocl3wgaj:7: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int&quot;</span><span class="err"></span>(B, TypedDict item <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;b&quot;</span><span class="err"></span>(B has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;str&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[typeddict-item]</span><span class="err"></span>(B
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpiobtz00p:7: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;str&quot;</span><span class="err"></span>(B, TypedDict item <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;a&quot;</span><span class="err"></span>(B has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[typeddict-item]</span><span class="err"></span>(B
+/tmp/tmpiobtz00p:7: <span class=" -Color -Color-Bold -Color-Bold-Red">error:</span><span class="err"></span>(B Incompatible types (expression has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;int&quot;</span><span class="err"></span>(B, TypedDict item <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;b&quot;</span><span class="err"></span>(B has type <span class="err"></span>(B<span class=" -Color -Color-Bold">&quot;str&quot;</span><span class="err"></span>(B)  <span class="err"></span>(B<span class=" -Color -Color-Yellow">[typeddict-item]</span><span class="err"></span>(B
 <span class=" -Color -Color-Bold -Color-Bold-Red">Found 2 errors in 1 file (checked 1 source file)</span><span class="err"></span>(B
 </pre></div>
 </div>
@@ -1275,6 +1280,94 @@ process<span class="o">(</span>Example2<span class="o">(</span><span class="nv">
 </div>
 </div>
 </section>
+<section id="protocol">
+<h2>Protocol<a class="headerlink" href="#protocol" title="Link to this heading">#</a></h2>
+<p>Enables the use of structural typing in Python. It allows you to define exactly which attributes and methods a class must implement to be considered compatible.</p>
+<p>You are suppose to define the ancestor of the <code class="docutils literal notranslate"><span class="pre">typing.Protocol</span></code>. Any values annotated as this type will trigger the linters if the passed object not have  attributes of the same type.</p>
+<hr class="docutils" />
+<p>The following cell defines the <code class="docutils literal notranslate"><span class="pre">Schema</span></code> protocol and two classes. One repeats the <code class="docutils literal notranslate"><span class="pre">Schema</span></code> interfaces; the other not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pyright</span>
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>Protocol
+
+class<span class="w"> </span>Schema<span class="o">(</span>Protocol<span class="o">)</span>:
+<span class="w">    </span>def<span class="w"> </span>method<span class="o">(</span>self,<span class="w"> </span>param:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>int:
+<span class="w">        </span>...
+
+class<span class="w"> </span>Valid:
+<span class="w">    </span>def<span class="w"> </span>method<span class="o">(</span>self,<span class="w"> </span>param:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>int:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">20</span>
+
+class<span class="w"> </span>Invalid:
+<span class="w">    </span>def<span class="w"> </span>method<span class="o">(</span>self,<span class="w"> </span>wrong_name:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>int:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">10</span>
+
+
+valid:<span class="w"> </span><span class="nv">Schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Valid<span class="o">()</span>
+invalid:<span class="w"> </span><span class="nv">Schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Invalid<span class="o">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpkunkx4xt
+  /tmp/tmpkunkx4xt:<span class=" -Color -Color-Yellow">17</span>:<span class=" -Color -Color-Yellow">19</span> - <span class=" -Color -Color-Red">error</span>: Type &quot;Invalid&quot; is not assignable to declared type &quot;Schema&quot;
+    &quot;Invalid&quot; is incompatible with protocol &quot;Schema&quot;
+      &quot;method&quot; is an incompatible type
+        Type &quot;(wrong_name: str) -&gt; int&quot; is not assignable to type &quot;(param: str) -&gt; int&quot;
+          Parameter name mismatch: &quot;param&quot; versus &quot;wrong_name&quot; (reportAssignmentType)
+1 error, 0 warnings, 0 informations
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The pirght raises only on attempt to assign the <code class="docutils literal notranslate"><span class="pre">Invalid</span></code> instance to the name annotated as <code class="docutils literal notranslate"><span class="pre">Schema</span></code>.</p>
+<section id="callable">
+<h3>Callable<a class="headerlink" href="#callable" title="Link to this heading">#</a></h3>
+<p>It’s a typical case when you need to annotate the callable with a specific schema. You can define the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method in the <code class="docutils literal notranslate"><span class="pre">typing.Protocol</span></code>; this declares of the protocol that the callable must follow.</p>
+<hr class="docutils" />
+<p>The following cell defines the protocol for callables that have a <code class="docutils literal notranslate"><span class="pre">param:</span> <span class="pre">str</span></code> and returns an <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pyright</span>
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>Protocol
+
+class<span class="w"> </span>CallableSchema<span class="o">(</span>Protocol<span class="o">)</span>:
+<span class="w">    </span>def<span class="w"> </span>__call__<span class="o">(</span>self,<span class="w"> </span>param:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>int:
+<span class="w">        </span>...
+
+def<span class="w"> </span>valid<span class="o">(</span>param:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>int:
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">10</span>
+
+def<span class="w"> </span>invalid<span class="o">(</span>param:<span class="w"> </span>int<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>int:
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">10</span>
+
+
+valid_fun:<span class="w"> </span><span class="nv">CallableSchema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>valid
+invalid_fun:<span class="w"> </span><span class="nv">CallableSchema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>invalid
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpjdeb_r7p
+  /tmp/tmpjdeb_r7p:<span class=" -Color -Color-Yellow">15</span>:<span class=" -Color -Color-Yellow">31</span> - <span class=" -Color -Color-Red">error</span>: Type &quot;(param: int) -&gt; int&quot; is not assignable to declared type &quot;CallableSchema&quot;
+    Type &quot;(param: int) -&gt; int&quot; is not assignable to type &quot;(param: str) -&gt; int&quot;
+      Parameter 1: type &quot;str&quot; is incompatible with type &quot;int&quot;
+        &quot;str&quot; is not assignable to &quot;int&quot; (reportAssignmentType)
+1 error, 0 warnings, 0 informations
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">valid</span></code> function assigns to the <code class="docutils literal notranslate"><span class="pre">valid_fun:</span> <span class="pre">CallableSchema</span></code> with on issues. Attempting to assign the <code class="docutils literal notranslate"><span class="pre">invalid</span></code> function raises in linting.</p>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1352,6 +1445,10 @@ process<span class="o">(</span>Example2<span class="o">(</span><span class="nv">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typed-dictionaries">Typed dictionaries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generics">Generics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotated">Annotated</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocol">Protocol</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callable">Callable</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
