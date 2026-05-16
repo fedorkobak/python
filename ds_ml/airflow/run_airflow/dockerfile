@@ -1,16 +1,11 @@
-FROM python:3.10
+FROM ghcr.io/fedorkobak/jlb:latest
 
-# script for airflow instalation
-# described below
-COPY install_airflow.sh install_airflow.sh
-RUN bash install_airflow.sh
+ENV AIRFLOW__CORE__AUTH_MANAGER=airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
 
-# we need to create user in other case
-# airflow will create it by itself with
-# random password
-# for some reason it asks to run airflow db init
-# before creating a user
-RUN airflow db init; \
+# installation of the airflow.
+# the apache-airflow-providers-fab
+RUN pip3 install apache-airflow==3.2.1 apache-airflow-providers-fab==3.6.3 && \
+    airflow db migrate && \
     airflow users create \
         --username admin \
         --password admin \
@@ -21,4 +16,4 @@ RUN airflow db init; \
 
 RUN sed -i 's/load_examples = True/load_examples = False/g' /root/airflow/airflow.cfg
 
-CMD ["airflow", "standalone"]
+CMD ["sh", "-c", "jupyter lab --ip 0.0.0.0 --allow-root & airflow api-server"]
