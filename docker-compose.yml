@@ -1,8 +1,8 @@
 services:
   airflow:
     build:
-      context: .
-      dockerfile: ./dockerfiles/airflow.dockerfile
+      context: ./dockerfiles/airflow
+      dockerfile: ./dockerfile
     ports:
       - 8888:8888
       - 8080:8080

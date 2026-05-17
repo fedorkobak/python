@@ -1,0 +1,2 @@
+apache-airflow==3.2.1
+https://github.com/fedorkobak/command_kernel/releases/download/0.0.1/command_kernel-0.0.1.tar.gz

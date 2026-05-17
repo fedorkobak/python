@@ -1,0 +1,17 @@
+FROM ghcr.io/fedorkobak/jlb:latest
+
+# installation of the airflow.
+# the apache-airflow-providers-fab
+
+WORKDIR /airflow-setup
+COPY ./requirements.txt /airflow-setup/requirements.txt
+
+RUN pip3 install -r requirements.txt && \
+    python3 -m bash_kernel.install && \
+    airflow db migrate
+
+WORKDIR /knowledge
+COPY ./airflow.cfg /root/airflow/airflow.cfg
+RUN mkdir /root/airflow/dags
+
+CMD ["sh", "-c", "jupyter lab --ip 0.0.0.0 --allow-root & airflow standalone"]
