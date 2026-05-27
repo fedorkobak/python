@@ -294,7 +294,7 @@ parts:
     - file: ds_ml/hugging_face.ipynb
       sections:
       - file: ds_ml/hugging_face/hub.ipynb
-      t it s- file: ds_ml/hugging_face/tokenizers.ipynb
+      - file: ds_ml/hugging_face/tokenizers.ipynb
       - file: ds_ml/hugging_face/transformers.ipynb
         sections:
         - file: ds_ml/hugging_face/transformers/pipeline.ipynb
@@ -303,6 +303,7 @@ parts:
       sections:
       - file: ds_ml/airflow/tutorial_dag.ipynb
       - file: ds_ml/airflow/tasks.ipynb
+      - file: ds_ml/airflow/api.ipynb
     - file: ds_ml/geopy
       sections:
       - file: ds_ml/geopy/distances.ipynb
