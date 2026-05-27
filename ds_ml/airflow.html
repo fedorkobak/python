@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Run airflow" href="airflow/run_airflow.html" />
+    <link rel="next" title="Tutorial DAG" href="airflow/tutorial_dag.html" />
     <link rel="prev" title="Tokenizer" href="hugging_face/transformers/tokenizer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -552,9 +552,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Airflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="airflow/run_airflow.html">Run airflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airflow/tutorial_dag.html">Tutorial DAG</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airflow/tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="airflow/api.html">API</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -850,13 +850,18 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="airflow">
 <h1>Airflow<a class="headerlink" href="#airflow" title="Link to this heading">#</a></h1>
 <p>Airflow is a tool that allows to schedule a set of processes commonly used in ETL pipelines and sometimes in ML automation. This section considers typical ways to use Airflow.</p>
-<p>We typically are typically run airflow in the Docker container to make sure that we are working in a clean environment. Use following command to run the container.</p>
-<p>Build the docker image described in the <code class="docutils literal notranslate"><span class="pre">airflow_files/dockerfile</span></code> and run it with the <code class="docutils literal notranslate"><span class="pre">standalone</span></code> command.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>packages/airflow_files/dockerfile<span class="w"> </span>.
-docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>airflow<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>-v<span class="w"> </span>./:/knowledge<span class="w"> </span>airflow<span class="w"> </span>standalone
+<p>We typically are typically run airflow in the Docker container to make sure that we are working in a clean environment. To run the environment used for this experiments use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>airflow<span class="w"> </span>-d
 </pre></div>
 </div>
-<p>Image that is used as an example configured in such way to create default user with login <code class="docutils literal notranslate"><span class="pre">user</span></code> and password <code class="docutils literal notranslate"><span class="pre">user</span></code> that will be used as credentials for the airflow server.</p>
+<p>From the root of the project.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">AIRFLOW__LOGGING__LOGGING_LEVEL</span><span class="o">=</span>CRITICAL
+</pre></div>
+</div>
+</div>
+</div>
 <section id="configuration-file">
 <h2>Configuration file<a class="headerlink" href="#configuration-file" title="Link to this heading">#</a></h2>
 <p>The global configuration of the airflow is stored in the special file: <code class="docutils literal notranslate"><span class="pre">airflow.cfg</span></code>. Different installations put this file in different places (as usual). Typical locations are <code class="docutils literal notranslate"><span class="pre">/opt/airflow/airflow.cfg</span></code> and <code class="docutils literal notranslate"><span class="pre">~/airflow/airflow.cfg</span></code>.</p>
@@ -864,12 +869,12 @@ docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </sp
 <p>Any way use following command to find the location of the <code class="docutils literal notranslate"><span class="pre">airflow.cfg</span></code> on your disk.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>find<span class="w"> </span>/<span class="w"> </span>-name<span class="w"> </span>airflow.cfg
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>/root<span class="w"> </span>-name<span class="w"> </span>airflow.cfg
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/airflow/airflow.cfg
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/root/airflow/airflow.cfg
 </pre></div>
 </div>
 </div>
@@ -883,12 +888,12 @@ docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </sp
 <p>First you need to identify the folder containing dags. This folder is specified by the <code class="docutils literal notranslate"><span class="pre">dogs_folder</span></code> parameter of the configuration file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span>/opt/airflow/airflow.cfg<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dags_folder
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/root/airflow/airflow.cfg<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dags_folder
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dags_folder = /opt/airflow/dags
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dags_folder = /root/airflow/dags
 </pre></div>
 </div>
 </div>
@@ -896,16 +901,12 @@ docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </sp
 <p>DAG must be implemented by the special DAG file. This is the file that contains <code class="docutils literal notranslate"><span class="pre">airflow.models.DAG</span></code> object. It takes a lot of settings that determine it’s behavior but in general it needs only <code class="docutils literal notranslate"><span class="pre">dag_id</span></code> to be specified. The following cell defines a dag with id <code class="docutils literal notranslate"><span class="pre">tutorial</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /opt/airflow/dags/tutorial.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.models.dag</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAG</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt;&gt; /root/airflow/dags/tutorial.py</span>
+<span class="s">from airflow.models.dag import DAG</span>
 
-<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing /opt/airflow/dags/tutorial.py
+<span class="s">with DAG(&quot;tutorial&quot;) as dag:</span>
+<span class="s">    pass</span>
+<span class="s">EOF</span>
 </pre></div>
 </div>
 </div>
@@ -913,23 +914,7 @@ docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </sp
 <p>The following command causes airflow to add DAG to its databases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>airflow<span class="w"> </span>db<span class="w"> </span>migrate
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DB: sqlite:////opt/airflow/airflow.db
-Performing upgrade to the metadata database sqlite:////opt/airflow/airflow.db
-[<span class=" -Color -Color-Blue">2025-03-22T14:14:21.698+0000</span>] {<span class=" -Color -Color-Blue">migration.py:</span>207} INFO - Context impl <span class=" -Color -Color-Bold">SQLiteImpl</span>.
-[<span class=" -Color -Color-Blue">2025-03-22T14:14:21.700+0000</span>] {<span class=" -Color -Color-Blue">migration.py:</span>210} INFO - Will assume <span class=" -Color -Color-Bold">non-transactional</span> DDL.
-[<span class=" -Color -Color-Blue">2025-03-22T14:14:21.704+0000</span>] {<span class=" -Color -Color-Blue">migration.py:</span>207} INFO - Context impl <span class=" -Color -Color-Bold">SQLiteImpl</span>.
-[<span class=" -Color -Color-Blue">2025-03-22T14:14:21.704+0000</span>] {<span class=" -Color -Color-Blue">migration.py:</span>210} INFO - Will assume <span class=" -Color -Color-Bold">non-transactional</span> DDL.
-[<span class=" -Color -Color-Blue">2025-03-22T14:14:21.705+0000</span>] {<span class=" -Color -Color-Blue">db.py:</span>1675} INFO - Creating tables
-INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-Database migrating done!
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>airflow<span class="w"> </span>dags<span class="w"> </span>reserialize
 </pre></div>
 </div>
 </div>
@@ -937,15 +922,16 @@ Database migrating done!
 <p>With <code class="docutils literal notranslate"><span class="pre">airflow</span> <span class="pre">dags</span> <span class="pre">list</span></code> you can show DAGs that are seen by the airflow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>airflow<span class="w"> </span>dags<span class="w"> </span>list
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>airflow<span class="w"> </span>dags<span class="w"> </span>list
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">dag_id   </span>|<span class=" -Color -Color-Bold"> fileloc                       </span>|<span class=" -Color -Color-Bold"> owners </span>|<span class=" -Color -Color-Bold"> is_paused</span>
-=========+===============================+========+==========
-tutorial | /opt/airflow/dags/tutorial.py |        | True     
-<span class=" -Color -Color-Faint">                                                             </span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">dag_id   </span>|<span class=" -Color -Color-Bold"> fileloc          </span>|<span class=" -Color -Color-Bold"> owners  </span>|<span class=" -Color -Color-Bold"> is_paused </span>|<span class=" -Color -Color-Bold"> bundle_name </span>|<span class=" -Color -Color-Bold"> bundle_version</span>
+=========+==================+=========+===========+=============+===============
+tutorial | /root/airflow/da | airflow | True      | dags-folder | None          
+         | gs/tutorial.py   |         |           |             |               
+<span class=" -Color -Color-Faint">                                                                                </span>
 </pre></div>
 </div>
 </div>
@@ -959,14 +945,14 @@ tutorial | /opt/airflow/dags/tutorial.py |        | True
 <p>The following cell defines the DAG in the Task Flow syntax.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /opt/airflow/dags/tutorial.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">dag</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%%writefile<span class="w"> </span>/opt/airflow/dags/tutorial.py
+from<span class="w"> </span>airflow.decorators<span class="w"> </span>import<span class="w"> </span>dag
 
-<span class="nd">@dag</span><span class="p">(</span><span class="s2">&quot;taskflow_example&quot;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">tutorial</span><span class="p">():</span>
-    <span class="k">pass</span>
+@dag<span class="o">(</span><span class="s2">&quot;taskflow_example&quot;</span><span class="o">)</span>
+def<span class="w"> </span>tutorial<span class="o">()</span>:
+<span class="w">    </span>pass
 
-<span class="n">tutorial</span><span class="p">()</span>
+tutorial<span class="o">()</span>
 </pre></div>
 </div>
 </div>
@@ -979,9 +965,9 @@ tutorial | /opt/airflow/dags/tutorial.py |        | True
 <p>The following cell reloads the airflow database - as a result the <code class="docutils literal notranslate"><span class="pre">dag_id</span></code> corresponds to the parameter specified in the <code class="docutils literal notranslate"><span class="pre">ariflow.decorators.dag</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
-airflow db migrate &amp;&gt; /dev/null
-airflow dags list
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%%bash
+airflow<span class="w"> </span>db<span class="w"> </span>migrate<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
+airflow<span class="w"> </span>dags<span class="w"> </span>list
 </pre></div>
 </div>
 </div>
@@ -1069,6 +1055,7 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
 <p>Find out more:</p>
 <ul class="simple">
 <li><p>In the official <a class="reference external" href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html">Tasks</a> page.</p></li>
+<li><p><a class="reference external" href="https://airflow.apache.org/docs/apache-airflow/stable/howto/custom-operator.html">Creating a custom operator</a> tutorial.</p></li>
 <li><p>In the specific <a class="reference internal" href="airflow/tasks.html"><span class="std std-doc">page</span></a>.</p></li>
 </ul>
 <hr class="docutils" />
@@ -1076,15 +1063,15 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
 <p>The following code defines DAG with <code class="docutils literal notranslate"><span class="pre">bash</span></code> task and loads it to the airflow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> /opt/airflow/dags/tutorial.py
-<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.models.dag</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAG</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.bash</span><span class="w"> </span><span class="kn">import</span> <span class="n">BashOperator</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%%writefile<span class="w"> </span>/opt/airflow/dags/tutorial.py
+from<span class="w"> </span>airflow.models.dag<span class="w"> </span>import<span class="w"> </span>DAG
+from<span class="w"> </span>airflow.operators.bash<span class="w"> </span>import<span class="w"> </span>BashOperator
 
-<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
-    <span class="n">BashOperator</span><span class="p">(</span>
-        <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;hello_world&quot;</span><span class="p">,</span>
-        <span class="n">bash_command</span><span class="o">=</span><span class="s2">&quot;echo &#39;Hello world&#39;&quot;</span>
-    <span class="p">)</span>
+with<span class="w"> </span>DAG<span class="o">(</span><span class="s2">&quot;tutorial&quot;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>dag:
+<span class="w">    </span>BashOperator<span class="o">(</span>
+<span class="w">        </span><span class="nv">task_id</span><span class="o">=</span><span class="s2">&quot;hello_world&quot;</span>,
+<span class="w">        </span><span class="nv">bash_command</span><span class="o">=</span><span class="s2">&quot;echo &#39;Hello world&#39;&quot;</span>
+<span class="w">    </span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -1096,7 +1083,7 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>airflow<span class="w"> </span>db<span class="w"> </span>migrate<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!airflow<span class="w"> </span>db<span class="w"> </span>migrate<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
@@ -1104,7 +1091,7 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
 <p>List the tasks of the DAG with <code class="docutils literal notranslate"><span class="pre">airflow</span> <span class="pre">tasks</span> <span class="pre">list</span> <span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">dug&gt;</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>airflow<span class="w"> </span>tasks<span class="w"> </span>list<span class="w"> </span>tutorial
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!airflow<span class="w"> </span>tasks<span class="w"> </span>list<span class="w"> </span>tutorial
 </pre></div>
 </div>
 </div>
@@ -1117,7 +1104,7 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
 <p>Run tasks for testing purposes using <code class="docutils literal notranslate"><span class="pre">airflow</span> <span class="pre">tasks</span> <span class="pre">test</span> <span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">dag&gt;</span> <span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">task&gt;</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>airflow<span class="w"> </span>tasks<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tutorial<span class="w"> </span>hello_world
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!airflow<span class="w"> </span>tasks<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tutorial<span class="w"> </span>hello_world
 </pre></div>
 </div>
 </div>
@@ -1144,7 +1131,7 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
 <p>The outputs contain a lot of logging information, but now only the line after “Output” is important. The next cell highlights it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>airflow<span class="w"> </span>tasks<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tutorial<span class="w"> </span>hello_world<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Output&quot;</span><span class="w"> </span>-A<span class="w"> </span><span class="m">1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!airflow<span class="w"> </span>tasks<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tutorial<span class="w"> </span>hello_world<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Output&quot;</span><span class="w"> </span>-A<span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 </div>
@@ -1204,10 +1191,10 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
 <p>The following cell shows how to access the <code class="docutils literal notranslate"><span class="pre">task_isntance</span></code> table from python script.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;/opt/airflow/airflow.db&quot;</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM task_instance LIMIT 5;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>import<span class="w"> </span>sqlite3
+import<span class="w"> </span>pandas<span class="w"> </span>as<span class="w"> </span>pd
+<span class="nv">con</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sqlite3.connect<span class="o">(</span><span class="s2">&quot;/opt/airflow/airflow.db&quot;</span><span class="o">)</span>
+pd.read_sql_query<span class="o">(</span><span class="s2">&quot;SELECT * FROM task_instance LIMIT 5;&quot;</span>,<span class="w"> </span>con<span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -1393,16 +1380,16 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "bash"
         },
         kernelOptions: {
-            name: "python3",
+            name: "bash",
             path: "./ds_ml"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'bash'</script>
 
                 </article>
               
@@ -1424,11 +1411,11 @@ taskflow_example | /opt/airflow/dags/tutorial.py |        | True
       </div>
     </a>
     <a class="right-next"
-       href="airflow/run_airflow.html"
+       href="airflow/tutorial_dag.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Run airflow</p>
+        <p class="prev-next-title">Tutorial DAG</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

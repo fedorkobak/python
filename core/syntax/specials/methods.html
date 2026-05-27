@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -552,9 +552,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../ds_ml/airflow.html">Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/airflow/run_airflow.html">Run airflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/airflow/tutorial_dag.html">Tutorial DAG</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/airflow/tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ds_ml/airflow/api.html">API</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../ds_ml/geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -837,6 +837,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subclass-kwargs">Subclass kwargs</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reversed-arithmetic">Reversed arithmetic</a></li>
 </ul>
             </nav>
         </div>
@@ -1231,6 +1232,135 @@ init invoked: &lt;class &#39;__main__.SomeClass&#39;&gt;
 </div>
 </section>
 </section>
+<section id="reversed-arithmetic">
+<h2>Reversed arithmetic<a class="headerlink" href="#reversed-arithmetic" title="Link to this heading">#</a></h2>
+<p>Arithmetic operators in python can be implemented as either the left-hand side or the right-hand side of an expression.</p>
+<p>To implement the behaviour of the object when it is on the right-hand of an expression, use the same specials as for regular arithmetic, but with name starts with <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p>
+<p>The following talbe lists the methods defining the behaviour:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Reflected special method</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__radd__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected addition</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rsub__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected subtraction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rmul__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected multiplication</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&#64;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rmatmul__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected matrix multiplication</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rtruediv__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected true division</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">//</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rfloordiv__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected floor division</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rmod__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected modulo</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">divmod()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rdivmod__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected <code class="docutils literal notranslate"><span class="pre">divmod</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">**</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rpow__(self,</span> <span class="pre">other[,</span> <span class="pre">modulo])</span></code></p></td>
+<td><p>Reflected power</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rlshift__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected left shift</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rrshift__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected right shift</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rand__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected bitwise AND</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__rxor__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected bitwise XOR</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">__ror__(self,</span> <span class="pre">other)</span></code></p></td>
+<td><p>Reflected bitwise OR</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Note</strong> if the left-hand method is implemented in the left object of the operation, it will be used: the right-hand method will not be called.</p>
+<hr class="docutils" />
+<p>The following cell defines the pow operation whene only <code class="docutils literal notranslate"><span class="pre">__rpow__</span></code> is implemented.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Left</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Right</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__rpow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Power called </span><span class="si">{</span><span class="n">left</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;right-hand power&quot;</span>
+
+
+<span class="n">left</span> <span class="o">=</span> <span class="n">Left</span><span class="p">()</span>
+<span class="n">right</span> <span class="o">=</span> <span class="n">Right</span><span class="p">()</span>
+
+
+<span class="n">left</span> <span class="o">**</span> <span class="n">right</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Power called &lt;__main__.Left object at 0x7e56c8342270&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;right-hand power&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s clear that output comes from the right-hand method.</p>
+<p>The following cell shows that the <code class="docutils literal notranslate"><span class="pre">__rpow__</span></code> would not be even called if the left side of the power operation implements the <code class="docutils literal notranslate"><span class="pre">__pow__</span></code> special.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NewLeft</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pow of the NewLeft is called&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;left-hand power&quot;</span>
+
+
+<span class="n">left</span> <span class="o">=</span> <span class="n">NewLeft</span><span class="p">()</span>
+<span class="n">left</span> <span class="o">**</span> <span class="n">right</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pow of the NewLeft is called
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;left-hand power&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1305,6 +1435,7 @@ init invoked: &lt;class &#39;__main__.SomeClass&#39;&gt;
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subclass-kwargs">Subclass kwargs</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reversed-arithmetic">Reversed arithmetic</a></li>
 </ul>
   </nav></div>
 
