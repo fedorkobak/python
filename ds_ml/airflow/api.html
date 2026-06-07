@@ -61,7 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Geopy" href="../geopy.html" />
+    <link rel="next" title="Connections &amp; Hooks" href="api/connections_hooks.html" />
     <link rel="prev" title="Tasks" href="tasks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -554,7 +554,10 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../airflow.html">Airflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="tutorial_dag.html">Tutorial DAG</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">API</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">API</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/connections_hooks.html">Connections &amp; Hooks</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../geopy.html">Geopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -829,7 +832,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-tasks">Operators &amp; Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dag">DAG</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagbag">DagBag</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-hooks">Connections &amp; Hooks</a></li>
 </ul>
             </nav>
         </div>
@@ -844,6 +850,131 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="api">
 <h1>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h1>
 <p>This page considers the internal API of the airflow.</p>
+<section id="operators-tasks">
+<h2>Operators &amp; Tasks<a class="headerlink" href="#operators-tasks" title="Link to this heading">#</a></h2>
+<p>The task is the piece of logic in ariflow.</p>
+<p>The operator is the template for the task. In fact, a task is an instance of an operator.</p>
+<hr class="docutils" />
+<p>The following cell shows the definition of the <code class="docutils literal notranslate"><span class="pre">PythonOperator</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">MagicMock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.standard.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonOperator</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello from task&quot;</span><span class="p">)</span>
+
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;process_data&quot;</span><span class="p">,</span>
+    <span class="n">python_callable</span><span class="o">=</span><span class="n">process_data</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">execute</span></code> method runs the procedure that is implemented by the task:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mock</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+<span class="n">task</span><span class="o">.</span><span class="n">execute</span><span class="p">({</span>
+    <span class="s2">&quot;task_instance&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">(),</span>
+    <span class="s2">&quot;dag_run&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">(),</span>
+    <span class="s2">&quot;logical_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2026-06-04&quot;</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Faint">2026-06-04T20:19:20.685280Z</span> [<span class=" -Color -Color-Bold -Color-Bold-Yellow">warning  </span>] <span class=" -Color -Color-Bold">PythonOperator.execute cannot be called outside of the Task Runner!</span> [<span class=" -Color -Color-Bold -Color-Bold-Blue">airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator</span>] <span class=" -Color -Color-Cyan">loc</span>=<span class=" -Color -Color-Magenta">operator.py:437</span>
+hello from task
+<span class=" -Color -Color-Faint">2026-06-04T20:19:20.688651Z</span> [<span class=" -Color -Color-Bold -Color-Bold-Green">info     </span>] <span class=" -Color -Color-Bold">Done. Returned value was: None</span> [<span class=" -Color -Color-Bold -Color-Bold-Blue">airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator</span>] <span class=" -Color -Color-Cyan">loc</span>=<span class=" -Color -Color-Magenta">python.py:233</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dag">
+<h2>DAG<a class="headerlink" href="#dag" title="Link to this heading">#</a></h2>
+<p>A DAG represents a set of nodes (tasks) that are related to each other by the sequence of the execution within the graph. In the ariflow it represented by the <code class="docutils literal notranslate"><span class="pre">airflow.DAG</span></code> class.</p>
+<p>Check the reference of the <a class="reference external" href="https://airflow.apache.org/docs/apache-airflow/2.9.1/_api/airflow/models/dag/index.html#airflow.models.dag.DAG">DAG</a> for more.</p>
+<hr class="docutils" />
+<p>The following cell defines the simple DAG:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">airflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.standard.operators.empty</span><span class="w"> </span><span class="kn">import</span> <span class="n">EmptyOperator</span>
+
+
+<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="s2">&quot;learning_dag&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">EmptyOperator</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;start&quot;</span><span class="p">)</span>
+    <span class="n">middle</span> <span class="o">=</span> <span class="n">EmptyOperator</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;middle&quot;</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">EmptyOperator</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;end&quot;</span><span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">&gt;&gt;</span> <span class="n">middle</span> <span class="o">&gt;&gt;</span> <span class="n">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As the result the target of the context manager is the instance of the DAG:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dag</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;DAG: learning_dag&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The tasks of the dag:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dag</span><span class="o">.</span><span class="n">tasks</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;Task(EmptyOperator): start&gt;,
+ &lt;Task(EmptyOperator): middle&gt;,
+ &lt;Task(EmptyOperator): end&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The tasks in the topological order:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dag</span><span class="o">.</span><span class="n">topological_sort</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Task(EmptyOperator): start&gt;,
+ &lt;Task(EmptyOperator): middle&gt;,
+ &lt;Task(EmptyOperator): end&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The starting nodes of the graph (<code class="docutils literal notranslate"><span class="pre">roots</span></code>) and finishing nodes (<code class="docutils literal notranslate"><span class="pre">leaves</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dag</span><span class="o">.</span><span class="n">roots</span><span class="p">,</span> <span class="n">dag</span><span class="o">.</span><span class="n">leaves</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&lt;Task(EmptyOperator): start&gt;], [&lt;Task(EmptyOperator): end&gt;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="dagbag">
 <h2>DagBag<a class="headerlink" href="#dagbag" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">DagBag</span></code> object in Airflow is responsible for loading DAGs. You can specify in which folder where your DAGs are located; Airflow will the “import” them and construct a <code class="docutils literal notranslate"><span class="pre">Dag</span></code> object for each.</p>
@@ -913,6 +1044,62 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="connections-hooks">
+<h2>Connections &amp; Hooks<a class="headerlink" href="#connections-hooks" title="Link to this heading">#</a></h2>
+<p><strong>Connections</strong> is the objects that contain credentials.</p>
+<p><strong>Hooks</strong> are the implementations of the interaction with the internal systems in airflow.</p>
+<p>Airflow loads connections from:</p>
+<ul class="simple">
+<li><p><strong>Environemnt variables</strong>.</p></li>
+<li><p><strong>External systems</strong> for keeping credentials.</p></li>
+<li><p><strong>Internal databaase</strong>.</p></li>
+</ul>
+<p>Check for more detailed overview check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html">Managing Connections</a> page in official documentation.</p></li>
+<li><p><a class="reference internal" href="api/connections_hooks.html"><span class="std std-doc">Connections &amp; Hooks</span></a> page.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following example shows the specification of the connection named <code class="docutils literal notranslate"><span class="pre">my_postgres</span></code>, the hook created using this connection, and some information fetched using the created hook instance.</p>
+<p><strong>Note</strong> the postgres instance running needed to run this example and <code class="docutils literal notranslate"><span class="pre">apache-airflow-providers-postgres</span></code> package installed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.postgres.hooks.postgres</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostgresHook</span>
+
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;AIRFLOW_CONN_MY_POSTGRES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;postgresql://postgres:postgres@localhost:5432/postgres&quot;</span>
+<span class="p">)</span>
+
+<span class="n">hook</span> <span class="o">=</span> <span class="n">PostgresHook</span><span class="p">(</span><span class="n">postgres_conn_id</span><span class="o">=</span><span class="s2">&quot;my_postgres&quot;</span><span class="p">)</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="n">hook</span><span class="o">.</span><span class="n">get_records</span><span class="p">(</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    select * from pg_database;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Faint">2026-06-07T14:13:17.136574Z</span> [<span class=" -Color -Color-Bold -Color-Bold-Green">info     </span>] <span class=" -Color -Color-Bold">Running statement: </span>
+<span class=" -Color -Color-Bold">    select * from pg_database;</span>
+<span class=" -Color -Color-Bold">    , parameters: None</span> [<span class=" -Color -Color-Bold -Color-Bold-Blue">airflow.task.hooks.airflow.providers.postgres.hooks.postgres.PostgresHook</span>] <span class=" -Color -Color-Cyan">loc</span>=<span class=" -Color -Color-Magenta">sql.py:861</span>
+<span class=" -Color -Color-Faint">2026-06-07T14:13:17.137916Z</span> [<span class=" -Color -Color-Bold -Color-Bold-Green">info     </span>] <span class=" -Color -Color-Bold">Rows affected: 3              </span> [<span class=" -Color -Color-Bold -Color-Bold-Blue">airflow.task.hooks.airflow.providers.postgres.hooks.postgres.PostgresHook</span>] <span class=" -Color -Color-Cyan">loc</span>=<span class=" -Color -Color-Magenta">sql.py:879</span>
+(5, &#39;postgres&#39;, 10, 6, &#39;c&#39;, False, True, False, -1, &#39;731&#39;, &#39;1&#39;, 1663, &#39;en_US.utf8&#39;, &#39;en_US.utf8&#39;, None, None, &#39;2.36&#39;, None)
+(1, &#39;template1&#39;, 10, 6, &#39;c&#39;, True, True, False, -1, &#39;731&#39;, &#39;1&#39;, 1663, &#39;en_US.utf8&#39;, &#39;en_US.utf8&#39;, None, None, &#39;2.36&#39;, &#39;{=c/postgres,postgres=CTc/postgres}&#39;)
+(4, &#39;template0&#39;, 10, 6, &#39;c&#39;, True, False, False, -1, &#39;731&#39;, &#39;1&#39;, 1663, &#39;en_US.utf8&#39;, &#39;en_US.utf8&#39;, None, None, None, &#39;{=c/postgres,postgres=CTc/postgres}&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -955,11 +1142,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../geopy.html"
+       href="api/connections_hooks.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Geopy</p>
+        <p class="prev-next-title">Connections &amp; Hooks</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -979,7 +1166,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-tasks">Operators &amp; Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dag">DAG</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagbag">DagBag</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-hooks">Connections &amp; Hooks</a></li>
 </ul>
   </nav></div>
 
