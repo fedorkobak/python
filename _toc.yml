@@ -357,6 +357,7 @@ parts:
       - file: ds_ml/spark/ml.ipynb
     - file: ds_ml/optuna.ipynb
     - file: ds_ml/xgboost.ipynb
+    - file: ds_ml/open_cv.ipynb
   - caption: Packages
     chapters:
     - file: packages/intro.ipynb
