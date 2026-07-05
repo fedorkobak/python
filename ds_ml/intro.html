@@ -623,6 +623,7 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="xgboost.html">XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_cv.html">OpenCV</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -671,6 +672,7 @@
 
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/tenacity.html">Tenacity</a></li>
 </ul>
 
     </div>
@@ -844,6 +846,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optuna">Optuna</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost">XGBoost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opencv">OpenCV</a></li>
 </ul>
             </nav>
         </div>
@@ -1323,6 +1326,47 @@ x = 2
 </div>
 </div>
 </section>
+<section id="opencv">
+<h2>OpenCV<a class="headerlink" href="#opencv" title="Link to this heading">#</a></h2>
+<p>OpenCV is a popular package for preprocessing images. Although it is a general library, it is essentioal for preprocessing images for any stage of training or using the machine learning models related to computed vision.</p>
+<p>This section focuses on the python api that provides access to the rich openCV library.</p>
+<p>Check more in the <a class="reference external" href="https://opencv-opencv.mintlify.app/api/core/mat">API reference</a> page. <strong>Note</strong> this is C++ reference, the is not dedicated python reference.</p>
+<p>Check some kind of description in the <a class="reference internal" href="#open_cv_files/open_cv.ipynb"><span class="xref myst">OpenCV</span></a> page.</p>
+<hr class="docutils" />
+<p>The following cell loads a simple image and applies some transformations to it, using openCV tools.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;open_cv_files/open_cv.png&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Could not load open_cv.png&quot;</span><span class="p">)</span>
+
+<span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+<span class="n">blurred</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">blurred</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">edges_color</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_GRAY2BGR</span><span class="p">)</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span>
+    <span class="n">image</span><span class="p">,</span>
+    <span class="s2">&quot;Original&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span>
+    <span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="mi">2</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">hconcat</span><span class="p">([</span><span class="n">image</span><span class="p">,</span> <span class="n">edges_color</span><span class="p">])</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17bb648d05e1dccc7c954c7f4f28fd36d42961fc73bd686443a7c1ac856050db.png" src="../_images/17bb648d05e1dccc7c954c7f4f28fd36d42961fc73bd686443a7c1ac856050db.png" />
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1399,6 +1443,7 @@ x = 2
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databricks-sdk">Databricks SDK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optuna">Optuna</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost">XGBoost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opencv">OpenCV</a></li>
 </ul>
   </nav></div>
 

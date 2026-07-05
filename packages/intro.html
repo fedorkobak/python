@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="To excel import" href="excel_export.html" />
-    <link rel="prev" title="XGBoost" href="../ds_ml/xgboost.html" />
+    <link rel="prev" title="OpenCV" href="../ds_ml/open_cv.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -621,6 +621,7 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ds_ml/xgboost.html">XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ds_ml/open_cv.html">OpenCV</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="current nav bd-sidenav">
@@ -669,6 +670,7 @@
 
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="tenacity.html">Tenacity</a></li>
 </ul>
 
     </div>
@@ -845,6 +847,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonschema">jsonschema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web">Web</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pillow">Pillow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tenacity">Tenacity</a></li>
 </ul>
             </nav>
         </div>
@@ -1690,6 +1694,81 @@ On instance:
 </div>
 <p>Check more details in the <a class="reference internal" href="web.html"><span class="std std-doc">corresponding page</span></a>.</p>
 </section>
+<section id="pillow">
+<h2>Pillow<a class="headerlink" href="#pillow" title="Link to this heading">#</a></h2>
+<p>Pillow is an image processing package. It includes facilities to load pictured of different python to python runtime, apply some relatively simple transformations for it and save images to the disk.</p>
+<p>Check <a class="reference external" href="https://pillow.readthedocs.io/en/stable/handbook/tutorial.html">Tutorial</a> to learn more about the package.</p>
+<hr class="docutils" />
+<p>The following cell loads the picture:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;intro_files/pillow_example.jpeg&quot;</span><span class="p">)</span>
+<span class="n">im</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4be8968d704e974fbc5ce553417ba742b8098b5cd02e9ab333a5f448c4c3dc49.png" src="../_images/4be8968d704e974fbc5ce553417ba742b8098b5cd02e9ab333a5f448c4c3dc49.png" />
+</div>
+</div>
+<p>Some examples of transofrmation supported by the pillow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">box</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">252</span><span class="p">,</span> <span class="mi">252</span><span class="p">)</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+
+<span class="n">region</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">Transpose</span><span class="o">.</span><span class="n">ROTATE_180</span><span class="p">)</span>
+<span class="n">im</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">box</span><span class="p">)</span>
+<span class="n">im</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/256f48d84105c595c34e98cb3e29fe1adfbaf63632d5eaa90c37436923cd7056.png" src="../_images/256f48d84105c595c34e98cb3e29fe1adfbaf63632d5eaa90c37436923cd7056.png" />
+</div>
+</div>
+</section>
+<section id="tenacity">
+<h2>Tenacity<a class="headerlink" href="#tenacity" title="Link to this heading">#</a></h2>
+<p>Tenacity is a general-purpose retry library for Python. Although packages that implement features that have unreliable nature (networks, external services, hardware etc.) ususally have embedded retry mechanisms included, the typical solution is to use Tenacity as it provides some flexibility and detailed configuration.</p>
+<p>Check more in:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://tenacity.readthedocs.io/en/latest/?__cf_chl_f_tk=VwuxmeTlws4C2HEX18XFkyQDAqnm9vDRJga5F16VDMg-1783107378-1.0.1.1-cl5ooexsh2iTSq4avrz_UpckfEym6VhQyYEmRa8na5Y">Tenacity</a> user guide.</p></li>
+<li><p><a class="reference external" href="https://tenacity.readthedocs.io/en/latest/api.html#retry-main-api">API reference</a>.</p></li>
+<li><p>Dedicated <a class="reference internal" href="tenacity.html"><span class="std std-doc">Tenacity</span></a> page.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell demonstrates the straightforward application of tenacity: simply wrapping <code class="docutils literal notranslate"><span class="pre">some_function</span></code> that raises into the configured decorator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tenacity</span><span class="w"> </span><span class="kn">import</span> <span class="n">retry</span><span class="p">,</span> <span class="n">stop_after_attempt</span>
+
+
+<span class="nd">@retry</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="n">stop_after_attempt</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">some_function</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Retryng!&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">some_function</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retryng!
+Retryng!
+Retryng!
+RetryError[&lt;Future at 0x70e034e23e30 state=finished raised ValueError&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first few attempts function don’t raises. After a while, however, a special execption raised. This exceptions contains information about original exception.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1723,12 +1802,12 @@ On instance:
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../ds_ml/xgboost.html"
+       href="../ds_ml/open_cv.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">XGBoost</p>
+        <p class="prev-next-title">OpenCV</p>
       </div>
     </a>
     <a class="right-next"
@@ -1769,6 +1848,8 @@ On instance:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonschema">jsonschema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web">Web</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pillow">Pillow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tenacity">Tenacity</a></li>
 </ul>
   </nav></div>
 

@@ -621,6 +621,7 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../xgboost.html">XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../open_cv.html">OpenCV</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -669,6 +670,7 @@
 
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages/tenacity.html">Tenacity</a></li>
 </ul>
 
     </div>
@@ -832,7 +834,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-hook">Base hook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hooks">Hooks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-hook">HTTP Hook</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection">Connection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variable">Environment variable</a></li>
 </ul>
@@ -859,13 +864,62 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="base-hook">
-<h2>Base hook<a class="headerlink" href="#base-hook" title="Link to this heading">#</a></h2>
+<section id="hooks">
+<h2>Hooks<a class="headerlink" href="#hooks" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">airflow.sdk.bases.hook.BaseHook</span></code> class is the base class for hooks, so understanding its api is crucial.</p>
-<p>There are two important methods with really straightforward names:</p>
+<p>There are plenty of ready implementations for the popular external systems.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Hook</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>REST APIs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">HttpHook</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>PostgreSQL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PostgresHook</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>MySQL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MySqlHook</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ClickHouse</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ClickHouseHook</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>AWS Storage</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">S3Hook</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Google Storage</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GCSHook</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>SSH</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SSHHook</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>File Transfer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SFTPHook</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>MongoDB</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MongoHook</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Redis</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RedisHook</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>BigQuery</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BigQueryHook</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Messaging</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SlackHook</span></code>, <code class="docutils literal notranslate"><span class="pre">TelegramHook</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>There are few important attributes that Hook api implements:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[a]get_connection</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">get_hook</span></code>.</p></li>
+<li><p>Method <code class="docutils literal notranslate"><span class="pre">[a]get_connection</span></code>.</p></li>
+<li><p>Method <code class="docutils literal notranslate"><span class="pre">get_hook</span></code>.</p></li>
+<li><p>Method <code class="docutils literal notranslate"><span class="pre">test_connection</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">log</span></code> object, allows to write logs consistently with airflow systems.</p></li>
 </ul>
 <p><strong>Note</strong> the <code class="docutils literal notranslate"><span class="pre">a</span></code> in the begining defines the async version of the hook.</p>
 <hr class="docutils" />
@@ -879,12 +933,59 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connection: Connection(conn_id=&#39;some_connection&#39;, conn_type=&#39;postgres&#39;, description=None, host=&#39;host&#39;, schema=&#39;schema&#39;, login=&#39;user&#39;, password=&#39;pass&#39;, port=2020, extra=None)
-hook: &lt;airflow.providers.postgres.hooks.postgres.PostgresHook object at 0x7daef239a660&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Faint">2026-06-21T22:18:47.404353Z</span> [<span class=" -Color -Color-Bold -Color-Bold-Yellow">warning  </span>] <span class=" -Color -Color-Bold">Skipping masking for a secret as it&#39;s too short (&lt;5 chars)</span> [<span class=" -Color -Color-Bold -Color-Bold-Blue">airflow.sdk._shared.secrets_masker.secrets_masker</span>] <span class=" -Color -Color-Cyan">loc</span>=<span class=" -Color -Color-Magenta">secrets_masker.py:577</span>
+connection: Connection(conn_id=&#39;some_connection&#39;, conn_type=&#39;postgres&#39;, description=None, host=&#39;host&#39;, schema=&#39;schema&#39;, login=&#39;user&#39;, password=&#39;pass&#39;, port=2020, extra=None)
+hook: &lt;airflow.providers.postgres.hooks.postgres.PostgresHook object at 0x7676c93e0ec0&gt;
 </pre></div>
 </div>
 </div>
 </div>
+<p>The following cell creates a base hook instance and shows the log record broduced by a <code class="docutils literal notranslate"><span class="pre">log</span></code> instance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base_hook</span> <span class="o">=</span> <span class="n">BaseHook</span><span class="p">()</span>
+<span class="n">base_hook</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;some log record&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Faint">2026-06-21T22:19:20.879086Z</span> [<span class=" -Color -Color-Bold -Color-Bold-Red">critical </span>] <span class=" -Color -Color-Bold">some log record               </span> [<span class=" -Color -Color-Bold -Color-Bold-Blue">airflow.task.hooks.airflow.sdk.bases.hook.BaseHook</span>] <span class=" -Color -Color-Cyan">loc</span>=<span class=" -Color -Color-Magenta">911723253.py:2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="http-hook">
+<h3>HTTP Hook<a class="headerlink" href="#http-hook" title="Link to this heading">#</a></h3>
+<p>Check more in the corresponding <a class="reference external" href="https://airflow.apache.org/docs/apache-airflow-providers-http/stable/_api/airflow/providers/http/hooks/http/index.html">reference</a> page.</p>
+<p>The HTTP hook provided by the airflow is simply a wrapper around the <code class="docutils literal notranslate"><span class="pre">requests</span></code> package, which implements the http within airflow’s abstractions.</p>
+<p>By default HTTP hook doesn’t have any retries in case request fails. However, there is embeded to the <a class="reference external" href="https://airflow.apache.org/docs/apache-airflow/1.10.12/_api/airflow/hooks/http_hook/index.html#airflow.hooks.http_hook.HttpHook.run_with_advanced_retry">run_with_advanced_retry</a> method retry policy. This is achieved by wrapping the <code class="docutils literal notranslate"><span class="pre">run</span></code> method in <a class="reference external" href="https://tenacity.readthedocs.io/en/latest/api.html#retry-main-api"><code class="docutils literal notranslate"><span class="pre">tenacity.Retrying</span></code></a>.</p>
+<hr class="docutils" />
+<p>The following cell shows creation and usage of the <code class="docutils literal notranslate"><span class="pre">HttpHook</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.providers.http.hooks.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpHook</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;AIRFLOW_CONN_HTTP_EXAMPLE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">{</span>
+<span class="s2">    &quot;host&quot;: &quot;httpbin.org&quot;,</span>
+<span class="s2">    &quot;schema&quot;: &quot;https&quot;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">http_hook</span> <span class="o">=</span> <span class="n">HttpHook</span><span class="p">(</span><span class="n">http_conn_id</span><span class="o">=</span><span class="s2">&quot;http_example&quot;</span><span class="p">)</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">http_hook</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;/post&quot;</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>requests.models.Response
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output is a regular <code class="docutils literal notranslate"><span class="pre">requests.models.Response</span></code>.</p>
+</section>
 </section>
 <section id="connection">
 <h2>Connection<a class="headerlink" href="#connection" title="Link to this heading">#</a></h2>
@@ -1096,7 +1197,10 @@ hook: &lt;airflow.providers.postgres.hooks.postgres.PostgresHook object at 0x7da
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-hook">Base hook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hooks">Hooks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-hook">HTTP Hook</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection">Connection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variable">Environment variable</a></li>
 </ul>

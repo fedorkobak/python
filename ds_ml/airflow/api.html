@@ -621,6 +621,7 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../optuna.html">Optuna</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../xgboost.html">XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../open_cv.html">OpenCV</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packages</span></p>
 <ul class="nav bd-sidenav">
@@ -669,6 +670,7 @@
 
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/tenacity.html">Tenacity</a></li>
 </ul>
 
     </div>
@@ -832,7 +834,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-tasks">Operators &amp; Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-tasks">Operators &amp; Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#template-fields">Template fields</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dag">DAG</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagbag">DagBag</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-hooks">Connections &amp; Hooks</a></li>
@@ -854,6 +859,7 @@ document.write(`
 <h2>Operators &amp; Tasks<a class="headerlink" href="#operators-tasks" title="Link to this heading">#</a></h2>
 <p>The task is the piece of logic in ariflow.</p>
 <p>The operator is the template for the task. In fact, a task is an instance of an operator.</p>
+<p>All operators is the heirs of the <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">airflow.sdk.bases.operator.BaseOperator</span></code> and follow it’s api.</p>
 <hr class="docutils" />
 <p>The following cell shows the definition of the <code class="docutils literal notranslate"><span class="pre">PythonOperator</span></code>.</p>
 <div class="cell docutils container">
@@ -894,6 +900,68 @@ hello from task
 </div>
 </div>
 </div>
+<section id="template-fields">
+<h3>Template fields<a class="headerlink" href="#template-fields" title="Link to this heading">#</a></h3>
+<p>Airflow operators support the templating language. This enables the specification of the data to be used in runtime.</p>
+<p>The fields that can be templated must be specified in the <code class="docutils literal notranslate"><span class="pre">template_fields</span></code> attribute.</p>
+<p>During rendering, the airflow will attempt to replace the corresponding values.</p>
+<p>Almost all of the attributes of built operators are template fields.</p>
+<p>Check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://airflow.apache.org/docs/apache-airflow/stable/howto/custom-operator.html?utm_source=chatgpt.com#templating">Templating</a> section of the custom operators guide for general overview.</p></li>
+<li><p><a class="reference external" href="https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html">Templates reference</a> for learning more of templating language.</p></li>
+</ul>
+<hr class="docutils" />
+<p>The following cell defines the simple operator where <code class="docutils literal notranslate"><span class="pre">template_filed</span></code> is declared.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.sdk.bases.operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TemplateExample</span><span class="p">(</span><span class="n">BaseOperator</span><span class="p">):</span>
+    <span class="n">template_fields</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;template_field&quot;</span><span class="p">,)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_field</span> <span class="o">=</span> <span class="n">template_field</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_field</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The tempate can be specified during definition of the task:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">TemplateExample</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;task1&quot;</span><span class="p">,</span>
+    <span class="n">template_field</span><span class="o">=</span><span class="s2">&quot;{{ logical_date }}&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In runtime airflow would do something like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;logical_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2026-06-24&quot;</span><span class="p">}</span>
+
+<span class="n">task</span><span class="o">.</span><span class="n">render_template_fields</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+<span class="n">task</span><span class="o">.</span><span class="n">execute</span><span class="p">({})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Faint">2026-06-24T19:52:21.212821Z</span> [<span class=" -Color -Color-Bold -Color-Bold-Yellow">warning  </span>] <span class=" -Color -Color-Bold">TemplateExample.execute cannot be called outside of the Task Runner!</span> [<span class=" -Color -Color-Bold -Color-Bold-Blue">airflow.task.operators.__main__.TemplateExample</span>] <span class=" -Color -Color-Cyan">loc</span>=<span class=" -Color -Color-Magenta">operator.py:437</span>
+2026-06-24
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a result, the corresponding value from the context would be used at runtime.</p>
+</section>
 </section>
 <section id="dag">
 <h2>DAG<a class="headerlink" href="#dag" title="Link to this heading">#</a></h2>
@@ -1166,7 +1234,10 @@ hello from task
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-tasks">Operators &amp; Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-tasks">Operators &amp; Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#template-fields">Template fields</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dag">DAG</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dagbag">DagBag</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-hooks">Connections &amp; Hooks</a></li>
